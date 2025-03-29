@@ -1,0 +1,125 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  color: #fff;
+  line-height: 1.6;
+}
+
+/* Hero section */
+.hero-image {
+background: url('/matura.jpg') no-repeat center center/cover;
+height: 100vh;
+position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* lehké tmavé pozadí */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hero-text h1,
+.hero-text p {
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+.hero-text h1 {
+font-size: 3em;
+margin-bottom: 0.5em;
+}
+
+.hero-text p {
+font-size: 1.5em;
+margin-bottom: 1em;
+}
+
+.hero-text button {
+background-color: #fff;
+color: #000;
+border: none;
+padding: 10px 20px;
+font-weight: bold;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.hero-text button:hover {
+background-color: #ffcc00;
+color: #000;
+}
+
+/* Navigation bar */
+/* Nav styles */
+nav {
+  background-color: #111;
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav ul li {
+  position: relative;
+  margin: 0 15px;
+}
+
+nav ul a,
+.dropbtn {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  font-weight: bold;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1em; /* ← přidej nebo uprav */
+}
+
+nav ul a:hover,
+.dropbtn:hover {
+  background-color: #333;
+}
+
+/* Dropdown styling */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #111;
+  border: 1px solid #444;
+  min-width: 200px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #333;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+

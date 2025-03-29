@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Marie Anna Mahdalová | Portfolio</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+      .semester-section, .info-section {
+        margin-top: 2em;
+      }
+      .semester-button, .info-button {
+        background-color: transparent;
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+      }
+      .semester-button:hover, .info-button:hover {
+        background-color: #333;
+      }
+    </style>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <div style="display: flex; flex-direction: column">
+    <!--<div id="app"></div>-->
+    <!-- Hero Section -->
+  <div class="hero-image">
+    <div class="hero-text">
+      <h1>I am Marie Anna</h1>
+      <p>And I'm a student</p>
+      <button onclick="toggleInfo('about')">Get to know me!</button>
+    </div>
+  </div>
+
+  <!-- Navigation with Dropdowns -->
+  <nav>
+    <ul>
+      <li><button class="info-button" onclick="toggleInfo('about')">About Me</button></li>
+  
+      <li class="dropdown">
+        <button class="dropbtn">Study</button>
+        <div class="dropdown-content">
+          <button class="semester-button" onclick="toggleSemester('semester1')">1st Semester</button>
+          <button class="semester-button" onclick="toggleSemester('semester2')">2nd Semester</button>
+          <button class="semester-button" onclick="toggleSemester('semester3')">3rd Semester</button>
+          <button class="semester-button" onclick="toggleSemester('semester4')">4th Semester</button>
+          <button class="semester-button" onclick="toggleSemester('semester5')">5th Semester</button>
+          <button class="semester-button" onclick="toggleSemester('semester6')">6th Semester</button>
+        </div>
+      </li>
+  
+      <li><button class="info-button" onclick="toggleInfo('participation')">Participation</button></li>
+      <li><button class="info-button" onclick="toggleInfo('contact')">Contact</button></li>
+    </ul>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about" class="info-section hidden">
+    <h2>About Me</h2>
+    <p>Hello! I'm Marie Anna Mahdalová! This portfolio showcases the subjects I've taken as part of my academic journey.</p>
+    <p>I'm currently studying Information Sciences at Masaryk University in Brno, where I'm diving deep into topics I’m passionate about. Before this, I completed my secondary education at Realgymnasium Komensky in Vienna, a bilingual school that helped me refine my academic skills in both English and German. I also had the opportunity to study in the UK for a year at Ysgol Hirael in Bangor, which really broadened my global perspective.</p>
+    <p>Throughout my educational journey, I’ve been actively engaged in leadership and volunteering. As a School Representative at Realgymnasium Komensky, I represented my school at an international level, collaborating with peers from diverse backgrounds. I’ve also been a proud member of Amnesty International since 2019, where I’ve worked on organizing campaigns, raising awareness for human rights, and participating in outreach events to create lasting impact.</p>
+    <p>Work-wise, I’ve gained hands-on experience in different fields. I worked as an Event Security Specialist with Patronus GmbH, where I coordinated safety processes and managed event logistics. I also spent a summer as a Children’s Summer Camp Leader with LT U SMRKU, organizing fun and safe activities for kids, which was a really rewarding experience. </p>
+    <p>Beyond my work and studies, I’ve taken part in several certifications and courses to keep building my skills. I participated in the Youth Parliament of the Czech Republic’s International Experience Exchange, and I’ve also completed a series of Soft Skills courses that taught me about project management, team building, and rhetoric. I’ve also been involved with initiatives like the Women's Engagement in Public Spaces project and the Wikigap workshop, which focused on gender representation online.</p>
+    <p>I’m fluent in Czech and English, with a solid level of German. I enjoy collaborating in teams, leading initiatives, and communicating effectively with people from all walks of life. I’m always keen to learn new things and apply my skills in different settings, and I look forward to what’s next on my journey.</p>
+  </section>
+
+  <!-- Semester Sections -->
+  <section id="semester1" class="semester-section hidden">
+    <h2>1st Semester</h2>
+    <section id="ai001">
+      <h3>AI001 Elements of AI</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="ai002">
+      <h3>AI002 Building AI</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="ai003">
+      <h3>AI003 Ethics of AI</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="core100">
+      <h3>CORE100 AI Revolution: Artificial Intelligence as an Opportunity and Threat to Society</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="esa915">
+      <h3>ESA915 European and Cultural Studies: Europe and Revolution</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="iskb02">
+      <h3>ISKB02 Introduction to Librarianship</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="iskb03">
+      <h3>ISKB03 Information Services and Retrieval</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="iskb04">
+      <h3>ISKB04 Academic Writing</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="iskb08">
+      <h3>ISKB08 Literature in Cultural Context</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="iskb60">
+      <h3>ISKB60 Prolegomena to the Field</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+    <section id="kpi55">
+      <h3>KPI55 DigCompEdu: Technology in Education</h3>
+      <p>Description or reflection goes here.</p>
+    </section>
+  </section>
+
+  <!-- Placeholder Semesters -->
+  <section id="semester2" class="semester-section hidden">
+    <h2>2nd Semester</h2>
+    <p>I haven't completed this semester yet.</p>
+    <section><h3>Subject 1</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 2</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 3</h3><p>Description or reflection goes here.</p></section>
+  </section>
+  <section id="semester3" class="semester-section hidden">
+    <h2>3rd Semester</h2>
+    <p>I haven't completed this semester yet.</p>
+    <section><h3>Subject 1</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 2</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 3</h3><p>Description or reflection goes here.</p></section>
+  </section>
+  <section id="semester4" class="semester-section hidden">
+    <h2>4th Semester</h2>
+    <p>I haven't completed this semester yet.</p>
+    <section><h3>Subject 1</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 2</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 3</h3><p>Description or reflection goes here.</p></section>
+  </section>
+  <section id="semester5" class="semester-section hidden">
+    <h2>5th Semester</h2>
+    <p>I haven't completed this semester yet.</p>
+    <section><h3>Subject 1</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 2</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 3</h3><p>Description or reflection goes here.</p></section>
+  </section>
+  <section id="semester6" class="semester-section hidden">
+    <h2>6th Semester</h2>
+    <p>I haven't completed this semester yet.</p>
+    <section><h3>Subject 1</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 2</h3><p>Description or reflection goes here.</p></section>
+    <section><h3>Subject 3</h3><p>Description or reflection goes here.</p></section>
+  </section>
+
+  <!-- Participation Section -->
+  <section id="participation" class="info-section hidden">
+    <h2>Certificates</h2>
+    <p>Here come my certificates</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="info-section hidden">
+    <h2>Contact</h2>
+    <p>You can reach me at: <a href="mailto:mahdalova.marieanna@gmail.com">mahdalova.marieanna@gmail.com</a></p>
+  </section>
+</div>
+  </body>
+</html>
