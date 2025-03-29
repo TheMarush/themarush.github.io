@@ -85,7 +85,6 @@ nav ul a,
   cursor: pointer;
   background: none;
   border: none;
-  font-size: 1em; /* ← přidej nebo uprav */
 }
 
 nav ul a:hover,
