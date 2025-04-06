@@ -24,6 +24,27 @@ export function toggleInfo(id) {
   }
 }
 
+export function toggleOverlay() {
+    const overlay = document.getElementById('overlay');
+    const background = document.getElementById('bg-image');
+    if (overlay) {
+      if (overlay.classList.contains('expanded')) {
+        overlay.classList.remove('expanded');
+      } else {
+        overlay.classList.add('expanded');
+      }
+    }
+
+  if (background) {
+    if (background.classList.contains('blur')) {
+      background.classList.remove('blur');
+    } else {
+      background.classList.add('blur');
+    }
+  }
+}
+
 // Attach functions to the global window object
 window.toggleSemester = toggleSemester;
 window.toggleInfo = toggleInfo;
+window.toggleOverlay = toggleOverlay;
