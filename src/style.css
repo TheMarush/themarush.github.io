@@ -11,7 +11,6 @@ body {
   display: none;
 }
 
-
 /* === Hero Section === */
 .hero-image {
   background: url('/matura.jpg') no-repeat center center/cover;
@@ -46,20 +45,39 @@ body {
 }
 
 .hero-text button {
-  background-color: #000000;
+  background: linear-gradient(45deg, #ffcc00, #ff9900);
   color: #000;
   border: none;
   padding: 10px 20px;
   font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .hero-text button:hover {
-  background-color: #ffcc00;
-  color: #000;
+  background-color: #666;
+  color: #fff;
 }
 
+/* === Navigation Buttons (unified) === */
+.nav-button {
+  background-color: transparent;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  display: block;
+  text-align: left;
+  width: 100%;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #333;
+}
 
 /* === Navigation Bar === */
 nav {
@@ -79,22 +97,6 @@ nav ul {
 nav ul li {
   position: relative;
   margin: 0 15px;
-}
-
-nav ul a,
-.dropbtn {
-  color: white;
-  text-decoration: none;
-  display: block;
-  font-weight: bold;
-  cursor: pointer;
-  background: none;
-  border: none;
-}
-
-nav ul a:hover,
-.dropbtn:hover {
-  background-color: #333;
 }
 
 /* Dropdown */
@@ -122,6 +124,7 @@ nav ul a:hover,
   display: block;
 }
 
+/* === Sections === */
 .semester-section,
 .info-section {
   max-width: 800px;
@@ -129,28 +132,11 @@ nav ul a:hover,
   padding: 20px;
 }
 
-.semester-button,
-.info-button {
-  background-color: transparent;
-  color: white;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-}
-
-.semester-button:hover,
-.info-button:hover {
-  background-color: #333;
-}
-
 .info-section p,
 .semester-section p {
   margin-bottom: 1em;
   line-height: 1.8;
 }
-
 
 /* === Art Gallery === */
 .gallery {
@@ -189,7 +175,6 @@ nav ul a:hover,
   text-align: center;
   font-size: 0.95em;
 }
-
 
 /* === Testimonials Section === */
 .testimonials-grid {
