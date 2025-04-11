@@ -65,7 +65,7 @@ body {
 /* === Navigation Bar === */
 nav {
   background-color: #111;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 nav ul {
@@ -112,7 +112,7 @@ nav ul a:hover,
 
 .dropdown-content a {
   color: #fff;
-  padding: 10px 15px;
+  padding: 10px;
   text-decoration: none;
   display: block;
   transition: background-color 0.3s ease;
@@ -207,7 +207,7 @@ nav ul a:hover,
 .flip-card footer {
   text-align: right;
   font-size: 0.9em;
-  color: #ccc;
+  color: #cccccc;
 }
 
 .flip-card .front,
@@ -233,7 +233,7 @@ nav ul a:hover,
 
 /* === Pastel Border Colors for Testimonials === */
 .border-red {
-  border: 2px solid #f8b4b4;
+  border: 2px solid #fbadad;
 }
 
 .border-orange {
