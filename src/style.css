@@ -186,33 +186,30 @@ nav ul a:hover,
 }
 
 .flip-card {
-  background-color: transparent;
   perspective: 1000px;
   width: 100%;
   height: auto;
-  min-height: 300px;
-  height: 100%;
-  margin-bottom: 1em;
 }
 
 .flip-card-inner {
   position: relative;
   width: 100%;
-  min-height: 100%;
-  height: 100%;
+  height: auto;
   transition: transform 0.8s;
   transform-style: preserve-3d;
   cursor: pointer;
 }
 
-.flip-card:hover .flip-card-inner,
 .flip-card.flip .flip-card-inner {
   transform: rotateY(180deg);
 }
 
 .flip-card-front, .flip-card-back {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
   padding: 1.5em;
   backface-visibility: hidden;
   background-color: #111;
@@ -222,8 +219,36 @@ nav ul a:hover,
   box-sizing: border-box;
 }
 
+/* Ensure each card adapts to its content */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flip-card-front {
+  z-index: 2;
+}
+
 .flip-card-back {
   transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Fix card stacking issue by hiding the back by default */
+.flip-card:not(.flip) .flip-card-back {
+  display: none;
+}
+
+.flip-card.flip .flip-card-front {
+  display: none;
+}
+
+.flip-card.flip .flip-card-back {
+  display: block;
 }
 
 .flip-card p {
