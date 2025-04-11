@@ -212,9 +212,7 @@ nav ul a:hover,
 
 .flip-card-front, .flip-card-back {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  inset: 0;
   padding: 1.5em;
   backface-visibility: hidden;
   background-color: #111;
@@ -222,7 +220,6 @@ nav ul a:hover,
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   box-sizing: border-box;
-  min-height: 100%;
 }
 
 .flip-card-back {
