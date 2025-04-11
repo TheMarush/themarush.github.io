@@ -158,3 +158,21 @@ nav ul a:hover,
   text-align: center;
   font-size: 0.95em;
 }
+
+.info-section,
+.semester-section {
+  max-width: 800px;       /* šířka textového bloku */
+  margin: 0 auto;          /* zarovnání na střed */
+  padding: 20px;           /* prostor od okrajů */
+}
+
+.info-section p,
+.semester-section p {
+  margin-bottom: 1em;
+  line-height: 1.8;
+}
+
+.info-section,
+.semester-section {
+  margin-top: 3em;
+}
