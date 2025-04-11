@@ -182,6 +182,7 @@ nav ul a:hover,
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2em;
   padding: 1em;
+  align-items: start;
 }
 
 .flip-card {
@@ -190,6 +191,7 @@ nav ul a:hover,
   width: 100%;
   min-height: 300px;
   height: 100%;
+  margin-bottom: 1em;
 }
 
 .flip-card-inner {
