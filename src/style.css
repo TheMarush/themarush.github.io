@@ -122,3 +122,39 @@ nav ul a:hover,
   display: none;
 }
 
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.art-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #111;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.art-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.art-item img:hover {
+  transform: scale(1.05);
+}
+
+.art-item p {
+  margin-top: 10px;
+  font-style: italic;
+  color: #ccc;
+  text-align: center;
+  font-size: 0.95em;
+}
