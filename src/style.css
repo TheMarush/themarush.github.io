@@ -233,3 +233,29 @@ nav ul a:hover,
 .flip-card:hover {
   transform: scale(1.02);
 }
+
+/* PASTEL BORDERS FOR TESTIMONIALS */
+
+.border-pink {
+  border: 3px solid #f4a6a6; /* pastelová červená */
+}
+
+.border-orange {
+  border: 3px solid #ffd1a6; /* pastelová oranžová */
+}
+
+.border-yellow {
+  border: 3px solid #fff6a6; /* pastelová žlutá */
+}
+
+.border-green {
+  border: 3px solid #bffcc6; /* pastelová zelená */
+}
+
+.border-blue {
+  border: 3px solid #add8ff; /* pastelová modrá */
+}
+
+.border-purple {
+  border: 3px solid #e1bfff; /* pastelová fialová */
+}
