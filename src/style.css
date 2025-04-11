@@ -177,80 +177,29 @@ nav ul a:hover,
   margin-top: 3em;
 }
 
+/* ZAKLADNÍ ÚPRAVA TESTIMONIAL GRIDU NA MASONRY STYLE */
 .testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2em;
-  padding: 1em;
-  align-items: start;
+  column-count: 2;
+  column-gap: 2em;
+  padding: 2em 0;
 }
 
+/* KAŽDÁ KARTIČKA BUDE FUNGOVAT JAKO "BLOK", ŽÁDNÉ ABSOLUTNÍ POZICOVÁNÍ */
 .flip-card {
-  perspective: 1000px;
+  display: inline-block;
   width: 100%;
-  height: auto;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: auto;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  cursor: pointer;
-}
-
-.flip-card.flip .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100%;
-  padding: 1.5em;
-  backface-visibility: hidden;
+  margin-bottom: 2em;
+  break-inside: avoid;
   background-color: #111;
-  color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  padding: 1.5em;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: transform 0.6s;
 }
 
-/* Ensure each card adapts to its content */
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.flip-card-front {
-  z-index: 2;
-}
-
-.flip-card-back {
-  transform: rotateY(180deg);
-  z-index: 1;
-}
-
-/* Fix card stacking issue by hiding the back by default */
-.flip-card:not(.flip) .flip-card-back {
-  display: none;
-}
-
-.flip-card.flip .flip-card-front {
-  display: none;
-}
-
-.flip-card.flip .flip-card-back {
-  display: block;
-}
-
+/* ZÁKLADNÍ VZHLED KARTIČKY */
 .flip-card p {
   margin-bottom: 1em;
   line-height: 1.6;
@@ -260,4 +209,27 @@ nav ul a:hover,
   text-align: right;
   font-size: 0.9em;
   color: #ccc;
+}
+
+/* FLIP LOGIKA — ukazuj jen jednu stranu */
+.flip-card .front,
+.flip-card .back {
+  display: none;
+}
+
+.flip-card .front {
+  display: block;
+}
+
+.flip-card.flip .front {
+  display: none;
+}
+
+.flip-card.flip .back {
+  display: block;
+}
+
+/* VOLITELNĚ: Hover efekt */
+.flip-card:hover {
+  transform: scale(1.02);
 }
