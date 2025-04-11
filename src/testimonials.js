@@ -1,5 +1,3 @@
-// testimonials.js
-
 export const testimonialsData = [
     {
       front: `"Maruška k nám přišla do školy už jako velice sebevědomá studentka a hned se všem představila jako politicky angažovaná osoba, která pracuje pro neziskové organizace (např. AI), zajímá se o celospolečenské dění, historii, politologii a sociologii a chce na naší škole také zastupovat zájmy studentů a studentek Rg. Díky svému řečnickému talentu se jí také podařilo stát se zástupkyní mluvčí školy a tuto funkci vykonávala opravdu s velkým nasazením. Na Marušce si nejvíce vážím toho, že dokáže svůj názor velice přesvědčivým způsobem zdůvodnit a obhájit, stojí si za ním a nenechá se ve svém přesvědčení zviklat mnohdy populistickými názory jiných. Pokud by měla dělat konkurenci Sibyle, Kassandře nebo Libuši, tak si dokážu představit, že Maruška bude za patnáct let řídit Greenpeace nebo Caritas."`,

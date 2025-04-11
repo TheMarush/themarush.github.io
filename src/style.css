@@ -1,3 +1,4 @@
+/* === Global styles === */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -6,11 +7,16 @@ body {
   line-height: 1.6;
 }
 
-/* Hero section */
+.hidden {
+  display: none;
+}
+
+
+/* === Hero Section === */
 .hero-image {
-background: url('/matura.jpg') no-repeat center center/cover;
-height: 100vh;
-position: relative;
+  background: url('/matura.jpg') no-repeat center center/cover;
+  height: 100vh;
+  position: relative;
 }
 
 .hero-text {
@@ -19,43 +25,43 @@ position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.5); /* lehké tmavé pozadí */
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
 }
 
 .hero-text h1,
 .hero-text p {
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .hero-text h1 {
-font-size: 3em;
-margin-bottom: 0.5em;
+  font-size: 3em;
+  margin-bottom: 0.5em;
 }
 
 .hero-text p {
-font-size: 1.5em;
-margin-bottom: 1em;
+  font-size: 1.5em;
+  margin-bottom: 1em;
 }
 
 .hero-text button {
-background-color: #fff;
-color: #000;
-border: none;
-padding: 10px 20px;
-font-weight: bold;
-cursor: pointer;
-transition: background-color 0.3s ease;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .hero-text button:hover {
-background-color: #ffcc00;
-color: #000;
+  background-color: #ffcc00;
+  color: #000;
 }
 
-/* Navigation bar */
-/* Nav styles */
+
+/* === Navigation Bar === */
 nav {
   background-color: #111;
   padding: 10px 0;
@@ -92,7 +98,7 @@ nav ul a:hover,
   background-color: #333;
 }
 
-/* Dropdown styling */
+/* Dropdown */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -103,7 +109,7 @@ nav ul a:hover,
 }
 
 .dropdown-content a {
-  color: rgb(255, 255, 255);
+  color: #fff;
   padding: 10px;
   text-decoration: none;
   display: block;
@@ -113,15 +119,42 @@ nav ul a:hover,
   background-color: #333;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-.hidden {
-  display: none;
+.semester-section,
+.info-section {
+  max-width: 800px;
+  margin: 3em auto 0;
+  padding: 20px;
 }
 
+.semester-button,
+.info-button {
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.semester-button:hover,
+.info-button:hover {
+  background-color: #333;
+}
+
+.info-section p,
+.semester-section p {
+  margin-bottom: 1em;
+  line-height: 1.8;
+}
+
+
+/* === Art Gallery === */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -159,32 +192,14 @@ nav ul a:hover,
   font-size: 0.95em;
 }
 
-.info-section,
-.semester-section {
-  max-width: 800px;       /* šířka textového bloku */
-  margin: 0 auto;          /* zarovnání na střed */
-  padding: 20px;           /* prostor od okrajů */
-}
 
-.info-section p,
-.semester-section p {
-  margin-bottom: 1em;
-  line-height: 1.8;
-}
-
-.info-section,
-.semester-section {
-  margin-top: 3em;
-}
-
-/* ZAKLADNÍ ÚPRAVA TESTIMONIAL GRIDU NA MASONRY STYLE */
+/* === Testimonials Section === */
 .testimonials-grid {
   column-count: 2;
   column-gap: 2em;
   padding: 2em 0;
 }
 
-/* KAŽDÁ KARTIČKA BUDE FUNGOVAT JAKO "BLOK", ŽÁDNÉ ABSOLUTNÍ POZICOVÁNÍ */
 .flip-card {
   display: inline-block;
   width: 100%;
@@ -192,14 +207,13 @@ nav ul a:hover,
   break-inside: avoid;
   background-color: #111;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   padding: 1.5em;
   box-sizing: border-box;
   cursor: pointer;
   transition: transform 0.6s;
 }
 
-/* ZÁKLADNÍ VZHLED KARTIČKY */
 .flip-card p {
   margin-bottom: 1em;
   line-height: 1.6;
@@ -211,7 +225,6 @@ nav ul a:hover,
   color: #ccc;
 }
 
-/* FLIP LOGIKA — ukazuj jen jednu stranu */
 .flip-card .front,
 .flip-card .back {
   display: none;
@@ -229,33 +242,31 @@ nav ul a:hover,
   display: block;
 }
 
-/* VOLITELNĚ: Hover efekt */
 .flip-card:hover {
   transform: scale(1.02);
 }
 
-/* PASTEL BORDERS FOR TESTIMONIALS */
-
-.border-pink {
-  border: 3px solid #f4a6a6; /* pastelová červená */
+/* === Pastel Border Colors for Testimonials === */
+.border-red {
+  border: 2px solid #f8b4b4;
 }
 
 .border-orange {
-  border: 3px solid #ffd1a6; /* pastelová oranžová */
+  border: 2px solid #fcd5b5;
 }
 
 .border-yellow {
-  border: 3px solid #fff6a6; /* pastelová žlutá */
+  border: 2px solid #fef3b5;
 }
 
 .border-green {
-  border: 3px solid #bffcc6; /* pastelová zelená */
+  border: 2px solid #b7e4c7;
 }
 
 .border-blue {
-  border: 3px solid #add8ff; /* pastelová modrá */
+  border: 2px solid #c3ddfd;
 }
 
 .border-purple {
-  border: 3px solid #e1bfff; /* pastelová fialová */
+  border: 2px solid #d8b4fe;
 }

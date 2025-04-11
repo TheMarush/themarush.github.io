@@ -1,5 +1,3 @@
-// subjects.js
-
 export const semestersData = [
     {
       id: "semester1",

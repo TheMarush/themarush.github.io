@@ -1,6 +1,8 @@
 import './style.css';
 import { generateTestimonials } from './testimonials.js';
 import { generateSemesters } from './subjects.js';
+import { artImages, generateArtGallery } from './artGallery.js';
+
 
 export function toggleSemester(id) {
   const section = document.getElementById(id);
@@ -30,10 +32,6 @@ export function toggleInfo(id) {
 window.toggleSemester = toggleSemester;
 window.toggleInfo = toggleInfo;
 
-
-import { artImages, generateArtGallery } from './artGallery.js';
-
-
 generateArtGallery(artImages);
 
 generateTestimonials();
@@ -54,4 +52,35 @@ document.querySelectorAll('[data-semester]').forEach(button => {
     const id = button.getAttribute('data-semester');
     toggleSemester(id);
   });
+});
+
+
+// === HANDLE HASH NAVIGATION ON PAGE LOAD ===
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.slice(1); // Odstraní #
+  if (!hash) return;
+
+  // Zkusíme najít sekci s tímto ID
+  const section = document.getElementById(hash);
+  if (section) {
+    if (section.classList.contains('info-section')) {
+      toggleInfo(hash);
+    } else if (section.classList.contains('semester-section')) {
+      toggleSemester(hash);
+    }
+  }
+});
+
+// === HANDLE HASH CHANGE (e.g. user clicks link) ===
+window.addEventListener('hashchange', () => {
+  const hash = window.location.hash.slice(1); // např. 'about'
+
+  const section = document.getElementById(hash);
+  if (section) {
+    if (section.classList.contains('info-section')) {
+      toggleInfo(hash);
+    } else if (section.classList.contains('semester-section')) {
+      toggleSemester(hash);
+    }
+  }
 });
