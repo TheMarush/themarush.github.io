@@ -30,17 +30,17 @@ window.toggleInfo = toggleInfo;
 
 const artImages = [
   {
-    src: "https://i.imgur.com/TVExGvG.jpg",
+    src: "https://i.imgur.com/3eH2i6A.jpeg",
     alt: "Artwork 1",
     caption: "This is a filler caption for artwork 1"
   },
   {
-    src: "https://i.imgur.com/Yy0xWQJ.jpg",
+    src: "https://i.imgur.com/9VKtGKd.jpeg",
     alt: "Artwork 2",
     caption: "This is a filler caption for artwork 2"
   },
   {
-    src: "https://i.imgur.com/kLsd3wf.jpg",
+    src: "https://i.imgur.com/HExMZ7Z.jpeg",
     alt: "Artwork 3",
     caption: "This is a filler caption for artwork 3"
   }
@@ -48,6 +48,13 @@ const artImages = [
 
 function generateArtGallery(images) {
   const container = document.getElementById("myart");
+
+  const introText = document.createElement("p");
+  introText.textContent = "Welcome to my little art corner 🎨";
+  introText.style.textAlign = "center";
+  introText.style.fontStyle = "italic";
+  container.appendChild(introText);
+
 
   const gallery = document.createElement("div");
   gallery.className = "gallery";
