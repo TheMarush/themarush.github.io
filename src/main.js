@@ -80,3 +80,8 @@ function generateArtGallery(images) {
 
 generateArtGallery(artImages);
 
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('flip');
+  });
+});
