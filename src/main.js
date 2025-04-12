@@ -86,9 +86,12 @@ window.addEventListener('hashchange', () => {
 });
 
 // === HERO ONLY LANDING LOGIC ===
+// === HERO ONLY LANDING LOGIC ===
 window.addEventListener('DOMContentLoaded', () => {
   const hero = document.getElementById('hero-container');
-const revealButton = document.getElementById('reveal-content');
+  const revealButton = document.getElementById('reveal-content');
+  const introScreen = document.getElementById('intro-screen'); // 🆕
+
   // Uzamkneme scroll na začátku
   if (!document.body.classList.contains('revealed')) {
     document.body.classList.add('locked');
@@ -98,6 +101,9 @@ const revealButton = document.getElementById('reveal-content');
     // Odemkneme stránku
     document.body.classList.remove('locked');
     document.body.classList.add('revealed');
+
+    // Zobrazíme intro screen 🆕
+    introScreen?.classList.remove('hidden');
 
     // Získáme ID ze data-info a zobrazíme správnou sekci
     const target = revealButton.getAttribute('data-info');
