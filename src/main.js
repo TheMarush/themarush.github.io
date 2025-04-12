@@ -84,3 +84,26 @@ window.addEventListener('hashchange', () => {
     }
   }
 });
+
+// === HERO ONLY LANDING LOGIC ===
+window.addEventListener('DOMContentLoaded', () => {
+  const hero = document.getElementById('hero-container');
+  const revealButton = document.getElementById('reveal-button');
+
+  // Uzamkneme scroll na začátku
+  if (!document.body.classList.contains('revealed')) {
+    document.body.classList.add('locked');
+  }
+
+  revealButton?.addEventListener('click', () => {
+    // Odemkneme stránku
+    document.body.classList.remove('locked');
+    document.body.classList.add('revealed');
+
+    // Získáme ID ze data-info a zobrazíme správnou sekci
+    const target = revealButton.getAttribute('data-info');
+    if (target) {
+      toggleInfo(target);
+    }
+  });
+});

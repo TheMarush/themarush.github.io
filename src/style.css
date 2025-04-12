@@ -1,4 +1,21 @@
 /* === Global styles === */
+body.locked {
+  overflow: hidden;
+}
+
+#hero-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+}
+
+body.revealed #hero-container {
+  display: none;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -44,7 +61,7 @@ body {
   margin-bottom: 1em;
 }
 
-.hero-text a.nav-button {
+.hero-text .nav-button {
   background: linear-gradient(45deg, #ffcc00, #ff9900);
   color: #000;
   border: none;
@@ -57,7 +74,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.hero-text a.nav-button:hover {
+.hero-text .nav-button:hover {
   background-color: #666;
   color: #fff;
 }
