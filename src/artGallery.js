@@ -9,12 +9,12 @@ export const artImages = [
     {
       src: "https://i.imgur.com/9VKtGKd.jpeg",
       alt: "Artwork 2",
-      caption: "They told us to paint our view of the world, and while I almost went for flowers, the flames just felt more accurate. Nothing says "existential dread" like a canvas full of fire and low-key despair."
+      caption: "They told us to paint our view of the world, and while I almost went for flowers, the flames just felt more accurate. Nothing says existential dread like a canvas full of fire and low-key despair."
     },
     {
       src: "https://i.imgur.com/HExMZ7Z.jpeg",
       alt: "Artwork 3",
-      caption: "My first Amnesty International event: standing up for Nasrin Sotoudeh, an Iranian human rights legend. We were collecting signatures... but turns out, a shocking number of people can’t be bothered to lift a pen for justice. Reality check: apathy is louder than I expected.
+      caption: "My first Amnesty International event: standing up for Nasrin Sotoudeh, an Iranian human rights legend. We were collecting signatures... but turns out, a shocking number of people can’t be bothered to lift a pen for justice. Reality check: apathy is louder than I expected."
     },
     {
         src: "https://i.imgur.com/JRR9kve.jpeg",
@@ -24,12 +24,12 @@ export const artImages = [
     {
         src: "https://i.imgur.com/CtTrdK1.jpeg",
         alt: "Artwork 5",
-        caption: "Organized Women’s Day at school like a boss, complete with a signature canvas and my favorite t-shirt: "Well-behaved women rarely make history." Honestly, I should’ve brought a megaphone too."
+        caption: "Organized Women’s Day at school like a boss, complete with a signature canvas and my favorite t-shirt: Well-behaved women rarely make history."
     },
     {
         src: "https://i.imgur.com/ptZTPwT.jpeg",
         alt: "Artwork 6",
-        caption: "Snapped this picture right after graduating at the Czech embassy in Vienna—front of the EU flag, rainbow bag in tow, and a big "I made it" grin. This isn’t just a graduation shot, it’s a whole manifesto in one frame."
+        caption: "Snapped this picture right after graduating at the Czech embassy in Vienna—front of the EU flag, rainbow bag in tow, and a big -I made it- grin. This isn’t just a graduation shot, it’s a whole manifesto in one frame."
     },
     {
         src: "https://i.imgur.com/Jhtx2zy.jpeg",
@@ -39,12 +39,12 @@ export const artImages = [
     {
         src: "https://i.imgur.com/kHW6zBe.jpeg",
         alt: "Artwork 8",
-        caption: "My first race ever! I have no recollection of pace, form, or breathing properly. But I do remember finishing and thinking, "Okay, let’s do that again but maybe with training next time.""
+        caption: "My first race ever! I have no recollection of pace, form, or breathing properly. But I do remember finishing and thinking: Okay, let’s do that again but maybe with training next time."
     },
     {
         src: "https://i.imgur.com/u9TPGX6.jpeg",
         alt: "Artwork 9",
-        caption: "Orienteering run with my family, because regular running? Not our thing. But give us a map, checkpoints, and an excuse to yell "LEFT!" every five seconds, and we suddenly become competitive trail ninjas."
+        caption: "Orienteering run with my family, because regular running? Not quite our thing. But give us a map, checkpoints, and we suddenly become competitive trail ninjas."
     },
     {
         src: "https://i.imgur.com/0wD7gNp.jpeg",
@@ -54,7 +54,7 @@ export const artImages = [
     {
         src: "https://i.imgur.com/QLy4Dnq.jpeg",
         alt: "Artwork 11",
-        caption: "Represented the Austrian student parliament abroad and realized politics is the same everywhere—mostly smoke and mirrors, just with better coffee and younger chaos agents."
+        caption: "Represented the Austrian student parliament abroad and realized politics is the same everywhere. Mostly smoke and mirrors, just with better coffee and younger chaos agents."
     },
     {
         src: "https://i.imgur.com/SfsgGll.jpeg",
