@@ -86,6 +86,7 @@ nav ul a,
 .dropbtn {
   color: white;
   text-decoration: none;
+  padding: 10px 15px;
   display: block;
   font-weight: bold;
   cursor: pointer;
