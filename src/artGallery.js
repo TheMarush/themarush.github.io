@@ -15,6 +15,51 @@ export const artImages = [
       src: "https://i.imgur.com/HExMZ7Z.jpeg",
       alt: "Artwork 3",
       caption: "This is a filler caption for artwork 3"
+    },
+    {
+        src: "https://i.imgur.com/JRR9kve.jpeg",
+        alt: "Artwork 4",
+        caption: "This is a filler caption for artwork 1"
+    },
+    {
+        src: "https://i.imgur.com/CtTrdK1.jpeg",
+        alt: "Artwork 5",
+        caption: "This is a filler caption for artwork 1"
+    },
+    {
+        src: "https://i.imgur.com/ptZTPwT.jpeg",
+        alt: "Artwork 6",
+        caption: "This is a filler caption for artwork 1"
+    },
+    {
+        src: "https://i.imgur.com/Jhtx2zy.jpeg",
+        alt: "Artwork 7",
+        caption: "This is a filler caption for artwork 1"
+    },
+    {
+        src: "https://i.imgur.com/kHW6zBe.jpeg",
+        alt: "Artwork 8",
+        caption: "This is a filler caption for artwork 1"
+    },
+    {
+        src: "https://i.imgur.com/u9TPGX6.jpeg",
+        alt: "Artwork 9",
+        caption: "This is a filler caption for artwork 1"
+    },
+    {
+        src: "https://i.imgur.com/0wD7gNp.jpeg",
+        alt: "Artwork 10",
+        caption: "This is a filler caption for artwork 1"
+    },
+    {
+        src: "https://i.imgur.com/QLy4Dnq.jpeg",
+        alt: "Artwork 11",
+        caption: "This is a filler caption for artwork 1"
+    },
+    {
+        src: "https://i.imgur.com/SfsgGll.jpeg",
+        alt: "Artwork 12",
+        caption: "This is a filler caption for artwork 1"
     }
   ];
   
