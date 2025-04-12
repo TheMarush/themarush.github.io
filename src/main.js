@@ -88,8 +88,7 @@ window.addEventListener('hashchange', () => {
 // === HERO ONLY LANDING LOGIC ===
 window.addEventListener('DOMContentLoaded', () => {
   const hero = document.getElementById('hero-container');
-  const revealButton = document.getElementById('reveal-button');
-
+const revealButton = document.getElementById('reveal-content');
   // Uzamkneme scroll na začátku
   if (!document.body.classList.contains('revealed')) {
     document.body.classList.add('locked');
