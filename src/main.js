@@ -1,6 +1,6 @@
 import './style.css';
 import { generateTestimonials } from './testimonials.js';
-import { generateSemesters } from './subjects.js';
+import { generateSemesters } from './study.js';
 import { artImages, generateArtGallery } from './artGallery.js';
 
 

@@ -1,7 +1,7 @@
 export const semester2 = {
     id: "semester2",
     name: "2nd Semester",
-    note: "I haven't completed this semester so far.",
+    note: "I haven't finished this semester so far.",
     subjects: [
       { code: "ISKB01", name: "Information Science", description: "Description or reflection goes here." },
       { code: "ISKB05", name: "Information Resources and Funds", description: "Description or reflection goes here." },
