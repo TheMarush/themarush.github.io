@@ -1,8 +1,8 @@
 export const semester2 = {
-    id: "semester2",
-    name: "2nd Semester",
-    note: "I haven't finished this semester so far.",
-    subjects: [
+  id: "semester2",
+  name: "2nd Semester",
+  note: "I haven't finished this semester so far.",
+  subjects: [
       { code: "ISKB01", name: "Information Science", description: "Description or reflection goes here." },
       { code: "ISKB05", name: "Information Resources and Funds", description: "Description or reflection goes here." },
       { code: "ISKB07", name: "Digital Literacy", description: "Description or reflection goes here." },
@@ -16,3 +16,69 @@ export const semester2 = {
       { code: "ISKB40", name: "Summer School: Master Course", description: "Description or reflection goes here." }
     ]
   };
+
+ // === Pokračování renderSemester2 (Fáze 2) ===
+
+export function renderSemester2() {
+  const container = document.getElementById("semester2");
+  if (!container) return;
+
+  container.innerHTML = ""; // Vyčistíme předchozí obsah
+
+  const heading = document.createElement("h2");
+  heading.textContent = semester2.name;
+  container.appendChild(heading);
+
+  if (semester2.note) {
+    const note = document.createElement("p");
+    note.textContent = semester2.note;
+    container.appendChild(note);
+  }
+
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("width", "100%");
+  svg.setAttribute("height", "300");
+  svg.setAttribute("viewBox", "0 0 1000 300");
+  svg.classList.add("rainbow-path");
+
+  const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+  defs.innerHTML = `
+    <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="red"/>
+      <stop offset="20%" stop-color="orange"/>
+      <stop offset="40%" stop-color="yellow"/>
+      <stop offset="60%" stop-color="green"/>
+      <stop offset="80%" stop-color="blue"/>
+      <stop offset="100%" stop-color="purple"/>
+    </linearGradient>
+  `;
+  svg.appendChild(defs);
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", "M0,150 Q250,0 500,150 T1000,150");
+  path.setAttribute("fill", "none");
+  path.setAttribute("stroke", "url(#rainbowGradient)");
+  path.setAttribute("stroke-width", "4");
+  svg.appendChild(path);
+
+  // === Přidáme hvězdičky ===
+  const subjects = semester2.subjects;
+  const numPoints = subjects.length;
+
+  for (let i = 0; i < numPoints; i++) {
+    const cx = 50 + (900 / (numPoints - 1)) * i;
+    const cy = 150 + Math.sin((i / (numPoints - 1)) * Math.PI * 2) * 80;
+
+    const star = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    star.setAttribute("cx", cx);
+    star.setAttribute("cy", cy);
+    star.setAttribute("r", "8");
+    star.setAttribute("fill", "white");
+    star.classList.add("semester-star");
+    star.setAttribute("data-index", i);
+    svg.appendChild(star);
+  }
+
+  container.appendChild(svg);
+}
+

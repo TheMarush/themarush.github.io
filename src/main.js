@@ -2,7 +2,7 @@ import './style.css';
 import { generateTestimonials } from './testimonials.js';
 import { generateSemesters } from './study.js';
 import { artImages, generateArtGallery } from './artGallery.js';
-
+import { renderSemester2 } from './study/semester2.js';
 
 export function toggleSemester(id) {
   const section = document.getElementById(id);
