@@ -338,3 +338,14 @@ nav ul a:hover,
     transform: translateY(0);
   }
 }
+
+
+/* === SEMESTER2 === */
+
+.rainbow-path {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 1; /* můžete zkusit 2.5/1 nebo 4/1 pro delší hada */
+  display: block;
+  overflow: visible;
+}
