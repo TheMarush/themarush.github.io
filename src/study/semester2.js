@@ -38,9 +38,8 @@ export function renderSemester2() {
   }
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("width", "100%");
-  svg.setAttribute("height", "auto");
-  svg.setAttribute("viewBox", "-50 0 1100 800");
+  svg.setAttribute("viewBox", "0 0 1200 1200"); // hodně místa pro hada
+  svg.setAttribute("preserveAspectRatio", "xMidYMin meet"); // důležité pro responzivitu
   svg.classList.add("rainbow-path");
 
   const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -58,16 +57,18 @@ export function renderSemester2() {
 
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
   path.setAttribute("d", `
-    M 50 100
-    C 300 0, 700 0, 950 100
-    S 700 300, 50 300
-    S 300 500, 950 500
-    S 700 700, 50 700
-  `);
+    M 100 100
+    C 400 0, 800 0, 1100 100
+    S 800 300, 100 300
+    S 400 500, 1100 500
+    S 800 700, 100 700
+    S 400 900, 1100 900
+    S 800 1100, 100 1100
+  `); // ♥️ dlouhý a plynulý had
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
   path.setAttribute("stroke-width", "6");
   svg.appendChild(path);
 
   container.appendChild(svg);
-} 
+}

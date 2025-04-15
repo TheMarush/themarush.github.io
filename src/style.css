@@ -344,8 +344,14 @@ nav ul a:hover,
 
 .rainbow-path {
   width: 100%;
+  max-width: 100%;
   height: auto;
-  aspect-ratio: 3 / 1; /* můžete zkusit 2.5/1 nebo 4/1 pro delší hada */
-  display: block;
   overflow: visible;
+}
+
+#semester2 svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
