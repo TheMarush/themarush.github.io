@@ -59,10 +59,10 @@ export function renderSemester2() {
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
   path.setAttribute("d", `
     M 50 100
-    Q 500 0 950 100
-    Q 500 200 50 300
-    Q 500 400 950 500
-    Q 500 600 50 700
+    C 300 0, 700 0, 950 100
+    S 700 300, 50 300
+    S 300 500, 950 500
+    S 700 700, 50 700
   `);
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
