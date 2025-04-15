@@ -22,7 +22,8 @@ body {
   background-color: #000;
   color: #fff;
   line-height: 1.6;
-  overflow-x: visible;
+  overflow-x: hidden;
+  overflow-y: visible
 }
 
 .hidden {
@@ -356,19 +357,19 @@ nav ul a:hover,
 
 #semester2 svg {
   transform: rotate(-90deg);
-  transform-origin: center;
+  transform-origin: center center;
+  height: 100vh;
+  width: auto;
   display: block;
   margin: 0 auto;
-  width: auto;
-  height: 100vh;
-  max-width: none;
+  max-width: 100%;
+  min-height: 300px;
 }
 
 .fullwidth-svg-container {
   position: relative;
-  width: 100vw;
-  overflow-x: hidden;
-  overflow-y: visible;
+  width: 100%;
+  overflow: hidden;
   margin: 30px 0;
 }
 
