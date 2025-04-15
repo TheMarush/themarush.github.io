@@ -1,26 +1,3 @@
-// === semester2.js ===
-
-export const semester2 = {
-  id: "semester2",
-  name: "2nd Semester",
-  note: "I haven't finished this semester so far.",
-  subjects: [
-    { code: "ISKB01", name: "Information Science", description: "Description or reflection goes here." },
-    { code: "ISKB05", name: "Information Resources and Funds", description: "Description or reflection goes here." },
-    { code: "ISKB07", name: "Digital Literacy", description: "Description or reflection goes here." },
-    { code: "KPI33", name: "Digital Competence Course", description: "Description or reflection goes here." },
-    { code: "ISKB65", name: "Group of Experts", description: "Description or reflection goes here." },
-    { code: "ISKM38", name: "Media in the Information Age", description: "Description or reflection goes here." },
-    { code: "CORE030", name: "Media and Society in the 21st Century", description: "Description or reflection goes here." },
-    { code: "CORE042", name: "Data and the Ultimate Question", description: "Description or reflection goes here." },
-    { code: "AUT_TM1", name: "Intro to Scheduling", description: "Description or reflection goes here." },
-    { code: "ISKB81", name: "Winter School: Crossing Borders", description: "Description or reflection goes here." },
-    { code: "ISKB40", name: "Summer School: Master Course", description: "Description or reflection goes here." }
-  ]
-};
-
-// === Pokračování renderSemester2 (cikcak had) ===
-
 export function renderSemester2() {
   const container = document.getElementById("semester2");
   if (!container) return;
@@ -37,9 +14,13 @@ export function renderSemester2() {
     container.appendChild(note);
   }
 
+  // === NOVÉ: Obalovací div pro plnou šířku ===
+  const svgWrapper = document.createElement("div");
+  svgWrapper.classList.add("fullwidth-svg-container");
+
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 1200 1200"); // hodně místa pro hada
-  svg.setAttribute("preserveAspectRatio", "xMidYMin meet"); // důležité pro responzivitu
+  svg.setAttribute("viewBox", "0 0 1200 1200");
+  svg.setAttribute("preserveAspectRatio", "xMidYMin meet");
   svg.classList.add("rainbow-path");
 
   const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -64,11 +45,12 @@ export function renderSemester2() {
     S 800 700, 100 700
     S 400 900, 1100 900
     S 800 1100, 100 1100
-  `); // ♥️ dlouhý a plynulý had
+  `);
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
   path.setAttribute("stroke-width", "6");
   svg.appendChild(path);
 
-  container.appendChild(svg);
+  svgWrapper.appendChild(svg);
+  container.appendChild(svgWrapper);
 }
