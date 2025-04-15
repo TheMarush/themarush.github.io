@@ -133,6 +133,7 @@ nav ul a:hover,
   padding: 10px;
   text-decoration: none;
   display: block;
+  width: 100%;
   transition: background-color 0.3s ease;
 }
 
