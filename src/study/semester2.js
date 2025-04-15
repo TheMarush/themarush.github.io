@@ -9,11 +9,7 @@ const semester2 = {
     { code: "KPI33", name: "Digital Competence Course", description: "Description or reflection goes here." },
     { code: "ISKB65", name: "Group of Experts", description: "Description or reflection goes here." },
     { code: "ISKM38", name: "Media in the Information Age", description: "Description or reflection goes here." },
-    {
-      code: "CORE030",
-      name: "Media and Society in the 21st Century",
-      description: "Description or reflection goes here.",
-    },
+    { code: "CORE030", name: "Media and Society in the 21st Century", description: "Description or reflection goes here.",},
     { code: "CORE042", name: "Data and the Ultimate Question", description: "Description or reflection goes here." },
     { code: "AUT_TM1", name: "Intro to Scheduling", description: "Description or reflection goes here." },
     { code: "ISKB81", name: "Winter School: Crossing Borders", description: "Description or reflection goes here." },
@@ -48,7 +44,7 @@ export function renderSemester2() {
 
   // Vytvoříme SVG element
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-  svg.setAttribute("viewBox", "0 0 2800 300")
+  svg.setAttribute("viewBox", "0 0 4000 300")
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet")
   svg.classList.add("rainbow-path")
   svg.style.width = "100%"
@@ -78,18 +74,18 @@ export function renderSemester2() {
     "d",
     `
     M 100 150
-    C 300 250, 500 50, 700 150
-    S 900 250, 1100 150
-    S 1300 50, 1500 150
-    S 1700 250, 1900 150
-    S 2100 50, 2300 150
-    S 2500 250, 2700 150
+C 400 300, 700 0, 1000 150
+S 1300 300, 1600 150
+S 1900 0, 2200 150
+S 2500 300, 2800 150
+S 3100 0, 3400 150
+S 3700 300, 4000 150
     `
   );
 
   path.setAttribute("fill", "none")
   path.setAttribute("stroke", "url(#rainbowGradient)")
-  path.setAttribute("stroke-width", "6")
+  path.setAttribute("stroke-width", "14")
   path.setAttribute("id", "sinePath")
   svg.appendChild(path)
 
