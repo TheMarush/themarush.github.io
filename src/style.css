@@ -367,7 +367,8 @@ nav ul a:hover,
 .fullwidth-svg-container {
   position: relative;
   width: 100vw;
-  overflow: visible;
+  overflow-x: hidden;
+  overflow-y: visible;
   margin: 30px 0;
 }
 
