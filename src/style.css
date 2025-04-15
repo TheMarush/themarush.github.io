@@ -125,6 +125,7 @@ nav ul a:hover,
   border: 1px solid #444;
   min-width: 200px;
   z-index: 1;
+  top: 100%;
 }
 
 .dropdown-content a {
@@ -141,6 +142,11 @@ nav ul a:hover,
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.drop-up {
+  bottom: 100%;
+  top: auto;
 }
 
 /* === Section Layouts === */
