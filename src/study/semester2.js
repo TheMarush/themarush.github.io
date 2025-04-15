@@ -44,6 +44,7 @@ export function renderSemester2() {
   svgWrapper.style.width = "100%"
   svgWrapper.style.marginTop = "30px"
   svgWrapper.style.marginBottom = "30px"
+  svgWrapper.style.overflowX = "auto"
 
   // Vytvoříme SVG element
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")

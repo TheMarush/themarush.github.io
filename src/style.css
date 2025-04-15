@@ -154,7 +154,7 @@ nav ul a:hover,
 /* === Section Layouts === */
 .semester-section,
 .info-section {
-  max-width: 800px;
+  max-width: 100%;
   margin: 2em auto 0;
   padding: 20px;
 }
@@ -360,7 +360,7 @@ nav ul a:hover,
 
 .fullwidth-svg-container {
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
   margin: 30px 0;
 }
 
@@ -413,4 +413,21 @@ nav ul a:hover,
   left: 20px;
   transform: rotate(45deg);
   z-index: -1;
+}
+
+.fullwidth-svg-container {
+  position: relative;
+  width: 100vw;
+  overflow: visible;
+  margin: 30px 0;
+}
+
+#semester2 .rainbow-path {
+  width: 100vw;
+  height: auto;
+  display: block;
+}
+
+body {
+  overflow-x: hidden;
 }
