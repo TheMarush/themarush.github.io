@@ -55,7 +55,7 @@ export function renderSemester2() {
   svg.appendChild(defs);
 
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d", "M0,150 Q250,0 500,150 T1000,150");
+  path.setAttribute("d", "M0,150 Q125,50 250,150 T500,150 T750,150 T1000,150");
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
   path.setAttribute("stroke-width", "4");
