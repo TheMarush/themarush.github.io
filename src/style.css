@@ -154,7 +154,8 @@ nav ul a:hover,
 /* === Section Layouts === */
 .semester-section,
 .info-section {
-  max-width: 100%;
+  width: 100%;
+  max-width: none; /* <- důležité! */
   margin: 2em auto 0;
   padding: 20px;
 }
@@ -352,8 +353,9 @@ nav ul a:hover,
 #semester2 svg {
   display: block;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: none;
   height: auto;
+  border: 2px dashed hotpink
 }
 
 /* Přidejte tyto styly do vašeho style.css */
@@ -429,5 +431,5 @@ nav ul a:hover,
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: visible;
 }
