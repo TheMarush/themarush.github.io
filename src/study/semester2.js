@@ -1,4 +1,4 @@
-// === study/semester2.js ===
+// study/semester2.js
 
 export const semester2 = {
   id: "semester2",
@@ -37,8 +37,8 @@ export function renderSemester2() {
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("width", "100%");
-  svg.setAttribute("height", "300");
-  svg.setAttribute("viewBox", "0 0 1000 300");
+  svg.setAttribute("height", "400");
+  svg.setAttribute("viewBox", "0 0 1000 400");
   svg.classList.add("rainbow-path");
 
   const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -54,34 +54,19 @@ export function renderSemester2() {
   `;
   svg.appendChild(defs);
 
+  // === Spirálová cesta ===
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute(
-    "d",
-    "M0,150 C100,50 200,250 300,150 S500,50 600,150 S800,250 900,150"
+  path.setAttribute("d",
+    `M50,200 
+     C150,100 250,100 350,200
+     S550,300 650,200
+     S850,100 950,200`
   );
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
-  path.setAttribute("stroke-width", "4");
-  path.setAttribute("id", "rainbowPath");
+  path.setAttribute("stroke-width", "8");
+  path.setAttribute("stroke-linecap", "round");
   svg.appendChild(path);
-
-  // === Add stars along the path ===
-  const pathLength = path.getTotalLength();
-  const subjects = semester2.subjects;
-
-  subjects.forEach((subject, i) => {
-    const point = path.getPointAtLength((i / (subjects.length - 1)) * pathLength);
-
-    const star = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    star.setAttribute("cx", point.x);
-    star.setAttribute("cy", point.y);
-    star.setAttribute("r", "8");
-    star.setAttribute("fill", "white");
-    star.classList.add("semester-star");
-    star.setAttribute("data-index", i);
-
-    svg.appendChild(star);
-  });
 
   container.appendChild(svg);
 }
