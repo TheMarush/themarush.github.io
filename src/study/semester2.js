@@ -60,11 +60,10 @@ export function renderSemester2() {
   path.setAttribute("d", `
     M 100 100
     C 400 0, 800 0, 1100 100
-    S 800 300, 100 300
-    S 400 500, 1100 500
-    S 800 700, 100 700
-    S 400 900, 1100 900
-    S 800 1100, 100 1100
+    S 800 400, 100 400
+    S 400 700, 1100 700
+    S 800 1000, 100 1000
+    S 400 1300, 1100 1300
   `);
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
