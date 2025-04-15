@@ -40,6 +40,12 @@ export const testimonialsData = [
   export function generateTestimonials() {
     const container = document.querySelector('#testimonials .testimonials-grid');
   
+    const introText = document.createElement("p");
+    introText.textContent = "For English translation click on the card!";
+    introText.style.textAlign = "center";
+    introText.style.fontStyle = "italic";
+    container.appendChild(introText);
+
     testimonialsData.forEach((item) => {
       const card = document.createElement('div');
       card.className = `flip-card pastel-border border-${item.color}`;

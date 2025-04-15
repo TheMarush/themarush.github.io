@@ -67,7 +67,7 @@ export const artImages = [
     const container = document.getElementById("myart");
   
     const introText = document.createElement("p");
-    introText.textContent = "Welcome to my little art corner 🎨";
+    introText.textContent = "This is the Art Gallery of meee!";
     introText.style.textAlign = "center";
     introText.style.fontStyle = "italic";
     container.appendChild(introText);
