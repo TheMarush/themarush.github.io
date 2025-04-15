@@ -75,4 +75,4 @@ export function renderSemester2() {
   container.appendChild(svgWrapper);
 }
 
-export { semester2, renderSemester2 };
+export { semester2 };
