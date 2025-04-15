@@ -60,9 +60,9 @@ export function renderSemester2() {
   path.setAttribute("d", `
     M 50 100
     Q 500 0 950 100
-    T 50 300
-    T 950 500
-    T 50 700
+    Q 500 200 50 300
+    Q 500 400 950 500
+    Q 500 600 50 700
   `);
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
