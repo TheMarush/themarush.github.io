@@ -39,7 +39,7 @@ export function renderSemester2() {
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("width", "100%");
-  svg.setAttribute("height", "800");
+  svg.setAttribute("height", "auto");
   svg.setAttribute("viewBox", "-50 0 1100 800");
   svg.classList.add("rainbow-path");
 
