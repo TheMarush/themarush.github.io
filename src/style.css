@@ -359,8 +359,9 @@ nav ul a:hover,
   transform-origin: center;
   display: block;
   margin: 0 auto;
+  width: auto;
+  height: 100vh;
   max-width: none;
-  height: auto;
 }
 
 .fullwidth-svg-container {
