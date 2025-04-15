@@ -2,7 +2,7 @@ export const testimonialsData = [
     {
       front: `"Maruška k nám přišla do školy už jako velice sebevědomá studentka a hned se všem představila jako politicky angažovaná osoba, která pracuje pro neziskové organizace (např. AI), zajímá se o celospolečenské dění, historii, politologii a sociologii a chce na naší škole také zastupovat zájmy studentů a studentek Rg. Díky svému řečnickému talentu se jí také podařilo stát se zástupkyní mluvčí školy a tuto funkci vykonávala opravdu s velkým nasazením. Na Marušce si nejvíce vážím toho, že dokáže svůj názor velice přesvědčivým způsobem zdůvodnit a obhájit, stojí si za ním a nenechá se ve svém přesvědčení zviklat mnohdy populistickými názory jiných. Pokud by měla dělat konkurenci Sibyle, Kassandře nebo Libuši, tak si dokážu představit, že Maruška bude za patnáct let řídit Greenpeace nebo Caritas."`,
       back: `"Maruška joined our school as a very confident student and immediately introduced herself as a politically engaged person working for NGOs (like Amnesty International), interested in society, history, political science and sociology, and wishing to represent the student body at our school. Thanks to her rhetorical talent, she became the school's student spokesperson — a role she performed with passion and drive. What I appreciate most about her is how convincingly she argues her views and doesn't let herself be swayed by populist opinions. If she ever competed with Sibyl, Cassandra, or Libuše, I wouldn’t be surprised to see her running Greenpeace or Caritas in fifteen years."`,
-      footer: "– Mag. Eva Zojer, RG Komenský",
+      footer: "– Mag. Eva Zojer",
       color: "red"
     },
     {
@@ -19,7 +19,7 @@ export const testimonialsData = [
     },
     {
       front: `"Maruska kombiniert ihre tiefe Seele mit einer sehr ausgeprägten sozialen und emotionalen Intelligenz – eine eher seltene Verbindung. Dabei ist sie zugleich rationell denkend und verfügt über starke analytische Fähigkeiten. Das waren wahrscheinlich die Triebfedern für ihr außergewöhnliches Engagement in der Schulorganisation."`,
-      back: `"Maruska combines a deep soul with highly developed social and emotional intelligence — a rather rare combination. At the same time, she thinks rationally and has strong analytical skills. These were likely the driving forces behind her exceptional commitment to school organization.\n\nThe many responsibilities she took on didn’t necessarily make her life easier — but she mastered them brilliantly. I’m grateful I had the chance to accompany her as a teacher on this path."`,
+      back: `"Maruska combines a deep soul with highly developed social and emotional intelligence — a rather rare combination. At the same time, she thinks rationally and has strong analytical skills. These were likely the driving forces behind her exceptional commitment to school organization. The many responsibilities she took on didn’t necessarily make her life easier — but she mastered them brilliantly. I’m grateful I had the chance to accompany her as a teacher on this path."`,
       footer: "– Mojmír Stránský, MA",
       color: "purple"
     },

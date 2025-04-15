@@ -355,6 +355,8 @@ nav ul a:hover,
 }
 
 #semester2 svg {
+  transform: rotate(-90deg);
+  transform-origin: center;
   display: block;
   margin: 0 auto;
   max-width: none;
