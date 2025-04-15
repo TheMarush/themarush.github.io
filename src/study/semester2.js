@@ -1,4 +1,4 @@
-// study/semester2.js
+// === semester2.js ===
 
 export const semester2 = {
   id: "semester2",
@@ -19,6 +19,8 @@ export const semester2 = {
   ]
 };
 
+// === Pokračování renderSemester2 (cikcak had) ===
+
 export function renderSemester2() {
   const container = document.getElementById("semester2");
   if (!container) return;
@@ -37,8 +39,8 @@ export function renderSemester2() {
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("width", "100%");
-  svg.setAttribute("height", "400");
-  svg.setAttribute("viewBox", "0 0 1000 400");
+  svg.setAttribute("height", "800");
+  svg.setAttribute("viewBox", "0 0 1000 800");
   svg.classList.add("rainbow-path");
 
   const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
@@ -54,19 +56,18 @@ export function renderSemester2() {
   `;
   svg.appendChild(defs);
 
-  // === Spirálová cesta ===
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d",
-    `M50,200 
-     C150,100 250,100 350,200
-     S550,300 650,200
-     S850,100 950,200`
-  );
+  path.setAttribute("d", `
+    M 50 100
+    Q 500 0 950 100
+    T 50 300
+    T 950 500
+    T 50 700
+  `);
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
-  path.setAttribute("stroke-width", "8");
-  path.setAttribute("stroke-linecap", "round");
+  path.setAttribute("stroke-width", "6");
   svg.appendChild(path);
 
   container.appendChild(svg);
-}
+} 
