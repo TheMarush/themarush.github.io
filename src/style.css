@@ -358,7 +358,7 @@ nav ul a:hover,
 #semester2 svg {
   transform: rotate(-90deg);
   transform-origin: center center;
-  height: 100vh;
+  height: 300vh; /* klíčový řádek */
   width: auto;
   display: block;
   margin: 0 auto;
