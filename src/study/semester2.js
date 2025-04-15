@@ -1,3 +1,5 @@
+
+
 export function renderSemester2() {
   const container = document.getElementById("semester2");
   if (!container) return;
@@ -54,3 +56,5 @@ export function renderSemester2() {
   svgWrapper.appendChild(svg);
   container.appendChild(svgWrapper);
 }
+
+export { semester2 };
