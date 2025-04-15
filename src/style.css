@@ -349,8 +349,8 @@ nav ul a:hover,
 
 /* === SEMESTER2 === */
 .rainbow-path {
-  width: 100%;
-  max-width: 100%;
+  width: auto;
+  max-width: none;
   height: auto;
   overflow: visible;
 }
@@ -358,7 +358,7 @@ nav ul a:hover,
 #semester2 svg {
   transform: rotate(-90deg);
   transform-origin: center center;
-  height: 300vh; /* klíčový řádek */
+  height: 400vh;
   width: auto;
   display: block;
   margin: 0 auto;

@@ -44,7 +44,7 @@ export function renderSemester2() {
 
   // Vytvoříme SVG element
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-  svg.setAttribute("viewBox", "0 0 4000 300")
+  svg.setAttribute("viewBox", "0 0 300 4000")
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet")
   svg.classList.add("rainbow-path")
   svg.style.width = "100%"
@@ -74,12 +74,12 @@ export function renderSemester2() {
     "d",
     `
     M 100 150
-C 400 300, 700 0, 1000 150
-S 1300 300, 1600 150
-S 1900 0, 2200 150
-S 2500 300, 2800 150
-S 3100 0, 3400 150
-S 3700 300, 4000 150
+    C 400 300, 700 0, 1000 150
+    S 1300 300, 1600 150
+    S 1900 0, 2200 150
+    S 2500 300, 2800 150
+    S 3100 0, 3400 150
+    S 3700 300, 4000 150
     `
   );
 
