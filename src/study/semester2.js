@@ -184,7 +184,8 @@ export function renderSemester2() {
     label.setAttribute("x", point.x + 60);
     label.setAttribute("y", point.y + 5);
     label.setAttribute("fill", "#fff");
-    label.setAttribute("font-size", "16");
+    label.setAttribute("transform", `rotate(90, ${point.x + 40}, ${point.y + 5})`);
+    label.setAttribute("font-size", "42");
     label.style.cursor = "pointer";
     label.textContent = subject.name;
     label.setAttribute("data-subject-index", index);
