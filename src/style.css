@@ -412,8 +412,8 @@ nav ul a:hover,
   height: 20px;
   background-color: #f5f5f5;
   bottom: -10px;
-  left: 20px;
-  transform: rotate(45deg);
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
   z-index: -1;
 }
 
