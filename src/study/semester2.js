@@ -13,8 +13,8 @@ const semester2 = {
     { code: "CORE042", name: "Data and the Ultimate Question", description: "Description or reflection goes here." },
     { code: "AUT_TM1", name: "Intro to Scheduling", description: "Description or reflection goes here." },
     { code: "ISKB81", name: "Winter School: Crossing Borders", description: "Description or reflection goes here." },
-    { code: "ISKB40", name: "Summer School: Master Course", description: "Description or reflection goes here." },
-  ],
+    { code: "ISKB40", name: "Summer School: Master Course", description: "Description or reflection goes here." }
+  ]
 };
 
 export function renderSemester2() {
@@ -27,15 +27,15 @@ export function renderSemester2() {
   heading.textContent = semester2.name;
   container.appendChild(heading);
 
-  const introText = document.createElement("p");
-  introText.textContent = "Placeholder for semester intro text.";
-  container.appendChild(introText);
-
   if (semester2.note) {
     const note = document.createElement("p");
     note.textContent = semester2.note;
     container.appendChild(note);
   }
+
+  const introText = document.createElement("p");
+  introText.textContent = "This is a placeholder introductory paragraph about the second semester.";
+  container.appendChild(introText);
 
   const svgWrapper = document.createElement("div");
   svgWrapper.classList.add("fullwidth-svg-container");
@@ -62,6 +62,7 @@ export function renderSemester2() {
       <stop offset="80%" stop-color="#5e9eff"/>
       <stop offset="100%" stop-color="#c15eff"/>
     </linearGradient>
+
     <symbol id="star" viewBox="0 0 24 24">
       <path d="M12,1.5l2.61,6.727l6.89,0.53l-5.278,4.688l1.5,7.055l-5.722,-3.757l-5.722,3.757l1.5,-7.055l-5.278,-4.688l6.89,-0.53l2.61,-6.727z" />
     </symbol>
@@ -69,14 +70,26 @@ export function renderSemester2() {
   svg.appendChild(defs);
 
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d", `M 100 150 C 400 300, 700 0, 1000 150 S 1300 300, 1600 150 S 1900 0, 2200 150 S 2500 300, 2800 150 S 3100 0, 3400 150 S 3700 300, 4000 150 S 4300 0, 4600 150 S 4900 300, 5200 150 S 5500 0, 5800 150 S 6100 300, 6400 150`);
+  path.setAttribute("d", `
+    M 100 150
+    C 400 300, 700 0, 1000 150
+    S 1300 300, 1600 150
+    S 1900 0, 2200 150
+    S 2500 300, 2800 150
+    S 3100 0, 3400 150
+    S 3700 300, 4000 150
+    S 4300 0, 4600 150
+    S 4900 300, 5200 150
+    S 5500 0, 5800 150
+    S 6100 300, 6400 150
+  `);
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
   path.setAttribute("stroke-width", "14");
   path.setAttribute("id", "sinePath");
   path.style.strokeDasharray = path.getTotalLength();
   path.style.strokeDashoffset = path.getTotalLength();
-  path.style.animation = "draw 2s ease forwards";
+  path.style.animation = "drawPath 3s ease forwards";
   svg.appendChild(path);
 
   svgWrapper.appendChild(svg);
@@ -98,6 +111,11 @@ export function renderSemester2() {
 
   const popupStyle = document.createElement("style");
   popupStyle.textContent = `
+    @keyframes drawPath {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
     .subject-popup-container::before {
       content: '';
       position: absolute;
@@ -108,11 +126,6 @@ export function renderSemester2() {
       left: 20px;
       transform: rotate(45deg);
       z-index: -1;
-    }
-    @keyframes draw {
-      to {
-        stroke-dashoffset: 0;
-      }
     }
   `;
   document.head.appendChild(popupStyle);
@@ -141,29 +154,56 @@ export function renderSemester2() {
     star.setAttribute("data-subject-index", index);
     star.classList.add("subject-star");
     star.style.cursor = "pointer";
+    star.style.transition = "transform 0.2s ease";
 
-    const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    text.setAttribute("x", point.x + (index % 2 === 0 ? 40 : -160));
-    text.setAttribute("y", point.y + 6);
-    text.setAttribute("fill", "#fff");
-    text.setAttribute("font-size", "28");
-    text.setAttribute("data-subject-index", index);
-    text.textContent = subject.name;
-    text.style.cursor = "pointer";
+    star.addEventListener("mouseenter", () => {
+      star.style.transform = "scale(1.3)";
+    });
+    star.addEventListener("mouseleave", () => {
+      star.style.transform = "scale(1)";
+    });
 
-    const handleClick = () => {
-      popupContainer.innerHTML = `<h3>${subject.code}: ${subject.name}</h3><p>${subject.description}</p>`;
+    star.addEventListener("click", (e) => {
+      const subjectIndex = Number.parseInt(star.getAttribute("data-subject-index"));
+      const subject = semester2.subjects[subjectIndex];
+      popupContainer.innerHTML = `
+        <h3>${subject.code}: ${subject.name}</h3>
+        <p>${subject.description}</p>
+      `;
       popupContainer.style.left = `${point.x - 150}px`;
       popupContainer.style.top = `${point.y - 120}px`;
       popupContainer.style.display = "block";
-      setTimeout(() => popupContainer.style.opacity = "1", 10);
-    };
-
-    star.addEventListener("click", handleClick);
-    text.addEventListener("click", handleClick);
+      setTimeout(() => {
+        popupContainer.style.opacity = "1";
+      }, 10);
+      e.stopPropagation();
+    });
 
     svg.appendChild(star);
-    svg.appendChild(text);
+
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    label.setAttribute("x", point.x + 24);
+    label.setAttribute("y", point.y + 6);
+    label.setAttribute("fill", "#fff");
+    label.setAttribute("font-size", "16");
+    label.setAttribute("cursor", "pointer");
+    label.textContent = subject.name;
+    label.addEventListener("click", () => {
+      const subjectIndex = index;
+      const subject = semester2.subjects[subjectIndex];
+      popupContainer.innerHTML = `
+        <h3>${subject.code}: ${subject.name}</h3>
+        <p>${subject.description}</p>
+      `;
+      popupContainer.style.left = `${point.x - 150}px`;
+      popupContainer.style.top = `${point.y - 120}px`;
+      popupContainer.style.display = "block";
+      setTimeout(() => {
+        popupContainer.style.opacity = "1";
+      }, 10);
+    });
+
+    svg.appendChild(label);
   });
 
   document.addEventListener("click", () => {
@@ -172,6 +212,19 @@ export function renderSemester2() {
       popupContainer.style.display = "none";
     }, 300);
   });
+
+  function getColorFromGradient(offset) {
+    const colors = [
+      "#ff5e5e",
+      "#ffb05e",
+      "#ffff5e",
+      "#5eff7f",
+      "#5e9eff",
+      "#c15eff"
+    ];
+    const index = Math.min(Math.floor(offset * colors.length), colors.length - 1);
+    return colors[index];
+  }
 }
 
 export { semester2 };
