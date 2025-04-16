@@ -33,9 +33,9 @@ export function renderSemester2() {
     container.appendChild(note);
   }
 
-  const introText = document.createElement("p");
-  introText.textContent = "This is a placeholder introductory paragraph about the second semester.";
-  container.appendChild(introText);
+  const introParagraph = document.createElement("p");
+  introParagraph.textContent = "This is a placeholder for the introductory text.";
+  container.appendChild(introParagraph);
 
   const svgWrapper = document.createElement("div");
   svgWrapper.classList.add("fullwidth-svg-container");
@@ -46,15 +46,15 @@ export function renderSemester2() {
   svgWrapper.style.overflowX = "auto";
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 6000 1000");
+  svg.setAttribute("viewBox", "0 0 1000 6000");
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
   svg.classList.add("rainbow-path");
-  svg.style.width = "100%";
-  svg.style.height = "auto";
+  svg.style.width = "auto";
+  svg.style.height = "100%";
 
   const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
   defs.innerHTML = `
-    <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+    <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ff5e5e"/>
       <stop offset="20%" stop-color="#ffb05e"/>
       <stop offset="40%" stop-color="#ffff5e"/>
@@ -70,26 +70,26 @@ export function renderSemester2() {
   svg.appendChild(defs);
 
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d", `
-    M 100 150
-    C 400 300, 700 0, 1000 150
-    S 1300 300, 1600 150
-    S 1900 0, 2200 150
-    S 2500 300, 2800 150
-    S 3100 0, 3400 150
-    S 3700 300, 4000 150
-    S 4300 0, 4600 150
-    S 4900 300, 5200 150
-    S 5500 0, 5800 150
-    S 6100 300, 6400 150
-  `);
+  path.setAttribute(
+    "d",
+    `
+      M 150 100
+      C 300 400, 0 700, 150 1000
+      S 300 1600, 150 1900
+      S 0 2200, 150 2500
+      S 300 2800, 150 3100
+      S 0 3400, 150 3700
+      S 300 4000, 150 4300
+      S 0 4600, 150 4900
+      S 300 5200, 150 5500
+      S 0 5800, 150 6100
+    `
+  );
+
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
   path.setAttribute("stroke-width", "14");
   path.setAttribute("id", "sinePath");
-  path.style.strokeDasharray = path.getTotalLength();
-  path.style.strokeDashoffset = path.getTotalLength();
-  path.style.animation = "drawPath 3s ease forwards";
   svg.appendChild(path);
 
   svgWrapper.appendChild(svg);
@@ -111,11 +111,6 @@ export function renderSemester2() {
 
   const popupStyle = document.createElement("style");
   popupStyle.textContent = `
-    @keyframes drawPath {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
     .subject-popup-container::before {
       content: '';
       position: absolute;
@@ -159,6 +154,7 @@ export function renderSemester2() {
     star.addEventListener("mouseenter", () => {
       star.style.transform = "scale(1.3)";
     });
+
     star.addEventListener("mouseleave", () => {
       star.style.transform = "scale(1)";
     });
@@ -166,43 +162,53 @@ export function renderSemester2() {
     star.addEventListener("click", (e) => {
       const subjectIndex = Number.parseInt(star.getAttribute("data-subject-index"));
       const subject = semester2.subjects[subjectIndex];
+
       popupContainer.innerHTML = `
         <h3>${subject.code}: ${subject.name}</h3>
         <p>${subject.description}</p>
       `;
-      popupContainer.style.left = `${point.x - 150}px`;
-      popupContainer.style.top = `${point.y - 120}px`;
+
+      popupContainer.style.left = `${point.x + 40}px`;
+      popupContainer.style.top = `${point.y - 60}px`;
+
       popupContainer.style.display = "block";
       setTimeout(() => {
         popupContainer.style.opacity = "1";
       }, 10);
+
+      e.stopPropagation();
+    });
+
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    label.setAttribute("x", point.x + 40);
+    label.setAttribute("y", point.y + 5);
+    label.setAttribute("fill", "#fff");
+    label.setAttribute("font-size", "16");
+    label.style.cursor = "pointer";
+    label.textContent = subject.name;
+    label.setAttribute("data-subject-index", index);
+
+    label.addEventListener("click", (e) => {
+      const subjectIndex = Number.parseInt(label.getAttribute("data-subject-index"));
+      const subject = semester2.subjects[subjectIndex];
+
+      popupContainer.innerHTML = `
+        <h3>${subject.code}: ${subject.name}</h3>
+        <p>${subject.description}</p>
+      `;
+
+      popupContainer.style.left = `${point.x + 40}px`;
+      popupContainer.style.top = `${point.y - 60}px`;
+
+      popupContainer.style.display = "block";
+      setTimeout(() => {
+        popupContainer.style.opacity = "1";
+      }, 10);
+
       e.stopPropagation();
     });
 
     svg.appendChild(star);
-
-    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    label.setAttribute("x", point.x + 24);
-    label.setAttribute("y", point.y + 6);
-    label.setAttribute("fill", "#fff");
-    label.setAttribute("font-size", "16");
-    label.setAttribute("cursor", "pointer");
-    label.textContent = subject.name;
-    label.addEventListener("click", () => {
-      const subjectIndex = index;
-      const subject = semester2.subjects[subjectIndex];
-      popupContainer.innerHTML = `
-        <h3>${subject.code}: ${subject.name}</h3>
-        <p>${subject.description}</p>
-      `;
-      popupContainer.style.left = `${point.x - 150}px`;
-      popupContainer.style.top = `${point.y - 120}px`;
-      popupContainer.style.display = "block";
-      setTimeout(() => {
-        popupContainer.style.opacity = "1";
-      }, 10);
-    });
-
     svg.appendChild(label);
   });
 
