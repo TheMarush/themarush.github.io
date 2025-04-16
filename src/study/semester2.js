@@ -44,7 +44,7 @@ export function renderSemester2() {
 
   // Vytvoříme SVG element
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-  svg.setAttribute("viewBox", "0 0 300 4000")
+  svg.setAttribute("viewBox", "0 0 4000 300")
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet")
   svg.classList.add("rainbow-path")
   svg.style.width = "100%"
