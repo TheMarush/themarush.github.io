@@ -180,9 +180,8 @@ export function renderSemester2() {
       e.stopPropagation();
     });
 
-    const centerX = 3200; 
     const textOffset = 120;
-    const isLeft = point.x < centerX;
+    const isLeft = index % 2 === 0;
     const labelX = isLeft ? point.x + textOffset : point.x - textOffset;
     const anchor = isLeft ? "start" : "end";
     const rotateX = labelX;
