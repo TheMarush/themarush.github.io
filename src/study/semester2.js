@@ -51,6 +51,8 @@ export function renderSemester2() {
   svg.classList.add("rainbow-path");
   svg.style.width = "auto";
   svg.style.height = "100%";
+  svg.style.transform = "rotate(-90deg)";
+  svg.style.transformOrigin = "top left";
 
   const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
   defs.innerHTML = `
@@ -85,7 +87,6 @@ export function renderSemester2() {
       S 0 5800, 150 6100
     `
   );
-
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
   path.setAttribute("stroke-width", "14");
@@ -185,6 +186,7 @@ export function renderSemester2() {
     label.setAttribute("fill", "#fff");
     label.setAttribute("font-size", "16");
     label.style.cursor = "pointer";
+    label.setAttribute("transform", `rotate(90 ${point.x + 40} ${point.y + 5})`);
     label.textContent = subject.name;
     label.setAttribute("data-subject-index", index);
 
