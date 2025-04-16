@@ -180,12 +180,18 @@ export function renderSemester2() {
       e.stopPropagation();
     });
 
+    const centerX = 3200; 
+    const textOffset = 120;
+    const isLeft = point.x < centerX;
+    const labelX = isLeft ? point.x + textOffset : point.x - textOffset;
+    const anchor = isLeft ? "start" : "end";
+
     const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    label.setAttribute("x", point.x + 60);
-    label.setAttribute("y", point.y + 5);
+    label.setAttribute("x", labelX);
+    label.setAttribute("y", point.y + 12);
     label.setAttribute("fill", "#fff");
-    label.setAttribute("transform", `rotate(90, ${point.x + 40}, ${point.y + 5})`);
     label.setAttribute("font-size", "42");
+    label.setAttribute("text-anchor", anchor);
     label.style.cursor = "pointer";
     label.textContent = subject.name;
     label.setAttribute("data-subject-index", index);
