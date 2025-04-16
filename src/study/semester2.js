@@ -46,16 +46,15 @@ export function renderSemester2() {
   svgWrapper.style.overflowX = "auto";
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 1000 6200");
+  svg.setAttribute("viewBox", "0 0 6000 1000");
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
   svg.classList.add("rainbow-path");
   svg.style.width = "100%";
   svg.style.height = "auto";
-  svg.style.display = "block";
 
   const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
   defs.innerHTML = `
-    <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="rainbowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#ff5e5e"/>
       <stop offset="20%" stop-color="#ffb05e"/>
       <stop offset="40%" stop-color="#ffff5e"/>
@@ -74,16 +73,17 @@ export function renderSemester2() {
   path.setAttribute(
     "d",
     `
-      M 150 100
-      C 0 400, 300 700, 150 1000
-      S 0 1600, 150 1900
-      S 300 2200, 150 2500
-      S 0 2800, 150 3100
-      S 300 3400, 150 3700
-      S 0 4000, 150 4300
-      S 300 4600, 150 4900
-      S 0 5200, 150 5500
-      S 300 5800, 150 6100
+      M 100 500
+      C 400 700, 700 300, 1000 500
+      S 1300 700, 1600 500
+      S 1900 300, 2200 500
+      S 2500 700, 2800 500
+      S 3100 300, 3400 500
+      S 3700 700, 4000 500
+      S 4300 300, 4600 500
+      S 4900 700, 5200 500
+      S 5500 300, 5800 500
+      S 6100 700, 6400 500
     `
   );
 
@@ -134,6 +134,7 @@ export function renderSemester2() {
   }
 
   const pathElement = svg.querySelector("#sinePath");
+  const pathLength = pathElement.getTotalLength();
 
   semester2.subjects.forEach((subject, index) => {
     const offset = index / (semester2.subjects.length - 1);
@@ -160,17 +161,22 @@ export function renderSemester2() {
     });
 
     star.addEventListener("click", (e) => {
-      const subject = semester2.subjects[index];
+      const subjectIndex = Number.parseInt(star.getAttribute("data-subject-index"));
+      const subject = semester2.subjects[subjectIndex];
+
       popupContainer.innerHTML = `
         <h3>${subject.code}: ${subject.name}</h3>
         <p>${subject.description}</p>
       `;
-      popupContainer.style.left = `${point.x + 50}px`;
+
+      popupContainer.style.left = `${point.x + 40}px`;
       popupContainer.style.top = `${point.y - 60}px`;
+
       popupContainer.style.display = "block";
       setTimeout(() => {
         popupContainer.style.opacity = "1";
       }, 10);
+
       e.stopPropagation();
     });
 
@@ -184,17 +190,22 @@ export function renderSemester2() {
     label.setAttribute("data-subject-index", index);
 
     label.addEventListener("click", (e) => {
-      const subject = semester2.subjects[index];
+      const subjectIndex = Number.parseInt(label.getAttribute("data-subject-index"));
+      const subject = semester2.subjects[subjectIndex];
+
       popupContainer.innerHTML = `
         <h3>${subject.code}: ${subject.name}</h3>
         <p>${subject.description}</p>
       `;
-      popupContainer.style.left = `${point.x + 50}px`;
+
+      popupContainer.style.left = `${point.x + 40}px`;
       popupContainer.style.top = `${point.y - 60}px`;
+
       popupContainer.style.display = "block";
       setTimeout(() => {
         popupContainer.style.opacity = "1";
       }, 10);
+
       e.stopPropagation();
     });
 
