@@ -46,13 +46,12 @@ export function renderSemester2() {
   svgWrapper.style.overflowX = "auto";
 
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 1000 6000");
+  svg.setAttribute("viewBox", "0 0 1000 6200");
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
   svg.classList.add("rainbow-path");
-  svg.style.width = "auto";
-  svg.style.height = "100%";
-  svg.style.transform = "rotate(-90deg)";
-  svg.style.transformOrigin = "top left";
+  svg.style.width = "100%";
+  svg.style.height = "auto";
+  svg.style.display = "block";
 
   const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
   defs.innerHTML = `
@@ -76,17 +75,18 @@ export function renderSemester2() {
     "d",
     `
       M 150 100
-      C 300 400, 0 700, 150 1000
-      S 300 1600, 150 1900
-      S 0 2200, 150 2500
-      S 300 2800, 150 3100
-      S 0 3400, 150 3700
-      S 300 4000, 150 4300
-      S 0 4600, 150 4900
-      S 300 5200, 150 5500
-      S 0 5800, 150 6100
+      C 0 400, 300 700, 150 1000
+      S 0 1600, 150 1900
+      S 300 2200, 150 2500
+      S 0 2800, 150 3100
+      S 300 3400, 150 3700
+      S 0 4000, 150 4300
+      S 300 4600, 150 4900
+      S 0 5200, 150 5500
+      S 300 5800, 150 6100
     `
   );
+
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
   path.setAttribute("stroke-width", "14");
@@ -134,7 +134,6 @@ export function renderSemester2() {
   }
 
   const pathElement = svg.querySelector("#sinePath");
-  const pathLength = pathElement.getTotalLength();
 
   semester2.subjects.forEach((subject, index) => {
     const offset = index / (semester2.subjects.length - 1);
@@ -142,10 +141,10 @@ export function renderSemester2() {
 
     const star = document.createElementNS("http://www.w3.org/2000/svg", "use");
     star.setAttribute("href", "#star");
-    star.setAttribute("x", point.x - 16);
-    star.setAttribute("y", point.y - 16);
-    star.setAttribute("width", "32");
-    star.setAttribute("height", "32");
+    star.setAttribute("x", point.x - 24);
+    star.setAttribute("y", point.y - 24);
+    star.setAttribute("width", "48");
+    star.setAttribute("height", "48");
     star.setAttribute("fill", "#fff");
     star.setAttribute("data-subject-index", index);
     star.classList.add("subject-star");
@@ -161,52 +160,41 @@ export function renderSemester2() {
     });
 
     star.addEventListener("click", (e) => {
-      const subjectIndex = Number.parseInt(star.getAttribute("data-subject-index"));
-      const subject = semester2.subjects[subjectIndex];
-
+      const subject = semester2.subjects[index];
       popupContainer.innerHTML = `
         <h3>${subject.code}: ${subject.name}</h3>
         <p>${subject.description}</p>
       `;
-
-      popupContainer.style.left = `${point.x + 40}px`;
+      popupContainer.style.left = `${point.x + 50}px`;
       popupContainer.style.top = `${point.y - 60}px`;
-
       popupContainer.style.display = "block";
       setTimeout(() => {
         popupContainer.style.opacity = "1";
       }, 10);
-
       e.stopPropagation();
     });
 
     const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    label.setAttribute("x", point.x + 40);
+    label.setAttribute("x", point.x + 60);
     label.setAttribute("y", point.y + 5);
     label.setAttribute("fill", "#fff");
     label.setAttribute("font-size", "16");
     label.style.cursor = "pointer";
-    label.setAttribute("transform", `rotate(90 ${point.x + 40} ${point.y + 5})`);
     label.textContent = subject.name;
     label.setAttribute("data-subject-index", index);
 
     label.addEventListener("click", (e) => {
-      const subjectIndex = Number.parseInt(label.getAttribute("data-subject-index"));
-      const subject = semester2.subjects[subjectIndex];
-
+      const subject = semester2.subjects[index];
       popupContainer.innerHTML = `
         <h3>${subject.code}: ${subject.name}</h3>
         <p>${subject.description}</p>
       `;
-
-      popupContainer.style.left = `${point.x + 40}px`;
+      popupContainer.style.left = `${point.x + 50}px`;
       popupContainer.style.top = `${point.y - 60}px`;
-
       popupContainer.style.display = "block";
       setTimeout(() => {
         popupContainer.style.opacity = "1";
       }, 10);
-
       e.stopPropagation();
     });
 
