@@ -358,12 +358,12 @@ nav ul a:hover,
 #semester2 svg {
   transform: rotate(-90deg);
   transform-origin: center center;
-  height: 100vh;
-  width: auto;
+  height: auto;
+  width: 100vw;
   display: block;
   margin: 0 auto;
   max-width: 100%;
-  min-height: 300px;
+  min-height: 100vh;
 }
 
 .fullwidth-svg-container {

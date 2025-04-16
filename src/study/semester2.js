@@ -44,7 +44,7 @@ export function renderSemester2() {
 
   // Vytvoříme SVG element
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-  svg.setAttribute("viewBox", "0 0 4000 300")
+  svg.setAttribute("viewBox", "0 0 4000 800")
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet")
   svg.classList.add("rainbow-path")
   svg.style.width = "100%"
@@ -73,13 +73,13 @@ export function renderSemester2() {
   path.setAttribute(
     "d",
     `
-    M 100 150
-    C 400 300, 700 0, 1000 150
-    S 1300 300, 1600 150
-    S 1900 0, 2200 150
-    S 2500 300, 2800 150
-    S 3100 0, 3400 150
-    S 3700 300, 4000 150
+      M 100 400
+      C 400 800, 700 0, 1000 400
+      S 1300 800, 1600 400
+      S 1900 0, 2200 400
+      S 2500 800, 2800 400
+      S 3100 0, 3400 400
+      S 3700 800, 4000 400
     `
   );
 
@@ -148,10 +148,10 @@ export function renderSemester2() {
     // Vytvoříme hvězdičku
     const star = document.createElementNS("http://www.w3.org/2000/svg", "use")
     star.setAttribute("href", "#star")
-    star.setAttribute("x", point.x - 12)
-    star.setAttribute("y", point.y - 12)
-    star.setAttribute("width", "24")
-    star.setAttribute("height", "24")
+    star.setAttribute("x", point.x - 16)
+    star.setAttribute("y", point.y - 16)
+    star.setAttribute("width", "32")
+    star.setAttribute("height", "32")
     star.setAttribute("fill", "#fff");
     star.setAttribute("data-subject-index", index)
     star.classList.add("subject-star")
