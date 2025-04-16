@@ -185,6 +185,8 @@ export function renderSemester2() {
     const isLeft = point.x < centerX;
     const labelX = isLeft ? point.x + textOffset : point.x - textOffset;
     const anchor = isLeft ? "start" : "end";
+    const rotateX = labelX;
+    const rotateY = point.y + 12;
 
     const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
     label.setAttribute("x", labelX);
@@ -192,6 +194,7 @@ export function renderSemester2() {
     label.setAttribute("fill", "#fff");
     label.setAttribute("font-size", "42");
     label.setAttribute("text-anchor", anchor);
+    label.setAttribute("transform", `rotate(-90, ${rotateX}, ${rotateY})`);
     label.style.cursor = "pointer";
     label.textContent = subject.name;
     label.setAttribute("data-subject-index", index);
@@ -205,8 +208,11 @@ export function renderSemester2() {
         <p>${subject.description}</p>
       `;
 
-      popupContainer.style.left = `${point.x + 40}px`;
-      popupContainer.style.top = `${point.y - 60}px`;
+      const starRect = star.getBoundingClientRect();
+      const wrapperRect = svgWrapper.getBoundingClientRect();
+      
+      popupContainer.style.left = `${starRect.left - wrapperRect.left + 40}px`;
+      popupContainer.style.top = `${starRect.top - wrapperRect.top - 60}px`;
 
       popupContainer.style.display = "block";
       setTimeout(() => {
