@@ -62,7 +62,6 @@ export function renderSemester2() {
       <stop offset="80%" stop-color="#5e9eff"/>
       <stop offset="100%" stop-color="#c15eff"/>
     </linearGradient>
-
     <symbol id="star" viewBox="0 0 24 24">
       <path d="M12,1.5l2.61,6.727l6.89,0.53l-5.278,4.688l1.5,7.055l-5.722,-3.757l-5.722,3.757l1.5,-7.055l-5.278,-4.688l6.89,-0.53l2.61,-6.727z" />
     </symbol>
@@ -70,23 +69,19 @@ export function renderSemester2() {
   svg.appendChild(defs);
 
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute(
-    "d",
-    `
-      M 100 500
-      C 400 700, 700 300, 1000 500
-      S 1300 700, 1600 500
-      S 1900 300, 2200 500
-      S 2500 700, 2800 500
-      S 3100 300, 3400 500
-      S 3700 700, 4000 500
-      S 4300 300, 4600 500
-      S 4900 700, 5200 500
-      S 5500 300, 5800 500
-      S 6100 700, 6400 500
-    `
-  );
-
+  path.setAttribute("d", `
+    M 100 500
+    C 400 700, 700 300, 1000 500
+    S 1300 700, 1600 500
+    S 1900 300, 2200 500
+    S 2500 700, 2800 500
+    S 3100 300, 3400 500
+    S 3700 700, 4000 500
+    S 4300 300, 4600 500
+    S 4900 700, 5200 500
+    S 5500 300, 5800 500
+    S 6100 700, 6400 500
+  `);
   path.setAttribute("fill", "none");
   path.setAttribute("stroke", "url(#rainbowGradient)");
   path.setAttribute("stroke-width", "14");
@@ -98,17 +93,19 @@ export function renderSemester2() {
 
   const popupContainer = document.createElement("div");
   popupContainer.classList.add("subject-popup-container");
-  popupContainer.style.display = "none";
-  popupContainer.style.position = "absolute";
-  popupContainer.style.backgroundColor = "#f5f5f5";
-  popupContainer.style.color = "#000";
-  popupContainer.style.padding = "15px";
-  popupContainer.style.borderRadius = "20px";
-  popupContainer.style.maxWidth = "300px";
-  popupContainer.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)";
-  popupContainer.style.zIndex = "100";
-  popupContainer.style.transition = "opacity 0.3s ease";
-  popupContainer.style.opacity = "0";
+  Object.assign(popupContainer.style, {
+    display: "none",
+    position: "absolute",
+    backgroundColor: "#f5f5f5",
+    color: "#000",
+    padding: "15px",
+    borderRadius: "20px",
+    maxWidth: "300px",
+    boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+    zIndex: "100",
+    transition: "opacity 0.3s ease",
+    opacity: "0"
+  });
 
   const popupStyle = document.createElement("style");
   popupStyle.textContent = `
@@ -119,8 +116,8 @@ export function renderSemester2() {
       height: 20px;
       background-color: #f5f5f5;
       bottom: -10px;
-      left: 20px;
-      transform: rotate(45deg);
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
       z-index: -1;
     }
   `;
@@ -133,8 +130,19 @@ export function renderSemester2() {
     return { x: point.x, y: point.y };
   }
 
+  function positionPopupAtStar(star, popupContainer, svgWrapper) {
+    const popupWidth = popupContainer.offsetWidth || 300;
+    const popupHeight = popupContainer.offsetHeight || 150;
+    const starRect = star.getBoundingClientRect();
+    const wrapperRect = svgWrapper.getBoundingClientRect();
+    const starCenterX = starRect.left - wrapperRect.left + starRect.width / 2;
+    const starTopY = starRect.top - wrapperRect.top;
+
+    popupContainer.style.left = `${starCenterX - popupWidth / 2}px`;
+    popupContainer.style.top = `${starTopY - popupHeight - 10}px`;
+  }
+
   const pathElement = svg.querySelector("#sinePath");
-  const pathLength = pathElement.getTotalLength();
 
   semester2.subjects.forEach((subject, index) => {
     const offset = index / (semester2.subjects.length - 1);
@@ -150,33 +158,16 @@ export function renderSemester2() {
     star.setAttribute("data-subject-index", index);
     star.classList.add("subject-star");
     star.style.cursor = "pointer";
-    star.style.transition = "transform 0.2s ease";
-
-    star.addEventListener("mouseenter", () => {
-      star.style.transform = "scale(1.3)";
-    });
-
-    star.addEventListener("mouseleave", () => {
-      star.style.transform = "scale(1)";
-    });
 
     star.addEventListener("click", (e) => {
-      const subjectIndex = Number.parseInt(star.getAttribute("data-subject-index"));
-      const subject = semester2.subjects[subjectIndex];
-
+      const subject = semester2.subjects[index];
       popupContainer.innerHTML = `
         <h3>${subject.code}: ${subject.name}</h3>
         <p>${subject.description}</p>
       `;
-
-      popupContainer.style.left = `${point.x + 40}px`;
-      popupContainer.style.top = `${point.y - 60}px`;
-
+      positionPopupAtStar(star, popupContainer, svgWrapper);
       popupContainer.style.display = "block";
-      setTimeout(() => {
-        popupContainer.style.opacity = "1";
-      }, 10);
-
+      setTimeout(() => (popupContainer.style.opacity = "1"), 10);
       e.stopPropagation();
     });
 
@@ -184,8 +175,6 @@ export function renderSemester2() {
     const isLeft = index % 2 === 0;
     const labelX = isLeft ? point.x + textOffset : point.x - textOffset;
     const anchor = isLeft ? "start" : "end";
-    const rotateX = labelX;
-    const rotateY = point.y + 12;
 
     const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
     label.setAttribute("x", labelX);
@@ -193,31 +182,20 @@ export function renderSemester2() {
     label.setAttribute("fill", "#fff");
     label.setAttribute("font-size", "124");
     label.setAttribute("text-anchor", anchor);
-    label.setAttribute("transform", `rotate(+90, ${rotateX}, ${rotateY})`);
+    label.setAttribute("transform", `rotate(+90, ${labelX}, ${point.y + 12})`);
     label.style.cursor = "pointer";
     label.textContent = subject.name;
     label.setAttribute("data-subject-index", index);
 
     label.addEventListener("click", (e) => {
-      const subjectIndex = Number.parseInt(label.getAttribute("data-subject-index"));
-      const subject = semester2.subjects[subjectIndex];
-
+      const subject = semester2.subjects[index];
       popupContainer.innerHTML = `
         <h3>${subject.code}: ${subject.name}</h3>
         <p>${subject.description}</p>
       `;
-
-      const starRect = star.getBoundingClientRect();
-      const wrapperRect = svgWrapper.getBoundingClientRect();
-      
-      popupContainer.style.left = `${starRect.left - wrapperRect.left + 40}px`;
-      popupContainer.style.top = `${starRect.top - wrapperRect.top - 60}px`;
-
+      positionPopupAtStar(star, popupContainer, svgWrapper);
       popupContainer.style.display = "block";
-      setTimeout(() => {
-        popupContainer.style.opacity = "1";
-      }, 10);
-
+      setTimeout(() => (popupContainer.style.opacity = "1"), 10);
       e.stopPropagation();
     });
 
@@ -227,23 +205,8 @@ export function renderSemester2() {
 
   document.addEventListener("click", () => {
     popupContainer.style.opacity = "0";
-    setTimeout(() => {
-      popupContainer.style.display = "none";
-    }, 300);
+    setTimeout(() => (popupContainer.style.display = "none"), 300);
   });
-
-  function getColorFromGradient(offset) {
-    const colors = [
-      "#ff5e5e",
-      "#ffb05e",
-      "#ffff5e",
-      "#5eff7f",
-      "#5e9eff",
-      "#c15eff"
-    ];
-    const index = Math.min(Math.floor(offset * colors.length), colors.length - 1);
-    return colors[index];
-  }
 }
 
 export { semester2 };
