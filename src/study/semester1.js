@@ -1,6 +1,7 @@
 export const semester1 = {
     id: "semester1",
     name: "1st Semester",
+    introText: "My journey into the world of AI and information sciences began here. Each course opened new doors and taught me how to see the world differently. From revolutions to reflections, this semester laid the foundation for everything that came after.",
     subjects: [
       { code: "AI001", name: "Elements of AI", description: "Description or reflection goes here." },
       { code: "AI002", name: "Building AI", description: "Description or reflection goes here." },
