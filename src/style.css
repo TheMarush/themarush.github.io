@@ -355,14 +355,23 @@ nav ul a:hover,
   overflow: visible;
 }
 
+/* SVG behavior in semester2 */
+#semester2 .svg-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 40px;
+}
+
 #semester2 svg {
-  transform: rotate(-90deg);
-  transform-origin: center center;
+  width: 100%;
   height: auto;
-  width: 6400px;
+  max-height: 90vh;
   display: block;
   margin: 0 auto;
-  min-height: 100vh;
+  transform: rotate(-90deg);
+  transform-origin: center center;
 }
 
 .fullwidth-svg-container {
