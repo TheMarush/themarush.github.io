@@ -367,7 +367,7 @@ nav ul a:hover,
 #semester2 svg {
   width: 100%;
   height: auto;
-  max-height: 90vh;
+  max-height: 95vh;
   display: block;
   margin: 0 auto;
   transform: rotate(-90deg);
