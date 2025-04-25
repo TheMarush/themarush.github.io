@@ -104,18 +104,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   revealButton?.addEventListener('click', () => {
-    // Odemkneme stránku
     document.body.classList.remove('locked');
     document.body.classList.add('revealed');
-
-    // Zobrazíme intro screen 🆕
     introScreen?.classList.remove('hidden');
-
-    // Získáme ID ze data-info a zobrazíme správnou sekci
-    const target = revealButton.getAttribute('data-info');
-    if (target) {
-      toggleInfo(target);
-    }
   });
 });
 
