@@ -290,41 +290,35 @@ nav ul a:hover,
   border: 2px solid #d8b4fe;
 }
 
-/* === Intro Screen === */
-#intro-screen {
-  background-color: #000;
-  text-align: center;
-  padding: 40px 20px;
-  animation: fadeIn 0.7s ease;
-}
-
-.intro-content {
+.content {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 40px;
   max-width: 1000px;
   margin: 0 auto;
   padding: 40px 20px;
 }
 
-.intro-left img {
+.intro img {
   max-width: 600px;
   width: 100%;
   height: auto;
   border-radius: 10px;
 }
 
-.intro-right {
+.nav-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
   gap: 15px;
   text-align: left;
 }
 
-.intro-right .nav-button {
+.nav-container .nav-button {
   width: 200px;
-  background: linear-gradient(45deg, #ed4ce2, #74dd54);
+  background: linear-gradient(0deg, #ed4ce2, #74dd54);
   color: #000;
   padding: 10px 20px;
   border-radius: 8px;
@@ -336,27 +330,28 @@ nav ul a:hover,
   transition: transform 0.3s, background-color 0.3s;
 }
 
-.intro-right .nav-button:hover {
+.nav-container .nav-button:hover {
   transform: scale(1.05);
   background-color: #444;
   color: #fff;
 }
 
-.intro-nav ul {
+.nav-bar ul {
   list-style: none;
   padding: 0;
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row
+;
   align-items: flex-start;
   gap: 15px;
 }
 
-.intro-nav li {
+.nav-bar li {
   margin: 10px 0;
 }
 
-.intro-nav a {
+.nav-bar a {
   background-color: transparent;
   color: #fff;
   font-weight: bold;
@@ -368,7 +363,7 @@ nav ul a:hover,
   transition: background-color 0.3s ease;
 }
 
-.intro-nav a:hover {
+.nav-bar a:hover {
   background-color: #333;
 }
 
