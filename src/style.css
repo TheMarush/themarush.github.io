@@ -293,6 +293,7 @@ nav ul a:hover,
 .content {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 40px;
   max-width: 1000px;
   margin: 0 auto;
