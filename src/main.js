@@ -4,37 +4,38 @@ import { generateSemesters } from './study.js';
 import { renderSemester2 } from './study/semester2.js';
 import { artImages, generateArtGallery } from './artGallery.js';
 
-export function toggleSemester(id) {
+export var currentSection = document.getElementById("intro");
+export var currentSemester = document.getElementById("semester1");
+
+export function toggleSection(id) {
   const section = document.getElementById(id);
   if (section) {
     const isHidden = section.classList.contains('hidden');
-    document.querySelectorAll('.semester-section').forEach(s => s.classList.add('hidden'));
-    document.querySelectorAll('.info-section').forEach(s => s.classList.add('hidden'));
+    currentSection.classList.add('hidden');
     if (isHidden) {
       section.classList.remove('hidden');
       section.scrollIntoView({ behavior: 'smooth' });
     }
+    currentSection = section;
   }
 }
 
-export function toggleInfo(id) {
-  const section = document.getElementById(id);
-  if (section) {
-    const isHidden = section.classList.contains('hidden');
-    // Skryjeme všechny info sekce
-    document.querySelectorAll('.info-section').forEach(s => s.classList.add('hidden'));
-    // Skryjeme i všechny semestrální sekce (nové!)
-    document.querySelectorAll('.semester-section').forEach(s => s.classList.add('hidden'));
+export function toggleSemester(id) {
+  const semester = document.getElementById(id);
+  if (semester) {
+    const isHidden = semester.classList.contains('hidden');
+    currentSemester.classList.add('hidden');
     if (isHidden) {
-      section.classList.remove('hidden');
-      section.scrollIntoView({ behavior: 'smooth' });
+      semester.classList.remove('hidden');
+      semester.scrollIntoView({ behavior: 'smooth' });
     }
+    currentSemester = semester;
   }
 }
 
 // Attach functions to global window object
 window.toggleSemester = toggleSemester;
-window.toggleInfo = toggleInfo;
+window.toggleSection = toggleSection;
 
 generateArtGallery(artImages);
 
@@ -65,33 +66,15 @@ document.querySelectorAll('[data-semester]').forEach(button => {
 window.addEventListener('DOMContentLoaded', () => {
   const hash = window.location.hash.slice(1); // Odstraní #
   if (!hash) return;
-
-  // Zkusíme najít sekci s tímto ID
-  const section = document.getElementById(hash);
-  if (section) {
-    if (section.classList.contains('info-section')) {
-      toggleInfo(hash);
-    } else if (section.classList.contains('semester-section')) {
-      toggleSemester(hash);
-    }
-  }
+  toggleSection(hash);
 });
 
 // === HANDLE HASH CHANGE (e.g. user clicks link) ===
 window.addEventListener('hashchange', () => {
   const hash = window.location.hash.slice(1); // např. 'about'
-
-  const section = document.getElementById(hash);
-  if (section) {
-    if (section.classList.contains('info-section')) {
-      toggleInfo(hash);
-    } else if (section.classList.contains('semester-section')) {
-      toggleSemester(hash);
-    }
-  }
+  toggleSection(hash);
 });
 
-// === HERO ONLY LANDING LOGIC ===
 // === HERO ONLY LANDING LOGIC ===
 window.addEventListener('DOMContentLoaded', () => {
   const hero = document.getElementById('hero-container');

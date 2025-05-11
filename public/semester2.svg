@@ -1,0 +1,61 @@
+<svg
+        viewBox="0 0 6400 5000"
+        preserveAspectRatio="xMidYMid"
+        xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="rainbowGradient" x1="21.445082" y1="1537.33" x2="1428.7968" y2="1537.33"
+                        gradientTransform="matrix(4.4820114,0,0,0.22311411,0,2214)"
+                        gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#ff5e5e" />
+            <stop offset="20%" stop-color="#ffb05e" />
+            <stop offset="40%" stop-color="#ffff5e" />
+            <stop offset="60%" stop-color="#5eff7f" />
+            <stop offset="80%" stop-color="#5e9eff" />
+            <stop offset="100%" stop-color="#c15eff" />
+        </linearGradient>
+        <symbol id="star" viewBox="0 0 24 24">
+            <path d="m 12,1.5 2.61,6.727 6.89,0.53 -5.278,4.688 1.5,7.055 L 12,16.743 6.278,20.5 7.778,13.445 2.5,8.757 9.39,8.227 Z" />
+        </symbol>
+    </defs>
+
+    <path
+            id="sinePath"
+            d="m 100,2714 c 300,200 600,-200 900,0 300,200 300,200 600,0 300,-200 300,-200 600,0 300,200 300,200 600,0 300,-200 300,-200 600,0 300,200 300,200 600,0 300,-200 300,-200 600,0 300,200 300,200 600,0 300,-200 300,-200 600,0 300,200 300,200 600,0"
+            fill="none"
+            stroke="url(#rainbowGradient)"
+            stroke-width="14" />
+
+    <!-- ⭐ HVĚZDIČKY A TEXTY ⭐ -->
+    <use href="#star" x="76" y="476" width="72" height="72" fill="#ffffff" transform="translate(0,2214)" />
+    <text x="2726" y="-196" fill="#ffffff" font-size="124px" text-anchor="start" transform="rotate(90)">Information Science</text>
+
+    <use href="#star" x="666" y="280" width="72" height="72" fill="#ffffff" transform="translate(0,2346)" />
+    <text x="2662" y="-546" fill="#ffffff" font-size="124px" text-anchor="end" transform="rotate(90)">Information Resources and Funds</text>
+
+    <use href="#star" x="1256" y="500" width="72" height="72" fill="#ffffff" transform="translate(0,2318)" />
+    <text x="2854" y="-1376" fill="#ffffff" font-size="124px" text-anchor="start" transform="rotate(90)">Digital Literacy</text>
+
+    <use href="#star" x="1846" y="300" width="72" height="72" fill="#ffffff" transform="translate(0,2220)" />
+    <text x="2556" y="-1726" fill="#ffffff" font-size="124px" text-anchor="end" transform="rotate(90)">Digital Competence Course</text>
+
+    <use href="#star" x="2436" y="700" width="72" height="72" fill="#ffffff" transform="translate(0,2136)" />
+    <text x="2876" y="-2556" fill="#ffffff" font-size="124px" text-anchor="start" transform="rotate(90)">Group of Experts</text>
+
+    <use href="#star" x="3026" y="300" width="72" height="72" fill="#ffffff" transform="translate(0,2224)" />
+    <text x="2560" y="-2906" fill="#ffffff" font-size="124px" text-anchor="end" transform="rotate(90)">Media in the Information Age</text>
+
+    <use href="#star" x="3616" y="700" width="72" height="72" fill="#ffffff" transform="translate(0,2134)" />
+    <text x="2950" y="-3736" fill="#ffffff" font-size="124px" text-anchor="start" transform="rotate(90)">Media and Society</text>
+
+    <use href="#star" x="4206" y="300" width="72" height="72" fill="#ffffff" transform="translate(0,2214)" />
+    <text x="2550" y="-4086" fill="#ffffff" font-size="124px" text-anchor="end" transform="rotate(90)">Data and the Ultimate Question</text>
+
+    <use href="#star" x="4796" y="700" width="72" height="72" fill="#ffffff" transform="translate(0,2136)" />
+    <text x="2950" y="-4916" fill="#ffffff" font-size="124px" text-anchor="start" transform="rotate(90)">Intro to Scheduling</text>
+
+    <use href="#star" x="5386" y="300" width="72" height="72" fill="#ffffff" transform="translate(0,2244)" />
+    <text x="2550" y="-5266" fill="#ffffff" font-size="124px" text-anchor="end" transform="rotate(90)">Winter School</text>
+
+    <use href="#star" x="5976" y="700" width="72" height="72" fill="#ffffff" transform="translate(0,2118)" />
+    <text x="2950" y="-6096" fill="#ffffff" font-size="124px" text-anchor="start" transform="rotate(90)">Summer School</text>
+</svg>
