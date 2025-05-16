@@ -292,6 +292,25 @@ nav ul a:hover,
   border: 2px solid #d8b4fe;
 }
 
+/* === Special Buttons === */
+.gold-button {
+  background: linear-gradient(45deg, #ffcc00, #ff9900);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gold-button:hover {
+  background-color: #666;
+  color: #fff;
+}
+
 .content {
   display: flex;
   align-items: center;

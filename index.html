@@ -17,7 +17,7 @@
             <div class="hero-text">
                 <h1>I am Marie Anna</h1>
                 <p>and I'm a student</p>
-                <button id="reveal-content" class="nav-button">Get to know me!</button>
+                <button id="reveal-content" class="nav-button gold-button">Get to know me!</button>
             </div>
         </div>
     </div>
@@ -99,7 +99,12 @@
             <h2>Contact</h2>
             <p>If you'd like to say hi, pitch a project, or share a meme — here’s where to do it!</p>
 
-            <form action="mailto:mahdalova.marieanna@gmail.com" method="POST" enctype="text/plain" class="contact-form">
+            <form action="https://formsubmit.co/mahdalova.marieanna@gmail.com" method="POST" class="contact-form">
+                <!-- Protect from spam -->
+                <input type="hidden" name="_captcha" value="false">
+                <!-- Redirect after successful submission -->
+                <input type="hidden" name="_next" value="thank-you.html">
+
                 <label for="name">Your Name</label>
                 <input type="text" id="name" name="name" required>
 
@@ -109,8 +114,9 @@
                 <label for="message">Message</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
 
-                <button type="submit" class="nav-button">Send Email</button>
+                <button type="submit" class="nav-button gold-button">Send Message</button>
             </form>
+    
 
             <div class="contact-links">
                 <p>Find me elsewhere:</p>
