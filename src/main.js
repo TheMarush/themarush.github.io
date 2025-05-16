@@ -71,9 +71,23 @@ document.querySelectorAll('[data-semester]').forEach(button => {
 
 // === HANDLE HASH CHANGE (e.g. user clicks link) ===
 window.addEventListener('hashchange', () => {
-  const hash = window.location.hash.slice(1); // např. 'about'
+  const hash = window.location.hash.slice(1);
+  const introScreen = document.getElementById('intro-screen');
+  const intro = document.getElementById('intro');
+
+  if (introScreen?.classList.contains('hidden')) {
+    introScreen.classList.remove('hidden');
+    document.body.classList.add('revealed');
+    document.body.classList.remove('locked');
+  }
+
+  if (intro && !intro.classList.contains('hidden')) {
+    intro.classList.add('hidden');
+  }
+
   toggleSection(hash);
 });
+
 
 window.addEventListener('DOMContentLoaded', () => {
   // Hero unlock
