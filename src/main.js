@@ -3,6 +3,7 @@ import { generateTestimonials } from './testimonials.js';
 import { generateSemesters } from './study.js';
 import { renderSemester2 } from './study/semester2.js';
 import { artImages, generateArtGallery } from './artGallery.js';
+import { initAbout } from './about.js';
 
 export var currentSection = document.getElementById("intro");
 export var currentSemester = document.getElementById("semester1");
@@ -110,6 +111,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (hash) {
     toggleSection(hash);
   }
+  initAbout();
 });
 
 document.querySelectorAll('.dropdown').forEach(dropdown => {
