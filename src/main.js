@@ -81,7 +81,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const revealButton = document.getElementById('reveal-content');
   const introScreen = document.getElementById('intro-screen'); // 🆕
 
-  // Uzamkneme scroll na začátku
   if (!document.body.classList.contains('revealed')) {
     document.body.classList.add('locked');
   }
@@ -93,17 +92,14 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// === Dynamické přepínání směru dropdownu ===
 document.querySelectorAll('.dropdown').forEach(dropdown => {
   dropdown.addEventListener('mouseenter', () => {
     const dropdownContent = dropdown.querySelector('.dropdown-content');
     if (!dropdownContent) return;
 
-    // Získáme pozici dropdownu vůči oknu
     const rect = dropdown.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
 
-    // Pokud místa pod dropdownem je málo (např. méně než 200px), přidáme .drop-up
     if (spaceBelow < 200) {
       dropdownContent.classList.add('drop-up');
     } else {

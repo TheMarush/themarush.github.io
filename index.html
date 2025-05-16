@@ -96,8 +96,27 @@
 
             <!-- Contact Section -->
             <section id="contact" class="section-container section-narrow info-section hidden">
-                <h2>Contact</h2>
-                <p>You can reach me at: <a href="mailto:mahdalova.marieanna(at)gmail.com">mahdalova.marieanna@gmail.com</a></p>
+            <h2>Contact</h2>
+            <p>If you'd like to say hi, pitch a project, or share a meme — here’s where to do it!</p>
+
+            <form action="mailto:mahdalova.marieanna@gmail.com" method="POST" enctype="text/plain" class="contact-form">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit" class="nav-button">Send Email</button>
+            </form>
+
+            <div class="contact-links">
+                <p>Find me elsewhere:</p>
+                <a href="https://github.com/TheMarush" target="_blank" class="contact-icon">GitHub</a> |
+                <a href="https://www.strava.com/athletes/130258990" target="_blank" class="contact-icon">Strava</a>
+            </div>
             </section>
         </div>
     </div>
