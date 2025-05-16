@@ -328,6 +328,17 @@ nav ul a:hover,
   border-radius: 10px;
 }
 
+#intro img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  border-radius: 10px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
 .nav-container {
   display: flex;
   flex-direction: row;

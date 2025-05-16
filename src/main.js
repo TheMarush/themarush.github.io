@@ -9,7 +9,14 @@ export var currentSemester = document.getElementById("semester1");
 
 export function toggleSection(id) {
   const section = document.getElementById(id);
+  const intro = document.getElementById('intro'); // jen ta část s mývalem
+
   if (section) {
+    // hide the raccoon, not the whole intro-screen
+    if (intro && !intro.classList.contains('hidden')) {
+      intro.classList.add('hidden');
+    }
+
     const isHidden = section.classList.contains('hidden');
     currentSection.classList.add('hidden');
     if (isHidden) {
@@ -19,6 +26,7 @@ export function toggleSection(id) {
     currentSection = section;
   }
 }
+
 
 export function toggleSemester(id) {
   const semester = document.getElementById(id);
@@ -61,25 +69,17 @@ document.querySelectorAll('[data-semester]').forEach(button => {
   });
 });
 
-
-// === HANDLE HASH NAVIGATION ON PAGE LOAD ===
-window.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash.slice(1); // Odstraní #
-  if (!hash) return;
-  toggleSection(hash);
-});
-
 // === HANDLE HASH CHANGE (e.g. user clicks link) ===
 window.addEventListener('hashchange', () => {
   const hash = window.location.hash.slice(1); // např. 'about'
   toggleSection(hash);
 });
 
-// === HERO ONLY LANDING LOGIC ===
 window.addEventListener('DOMContentLoaded', () => {
+  // Hero unlock
   const hero = document.getElementById('hero-container');
   const revealButton = document.getElementById('reveal-content');
-  const introScreen = document.getElementById('intro-screen'); // 🆕
+  const introScreen = document.getElementById('intro-screen');
 
   if (!document.body.classList.contains('revealed')) {
     document.body.classList.add('locked');
@@ -90,6 +90,12 @@ window.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('revealed');
     introScreen?.classList.remove('hidden');
   });
+
+  // Hash navigation
+  const hash = window.location.hash.slice(1);
+  if (hash) {
+    toggleSection(hash);
+  }
 });
 
 document.querySelectorAll('.dropdown').forEach(dropdown => {
