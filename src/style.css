@@ -329,7 +329,7 @@ nav ul a:hover,
 }
 
 #intro img {
-  max-width: 300px;
+  max-width: 500px;
   width: 100%;
   height: auto;
   max-height: 70vh;
@@ -337,6 +337,12 @@ nav ul a:hover,
   object-fit: contain;
   display: block;
   margin: 0 auto;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+#intro img:hover {
+  filter: grayscale(0%);
 }
 
 .nav-container {
