@@ -85,7 +85,7 @@ section.hidden {
 }
 
 .hero-text .nav-button {
-  background: linear-gradient(45deg, #ffcc00, #ff9900);
+  background: linear-gradient(45deg, #E8B560, #FFB347);
   color: #000;
   border: none;
   padding: 10px 20px;
@@ -294,7 +294,7 @@ nav ul a:hover,
 
 /* === Special Buttons === */
 .gold-button {
-  background: linear-gradient(45deg, #ffcc00, #ff9900);
+  background: linear-gradient(45deg, #E8B560, #FFB347);
   color: #000;
   border: none;
   padding: 10px 20px;
@@ -508,7 +508,7 @@ nav ul a:hover,
 }
 
 .semester-buttons .nav-button {
-  background-color: #B640F2;
+  background-color: #D973C4;
   color: #000;
   padding: 10px 20px;
   border-radius: 8px;
@@ -521,7 +521,7 @@ nav ul a:hover,
 
 .semester-buttons .nav-button:hover {
   transform: scale(1.05);
-  background-color: #D973C4;
+  background-color: #B640F2;
   color: #fff;
 }
 
@@ -551,7 +551,7 @@ nav ul a:hover,
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  outline: 2px solid #1ac100;
+  outline: 2px solid #B640F2;
 }
 
 .contact-links {
