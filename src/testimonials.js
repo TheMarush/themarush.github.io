@@ -48,7 +48,7 @@ export const testimonialsData = [
 
     testimonialsData.forEach((item) => {
       const card = document.createElement('div');
-      card.className = `flip-card pastel-border border-${item.color}`;
+      card.className = `flip-card tm-border tm-border-${item.color}`;
   
       const inner = document.createElement('div');
       inner.className = 'flip-card-inner';
