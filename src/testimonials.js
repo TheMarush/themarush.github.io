@@ -36,7 +36,7 @@ export const testimonialsData = [
       color: "orange"
     }
   ];
-  
+
   export function generateTestimonials() {
     const container = document.querySelector('#testimonials');
   
@@ -52,13 +52,13 @@ export const testimonialsData = [
 
     testimonialsData.forEach((item) => {
       const card = document.createElement('div');
-      card.className = `flip-card tm-border tm-border-${item.color}`;
+      card.className = `flip-card tm-border tm-border-${item.color} front`;
   
       const inner = document.createElement('div');
       inner.className = 'flip-card-inner';
   
       const front = document.createElement('div');
-      front.className = 'front';
+      front.className = 'flip-card-front';
       const frontText = document.createElement('p');
       frontText.innerText = item.front;
       const frontFooter = document.createElement('footer');
@@ -67,7 +67,7 @@ export const testimonialsData = [
       front.appendChild(frontFooter);
   
       const back = document.createElement('div');
-      back.className = 'back';
+      back.className = 'flip-card-back';
       const backText = document.createElement('p');
       backText.innerText = item.back;
       const backFooter = document.createElement('footer');
@@ -78,11 +78,12 @@ export const testimonialsData = [
       inner.appendChild(front);
       inner.appendChild(back);
       card.appendChild(inner);
-      testimonialsContainer.appendChild(card);
   
       card.addEventListener('click', () => {
-        card.classList.toggle('flip');
+        card.classList.toggle('back');
+        card.classList.toggle('front');
       });
+      testimonialsContainer.appendChild(card);
     });
   }
   

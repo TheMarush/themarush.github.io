@@ -178,56 +178,77 @@ nav ul li {
 }
 
 /* === Testimonials Section === */
+
 .testimonials-grid {
+  display: grid;
   column-count: 2;
-  column-gap: 2em;
-  padding: 2em 0;
+  column-gap: 2rem;
+  padding: 2rem 0;
+  grid-gap: 1.5rem;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 }
 
 .flip-card {
-  display: inline-block;
+  display: flex;
+  perspective: 100rem;
   width: 100%;
-  margin-bottom: 2em;
   break-inside: avoid;
   background-color: #111;
   border-radius: 0.625rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  padding: 1.5em;
   box-sizing: border-box;
   cursor: pointer;
-  transition: transform 0.6s;
-}
+  max-height: 1000px;
+  transition: z-index, transform var(--transition-time) ease;
+  transition-delay: var(--transition-time), 0s;
+  z-index: 0;
 
-.flip-card p {
-  margin-bottom: 1em;
-  line-height: 1.6;
+
+  &:hover {
+    transition-delay: 0s;
+    z-index: 1;
+  }
+
+  &:active {
+    transform: scale(0.975);
+  }
 }
 
 .flip-card footer {
   text-align: right;
-  font-size: 0.9em;
+  align-self: flex-end;
+  font-size: 1rem;
   color: #cccccc;
 }
 
-.flip-card .front,
-.flip-card .back {
-  display: none;
+.flip-card-inner {
+  border-radius: 0.25rem;
+  flex: 1;
+  display: flex;
+  transform-style: preserve-3d;
+  transition: var(--transition-time) transform;
+
+  .flip-card:hover &, .flip-card:focus &, .flip-card.front, .flip-card.back {
+    transform: rotateY(-180deg);
+  }
 }
 
-.flip-card .front {
-  display: block;
+.flip-card-front, .flip-card-back {
+  backface-visibility: hidden;
+  min-width: 100%;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  border-radius: 0.25rem;
 }
 
-.flip-card.flip .front {
-  display: none;
-}
-
-.flip-card.flip .back {
-  display: block;
-}
-
-.flip-card:hover {
-  transform: scale(1.02);
+.flip-card-back {
+  transform: rotateY(-180deg) translate(100%, 0);
 }
 
 /* === Pastel Border Colors for Testimonials === */
