@@ -78,13 +78,15 @@ export const artImages = [
     images.forEach(img => {
       const wrapper = document.createElement("div");
       wrapper.className = "art-item";
-  
+
       const image = document.createElement("img");
       image.src = img.src;
       image.alt = img.alt;
+      image.className = "art-item-img";
   
       const caption = document.createElement("p");
       caption.textContent = img.caption;
+      caption.className = "art-item-caption";
   
       wrapper.appendChild(image);
       wrapper.appendChild(caption);
