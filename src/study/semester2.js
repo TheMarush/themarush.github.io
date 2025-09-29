@@ -1,7 +1,7 @@
 export const semester2 = {
   id: "semester2",
   name: "2nd Semester",
-  note: "In my second semester, theory met practice. I moved from foundations of information science to real-world media analysis, data-informed thinking, and hands-on digital competences. Along the way I built the base of this website, mapped Czech disinformation ecosystems, and co-created community learning spaces from Bratislava’s Winter School to a cybersecurity intervention. The semester tied my interests together into a clearer, more confident professional direction.",
+  note: "In my second semester, theory met practice. I moved from foundations of information science to real-world media analysis, data-informed thinking, and hands-on digital competences. Along the way I built the base of this website, mapped Czech disinformation ecosystems, and co-created community learning spaces in Bratislava to a cybersecurity intervention in an NGO. The semester tied my interests together into a clearer, more confident professional direction.",
   subjects: [
     {
       code: "ISKB01",
@@ -31,21 +31,21 @@ export const semester2 = {
     {
       code: "ISKM38",
       name: "Media in the Information Age",
-      description: "Centred on contemporary public affairs and media dynamics, the class combined critical reading with guided discussion of current events and their historical context. We examined agenda-setting, propaganda, ownership and financing, platform effects, and AI-driven transformations of content and distribution. For the final project, I created an investigative media map of influential disinformation outlets in the Czech Republic, tracing ownership structures and histories via domain and registry sources and estimating reach across social platforms. The project received special recognition for investigative rigor."
+      description: "Centred on contemporary public affairs and media dynamics, the class combined critical reading with guided discussion of current events and their historical context. Together with a journalist, Bedřich Musil, we examined agenda-setting, propaganda, ownership and financing, platform effects, and AI-driven transformations of content and distribution. For the final project, I created an investigative media map of influential disinformation outlets in the Czech Republic, tracing ownership structures and histories via domain and registry sources and estimating reach across social platforms. The project received special recognition for investigative rigor."
     },
     {
       code: "CORE030",
       name: "Media and Society in the 21st Century",
-      description: "Led by Jakub Macek and Lenka Waschková Císařová, this university-wide course introduced key concepts from media theory and research while situating them in today’s transforming media landscape. We discussed trust and credibility, public opinion, power and ownership, and the shifting roles of audiences and platforms. The class clarified why media literacy matters, how data-driven journalism operates, and what practical steps individuals and institutions can take to navigate an increasingly complex information environment."
+      description: "Led by journalist Jakub Macek and Lenka Waschková Císařová, this university-wide course introduced key concepts from media theory and research while situating them in today’s transforming media landscape. We discussed trust and credibility, public opinion, power and ownership, and the shifting roles of audiences and platforms. The class clarified why media literacy matters, how data-driven journalism operates, and what practical steps individuals and institutions can take to navigate an increasingly complex information environment."
     },
     {
       code: "CORE042",
-      name: "Data and the Ultimate Question",
+      name: "Data – the Answer to the Ultimate Question of Life, the Universe, and Everything...",
       description: "A cross-disciplinary exploration of research data—its lifecycle, FAIR principles, methods, and uses across domains from NLP to public policy and microbiology. The lectures highlighted both the promise and pitfalls of data-driven inquiry, from reproducibility and ethics to commercialization and open data in public administration. As someone fascinated by data, I appreciated the breadth of perspectives and came away with clearer standards for trustworthy analysis and collaboration across disciplines."
     },
     {
       code: "AUT_TM1",
-      name: "Intro to Scheduling",
+      name: "Introduction to scheduling and time management for students with special needs",
       description: "A practical seminar on planning, prioritization, habits, motivation, productivity, and (digital) hygiene tailored for students with specific needs. Working alongside peers with similar challenges helped me test concrete strategies, compare tools, and build routines that actually fit my life. The experience boosted my confidence that—with the right structures—I can organize anything I set my mind to."
     },
     {
