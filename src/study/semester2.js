@@ -1,7 +1,7 @@
 const semester2 = {
   id: "semester2",
   name: "2nd Semester",
-  note: "I haven't finished this semester so far.",
+  note: "In my second semester, theory met practice. I moved from foundations of information science to real-world media analysis, data-informed thinking, and hands-on digital competences. Along the way I built the base of this website, mapped Czech disinformation ecosystems, and co-created community learning spaces from Bratislava’s Winter School to a cybersecurity intervention. The semester tied my interests together into a clearer, more confident professional direction.",
   subjects: [
     {
       code: "ISKB01",
