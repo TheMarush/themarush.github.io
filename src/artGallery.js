@@ -35,7 +35,7 @@ export const artImages = [
         src: "https://i.imgur.com/SfsgGll.jpeg",
         alt: "Artwork 7",
         caption: "Snapped this rainbow moment at the Institute of Science and Technology Austria. A proof that science doesn’t just accept LGBTQ+ folks, it celebrates them. Smart, inclusive, and fabulous? Yes please."
-    }
+    },
     {
       src: "https://i.imgur.com/9VKtGKd.jpeg",
       alt: "Artwork 8",
