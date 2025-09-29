@@ -1,4 +1,4 @@
-const semester2 = {
+export const semester2 = {
   id: "semester2",
   name: "2nd Semester",
   note: "In my second semester, theory met practice. I moved from foundations of information science to real-world media analysis, data-informed thinking, and hands-on digital competences. Along the way I built the base of this website, mapped Czech disinformation ecosystems, and co-created community learning spaces from Bratislava’s Winter School to a cybersecurity intervention. The semester tied my interests together into a clearer, more confident professional direction.",
@@ -60,24 +60,3 @@ const semester2 = {
     }
   ]
 };
-
-export function renderSemester2() {
-  const container = document.getElementById("semester2");
-  if (!container) return;
-
-  const heading = document.createElement("h2");
-  heading.textContent = semester2.name;
-  container.insertBefore(heading, container.firstChild);
-
-  if (semester2.note) {
-    const note = document.createElement("p");
-    note.textContent = semester2.note;
-    container.insertBefore(note, heading.nextSibling);
-  }
-
-  const introParagraph = document.createElement("p");
-  introParagraph.textContent = "This is a placeholder for the introductory text.";
-  container.insertBefore(introParagraph, container.children[2] || null);
-}
-
-export { semester2 };

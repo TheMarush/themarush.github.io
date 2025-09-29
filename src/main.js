@@ -1,7 +1,6 @@
 import './style.css';
 import { generateTestimonials } from './testimonials.js';
 import { generateSemesters } from './study.js';
-import { renderSemester2 } from './study/semester2.js';
 import { artImages, generateArtGallery } from './artGallery.js';
 import { initAbout } from './about.js';
 
@@ -52,7 +51,6 @@ generateTestimonials();
 
 generateSemesters();
 
-renderSemester2();
 
 // === Info buttons ===
 document.querySelectorAll('[data-info]').forEach(button => {
