@@ -38,7 +38,12 @@ export class App extends LitElement {
             { id: "gallery", label: "Gallery" },
             { id: "about", label: "About" },
             { id: "testimonials", label: "Testimonials" },
-            { id: "view", label: "AI view" },
+            { id: "projects",
+              label: "Projects",
+              submenu: [
+                { id: "view", label: "AI View" },
+               ]
+            }, 
             {
               id: "study",
               label: "Study",
