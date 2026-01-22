@@ -176,7 +176,7 @@ export class MMMenu extends LitElement {
     }
 
     .menu-nav mm-button.active {
-      --button-bg: #0B1DB4;
+      --button-bg: #0a71ac;
       --button-color: #fff;
       transform: scale(1.05);
     }

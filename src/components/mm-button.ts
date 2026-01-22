@@ -41,12 +41,12 @@ export class MMButon extends LitElement {
 
     button.mm-button:hover {
       transform: scale(1.05);
-      background-color: #0B1DB4;
+      background-color: #0b76b4;
       color: #fff;
     }
       
     button.mm-button:hover {
-      border-color: #646cff;
+      border-color: #0b76b4;
     }
     button.mm-button:focus,
     button.mm-button:focus-visible {
