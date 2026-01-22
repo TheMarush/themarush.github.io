@@ -98,7 +98,7 @@ export class App extends LitElement {
           </div>
         </mm-menu>
       </div>
-      <mm-racoon @racoon-click=${(e: CustomEvent) => {
+      <mm-racoon @racoon-click=${(e: CustomEvent<{ imageUrl: string }>) => {
         this.modal.show("", e.detail.imageUrl);
       }}></mm-racoon>
     `;

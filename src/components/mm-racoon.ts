@@ -1,18 +1,36 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
+type RacoonClickDetail = { imageUrl: string };
+
 @customElement("mm-racoon")
 export class Racoon extends LitElement {
   @property({ type: Boolean }) private isHovered = false;
 
+  private memeUrls = [
+    "https://i.imgur.com/HaQZoZH.jpeg",
+    "https://i.imgur.com/jiDnkKq.jpg",
+    "https://i.imgur.com/evbLt60.jpg",
+    "https://i.imgur.com/MudSgmc.jpg",
+    "https://i.imgur.com/yWUddaf.jpg",
+    "https://i.imgur.com/Q65qcNm.jpg",
+    "https://i.imgur.com/Z1LpEhD.jpg",
+    "https://i.imgur.com/2X5zBnj.jpg",
+    "https://i.imgur.com/9FmlNFY.jpg",
+  ];
+
+  private currentIndex = 0;
+
   private handleClick() {
+    const currentUrl = this.memeUrls[this.currentIndex];
     this.dispatchEvent(
-      new CustomEvent("racoon-click", {
-        detail: { imageUrl: "https://i.imgur.com/HaQZoZH.jpeg" },
+      new CustomEvent<RacoonClickDetail>("racoon-click", {
+        detail: { imageUrl: currentUrl },
         bubbles: true,
         composed: true,
       }),
     );
+    this.currentIndex = (this.currentIndex + 1) % this.memeUrls.length;
   }
 
   private handleMouseEnter() {
@@ -25,13 +43,15 @@ export class Racoon extends LitElement {
 
   render() {
     return html`
-      <div
-        class="racoon-container ${this.isHovered ? "hovered" : ""}"
-        @click=${this.handleClick}
-        @mouseenter=${this.handleMouseEnter}
-        @mouseleave=${this.handleMouseLeave}
-      >
-        <img src="/racoon.png" alt="Racoon" class="racoon-image" />
+      <div class="racoon-container ${this.isHovered ? "hovered" : ""}">
+        <img
+          src="/racoon.png"
+          alt="Racoon"
+          class="racoon-image"
+          @click=${this.handleClick}
+          @mouseenter=${this.handleMouseEnter}
+          @mouseleave=${this.handleMouseLeave}
+        />
       </div>
     `;
   }
@@ -47,11 +67,10 @@ export class Racoon extends LitElement {
 
     .racoon-container {
       position: relative;
-      cursor: pointer;
       overflow: hidden;
-      height: 500px;
       display: flex;
       align-items: flex-end;
+      pointer-events: none;
     }
 
     .racoon-image {
@@ -64,6 +83,8 @@ export class Racoon extends LitElement {
       transform: translateY(80%);
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       will-change: transform;
+      cursor: pointer;
+      pointer-events: auto;
     }
 
     .racoon-container.hovered .racoon-image {
