@@ -1,122 +1,14 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="./style.css"/>
-    <title>Marie Anna Mahdalová | Portfolio</title>
-    <script type="module" src="/src/main.js"></script>
-</head>
-<body>
-<div style="display: flex; flex-direction: column">
-
-    <!-- Hero Section -->
-    <div id="hero-container">
-        <div class="hero-image">
-            <div class="hero-text">
-                <h1>I am Marie Anna</h1>
-                <button id="reveal-content" class="tm-button tm-main-button">Get to know me</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Intro Screen (hidden by default) -->
-    <div id="intro-screen" class="hidden">
-        <div class="nav-container">
-            <nav class="nav-bar">
-                <ul>
-                    <li><a href="#about" class="tm-button nav-button">About Me</a></li>
-                    <li><a href="#study" class="tm-button nav-button">Study</a></li>
-                    <li><a href="#testimonials" class="tm-button nav-button">Testimonials</a></li>
-                    <li><a href="#myart" class="tm-button nav-button">My Art</a></li>
-                    <li><a href="#contact" class="tm-button nav-button">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="content">
-            <section id="intro" class="intro">
-                <img src="https://i.imgur.com/HaQZoZH.jpeg" alt="Funny Intro"/>
-            </section>
-            <!-- About Section -->
-            <section id="about" class="section-container info-section hidden"></section>
-
-            <!-- Study Section -->
-            <section id="study" class="section-container info-section hidden">
-                <h2>KISK MUNI</h2>
-                <p>Somewhere along the way, I stopped thinking of information science as a dry field with a misleading name. I began to see how deeply it connects with the world around me, with ethics, with technology, with education, with people. I found a space that doesn’t just teach tools but challenges ideas. A space that values reflection as much as innovation.</p>
-                <p>And honestly? That’s not why I came here.</p>
-                <p>I chose KISK because I was looking for the theoretical side of AI. I wasn’t interested in librarianship or particularly drawn to the idea of working with information. But the further I got, the more it all started making sense—how knowledge is structured, how it flows, and how much power there is in understanding it. I didn’t know it then, but I had landed in exactly the right place.</p>
-                <p>Explore my academic adventures semester by semester:</p>
-                <div class="semester-buttons">
-                    <button class="tm-button nav-button" data-semester="semester1">1st Semester</button>
-                    <button class="tm-button nav-button" data-semester="semester2">2nd Semester</button>
-                    <button class="tm-button nav-button" data-semester="semester3">3rd Semester</button>
-                    <button class="tm-button nav-button" data-semester="semester4">4th Semester</button>
-                    <button class="tm-button nav-button" data-semester="semester5">5th Semester</button>
-                    <button class="tm-button nav-button" data-semester="semester6">6th Semester</button>
-                </div>
-
-                <!-- Semester Sections -->
-                <section id="semester1" class="section-container semester-section hidden"></section>
-                <section id="semester2" class="section-container semester-section hidden">
-                    <!--<div class="svg-wrapper">
-                        <img src="/semester2.svg" alt="Semester 2"/>
-                    </div>-->
-                </section>
-                <section id="semester3" class="section-container semester-section hidden"></section>
-                <section id="semester4" class="section-container semester-section hidden"></section>
-                <section id="semester5" class="section-container semester-section hidden"></section>
-                <section id="semester6" class="section-container semester-section hidden"></section>
-
-            </section>
-
-            <!-- Testimonials Section -->
-            <section id="testimonials" class="section-container info-section hidden">
-                <h2>Testimonials</h2>
-            </section>
-
-            <!-- My Art Section -->
-            <section id="myart" class="section-container info-section hidden">
-                <h2>My Art</h2>
-            </section>
-
-            <!-- Contact Section -->
-            <section id="contact" class="section-container info-section hidden">
-            <h2>Contact</h2>
-            <p>If you'd like to say hi, pitch a project, or share a meme — here’s where to do it!</p>
-
-            <form action="https://formsubmit.co/marush.the.first@gmail.com" method="POST" class="contact-form">
-                <!-- Protect from spam -->
-                <input type="text" name="_honey" style="display:none">
-                <input type="hidden" name="_captcha" value="false">
-                <!-- Redirect after successful submission -->
-                <input type="hidden" name="_next" value="https://themarush.github.io/thank-you.html">
-                <input type="hidden" name="_subject" value="[themarush.github.io] New message">
-
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Your Email</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-
-                <button type="submit" class="tm-button tm-main-button">Send Message</button>
-            </form>
-    
-
-            <div class="contact-links">
-                <p>Find me elsewhere:</p>
-                <a href="https://github.com/TheMarush" target="_blank" class="contact-icon">GitHub</a> |
-                <a href="https://www.strava.com/athletes/130258990" target="_blank" class="contact-icon">Strava</a> |
-                <a href="https://youtube.com/@marieannam.7648?si=VtgVY0MjdPS7CrD0" target="_blank" class="contact-icon">YouTube</a>
-            </div>
-            </section>
-        </div>
-    </div>
-</div>
-<script type="module" src="/src/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/racoon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marie Anna Mahdalová</title>
+    <link rel="stylesheet" href="/src/index.css" />
+    <script type="module" src="/src/app.ts"></script>
+  </head>
+  <body>
+    <mm-app></mm-app>
+  </body>
 </html>
