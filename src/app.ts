@@ -38,7 +38,7 @@ export class App extends LitElement {
             { id: "gallery", label: "Gallery" },
             { id: "about", label: "About" },
             { id: "testimonials", label: "Testimonials" },
-            { id: "contact", label: "Contact" },
+            { id: "view", label: "AI view" },
             {
               id: "study",
               label: "Study",
@@ -50,6 +50,7 @@ export class App extends LitElement {
                 { id: "semester-5", label: "Semester 5" },
               ],
             },
+            { id: "contact", label: "Contact" }
           ]}
           position="left">
           <div slot="gallery">
