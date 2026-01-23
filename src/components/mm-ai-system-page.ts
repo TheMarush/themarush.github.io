@@ -2,7 +2,7 @@ import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type { AiSystemData, AiSystemId } from "../data/aiView.js";
 import { aiSystems } from "../data/aiView.js";
-import "./mm-ai-input-module.ts";
+import "./mm-ai-exhibit.ts";
 
 @customElement("mm-ai-system-page")
 export class MMAiSystemPage extends LitElement {
@@ -63,50 +63,10 @@ export class MMAiSystemPage extends LitElement {
       max-width: 420px;
     }
 
-    .hero-text {
-      font-size: 0.96rem;
-      color: #d1d5db;
-      line-height: 1.7;
-      max-width: 720px;
-    }
-
-    .modules {
+    .exhibits {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .footer {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(55, 65, 81, 0.9);
-      font-size: 0.9rem;
-      color: #d1d5db;
-    }
-
-    @media (max-width: 900px) {
-      .footer {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .footer-section-label {
-      font-size: 0.78rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #9ca3af;
-      margin-bottom: 0.4rem;
-    }
-
-    ul {
-      margin: 0.2rem 0 0.7rem;
-      padding-left: 1.2rem;
-    }
-
-    li {
-      margin-bottom: 0.25rem;
+      gap: 2.5rem;
     }
   `;
 
@@ -122,51 +82,18 @@ export class MMAiSystemPage extends LitElement {
             <h1 id="system-title">${system.title}</h1>
             <p class="descriptor">${system.descriptor}</p>
           </div>
-          <p class="hero-text">${system.hero}</p>
         </section>
 
-        <section class="modules" aria-label="Input modules">
-          ${system.modules.map(
-            (module, index) => html`
-              <mm-ai-input-module
-                .module=${module}
+        <section class="exhibits" aria-label="Gallery exhibits">
+          ${system.exhibits.map(
+            (exhibit, index) => html`
+              <mm-ai-exhibit
+                .exhibit=${exhibit}
                 .index=${index + 1}
                 accent=${accent}
-              ></mm-ai-input-module>
+              ></mm-ai-exhibit>
             `,
           )}
-        </section>
-
-        <section class="footer" aria-label="System profile and counter-reading">
-          <div>
-            <div class="footer-section-label">System profile</div>
-            <div>
-              <strong>Themes</strong>
-              <ul>
-                ${system.systemProfile.themes.map(
-                  (t) => html`<li>${t}</li>`,
-                )}
-              </ul>
-              <strong>Tone</strong>
-              <ul>
-                ${system.systemProfile.tone.map(
-                  (t) => html`<li>${t}</li>`,
-                )}
-              </ul>
-              <strong>Aesthetic pattern</strong>
-              <ul>
-                ${system.systemProfile.aesthetics.map(
-                  (t) => html`<li>${t}</li>`,
-                )}
-              </ul>
-            </div>
-          </div>
-          <div>
-            <div class="footer-section-label">My counter-reading</div>
-            <p>
-              ${system.counterReading}
-            </p>
-          </div>
         </section>
       </div>
     `;
