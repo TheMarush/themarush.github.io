@@ -7,6 +7,8 @@ import "./components/mm-semester.ts";
 import "./components/mm-testimonials.ts";
 import "./components/mm-gallery.ts";
 import "./components/mm-about.ts";
+import "./components/mm-projects.ts";
+import "./components/mm-ai-view-index.ts";
 import "./components/mm-contact.ts";
 import "./components/mm-racoon.ts";
 import { galleryImages } from "./data/gallery.js";
@@ -63,6 +65,12 @@ export class App extends LitElement {
           </div>
           <div slot="about">
             <mm-about></mm-about>
+          </div>
+          <div slot="projects">
+            <mm-projects></mm-projects>
+          </div>
+          <div slot="view">
+            <mm-ai-view-index></mm-ai-view-index>
           </div>
           <div slot="testimonials">
             <mm-testimonials .testimonials=${testimonials}></mm-testimonials>
