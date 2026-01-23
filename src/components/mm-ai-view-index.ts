@@ -181,14 +181,18 @@ export class MMAiViewIndex extends LitElement {
   private syncFromLocation() {
     if (typeof window === "undefined") return;
     const hash = window.location.hash || "";
-    const cleaned = hash.replace(/^#/, "");
-    if (!cleaned.startsWith("/projects/ai-view")) {
+    const cleaned = hash.replace(/^#\/?/, "");
+    const segments = cleaned.split("/").filter(Boolean);
+
+    // Check if we're in the AI view section
+    // URL structure: #/view or #/view/gemini
+    if (segments[0] !== "view") {
       this.activeSystem = null;
       return;
     }
 
-    const segments = cleaned.split("/").filter(Boolean);
-    const maybeSystem = segments[2] as AiSystemId | undefined;
+    // Check for system selection (segments[1])
+    const maybeSystem = segments[1] as AiSystemId | undefined;
     if (maybeSystem && (maybeSystem in aiSystems)) {
       this.activeSystem = maybeSystem;
     } else {
@@ -203,12 +207,12 @@ export class MMAiViewIndex extends LitElement {
 
   private handleEnterSystem(id: AiSystemId) {
     this.activeSystem = id;
-    this.setHash(`/projects/ai-view/${id}`);
+    this.setHash(`/view/${id}`);
   }
 
   private handleBackToIndex() {
     this.activeSystem = null;
-    this.setHash(`/projects/ai-view`);
+    this.setHash(`/view`);
   }
 
   private systemFor(id: AiSystemId): AiSystemData {

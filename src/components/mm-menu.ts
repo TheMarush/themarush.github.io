@@ -27,15 +27,46 @@ export class MMMenu extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    if (this.items.length > 0 && !this.activeItem) {
-      this.activeItem = this.items[0].id;
-    }
+    this.syncFromHash();
     document.addEventListener("click", this._handleDocumentClick.bind(this));
+    window.addEventListener("hashchange", this._handleHashChange.bind(this));
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener("click", this._handleDocumentClick.bind(this));
+    window.removeEventListener("hashchange", this._handleHashChange.bind(this));
+  }
+
+  private _handleHashChange() {
+    this.syncFromHash();
+  }
+
+  private syncFromHash() {
+    const hash = window.location.hash || "";
+    const cleaned = hash.replace(/^#\/?/, "");
+    const segments = cleaned.split("/").filter(Boolean);
+
+    // First segment is the main page (e.g., "gallery", "projects")
+    const mainPage = segments[0] || (this.items.length > 0 ? this.items[0].id : "");
+
+    // Check if this is a main menu item
+    const mainItem = this.items.find(item => item.id === mainPage);
+    if (mainItem) {
+      this.activeItem = mainPage;
+      // If there's a second segment and the main item has a submenu, select that too
+      if (segments.length > 1 && mainItem.submenu) {
+        const subPage = segments[1];
+        const subItem = mainItem.submenu.find(sub => sub.id === subPage);
+        if (subItem) {
+          this.activeItem = subPage;
+          this.expandedItems = new Set([mainPage]);
+        }
+      }
+    } else if (this.items.length > 0 && !this.activeItem) {
+      // Default to first item if no valid hash
+      this.activeItem = this.items[0].id;
+    }
   }
 
   private _handleDocumentClick(e: Event) {
@@ -47,6 +78,13 @@ export class MMMenu extends LitElement {
   private _selectItem(itemId: string) {
     this.activeItem = itemId;
     this.isMenuOpen = false;
+
+    // Update URL hash
+    const hash = `#/${itemId}`;
+    if (window.location.hash !== hash) {
+      window.location.hash = hash;
+    }
+
     this.dispatchEvent(
       new CustomEvent("menu-change", {
         detail: { activeItem: itemId },
