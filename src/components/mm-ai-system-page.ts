@@ -89,6 +89,7 @@ export class MMAiSystemPage extends LitElement {
             (exhibit, index) => html`
               <mm-ai-exhibit
                 .exhibit=${exhibit}
+                .systemId=${system.id}
                 .index=${index + 1}
                 accent=${accent}
               ></mm-ai-exhibit>
