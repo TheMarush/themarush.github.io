@@ -1,10 +1,10 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import type { AiSystemData, AiSystemId } from "../data/aiView.js";
-import { aiSystems } from "../data/aiView.js";
+import { aiSystems, aiViewIntro } from "../data/aiView.js";
 import "./mm-ai-system-page.ts";
 
-const SYSTEM_ORDER: AiSystemId[] = ["claude", "chatgpt", "gemini"];
+const SYSTEM_ORDER: AiSystemId[] = ["gemini", "claude", "grok"];
 
 @customElement("mm-ai-view-index")
 export class MMAiViewIndex extends LitElement {
@@ -43,6 +43,7 @@ export class MMAiViewIndex extends LitElement {
       color: #d1d5db;
       line-height: 1.7;
       margin-bottom: 1.75rem;
+      white-space: pre-line;
     }
 
     .tiles {
@@ -225,13 +226,9 @@ export class MMAiViewIndex extends LitElement {
     return html`
       <div class="page">
         <div class="meta-label">Projects → AI view</div>
-        <h1>AI view</h1>
+        <h1>Reimagined by AI</h1>
         <p class="intro">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          vestibulum, sapien vel aliquet luctus, erat sapien pellentesque quam,
-          vitae suscipit sem purus at enim. Integer porttitor, mauris non
-          aliquam elementum, massa nulla blandit leo, vitae dictum neque dui
-          nec elit.
+          ${aiViewIntro}
         </p>
         <div
           class="tiles"
