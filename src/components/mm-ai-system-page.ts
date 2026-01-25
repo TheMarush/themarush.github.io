@@ -1,9 +1,10 @@
+import type { PropertyValues } from "lit";
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import type { PropertyValues } from "lit";
 import type { AiSystemData, AiSystemId } from "../data/aiView.js";
 import { aiSystems } from "../data/aiView.js";
 import "./mm-ai-exhibit.ts";
+import type { MMAiExhibit } from "./mm-ai-exhibit.js";
 
 @customElement("mm-ai-system-page")
 export class MMAiSystemPage extends LitElement {
@@ -28,7 +29,7 @@ export class MMAiSystemPage extends LitElement {
     const exhibits = this.shadowRoot?.querySelectorAll("mm-ai-exhibit");
     exhibits?.forEach((exhibit) => {
       // Trigger animation start on each exhibit
-      (exhibit as any).startAnimationOnLoad?.();
+      (exhibit as MMAiExhibit).startAnimationOnLoad?.();
     });
   }
 

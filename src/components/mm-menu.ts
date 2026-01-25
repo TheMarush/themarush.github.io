@@ -135,7 +135,7 @@ export class MMMenu extends LitElement {
           <mm-button 
             cta="${subitem.label}"
             class="submenu-item ${this.activeItem === subitem.id ? "active" : ""}"
-            .onClick=${() => this._selectItem(subitem.id, parentItem!.id)}>
+            .onClick=${() => this._selectItem(subitem.id, parentItem?.id)}>
           </mm-button>
         `,
         )}

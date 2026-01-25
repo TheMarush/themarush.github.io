@@ -244,7 +244,7 @@ export class MMAiExhibit extends LitElement {
     // Wait for image to load before starting animation
     requestAnimationFrame(() => {
       const img = this.shadowRoot?.querySelector(".artwork-image") as HTMLImageElement;
-      if (img && img.complete) {
+      if (img?.complete) {
         this.setupPixelationCanvas(img);
         this.animatePixelation();
       } else if (img) {
@@ -592,7 +592,7 @@ export class MMAiExhibit extends LitElement {
       this.pixelationInterval = undefined;
     }
     // Clean up canvas
-    if (this.canvasElement && this.canvasElement.parentElement) {
+    if (this.canvasElement?.parentElement) {
       this.canvasElement.parentElement.removeChild(this.canvasElement);
       this.canvasElement = undefined;
     }
