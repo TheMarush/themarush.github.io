@@ -110,19 +110,6 @@ export class MMProjects extends LitElement {
     }
   `;
 
-  private handleOpenAiView() {
-    const menu = this.closest("mm-menu") as HTMLElement & {
-      activeItem?: string;
-    } | null;
-    if (menu) {
-      // Switch to the AI View slot (submenu item id: "view").
-      menu.activeItem = "view";
-    }
-    if (typeof window !== "undefined") {
-      window.location.hash = "/projects/ai-view";
-    }
-  }
-
   render() {
     return html`
       <section class="container" aria-labelledby="projects-title">
@@ -142,7 +129,9 @@ export class MMProjects extends LitElement {
               <button
                 type="button"
                 class="cta-btn"
-                @click=${this.handleOpenAiView}
+                @click=${() => {
+                  window.location.hash = "#/projects/ai-view";
+                }}
               >
                 <span>Open Reimagined by LLM</span>
                 <span aria-hidden="true">→</span>
@@ -160,4 +149,3 @@ declare global {
     "mm-projects": MMProjects;
   }
 }
-
