@@ -18,7 +18,7 @@ export class MMContact extends LitElement {
     return html`
       <div class="contact-container">
         <h2 class="contact-title">Contact</h2>
-        <p class="contact-intro">If you'd like to say hi, pitch a project, or share a meme — here's where to do it!</p>
+        <p class="contact-intro">If you'd like to say hi, pitch a project, or share a joke — here's where to do it!</p>
 
         <form 
           action="https://formsubmit.co/marush.the.first@gmail.com" 
@@ -47,7 +47,9 @@ export class MMContact extends LitElement {
           <p>Find me elsewhere:</p>
           <a href="https://github.com/TheMarush" target="_blank" class="contact-link">GitHub</a> |
           <a href="https://www.strava.com/athletes/130258990" target="_blank" class="contact-link">Strava</a> |
-          <a href="https://youtube.com/@marieannam.7648?si=VtgVY0MjdPS7CrD0" target="_blank" class="contact-link">YouTube</a>
+          <a href="https://youtube.com/@marieannam.7648?si=VtgVY0MjdPS7CrD0" target="_blank" class="contact-link">YouTube</a> |
+          <a href="https://www.linkedin.com/in/marie-anna-mahdlová-a81299305" target="_blank" class="contact-link">LinkedIn</a>
+
           <p class="dont-click-wrapper">
             <a href="#" class="dont-click-link" @click=${this._handleDontClick}>Don't click me</a>
           </p>

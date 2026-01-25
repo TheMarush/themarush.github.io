@@ -77,7 +77,7 @@ export class MMAiSystemPage extends LitElement {
     return html`
       <div class="page" style=${`--ai-accent: ${accent};`}>
         <section class="hero" aria-labelledby="system-title">
-          <div class="system-label">Projects → AI view → ${system.id}</div>
+          <div class="system-label">Projects → Reimagined by LLM → ${system.id}</div>
           <div class="title-row">
             <h1 id="system-title">${system.title}</h1>
             <p class="descriptor">${system.descriptor}</p>

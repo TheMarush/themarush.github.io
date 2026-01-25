@@ -1,7 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import type { AiSystemData, AiSystemId } from "../data/aiView.js";
-import { aiSystems, aiViewIntro } from "../data/aiView.js";
+import { aiSystems, aiViewIntro, aiViewSources } from "../data/aiView.js";
 import "./mm-ai-system-page.ts";
 
 const SYSTEM_ORDER: AiSystemId[] = ["gemini", "claude", "grok"];
@@ -43,6 +43,18 @@ export class MMAiViewIndex extends LitElement {
       color: #d1d5db;
       line-height: 1.7;
       margin-bottom: 1.75rem;
+      white-space: pre-line;
+    }
+
+    .sources {
+      max-width: 720px;
+      font-size: 0.82rem;
+      color: #9ca3af;
+      line-height: 1.65;
+      margin-top: -0.5rem;
+      margin-bottom: 1.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
       white-space: pre-line;
     }
 
@@ -229,14 +241,17 @@ export class MMAiViewIndex extends LitElement {
   private renderIndex() {
     return html`
       <div class="page">
-        <div class="meta-label">Projects → AI view</div>
-        <h1>Reimagined by AI</h1>
+        <div class="meta-label">Projects → Reimagined by LLM</div>
+        <h1>Reimagined by LLM</h1>
         <p class="intro">
           ${aiViewIntro}
         </p>
+        <p class="sources">
+          ${aiViewSources}
+        </p>
         <div
           class="tiles"
-          aria-label="Choose a system to enter the AI view"
+          aria-label="Choose a system to enter Reimagined by LLM"
         >
           ${SYSTEM_ORDER.map((id) => {
             const system = this.systemFor(id);
@@ -280,7 +295,7 @@ export class MMAiViewIndex extends LitElement {
             @click=${this.handleBackToIndex}
           >
             <span aria-hidden="true">←</span>
-            <span>Back to AI view</span>
+            <span>Back to Reimagined by LLM</span>
           </button>
           <span>${system.title}</span>
         </div>

@@ -325,7 +325,7 @@ export class MMAiExhibit extends LitElement {
         <div class="artwork-info">
           <h2 class="artwork-title">${exhibit.artworkTitle}</h2>
           <div class="attribution">
-            Interpreted by ${this.getSystemDisplayName()}, 2025
+            Interpreted by ${this.getSystemDisplayName()}, 2026
           </div>
         </div>
 
