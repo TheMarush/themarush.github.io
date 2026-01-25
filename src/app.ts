@@ -40,24 +40,19 @@ export class App extends LitElement {
             { id: "gallery", label: "Gallery" },
             { id: "about", label: "About" },
             { id: "testimonials", label: "Testimonials" },
-            { id: "projects",
-              label: "Projects",
-              submenu: [
-                { id: "view", label: "AI View" },
-               ]
-            }, 
+            { id: "projects", label: "Projects", submenu: [{ id: "ai-view", label: "AI View" }] },
             {
               id: "study",
               label: "Study",
               submenu: [
-                { id: "semester-1", label: "Semester 1" },
-                { id: "semester-2", label: "Semester 2" },
-                { id: "semester-3", label: "Semester 3" },
-                { id: "semester-4", label: "Semester 4" },
-                { id: "semester-5", label: "Semester 5" },
+                { id: "semester1", label: "Semester 1" },
+                { id: "semester2", label: "Semester 2" },
+                { id: "semester3", label: "Semester 3" },
+                { id: "semester4", label: "Semester 4" },
+                { id: "semester5", label: "Semester 5" },
               ],
             },
-            { id: "contact", label: "Contact" }
+            { id: "contact", label: "Contact" },
           ]}
           position="left">
           <div slot="gallery">
@@ -69,7 +64,7 @@ export class App extends LitElement {
           <div slot="projects">
             <mm-projects></mm-projects>
           </div>
-          <div slot="view">
+          <div slot="ai-view">
             <mm-ai-view-index></mm-ai-view-index>
           </div>
           <div slot="testimonials">
@@ -89,22 +84,22 @@ export class App extends LitElement {
             <p>Explore my academic adventures semester by semester:</p>
             </div>
           </div>
-          <div slot="semester-1">
+          <div slot="semester1">
             <mm-semester .semester=${semester1}></mm-semester>
           </div>
-          <div slot="semester-2">
+          <div slot="semester2">
             <mm-semester .semester=${semester2}></mm-semester>
           </div>
-          <div slot="semester-3">
+          <div slot="semester3">
             <mm-semester .semester=${semester3}></mm-semester>
           </div>
-          <div slot="semester-4">
+          <div slot="semester4">
             <div class="section-container">
               <h2 class="section-title">Semester 4</h2>
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </div>
           </div>
-          <div slot="semester-5">
+          <div slot="semester5">
             <div class="section-container">
               <h2 class="section-title">Semester 5</h2>
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
