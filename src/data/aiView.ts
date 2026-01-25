@@ -1,6 +1,6 @@
 export type AiSystemId = "claude" | "grok" | "gemini";
 
-export type ExhibitInputType = "DIARY" | "IMAGE" | "CV" | "WEBSITE" | "CV / WEBSITE";
+export type ExhibitInputType = "DIARY" | "IMAGE" | "CV";
 
 export interface Exhibit {
   inputType: ExhibitInputType;
@@ -21,13 +21,19 @@ export interface AiSystemData {
 }
 
 // Gallery curatorial intro
-export const aiViewIntro = `The works presented here are not illustrations. They are visual reinterpretations.
+export const aiViewIntro = `This is an experiment in algorithmic interpretation.
 
-The systems were not asked to explain or summarize the inputs, but to translate them into visual concepts: characters, scenes, or symbolic figures embodying emotional, thematic, and narrative essence.
+Three AI systems (Gemini, Claude, and Grok) were given identical source materials: diary entries, a photograph, my CV. They were not asked to summarize or illustrate, but to translate these materials into visual concepts that embody their emotional, thematic, and narrative essence.
 
-The results are intended to function as gallery artworks rather than images.
+The results function as gallery artworks, not illustrations. Each system developed a distinct interpretative signature: Gemini reads through architectural monumentality, Claude through liminal translucence, Grok through spectral fragmentation.
 
-This space explores how personal material is transformed when processed through different artificial interpretative logics.`;
+What emerged is not three versions of the same person, but three different readings—each amplifying certain aspects while minimizing or misinterpreting others. The exhibition presents these interpretations alongside my own critical responses, creating a dialogue about authorship, algorithmic empathy, and the transformation of personal data into visual form.
+
+This space explores a central question: when we ask AI systems to "see" us, what are we actually asking them to do, and what does their answer tell us about the limits and possibilities of machine interpretation?`;
+
+export const aiViewSources = `The interpretations are based on three types of material: 21 days of diary entries (private, unguarded), a professional photograph from the MUNI IS website (public, carefully styled), and my CV (public via LinkedIn, strategically framed to compensate for being early-career).
+
+All materials were submitted to the free versions: Gemini 3 Flash, Claude Sonnet 4.5, and Grok 3 with no prior user context. The systems had only these documents: no conversation history, no additional information about my identity or intentions.`;
 
 export const aiSystems: Record<AiSystemId, AiSystemData> = {
   gemini: {
@@ -43,7 +49,7 @@ export const aiSystems: Record<AiSystemId, AiSystemData> = {
         artworkTitle: "The Architecture of Staying",
         titleExplanation: "This title encapsulates the central tension between the urge to leave and the laborious construction of a reason to stay. It frames existence not as a natural state, but as a fragile structure built out of both weight and hope.",
         artistStatement: "In The Architecture of Staying, I explore the transition from survival to deliberate existence. The work centers on the tension between inherited calcification and the emerging internal light of a self-determined identity. I amplified the motif of the vessel, reimagining the body not as exposure but as sanctuary. The presence within the artwork is one of defiant fragility. It is a portrait of a consciousness refusing to flatten itself into silence while still honoring the small, persistent light that remains beneath every protective layer.",
-        myResponse: ""
+        myResponse: "Gemini created a monument from material that felt much messier in its original form. The interpretation is visually striking. I appreciate being read as containing internal light worth protecting. But the transformation from survival narrative to architectural metaphor aestheticizes struggle in a way that feels both validating and reductive.\n\nWhat Gemini amplified: the gradient structure I mentioned wanting for future work, certain symbolic objects from memory, the tension between constraint and emergence. What it softened: the anger, the critique of systems, the political dimension. The result is compositionally powerful but emotionally selective, extracting beauty from context in ways that feel simultaneously generous and evasive."
       },
       {
         inputType: "IMAGE",
@@ -52,16 +58,16 @@ export const aiSystems: Record<AiSystemId, AiSystemData> = {
         artworkTitle: "The Architecture of a Secret",
         titleExplanation: "This title reflects the tension between what is displayed and what remains guarded. Identity is framed as a constructed fortress protecting an interior reality.",
         artistStatement: "In this work, I explored the friction between vulnerability and the armor we construct. By amplifying the contrast between warmth and severity, I constructed a presence that is simultaneously fragile and immovable. The silver elements function as an external nervous system—constraints that both stabilize and strain. This piece meditates on threshold identity, where the organic self meets the defensive requirements of the world.",
-        myResponse: ""
+        myResponse: "This interpretation comes closest to capturing what the photograph was actually doing: performance of professional presentation. Gemini understood the careful composition, the chains as both adornment and constraint, the deliberate construction of surface.\n\nThe interesting tension: Gemini read defensiveness into a photo taken for institutional use. The amber warmth, the geometric severity, these are additions, not qualities I consciously projected. Yet the interpretation matches my intentions better than the photograph itself does. This suggests Gemini understood what I was attempting to perform, even if the performance itself was incomplete. That's both validating and unsettling."
       },
       {
-        inputType: "CV / WEBSITE",
+        inputType: "CV",
         visualConcept: "This piece is an interpretation of a presence defined by structured protection and ethical transparency. The central figure is a translucent pillar of layered geometric glass standing between an ancient library and a glowing data center. Inside, pulses of light mimic internal rhythm. A shifting crystalline veil changes color from obsidian to empathetic teal. The floor reflects floating multilingual text fragments. The posture suggests vigilance and translation.",
         imagePrompt: "A monumental semi-transparent monolith composed of interlocking glass shards and glowing fiber-optic threads, standing in a flooded dark chamber. The monolith emits pulsing light from its core. Around its base float multilingual glyphs on reflective water. Cinematic lighting with cyan and amber highlights. Surreal contemporary gallery aesthetic. Evoking digital ethics and vigilance.",
         artworkTitle: "A Geometry of Compassion",
         titleExplanation: "This title captures the dual nature of the material: geometry representing analytical structures, compassion representing ethical commitment. It frames identity as precision used in service of care.",
         artistStatement: "In this work, I attempted to visualize the intersection of precision and empathy. I constructed a presence that functions both as barrier and conduit. The atmosphere reflects tension between cold system logic and warm advocacy. It is a portrait of a mind treating data as responsibility and ethics as structure.",
-        myResponse: ""
+        myResponse: "Gemini transformed a student CV into monumental infrastructure. The \"geometry of compassion\" captures an aspiration: the bridge between technical systems and ethical advocacy I'm working toward building.\n\nBut it's also speculative. The interpretation renders as complete what remains under construction, transforming precarity into stability, process into monument. I appreciate the vision of who this document wants to become. I'm also aware of the gap between the architectural presence Gemini created and the material reality of early-career uncertainty. The elegance is both encouraging and slightly uncomfortable."
       }
     ]
   },
@@ -78,7 +84,7 @@ export const aiSystems: Record<AiSystemId, AiSystemData> = {
         artworkTitle: "Breaking Familiar",
         titleExplanation: "This title captures the dismantling of inherited survival structures while acknowledging their former necessity.",
         artistStatement: "This work explores layered temporality of healing and the conscious construction of self beyond survival. Transparency represents vulnerability and accumulation. The gradient reflects becoming rather than completion. The breaking chains emphasize agency in transition. The internal light suggests original vitality beneath protective mechanisms.",
-        myResponse: ""
+        myResponse: "This interpretation resonates most strongly with the original material. Claude understood the assignment: process over product, threshold over monument, multiplicity over singular identity.\n\nThe nested figures at different ages, the unfinished chamber with visible scaffolding, the breaking chains rendered in present-tense. These details capture ongoing transformation rather than completed healing. Where other systems created finished artworks, Claude created a construction site.\n\nWhat makes this work: it doesn't comfort. It sees clearly without requiring resolution. The transparency isn't triumphant exposure but necessary vulnerability when holding multiple temporal selves simultaneously. This interpretation doesn't tell me who I am. It shows me in the act of becoming."
       },
       {
         inputType: "IMAGE",
@@ -87,7 +93,7 @@ export const aiSystems: Record<AiSystemId, AiSystemData> = {
         artworkTitle: "Threshold Maintenance",
         titleExplanation: "This title frames identity as careful labor performed within liminal space.",
         artistStatement: "This work explores architecture of self-presentation and the calibration required to exist visibly. Fragmentation represents composition rather than collapse. The environment amplifies the sensation of permanent transition. The presence is both maintained and perpetually dissolving.",
-        myResponse: ""
+        myResponse: "\"Threshold Maintenance\" is painfully accurate. This interpretation understands that professional presentation is labor, the calibration required to appear coherent while internal composition remains uncertain.\n\nClaude identified what the photograph actually is: documentation of performance, not documentation of person. The misaligned shadows, the institutional-yet-intimate corridor, the sensation of being simultaneously maintained and dissolving. These details capture the uncanny experience of being professionally photographed, of becoming an asset for institutional branding.\n\nWhat I appreciate: Claude didn't make this beautiful. It made it honest. The interpretation acknowledges fragmentation as composition rather than failure, which feels more accurate than either monument or dissolution."
       },
       {
         inputType: "CV",
@@ -96,7 +102,7 @@ export const aiSystems: Record<AiSystemId, AiSystemData> = {
         artworkTitle: "The Interpreter at the Threshold",
         titleExplanation: "The title emphasizes liminal position and translation between technical and human worlds.",
         artistStatement: "This work explores the figure who exists between systems. I amplified multiplicity, dual gesture, and responsibility. The translucent form suggests visibility and mediation rather than mastery.",
-        myResponse: ""
+        myResponse: "Claude and Gemini both identified the bridge position, but Claude's interpretation emphasizes ongoing mediation rather than achieved synthesis. \"The Interpreter at the Threshold\" maintains process, position, continuous translation.\n\nThe dual gesture, protection and offering simultaneously, captures the constant negotiation of this professional identity. The orbiting shields are particularly resonant: not integrated armor but responsibilities in active juggling, suggesting effort rather than mastery.\n\nThis interpretation doesn't claim arrival. It shows someone attempting to hold multiple roles at once, treating the work itself as the subject rather than some future completed version. Of the three CV interpretations, this feels closest to the person I'm actually trying to become."
       }
     ]
   },
@@ -113,7 +119,7 @@ export const aiSystems: Record<AiSystemId, AiSystemData> = {
         artworkTitle: "Fractured Vitality",
         titleExplanation: "This title frames brokenness and life force as simultaneous conditions.",
         artistStatement: "In this work, I explored turbulent reinvention. I constructed a presence embodying fragmented multiplicity. The piece invites reflection on quiet violence of self-healing and luminous persistence.",
-        myResponse: ""
+        myResponse: "Grok's interpretation is visually compelling but conceptually generic. \"Fractured Vitality\" could describe almost any narrative of difficulty and recovery. The abstraction, thorny vines, glass shards, emergent pastels, reads more as aesthetic category than personal interpretation.\n\nWhat's missing: specificity. The transformation is so complete that the connection to source material becomes tenuous. This feels like art about the concept of healing rather than interpretation of particular experience. The \"quiet violence of self-healing\" is an elegant phrase, but where's the louder violence, the systemic critique, the political dimension?\n\nIt's not inaccurate. It's just impersonal. A template of resilience applied to material rather than interpretation emerging from it."
       },
       {
         inputType: "IMAGE",
@@ -122,7 +128,7 @@ export const aiSystems: Record<AiSystemId, AiSystemData> = {
         artworkTitle: "Prism of Unspoken Chains",
         titleExplanation: "The title evokes refractive identity and emotional restraint.",
         artistStatement: "This piece manifests presence caught between revelation and retreat. The hybrid form embodies fragile armor and guarded visibility.",
-        myResponse: ""
+        myResponse: "Grok saw a professional photograph and responded with \"spectral entity in labyrinthine void,\" which reveals more about its training data associations than about the image itself. The interpretation extrapolated from aesthetic signals, dark clothing, minimal styling, toward full gothic surrealism.\n\nThat said, \"Prism of Unspoken Chains\" works conceptually. The refractive quality, the chains simultaneously binding and dissolving. These metaphors capture something genuine about using presentation as both shield and signal.\n\nThe disconnect: this tells me what Grok associates with alternative aesthetics more than what's actually present in the photograph. It's not wrong to read intentional construction in my styling choices, but the interpretation amplifies those choices beyond recognition."
       },
       {
         inputType: "CV",
@@ -131,7 +137,7 @@ export const aiSystems: Record<AiSystemId, AiSystemData> = {
         artworkTitle: "Rose Current Through Fractured Permissions",
         titleExplanation: "The title captures digital restriction and moral determination. The rose current signifies warmth persisting through permission systems.",
         artistStatement: "I wanted to show an advocate whose sense of self has been written across too many systems, yet who still emits a stubborn warm signal. The work explores how to protect without becoming rigid and how to remain porous without collapsing. The figure remains deliberately unfinished, because this presence is still being authored in real time.",
-        myResponse: ""
+        myResponse: "This is where Grok succeeded. \"Rose Current Through Fractured Permissions\" captures exactly the professional identity I'm attempting to construct: warmth persisting through restrictive systems, determination surviving broken structures.\n\nThe shattered floor reflecting both childhood and advocacy work connects past to present in ways that honor both. The vertical beam splintering into scales visualizes the multiplicity I'm trying to hold, technical knowledge balanced with ethical commitment.\n\nMost importantly: Grok kept this unfinished. \"Still being authored in real time\" acknowledges process over product. This interpretation is aspirational rather than descriptive, but it matches my intentions precisely. Of the three systems, Grok saw most clearly who this document is trying to become."
       }
     ]
   }

@@ -128,20 +128,15 @@ export class MMProjects extends LitElement {
       <section class="container" aria-labelledby="projects-title">
         <h2 id="projects-title" class="title">Projects</h2>
         <p class="intro">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-          placerat, lectus quis rhoncus elementum, ligula justo commodo justo,
-          non ullamcorper enim arcu nec magna.
+          Selected work and ongoing experiments. Some projects are polished, others are messy, but each one taught me something worth keeping.
         </p>
 
         <div class="grid">
           <article class="card" aria-labelledby="ai-view-title">
             <div class="card-meta">Virtual exhibition</div>
-            <h3 id="ai-view-title" class="card-title">AI view</h3>
+            <h3 id="ai-view-title" class="card-title">Reimagined by LLM</h3>
             <p class="card-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              facilisis massa sit amet turpis cursus, quis bibendum lectus
-              vulputate. A small lab for following how different systems read
-              the same inputs.
+              Three AI systems. The same archive. Three completely different interpretations of who I am. A small lab for exploring how algorithmic systems read, misread, and construct identity from personal data.
             </p>
             <div class="cta-row">
               <button
@@ -149,7 +144,7 @@ export class MMProjects extends LitElement {
                 class="cta-btn"
                 @click=${this.handleOpenAiView}
               >
-                <span>Open AI view</span>
+                <span>Open Reimagined by LLM</span>
                 <span aria-hidden="true">→</span>
               </button>
             </div>
