@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import type { PropertyValues } from "lit";
 import type { AiSystemData, AiSystemId } from "../data/aiView.js";
 import { aiSystems } from "../data/aiView.js";
 import "./mm-ai-exhibit.ts";
@@ -11,6 +12,24 @@ export class MMAiSystemPage extends LitElement {
 
   private get system(): AiSystemData {
     return aiSystems[this.systemId] ?? aiSystems.claude;
+  }
+
+  firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
+    // Start all exhibits simultaneously after first render
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.startAllExhibits();
+      });
+    });
+  }
+
+  private startAllExhibits() {
+    const exhibits = this.shadowRoot?.querySelectorAll("mm-ai-exhibit");
+    exhibits?.forEach((exhibit) => {
+      // Trigger animation start on each exhibit
+      (exhibit as any).startAnimationOnLoad?.();
+    });
   }
 
   static styles = css`
@@ -77,7 +96,6 @@ export class MMAiSystemPage extends LitElement {
     return html`
       <div class="page" style=${`--ai-accent: ${accent};`}>
         <section class="hero" aria-labelledby="system-title">
-          <div class="system-label">Projects → Reimagined by LLM → ${system.id}</div>
           <div class="title-row">
             <h1 id="system-title">${system.title}</h1>
             <p class="descriptor">${system.descriptor}</p>
@@ -106,4 +124,3 @@ declare global {
     "mm-ai-system-page": MMAiSystemPage;
   }
 }
-

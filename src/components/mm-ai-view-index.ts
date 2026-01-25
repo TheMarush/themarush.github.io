@@ -3,6 +3,7 @@ import { customElement, state } from "lit/decorators.js";
 import type { AiSystemData, AiSystemId } from "../data/aiView.js";
 import { aiSystems, aiViewIntro, aiViewSources } from "../data/aiView.js";
 import "./mm-ai-system-page.ts";
+import "./mm-back-button.ts";
 
 const SYSTEM_ORDER: AiSystemId[] = ["gemini", "claude", "grok"];
 
@@ -10,6 +11,8 @@ const SYSTEM_ORDER: AiSystemId[] = ["gemini", "claude", "grok"];
 export class MMAiViewIndex extends LitElement {
   @state()
   private activeSystem: AiSystemId | null = null;
+
+  private previousSystem: AiSystemId | null = null;
 
   static styles = css`
     :host {
@@ -155,24 +158,6 @@ export class MMAiViewIndex extends LitElement {
       font-size: 0.85rem;
       color: #e5e7eb;
     }
-
-    .back-btn {
-      background: none;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      border-radius: 999px;
-      padding: 0.25rem 0.65rem;
-      color: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      cursor: pointer;
-      font-size: 0.82rem;
-    }
-
-    .back-btn:focus-visible {
-      outline: 2px solid #52c8f4;
-      outline-offset: 2px;
-    }
   `;
 
   connectedCallback() {
@@ -190,6 +175,17 @@ export class MMAiViewIndex extends LitElement {
     this.syncFromLocation();
   };
 
+  updated(changedProperties: Map<string | number | symbol, unknown>) {
+    super.updated(changedProperties);
+    // Scroll to first hr when entering a system page
+    if (this.activeSystem && this.activeSystem !== this.previousSystem) {
+      this.scrollToFirstHr();
+      this.previousSystem = this.activeSystem;
+    } else if (!this.activeSystem) {
+      this.previousSystem = null;
+    }
+  }
+
   private syncFromLocation() {
     if (typeof window === "undefined") return;
     const hash = window.location.hash || "";
@@ -197,34 +193,39 @@ export class MMAiViewIndex extends LitElement {
     const segments = cleaned.split("/").filter(Boolean);
 
     // Check if we're in the AI view section
-    // URL structure: #/view or #/view/gemini
-    if (segments[0] !== "view") {
+    // URL structure: #/projects/ai-view or #/projects/ai-view/gemini
+    if (segments[0] !== "projects" || segments[1] !== "ai-view") {
       this.activeSystem = null;
       return;
     }
 
-    // Check for system selection (segments[1])
-    const maybeSystem = segments[1] as AiSystemId | undefined;
-    if (maybeSystem && (maybeSystem in aiSystems)) {
+    // Check for system selection (segments[2])
+    const maybeSystem = segments[2] as AiSystemId | undefined;
+    if (maybeSystem && maybeSystem in aiSystems) {
       this.activeSystem = maybeSystem;
     } else {
       this.activeSystem = null;
     }
   }
 
-  private setHash(path: string) {
-    if (typeof window === "undefined") return;
-    window.location.hash = path;
-  }
-
-  private handleEnterSystem(id: AiSystemId) {
-    this.activeSystem = id;
-    this.setHash(`/view/${id}`);
-  }
-
-  private handleBackToIndex() {
-    this.activeSystem = null;
-    this.setHash(`/view`);
+  private scrollToFirstHr() {
+    // Wait for the DOM to update, then scroll to the hero section's border-bottom
+    // Use multiple requestAnimationFrame calls to ensure shadow DOM is rendered
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const systemPage = this.shadowRoot?.querySelector("mm-ai-system-page");
+        const hero = systemPage?.shadowRoot?.querySelector(".hero") as HTMLElement;
+        if (hero) {
+          // Get the position of the hero's bottom (where the border-bottom/hr is)
+          const rect = hero.getBoundingClientRect();
+          const heroBottom = window.scrollY + rect.bottom;
+          window.scrollTo({
+            top: heroBottom,
+            behavior: "smooth",
+          });
+        }
+      });
+    });
   }
 
   private systemFor(id: AiSystemId): AiSystemData {
@@ -241,6 +242,9 @@ export class MMAiViewIndex extends LitElement {
   private renderIndex() {
     return html`
       <div class="page">
+        <div class="back-row">
+          <mm-back-button label="Back to Projects" href="#/projects"></mm-back-button>
+        </div>
         <div class="meta-label">Projects → Reimagined by LLM</div>
         <h1>Reimagined by LLM</h1>
         <p class="intro">
@@ -256,11 +260,10 @@ export class MMAiViewIndex extends LitElement {
           ${SYSTEM_ORDER.map((id) => {
             const system = this.systemFor(id);
             return html`
-              <button
-                type="button"
+              <a
+                href="#/projects/ai-view/${id}"
                 class="tile"
-                style=${`color: ${system.accent};`}
-                @click=${() => this.handleEnterSystem(id)}
+                style=${`color: ${system.accent}; text-decoration: none;`}
               >
                 <div class="tile-label">System environment</div>
                 <div class="tile-title">
@@ -276,7 +279,7 @@ export class MMAiViewIndex extends LitElement {
                     >enter system →</span
                   >
                 </div>
-              </button>
+              </a>
             `;
           })}
         </div>
@@ -285,19 +288,13 @@ export class MMAiViewIndex extends LitElement {
   }
 
   private renderSystemPage(id: AiSystemId) {
-    const system = this.systemFor(id);
     return html`
       <div class="page">
         <div class="back-row">
-          <button
-            type="button"
-            class="back-btn"
-            @click=${this.handleBackToIndex}
-          >
-            <span aria-hidden="true">←</span>
-            <span>Back to Reimagined by LLM</span>
-          </button>
-          <span>${system.title}</span>
+          <mm-back-button 
+            label="Back to Reimagined by LLM" 
+            href="#/projects/ai-view"
+          ></mm-back-button>
         </div>
         <mm-ai-system-page .systemId=${id}></mm-ai-system-page>
       </div>
@@ -310,4 +307,3 @@ declare global {
     "mm-ai-view-index": MMAiViewIndex;
   }
 }
-

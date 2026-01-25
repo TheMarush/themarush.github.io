@@ -51,13 +51,13 @@ export class MMMenu extends LitElement {
     const mainPage = segments[0] || (this.items.length > 0 ? this.items[0].id : "");
 
     // Check if this is a main menu item
-    const mainItem = this.items.find(item => item.id === mainPage);
+    const mainItem = this.items.find((item) => item.id === mainPage);
     if (mainItem) {
       this.activeItem = mainPage;
       // If there's a second segment and the main item has a submenu, select that too
       if (segments.length > 1 && mainItem.submenu) {
         const subPage = segments[1];
-        const subItem = mainItem.submenu.find(sub => sub.id === subPage);
+        const subItem = mainItem.submenu.find((sub) => sub.id === subPage);
         if (subItem) {
           this.activeItem = subPage;
           this.expandedItems = new Set([mainPage]);
@@ -75,12 +75,12 @@ export class MMMenu extends LitElement {
     }
   }
 
-  private _selectItem(itemId: string) {
+  private _selectItem(itemId: string, parentId?: string) {
     this.activeItem = itemId;
     this.isMenuOpen = false;
 
-    // Update URL hash
-    const hash = `#/${itemId}`;
+    // Update URL hash - use hierarchical path for submenu items
+    const hash = parentId ? `#/${parentId}/${itemId}` : `#/${itemId}`;
     if (window.location.hash !== hash) {
       window.location.hash = hash;
     }
@@ -114,17 +114,28 @@ export class MMMenu extends LitElement {
   }
 
   private _renderDesktopSubmenu() {
-    const activeMenuItem = this.items.find((item) => item.id === this.activeItem);
-    if (!activeMenuItem?.submenu) return "";
+    // Find the parent menu item that has a submenu and contains the active submenu item
+    let parentItem: MenuItem | undefined;
+    for (const item of this.items) {
+      if (item.submenu) {
+        const hasActiveSubitem = item.submenu.some((sub) => sub.id === this.activeItem);
+        if (hasActiveSubitem || this.activeItem === item.id) {
+          parentItem = item;
+          break;
+        }
+      }
+    }
+
+    if (!parentItem?.submenu) return "";
 
     return html`
       <div class="submenu-desktop">
-        ${activeMenuItem.submenu.map(
+        ${parentItem.submenu.map(
           (subitem) => html`
           <mm-button 
             cta="${subitem.label}"
             class="submenu-item ${this.activeItem === subitem.id ? "active" : ""}"
-            .onClick=${() => this._selectItem(subitem.id)}>
+            .onClick=${() => this._selectItem(subitem.id, parentItem!.id)}>
           </mm-button>
         `,
         )}
@@ -149,7 +160,7 @@ export class MMMenu extends LitElement {
               <div class="menu-item-wrapper">
                 <mm-button 
                   cta="${item.label}"
-                  class="${this.activeItem === item.id ? "active" : ""}"
+                  class="${this.activeItem === item.id && !item.submenu?.some((sub) => sub.id === this.activeItem) ? "active" : ""}"
                   .onClick=${() => this._selectItem(item.id)}>
                 </mm-button>
                 ${
@@ -171,7 +182,7 @@ export class MMMenu extends LitElement {
                     <mm-button 
                       cta="${subitem.label}"
                       class="submenu-item ${this.activeItem === subitem.id ? "active" : ""}"
-                      .onClick=${() => this._selectItem(subitem.id)}>
+                      .onClick=${() => this._selectItem(subitem.id, item.id)}>
                     </mm-button>
                   `,
                   )}
