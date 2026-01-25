@@ -16,6 +16,9 @@ export class MMAiExhibit extends LitElement {
   @property({ type: String })
   accent: string = "#52c8f4";
 
+  @property({ type: Number })
+  animationDelay: number = 0; // Delay in ms before starting animation
+
   @state()
   private lightboxOpen: boolean = false;
 
@@ -48,14 +51,9 @@ export class MMAiExhibit extends LitElement {
     myResponse: "",
   };
 
-  @state()
-  private pixelationLevel: number = 1; // 1 = fully pixelated, 0 = clear
-
   private intersectionObserver?: IntersectionObserver;
   private animationFrameId?: number;
-  private pixelationInterval?: number;
   private imageElement?: HTMLImageElement;
-  private canvasElement?: HTMLCanvasElement;
 
   // Animation state
   private generatingStartTime?: number;
@@ -64,7 +62,7 @@ export class MMAiExhibit extends LitElement {
   private textRevealTimeout?: number;
 
   // Animation constants
-  private static readonly TEXT_REVEAL_INTERVAL = 2; // ms per character
+  private static readonly TEXT_REVEAL_INTERVAL = 12; // ms per character (increased for better performance)
 
   private getImagePath(): string {
     // Map input types to file naming convention
@@ -200,7 +198,11 @@ export class MMAiExhibit extends LitElement {
     if (this.animationPhase === "idle") {
       // Mark as in view and start animation (force start regardless of viewport)
       this.isInView = true;
-      this.startAnimation(true);
+      if (this.animationDelay > 0) {
+        setTimeout(() => this.startAnimation(true), this.animationDelay);
+      } else {
+        this.startAnimation(true);
+      }
     }
   }
 
@@ -214,11 +216,6 @@ export class MMAiExhibit extends LitElement {
     if (this.textRevealTimeout) {
       clearTimeout(this.textRevealTimeout);
       this.textRevealTimeout = undefined;
-    }
-    // Stop pixelation animation
-    if (this.pixelationInterval) {
-      clearInterval(this.pixelationInterval);
-      this.pixelationInterval = undefined;
     }
   }
 
@@ -238,147 +235,25 @@ export class MMAiExhibit extends LitElement {
   }
 
   private startPixelationAnimation() {
-    // Start with fully pixelated image
-    this.pixelationLevel = 1;
-
-    // Wait for image to load before starting animation
+    // CSS-based pixelation - much more performant than canvas manipulation
     requestAnimationFrame(() => {
       const img = this.shadowRoot?.querySelector(".artwork-image") as HTMLImageElement;
-      if (img?.complete) {
-        this.setupPixelationCanvas(img);
-        this.animatePixelation();
-      } else if (img) {
-        img.addEventListener(
-          "load",
-          () => {
-            this.setupPixelationCanvas(img);
-            this.animatePixelation();
-          },
-          { once: true },
-        );
+      if (img) {
+        this.imageElement = img;
+        // Apply initial pixelated state via CSS class
+        img.classList.add("pixelating");
+
+        // Start the CSS transition after a brief delay
+        requestAnimationFrame(() => {
+          img.classList.add("revealing");
+
+          // Clean up after animation completes (3s duration)
+          setTimeout(() => {
+            img.classList.remove("pixelating", "revealing");
+          }, 3000);
+        });
       }
     });
-  }
-
-  private setupPixelationCanvas(img: HTMLImageElement) {
-    this.imageElement = img;
-
-    // Create canvas for pixelation effect
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const wrapper = img.parentElement;
-    if (!wrapper) return;
-
-    // Set canvas size to match image
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
-    canvas.style.position = "absolute";
-    canvas.style.top = "0";
-    canvas.style.left = "0";
-    canvas.style.pointerEvents = "none";
-    canvas.style.zIndex = "1";
-    canvas.className = "pixelation-canvas";
-
-    // Insert canvas before image
-    wrapper.insertBefore(canvas, img);
-    this.canvasElement = canvas;
-
-    // Initial render with full pixelation
-    this.renderPixelatedImage();
-  }
-
-  private renderPixelatedImage() {
-    if (!this.imageElement || !this.canvasElement) return;
-
-    const canvas = this.canvasElement;
-    const ctx = canvas.getContext("2d");
-    const img = this.imageElement;
-
-    if (!ctx) return;
-
-    // Calculate pixel size based on pixelation level
-    // pixelationLevel: 1 = very pixelated (large pixels), 0 = clear (no pixelation)
-    const maxPixelSize = Math.max(canvas.width, canvas.height) / 8; // Max 8x8 grid
-    const minPixelSize = 1;
-    const pixelSize = minPixelSize + (maxPixelSize - minPixelSize) * this.pixelationLevel;
-
-    // Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (this.pixelationLevel <= 0) {
-      // Fully clear - hide canvas
-      canvas.style.opacity = "0";
-      return;
-    }
-
-    canvas.style.opacity = "1";
-
-    // Draw pixelated version
-    const scaledWidth = Math.ceil(canvas.width / pixelSize);
-    const scaledHeight = Math.ceil(canvas.height / pixelSize);
-
-    // Create temporary canvas for downscaling
-    const tempCanvas = document.createElement("canvas");
-    tempCanvas.width = scaledWidth;
-    tempCanvas.height = scaledHeight;
-    const tempCtx = tempCanvas.getContext("2d");
-    if (!tempCtx) return;
-
-    // Draw image scaled down
-    tempCtx.imageSmoothingEnabled = false;
-    tempCtx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
-
-    // Get image data
-    const imageData = tempCtx.getImageData(0, 0, scaledWidth, scaledHeight);
-    const data = imageData.data;
-
-    // Draw pixels back upscaled
-    ctx.imageSmoothingEnabled = false;
-    for (let y = 0; y < scaledHeight; y++) {
-      for (let x = 0; x < scaledWidth; x++) {
-        const idx = (y * scaledWidth + x) * 4;
-        const r = data[idx];
-        const g = data[idx + 1];
-        const b = data[idx + 2];
-        const a = data[idx + 3];
-
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a / 255})`;
-        ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
-      }
-    }
-  }
-
-  private animatePixelation() {
-    // Start animation immediately
-    const duration = 1500;
-    const steps = 80;
-    const stepTime = duration / steps;
-    let currentStep = 0;
-
-    this.pixelationInterval = window.setInterval(() => {
-      currentStep++;
-      // Ease out function for smoother animation
-      const progress = currentStep / steps;
-      const eased = 1 - (1 - progress) ** 3; // Cubic ease out
-
-      this.pixelationLevel = 1 - eased;
-      this.renderPixelatedImage();
-
-      if (currentStep >= steps) {
-        if (this.pixelationInterval) {
-          clearInterval(this.pixelationInterval);
-          this.pixelationInterval = undefined;
-        }
-        // Ensure canvas is hidden when done
-        if (this.canvasElement) {
-          this.canvasElement.style.opacity = "0";
-        }
-      }
-    }, stepTime);
   }
 
   private startTitleAnimation() {
@@ -587,14 +462,9 @@ export class MMAiExhibit extends LitElement {
       clearTimeout(this.textRevealTimeout);
       this.textRevealTimeout = undefined;
     }
-    if (this.pixelationInterval) {
-      clearInterval(this.pixelationInterval);
-      this.pixelationInterval = undefined;
-    }
-    // Clean up canvas
-    if (this.canvasElement?.parentElement) {
-      this.canvasElement.parentElement.removeChild(this.canvasElement);
-      this.canvasElement = undefined;
+    // Clean up image classes
+    if (this.imageElement) {
+      this.imageElement.classList.remove("pixelating", "revealing");
     }
   }
 
@@ -657,10 +527,6 @@ export class MMAiExhibit extends LitElement {
       position: relative;
     }
 
-    .pixelation-canvas {
-      border-radius: 0.5rem;
-      transition: opacity 300ms ease-out;
-    }
 
     .artwork-container:hover {
       transform: translateY(-2px);
@@ -706,6 +572,23 @@ export class MMAiExhibit extends LitElement {
       display: block;
       position: relative;
       z-index: 0;
+    }
+
+    /* GPU-accelerated pixelation effect using CSS */
+    .artwork-image.pixelating {
+      filter: blur(20px) saturate(0.8);
+      transform: scale(1.05);
+      opacity: 0.7;
+    }
+
+    .artwork-image.revealing {
+      filter: blur(0px) saturate(1);
+      transform: scale(1);
+      opacity: 1;
+      transition:
+        filter 3s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 3s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 2s ease-out;
     }
 
     .content-column {

@@ -111,6 +111,7 @@ export class MMAiSystemPage extends LitElement {
                 .systemId=${system.id}
                 .index=${index + 1}
                 accent=${accent}
+                .animationDelay=${index * 400}
               ></mm-ai-exhibit>
             `,
           )}

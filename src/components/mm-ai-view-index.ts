@@ -1,7 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import type { AiSystemData, AiSystemId } from "../data/aiView.js";
-import { aiSystems, aiViewIntro, aiViewSources } from "../data/aiView.js";
+import { aiSystems, aiViewConclusion, aiViewIntro, aiViewPrompt, aiViewSources } from "../data/aiView.js";
 import "./mm-ai-system-page.ts";
 import "./mm-back-button.ts";
 
@@ -11,6 +11,12 @@ const SYSTEM_ORDER: AiSystemId[] = ["gemini", "claude", "grok"];
 export class MMAiViewIndex extends LitElement {
   @state()
   private activeSystem: AiSystemId | null = null;
+
+  @state()
+  private promptOpen: boolean = false;
+
+  @state()
+  private conclusionOpen: boolean = false;
 
   private previousSystem: AiSystemId | null = null;
 
@@ -41,7 +47,6 @@ export class MMAiViewIndex extends LitElement {
     }
 
     .intro {
-      max-width: 720px;
       font-size: 0.96rem;
       color: #d1d5db;
       line-height: 1.7;
@@ -50,7 +55,6 @@ export class MMAiViewIndex extends LitElement {
     }
 
     .sources {
-      max-width: 720px;
       font-size: 0.82rem;
       color: #9ca3af;
       line-height: 1.65;
@@ -65,6 +69,7 @@ export class MMAiViewIndex extends LitElement {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1rem;
+      margin-top: 1rem;
     }
 
     @media (max-width: 900px) {
@@ -150,6 +155,83 @@ export class MMAiViewIndex extends LitElement {
       font-size: 0.9rem;
     }
 
+    .collapsible-section {
+      margin-top: 2.5rem;
+      margin-bottom: 3rem;
+      padding-top: 1.5rem;
+    }
+
+    .collapsible-section.footer {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .collapsible-button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      cursor: pointer;
+      transition: all 250ms ease;
+    }
+
+    .collapsible-button:hover {
+      border-color: rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .collapsible-button.open {
+      background: rgba(15, 23, 42, 0.4);
+      border-color: rgba(148, 163, 184, 0.12);
+      border-bottom: 1px solid transparent;
+      border-radius: 0.5rem 0.5rem 0 0;
+      color: #d1d5db;
+    }
+
+    .collapsible-button .arrow {
+      font-size: 0.6rem;
+      transition: transform 300ms ease;
+      margin-left: auto;
+    }
+
+    .collapsible-button.open .arrow {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .collapsible-content.open {
+      max-height: 4000px;
+    }
+
+    .collapsible-text {
+      font-size: 0.88rem;
+      color: #b0b8c4;
+      line-height: 1.75;
+      margin: 0;
+      padding: 0 1.25rem 1.25rem 1.25rem;
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      border-top: none;
+      border-radius: 0 0 0.5rem 0.5rem;
+      white-space: pre-line;
+    }
+
     .back-row {
       display: flex;
       align-items: center;
@@ -232,6 +314,14 @@ export class MMAiViewIndex extends LitElement {
     return aiSystems[id];
   }
 
+  private togglePrompt() {
+    this.promptOpen = !this.promptOpen;
+  }
+
+  private toggleConclusion() {
+    this.conclusionOpen = !this.conclusionOpen;
+  }
+
   render() {
     if (this.activeSystem) {
       return this.renderSystemPage(this.activeSystem);
@@ -253,6 +343,18 @@ export class MMAiViewIndex extends LitElement {
         <p class="sources">
           ${aiViewSources}
         </p>
+        <div class="collapsible-section">
+          <button
+            class="collapsible-button ${this.promptOpen ? "open" : ""}"
+            @click=${this.togglePrompt}
+          >
+            <span>Prompt</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="collapsible-content ${this.promptOpen ? "open" : ""}">
+            <p class="collapsible-text">${aiViewPrompt}</p>
+          </div>
+        </div>
         <div
           class="tiles"
           aria-label="Choose a system to enter Reimagined by LLM"
@@ -282,6 +384,18 @@ export class MMAiViewIndex extends LitElement {
               </a>
             `;
           })}
+        </div>
+        <div class="collapsible-section footer">
+          <button
+            class="collapsible-button ${this.conclusionOpen ? "open" : ""}"
+            @click=${this.toggleConclusion}
+          >
+            <span>Conclusion</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="collapsible-content ${this.conclusionOpen ? "open" : ""}">
+            <p class="collapsible-text">${aiViewConclusion}</p>
+          </div>
         </div>
       </div>
     `;
