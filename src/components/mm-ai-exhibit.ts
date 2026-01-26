@@ -39,30 +39,15 @@ export class MMAiExhibit extends LitElement {
 
   @state()
   private generatingDots: number = 3; // Start with 3 dots (Generating...) before animation starts
-
-  @state()
-  private revealedText: {
-    title: string;
-    artistStatement: string;
-    myResponse: string;
-  } = {
-    title: "",
-    artistStatement: "",
-    myResponse: "",
-  };
-
   private intersectionObserver?: IntersectionObserver;
   private animationFrameId?: number;
-  private imageElement?: HTMLImageElement;
 
   // Animation state
   private generatingStartTime?: number;
-  private currentTextIndex: number = 0;
   private currentTextSection?: "title" | "artistStatement" | "myResponse";
-  private textRevealTimeout?: number;
-
-  // Animation constants
-  private static readonly TEXT_REVEAL_INTERVAL = 12; // ms per character (increased for better performance)
+  
+  // CSS animation constants
+  private static readonly TEXT_REVEAL_INTERVAL = 2; // ms per character (for CSS delay calculation)
 
   private getImagePath(): string {
     // Map input types to file naming convention
@@ -212,11 +197,6 @@ export class MMAiExhibit extends LitElement {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = undefined;
     }
-    // Stop text reveal timeout (if any)
-    if (this.textRevealTimeout) {
-      clearTimeout(this.textRevealTimeout);
-      this.textRevealTimeout = undefined;
-    }
   }
 
   private startAnimation(forceStart: boolean = false) {
@@ -239,7 +219,6 @@ export class MMAiExhibit extends LitElement {
     requestAnimationFrame(() => {
       const img = this.shadowRoot?.querySelector(".artwork-image") as HTMLImageElement;
       if (img) {
-        this.imageElement = img;
         // Apply initial pixelated state via CSS class
         img.classList.add("pixelating");
 
@@ -270,64 +249,35 @@ export class MMAiExhibit extends LitElement {
     this.currentSection = section;
     this.animationPhase = "revealing";
     this.currentTextSection = section;
-
-    // Reset index to 0, animation loop will handle revealing
-    this.currentTextIndex = 0;
+    // CSS animation will handle the reveal - just trigger it by updating state
+    this.requestUpdate();
   }
 
-  private getTextForSection(section: "title" | "artistStatement" | "myResponse"): string {
-    const exhibit = this.exhibit;
-    if (!exhibit) return "";
-
-    if (section === "title") {
-      return exhibit.artworkTitle;
-    } else if (section === "artistStatement") {
-      return exhibit.artistStatement;
-    } else if (section === "myResponse") {
-      return exhibit.myResponse || "";
-    }
-    return "";
-  }
-
-  private updateRevealedText(section: "title" | "artistStatement" | "myResponse", index: number) {
-    const fullText = this.getTextForSection(section);
-    const text = fullText.slice(0, index);
-
-    // Only update if the text actually changed (avoid unnecessary re-renders)
-    let needsUpdate = false;
-    if (section === "title" && this.revealedText.title !== text) {
-      this.revealedText = { ...this.revealedText, title: text };
-      needsUpdate = true;
-    } else if (section === "artistStatement" && this.revealedText.artistStatement !== text) {
-      this.revealedText = { ...this.revealedText, artistStatement: text };
-      needsUpdate = true;
-    } else if (section === "myResponse" && this.revealedText.myResponse !== text) {
-      this.revealedText = { ...this.revealedText, myResponse: text };
-      needsUpdate = true;
-    }
-
-    // Only request update if something changed
-    if (needsUpdate) {
-      this.requestUpdate();
-    }
+  // Helper to split text into character spans for CSS animation
+  private splitTextIntoSpans(text: string, section: "title" | "artistStatement" | "myResponse"): any {
+    if (!text) return html``;
+    
+    const isRevealing = this.animationPhase === "revealing" && this.currentTextSection === section;
+    const chars = Array.from(text);
+    
+    return html`${chars.map((char, index) => {
+      const delay = index * MMAiExhibit.TEXT_REVEAL_INTERVAL;
+      // Use regular spaces to allow proper text wrapping
+      // Only preserve spaces that are part of the original text structure
+      return html`<span class="char-reveal ${isRevealing ? 'revealing' : ''}" style="--char-delay: ${delay}ms">${char}</span>`;
+    })}`;
   }
 
   private startTextAnimationLoop() {
-    // Clear any existing animation frame and timeout
+    // Clear any existing animation frame
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
-    }
-    if (this.textRevealTimeout) {
-      clearTimeout(this.textRevealTimeout);
-      this.textRevealTimeout = undefined;
     }
 
     const GENERATING_DURATION = 1000; // ms
     const GENERATING_DOT_INTERVAL = 250; // ms per dot change
-    const TEXT_REVEAL_INTERVAL = MMAiExhibit.TEXT_REVEAL_INTERVAL; // ms per character
 
     let lastDotUpdateTime = 0;
-    let textRevealStartTime = 0;
 
     const animate = (currentTime: number) => {
       // Stop if we're no longer in view
@@ -355,36 +305,15 @@ export class MMAiExhibit extends LitElement {
         // Transition to revealing after generating duration
         if (generatingElapsed >= GENERATING_DURATION) {
           this.startTextReveal("title");
-          textRevealStartTime = currentTime;
+          // CSS animation will handle the reveal, but we need to detect when it completes
+          this.scheduleNextSectionTransition("title");
         }
       }
 
-      // Handle revealing phase - use requestAnimationFrame with precise timing
+      // Handle revealing phase - CSS handles the animation, we just need to detect completion
       if (this.animationPhase === "revealing" && this.currentTextSection) {
-        if (textRevealStartTime === 0) {
-          textRevealStartTime = currentTime;
-        }
-
-        const fullText = this.getTextForSection(this.currentTextSection);
-        const textLength = fullText.length;
-
-        if (this.currentTextIndex < textLength) {
-          // Calculate how many characters should be revealed based on elapsed time
-          const elapsed = currentTime - textRevealStartTime;
-          const targetIndex = Math.floor(elapsed / TEXT_REVEAL_INTERVAL);
-
-          // Only reveal one character at a time, but check every frame
-          if (targetIndex > this.currentTextIndex) {
-            this.currentTextIndex = targetIndex;
-            this.updateRevealedText(this.currentTextSection, this.currentTextIndex);
-          }
-
-          // Check if section is complete
-          if (this.currentTextIndex >= textLength) {
-            this.moveToNextSection();
-            textRevealStartTime = 0; // Reset for next section
-          }
-        }
+        // CSS animation is running, no JavaScript timing needed
+        // The completion is handled by CSS animation events or timeout
       }
 
       // Stop loop only if animation is complete
@@ -394,10 +323,7 @@ export class MMAiExhibit extends LitElement {
       }
 
       // Continue loop when actively animating
-      const shouldContinue =
-        this.animationPhase === "generating" ||
-        (this.animationPhase === "revealing" &&
-          this.currentTextIndex < this.getTextForSection(this.currentTextSection || "title").length);
+      const shouldContinue = this.animationPhase === "generating";
 
       if (shouldContinue) {
         this.animationFrameId = requestAnimationFrame(animate) as unknown as number;
@@ -408,6 +334,36 @@ export class MMAiExhibit extends LitElement {
 
     // Start the loop
     this.animationFrameId = requestAnimationFrame(animate) as unknown as number;
+  }
+
+  private scheduleNextSectionTransition(section: "title" | "artistStatement" | "myResponse") {
+    // Wait for the next frame to ensure DOM is updated with character spans
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        // Find the last character span in the current section
+        const container = this.shadowRoot?.querySelector(
+          section === "title" 
+            ? ".artwork-title.text-content" 
+            : section === "artistStatement"
+            ? ".artist-statement .statement-text.text-content"
+            : ".my-response .statement-text.text-content"
+        );
+        
+        if (container) {
+          const lastChar = container.querySelector(".char-reveal:last-child") as HTMLElement;
+          if (lastChar) {
+            // Listen for animation end on the last character
+            const handleAnimationEnd = () => {
+              if (this.animationPhase === "revealing" && this.currentTextSection === section) {
+                this.moveToNextSection();
+              }
+              lastChar.removeEventListener("animationend", handleAnimationEnd);
+            };
+            lastChar.addEventListener("animationend", handleAnimationEnd, { once: true });
+          }
+        }
+      });
+    });
   }
 
   private moveToNextSection() {
@@ -423,8 +379,10 @@ export class MMAiExhibit extends LitElement {
     if (this.currentSection === "title") {
       if (exhibit.artistStatement) {
         this.startTextReveal("artistStatement");
+        this.scheduleNextSectionTransition("artistStatement");
       } else if (exhibit.myResponse) {
         this.startTextReveal("myResponse");
+        this.scheduleNextSectionTransition("myResponse");
       } else {
         this.animationPhase = "complete";
         this.currentSection = "complete";
@@ -433,6 +391,7 @@ export class MMAiExhibit extends LitElement {
     } else if (this.currentSection === "artistStatement") {
       if (exhibit.myResponse) {
         this.startTextReveal("myResponse");
+        this.scheduleNextSectionTransition("myResponse");
       } else {
         this.animationPhase = "complete";
         this.currentSection = "complete";
@@ -457,14 +416,6 @@ export class MMAiExhibit extends LitElement {
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = undefined;
-    }
-    if (this.textRevealTimeout) {
-      clearTimeout(this.textRevealTimeout);
-      this.textRevealTimeout = undefined;
-    }
-    // Clean up image classes
-    if (this.imageElement) {
-      this.imageElement.classList.remove("pixelating", "revealing");
     }
   }
 
@@ -714,8 +665,9 @@ export class MMAiExhibit extends LitElement {
 
     .text-placeholder {
       visibility: hidden;
-      white-space: pre-wrap;
+      white-space: normal;
       word-wrap: break-word;
+      overflow-wrap: break-word;
       margin: 0;
       pointer-events: none;
     }
@@ -725,8 +677,9 @@ export class MMAiExhibit extends LitElement {
       top: 0;
       left: 0;
       right: 0;
-      white-space: pre-wrap;
+      white-space: normal;
       word-wrap: break-word;
+      overflow-wrap: break-word;
       margin: 0;
     }
 
@@ -749,6 +702,7 @@ export class MMAiExhibit extends LitElement {
       word-wrap: break-word;
       overflow-wrap: break-word;
       padding-right: 1.75rem;
+      white-space: normal;
     }
 
     .artwork-info .text-content {
@@ -762,6 +716,7 @@ export class MMAiExhibit extends LitElement {
       line-height: 1.3;
       word-wrap: break-word;
       overflow-wrap: break-word;
+      white-space: normal;
     }
 
     .artwork-info .text-content .title-info-icon {
@@ -778,6 +733,31 @@ export class MMAiExhibit extends LitElement {
     .statement-text.text-content {
       font-size: 1rem;
       line-height: 1.8;
+    }
+
+    /* Character-by-character reveal animation */
+    .char-reveal {
+      opacity: 0;
+      display: inline;
+    }
+
+    .char-reveal.revealing {
+      animation: charFadeIn 0.01s forwards;
+      animation-delay: var(--char-delay, 0ms);
+    }
+
+    /* Keep character spans visible after animation completes */
+    .char-reveal:not(.revealing) {
+      opacity: 1;
+    }
+
+    @keyframes charFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     .artist-statement {
@@ -1066,13 +1046,13 @@ export class MMAiExhibit extends LitElement {
                     (this.animationPhase === "generating" || this.animationPhase === "revealing")
                   ? this.animationPhase === "generating"
                     ? html`<h2 class="artwork-title generating-text text-content">${this.getGeneratingText()}</h2>`
-                    : html`<h2 class="artwork-title text-content"><span>${this.revealedText.title}</span><button class="title-info-icon" @click=${this.toggleTitlePopover} aria-label="Title explanation">
+                    : html`<h2 class="artwork-title text-content"><span>${this.splitTextIntoSpans(exhibit.artworkTitle, "title")}</span><button class="title-info-icon" @click=${this.toggleTitlePopover} aria-label="Title explanation">
                     <svg aria-hidden="true" focusable="false" viewBox="0 0 512 512">
                       <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
                     </svg>
                   </button></h2>`
                   : this.currentSection !== "title" || this.animationPhase === "complete"
-                    ? html`<h2 class="artwork-title text-content"><span>${exhibit.artworkTitle}</span><button class="title-info-icon" @click=${this.toggleTitlePopover} aria-label="Title explanation">
+                    ? html`<h2 class="artwork-title text-content"><span>${this.splitTextIntoSpans(exhibit.artworkTitle, "title")}</span><button class="title-info-icon" @click=${this.toggleTitlePopover} aria-label="Title explanation">
                     <svg aria-hidden="true" focusable="false" viewBox="0 0 512 512">
                       <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
                     </svg>
@@ -1106,9 +1086,9 @@ export class MMAiExhibit extends LitElement {
               <!-- Actual content -->
               ${
                 this.currentSection === "artistStatement" && this.animationPhase === "revealing"
-                  ? html`<p class="statement-text text-content">${this.revealedText.artistStatement}</p>`
+                  ? html`<p class="statement-text text-content">${this.splitTextIntoSpans(exhibit.artistStatement, "artistStatement")}</p>`
                   : this.currentSection === "myResponse" || this.currentSection === "complete"
-                    ? html`<p class="statement-text text-content">${exhibit.artistStatement}</p>`
+                    ? html`<p class="statement-text text-content">${this.splitTextIntoSpans(exhibit.artistStatement, "artistStatement")}</p>`
                     : html`<p class="statement-text text-content hidden">${exhibit.artistStatement}</p>`
               }
             </div>
@@ -1125,9 +1105,9 @@ export class MMAiExhibit extends LitElement {
                     <!-- Actual content -->
                     ${
                       this.currentSection === "myResponse" && this.animationPhase === "revealing"
-                        ? html`<p class="statement-text text-content">${this.revealedText.myResponse}</p>`
+                        ? html`<p class="statement-text text-content">${this.splitTextIntoSpans(exhibit.myResponse, "myResponse")}</p>`
                         : this.currentSection === "complete"
-                          ? html`<p class="statement-text text-content">${exhibit.myResponse}</p>`
+                          ? html`<p class="statement-text text-content">${this.splitTextIntoSpans(exhibit.myResponse, "myResponse")}</p>`
                           : html`<p class="statement-text text-content hidden">${exhibit.myResponse}</p>`
                     }
                   `
