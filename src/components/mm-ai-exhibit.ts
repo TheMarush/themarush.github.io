@@ -1,4 +1,4 @@
-import { css, html, LitElement } from "lit";
+import { css, html, LitElement, type TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import type { AiSystemId, Exhibit } from "../data/aiView.js";
 
@@ -37,17 +37,14 @@ export class MMAiExhibit extends LitElement {
   @state()
   private currentSection: "title" | "artistStatement" | "myResponse" | "complete" = "title";
 
-  @state()
-  private generatingDots: number = 3; // Start with 3 dots (Generating...) before animation starts
   private intersectionObserver?: IntersectionObserver;
-  private animationFrameId?: number;
 
   // Animation state
-  private generatingStartTime?: number;
   private currentTextSection?: "title" | "artistStatement" | "myResponse";
-  
+
   // CSS animation constants
   private static readonly TEXT_REVEAL_INTERVAL = 2; // ms per character (for CSS delay calculation)
+  private static readonly GENERATING_DURATION = 1000; // ms
 
   private getImagePath(): string {
     // Map input types to file naming convention
@@ -81,14 +78,12 @@ export class MMAiExhibit extends LitElement {
     e.preventDefault();
     e.stopPropagation();
     this.titlePopoverOpen = !this.titlePopoverOpen;
-    this.requestUpdate();
   }
 
   private toggleImagePopover(e: Event) {
     e.preventDefault();
     e.stopPropagation();
     this.imagePopoverOpen = !this.imagePopoverOpen;
-    this.requestUpdate();
   }
 
   private closeTitlePopover() {
@@ -146,13 +141,14 @@ export class MMAiExhibit extends LitElement {
             if (!this.isInView) {
               // Just entered view
               this.isInView = true;
-              this.requestStartAnimation();
+              if (this.animationPhase === "idle") {
+                this.startAnimation();
+              }
             }
           } else {
             if (this.isInView) {
               // Just left view
               this.isInView = false;
-              this.stopAnimation();
             }
           }
         });
@@ -171,13 +167,6 @@ export class MMAiExhibit extends LitElement {
     });
   }
 
-  private requestStartAnimation() {
-    // Only start if idle and in view
-    if (this.animationPhase === "idle" && this.isInView) {
-      this.startAnimation();
-    }
-  }
-
   // Public method to start animation on page load (called by parent)
   public startAnimationOnLoad() {
     if (this.animationPhase === "idle") {
@@ -191,14 +180,6 @@ export class MMAiExhibit extends LitElement {
     }
   }
 
-  private stopAnimation() {
-    // Stop animation loop when out of view
-    if (this.animationFrameId) {
-      cancelAnimationFrame(this.animationFrameId);
-      this.animationFrameId = undefined;
-    }
-  }
-
   private startAnimation(forceStart: boolean = false) {
     // If already started, don't restart
     if (this.animationPhase !== "idle") return;
@@ -206,7 +187,7 @@ export class MMAiExhibit extends LitElement {
     // Only proceed if we're in view (unless forced to start)
     if (!forceStart && !this.isInView) return;
 
-    // Start pixelation animation (uses one interval)
+    // Start pixelation animation
     this.startPixelationAnimation();
 
     // Start text animation sequence
@@ -238,129 +219,97 @@ export class MMAiExhibit extends LitElement {
   private startTitleAnimation() {
     this.currentSection = "title";
     this.animationPhase = "generating";
-    this.generatingDots = 1;
-    this.generatingStartTime = performance.now();
 
-    // Start unified animation loop
-    this.startTextAnimationLoop();
+    // After generating duration, transition to revealing phase
+    setTimeout(() => {
+      if (this.animationPhase === "generating" && this.currentSection === "title") {
+        this.startTextReveal("title");
+        this.scheduleNextSectionTransition("title");
+      }
+    }, MMAiExhibit.GENERATING_DURATION);
   }
 
   private startTextReveal(section: "title" | "artistStatement" | "myResponse") {
     this.currentSection = section;
     this.animationPhase = "revealing";
     this.currentTextSection = section;
-    // CSS animation will handle the reveal - just trigger it by updating state
-    this.requestUpdate();
   }
 
   // Helper to split text into character spans for CSS animation
-  private splitTextIntoSpans(text: string, section: "title" | "artistStatement" | "myResponse"): any {
+  private splitTextIntoSpans(text: string, section: "title" | "artistStatement" | "myResponse"): TemplateResult {
     if (!text) return html``;
-    
+
     const isRevealing = this.animationPhase === "revealing" && this.currentTextSection === section;
     const chars = Array.from(text);
-    
+
     return html`${chars.map((char, index) => {
       const delay = index * MMAiExhibit.TEXT_REVEAL_INTERVAL;
-      // Use regular spaces to allow proper text wrapping
-      // Only preserve spaces that are part of the original text structure
-      return html`<span class="char-reveal ${isRevealing ? 'revealing' : ''}" style="--char-delay: ${delay}ms">${char}</span>`;
+      return html`<span class="char-reveal ${isRevealing ? "revealing" : ""}" style="--char-delay: ${delay}ms">${char}</span>`;
     })}`;
   }
 
-  private startTextAnimationLoop() {
-    // Clear any existing animation frame
-    if (this.animationFrameId) {
-      cancelAnimationFrame(this.animationFrameId);
-    }
-
-    const GENERATING_DURATION = 1000; // ms
-    const GENERATING_DOT_INTERVAL = 250; // ms per dot change
-
-    let lastDotUpdateTime = 0;
-
-    const animate = (currentTime: number) => {
-      // Stop if we're no longer in view
-      if (!this.isInView) {
-        this.animationFrameId = undefined;
-        return;
-      }
-
-      // Initialize timing on first frame
-      if (lastDotUpdateTime === 0 && this.animationPhase === "generating") {
-        lastDotUpdateTime = currentTime;
-      }
-
-      // Handle generating phase (only for title)
-      if (this.animationPhase === "generating" && this.currentSection === "title") {
-        const generatingElapsed = currentTime - (this.generatingStartTime || 0);
-
-        // Update dots animation
-        if (currentTime - lastDotUpdateTime >= GENERATING_DOT_INTERVAL) {
-          this.generatingDots = (this.generatingDots % 3) + 1;
-          lastDotUpdateTime = currentTime;
-          this.requestUpdate();
-        }
-
-        // Transition to revealing after generating duration
-        if (generatingElapsed >= GENERATING_DURATION) {
-          this.startTextReveal("title");
-          // CSS animation will handle the reveal, but we need to detect when it completes
-          this.scheduleNextSectionTransition("title");
-        }
-      }
-
-      // Handle revealing phase - CSS handles the animation, we just need to detect completion
-      if (this.animationPhase === "revealing" && this.currentTextSection) {
-        // CSS animation is running, no JavaScript timing needed
-        // The completion is handled by CSS animation events or timeout
-      }
-
-      // Stop loop only if animation is complete
-      if (this.animationPhase === "complete") {
-        this.animationFrameId = undefined;
-        return;
-      }
-
-      // Continue loop when actively animating
-      const shouldContinue = this.animationPhase === "generating";
-
-      if (shouldContinue) {
-        this.animationFrameId = requestAnimationFrame(animate) as unknown as number;
-      } else {
-        this.animationFrameId = undefined;
-      }
-    };
-
-    // Start the loop
-    this.animationFrameId = requestAnimationFrame(animate) as unknown as number;
-  }
-
   private scheduleNextSectionTransition(section: "title" | "artistStatement" | "myResponse") {
+    // Calculate fallback timeout based on text length
+    const exhibit = this.exhibit;
+    if (!exhibit) return;
+
+    const text =
+      section === "title"
+        ? exhibit.artworkTitle
+        : section === "artistStatement"
+          ? exhibit.artistStatement
+          : exhibit.myResponse;
+
+    const estimatedDuration = text ? text.length * MMAiExhibit.TEXT_REVEAL_INTERVAL + 500 : 2000;
+    const fallbackTimeout = Math.max(estimatedDuration, 2000); // At least 2 seconds
+
+    // Set up fallback timeout in case animation event doesn't fire
+    const fallbackTimer = setTimeout(() => {
+      if (this.animationPhase === "revealing" && this.currentTextSection === section) {
+        this.moveToNextSection();
+      }
+    }, fallbackTimeout);
+
     // Wait for the next frame to ensure DOM is updated with character spans
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         // Find the last character span in the current section
         const container = this.shadowRoot?.querySelector(
-          section === "title" 
-            ? ".artwork-title.text-content" 
+          section === "title"
+            ? ".artwork-title.text-content"
             : section === "artistStatement"
-            ? ".artist-statement .statement-text.text-content"
-            : ".my-response .statement-text.text-content"
+              ? ".artist-statement .statement-text.text-content"
+              : ".my-response .statement-text.text-content",
         );
-        
+
         if (container) {
           const lastChar = container.querySelector(".char-reveal:last-child") as HTMLElement;
           if (lastChar) {
             // Listen for animation end on the last character
             const handleAnimationEnd = () => {
+              clearTimeout(fallbackTimer);
               if (this.animationPhase === "revealing" && this.currentTextSection === section) {
                 this.moveToNextSection();
               }
-              lastChar.removeEventListener("animationend", handleAnimationEnd);
             };
             lastChar.addEventListener("animationend", handleAnimationEnd, { once: true });
+          } else {
+            // No character spans found, clear fallback and use it
+            clearTimeout(fallbackTimer);
+            setTimeout(() => {
+              if (this.animationPhase === "revealing" && this.currentTextSection === section) {
+                this.moveToNextSection();
+              }
+            }, 100);
           }
+        } else {
+          // Container not found, clear fallback and use it
+          clearTimeout(fallbackTimer);
+          setTimeout(() => {
+            if (this.animationPhase === "revealing" && this.currentTextSection === section) {
+              this.moveToNextSection();
+            }
+          }, 100);
         }
       });
     });
@@ -371,11 +320,9 @@ export class MMAiExhibit extends LitElement {
     if (!exhibit) {
       this.animationPhase = "complete";
       this.currentSection = "complete";
-      this.notifyAnimationComplete();
       return;
     }
 
-    // Move to next section immediately (no delay)
     if (this.currentSection === "title") {
       if (exhibit.artistStatement) {
         this.startTextReveal("artistStatement");
@@ -386,7 +333,6 @@ export class MMAiExhibit extends LitElement {
       } else {
         this.animationPhase = "complete";
         this.currentSection = "complete";
-        this.notifyAnimationComplete();
       }
     } else if (this.currentSection === "artistStatement") {
       if (exhibit.myResponse) {
@@ -395,27 +341,17 @@ export class MMAiExhibit extends LitElement {
       } else {
         this.animationPhase = "complete";
         this.currentSection = "complete";
-        this.notifyAnimationComplete();
       }
     } else if (this.currentSection === "myResponse") {
       this.animationPhase = "complete";
       this.currentSection = "complete";
-      this.notifyAnimationComplete();
     }
-  }
-
-  private notifyAnimationComplete() {
-    // Animation complete - no longer needed for coordination but keeping for potential future use
   }
 
   private cleanup() {
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
       this.intersectionObserver = undefined;
-    }
-    if (this.animationFrameId) {
-      cancelAnimationFrame(this.animationFrameId);
-      this.animationFrameId = undefined;
     }
   }
 
@@ -425,11 +361,6 @@ export class MMAiExhibit extends LitElement {
     if (changedProperties.has("exhibit") && this.exhibit && !this.intersectionObserver) {
       this.setupIntersectionObserver();
     }
-  }
-
-  private getGeneratingText(): string {
-    const dots = ".".repeat(this.generatingDots);
-    return `Generating${dots}`;
   }
 
   static styles = css`
@@ -659,6 +590,36 @@ export class MMAiExhibit extends LitElement {
       min-height: 1.2em;
     }
 
+    .generating-dots {
+      display: inline-block;
+    }
+
+    .generating-dots .dot {
+      display: inline-block;
+      animation: generatingDot 1.5s ease-in-out infinite;
+    }
+
+    .generating-dots .dot:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .generating-dots .dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .generating-dots .dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes generatingDot {
+      0%, 60%, 100% {
+        opacity: 0.3;
+      }
+      30% {
+        opacity: 1;
+      }
+    }
+
     .text-reveal-container {
       position: relative;
     }
@@ -816,10 +777,6 @@ export class MMAiExhibit extends LitElement {
 
     .popover-section:last-child {
       margin-bottom: 0;
-    }
-
-    .artwork-info .text-reveal-container {
-      position: relative;
     }
 
     .title-popover {
@@ -1040,13 +997,11 @@ export class MMAiExhibit extends LitElement {
             <div class="text-placeholder artwork-title">${exhibit.artworkTitle}</div>
             <!-- Actual content -->
             ${
-              this.animationPhase === "idle"
-                ? html`<h2 class="artwork-title generating-text text-content">${this.getGeneratingText()}</h2>`
-                : this.currentSection === "title" &&
-                    (this.animationPhase === "generating" || this.animationPhase === "revealing")
-                  ? this.animationPhase === "generating"
-                    ? html`<h2 class="artwork-title generating-text text-content">${this.getGeneratingText()}</h2>`
-                    : html`<h2 class="artwork-title text-content"><span>${this.splitTextIntoSpans(exhibit.artworkTitle, "title")}</span><button class="title-info-icon" @click=${this.toggleTitlePopover} aria-label="Title explanation">
+              this.animationPhase === "idle" ||
+              (this.currentSection === "title" && this.animationPhase === "generating")
+                ? html`<h2 class="artwork-title generating-text text-content">Generating<span class="generating-dots"><span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></span></h2>`
+                : this.currentSection === "title" && this.animationPhase === "revealing"
+                  ? html`<h2 class="artwork-title text-content"><span>${this.splitTextIntoSpans(exhibit.artworkTitle, "title")}</span><button class="title-info-icon" @click=${this.toggleTitlePopover} aria-label="Title explanation">
                     <svg aria-hidden="true" focusable="false" viewBox="0 0 512 512">
                       <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
                     </svg>
