@@ -8,11 +8,12 @@ import "./components/mm-testimonials.ts";
 import "./components/mm-gallery.ts";
 import "./components/mm-about.ts";
 import "./components/mm-projects.ts";
+import "./components/mm-study.ts";
 import "./components/mm-ai-view-index.ts";
 import "./components/mm-contact.ts";
 import "./components/mm-racoon.ts";
 import { galleryImages } from "./data/gallery.js";
-import { semester1, semester2, semester3 } from "./data/semesters.js";
+import { semester1, semester2, semester3, semester4 } from "./data/semesters.js";
 import { testimonials } from "./data/testimonials.js";
 import { ModalController } from "./utils/modal.js";
 
@@ -76,13 +77,7 @@ export class App extends LitElement {
             }}></mm-contact>
           </div>
           <div slot="study">
-            <div class="section-container">
-              <h2 class="section-title">KISK MUNI</h2>
-            <p>Somewhere along the way, I stopped thinking of information science as a dry field with a misleading name. I began to see how deeply it connects with the world around me, with ethics, with technology, with education, with people. I found a space that doesn't just teach tools but challenges ideas. A space that values reflection as much as innovation.</p>
-            <p>And honestly? That's not why I came here.</p>
-            <p>I chose KISK because I was looking for the theoretical side of AI. I wasn't interested in librarianship or particularly drawn to the idea of working with information. But the further I got, the more it all started making sense: how knowledge is structured, how it flows, and how much power there is in understanding it. I didn't know it then, but I had landed in exactly the right place.</p>
-            <p>Explore my academic adventures semester by semester:</p>
-            </div>
+            <mm-study .semesters=${[semester1, semester2, semester3, semester4]}></mm-study>
           </div>
           <div slot="semester1">
             <mm-semester .semester=${semester1}></mm-semester>
@@ -94,10 +89,7 @@ export class App extends LitElement {
             <mm-semester .semester=${semester3}></mm-semester>
           </div>
           <div slot="semester4">
-            <div class="section-container">
-              <h2 class="section-title">Semester 4</h2>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            </div>
+            <mm-semester .semester=${semester4}></mm-semester>
           </div>
           <div slot="semester5">
             <div class="section-container">

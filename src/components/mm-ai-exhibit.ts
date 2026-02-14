@@ -174,6 +174,11 @@ export class MMAiExhibit extends LitElement {
   private requestStartAnimation() {
     // Only start if idle and in view
     if (this.animationPhase === "idle" && this.isInView) {
+      // Only animate the first exhibit in each gallery (index 1)
+      if (this.index > 1) {
+        this.skipToComplete();
+        return;
+      }
       this.startAnimation();
     }
   }
@@ -181,6 +186,13 @@ export class MMAiExhibit extends LitElement {
   // Public method to start animation on page load (called by parent)
   public startAnimationOnLoad() {
     if (this.animationPhase === "idle") {
+      // Only animate the first exhibit in each gallery (index 1)
+      // For exhibits 2 and 3, skip directly to complete state
+      if (this.index > 1) {
+        this.skipToComplete();
+        return;
+      }
+
       // Mark as in view and start animation (force start regardless of viewport)
       this.isInView = true;
       if (this.animationDelay > 0) {
@@ -189,6 +201,14 @@ export class MMAiExhibit extends LitElement {
         this.startAnimation(true);
       }
     }
+  }
+
+  // Skip animation and show content immediately
+  private skipToComplete() {
+    this.animationPhase = "complete";
+    this.currentSection = "complete";
+    this.isInView = true;
+    this.requestUpdate();
   }
 
   private stopAnimation() {

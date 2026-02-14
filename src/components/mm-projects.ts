@@ -117,8 +117,29 @@ export class MMProjects extends LitElement {
         <p class="intro">
           Selected work and ongoing experiments. Some projects are polished, others are messy, but each one taught me something worth keeping.
         </p>
-
+        
         <div class="grid">
+          <!-- TODO: Update link and title when project name is finalized -->
+          <article class="card" aria-labelledby="working-on-it-title">
+            <div class="card-meta">Assistant creation</div>
+            <h3 id="working-on-it-title" class="card-title">Working on it</h3>
+            <p class="card-body">
+              A project from AI in Praxis exploring the boundaries between human creativity and machine assistance. More details coming soon.
+            </p>
+            <div class="cta-row">
+              <button
+                type="button"
+                class="cta-btn"
+                @click=${() => {
+                  window.location.hash = "#/projects/working-on-it";
+                }}
+              >
+                <span>Open project</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </article>
+
           <article class="card" aria-labelledby="ai-view-title">
             <div class="card-meta">Virtual exhibition</div>
             <h3 id="ai-view-title" class="card-title">Reimagined by LLM</h3>

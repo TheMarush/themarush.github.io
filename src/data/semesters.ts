@@ -4,6 +4,7 @@ export const semester1: Semester = {
   id: "semester1",
   name: "1st Semester",
   note: "I started the semester not really knowing what I signed up for. AI, ethics, librarianship. It all sounded a bit abstract and a lot overwhelming. I was confused, undercaffeinated, and pretty sure I'd made a terrible mistake. But as the weeks went on, things started to connect. I built a chatbot, questioned capitalism, made peace with academic writing, and even developed a strange respect for library systems. Turns out, this place might just be for me after all.",
+  credits: 39,
   subjects: [
     {
       code: "AI001",
@@ -78,6 +79,7 @@ export const semester2: Semester = {
   id: "semester2",
   name: "2nd Semester",
   note: "In my second semester, theory met practice. I moved from foundations of information science to real-world media analysis, data-informed thinking, and hands-on digital competences. Along the way I built the base of this website, mapped Czech disinformation ecosystems, and co-created community learning spaces in Bratislava to a cybersecurity intervention in an NGO. The semester tied my interests together into a clearer, more confident professional direction.",
+  credits: 39,
   subjects: [
     {
       code: "ISKB01",
@@ -151,41 +153,126 @@ export const semester2: Semester = {
 export const semester3: Semester = {
   id: "semester3",
   name: "3rd Semester",
-  note: "I'm still working on this one. :)",
+  note: "This semester bridged theory and practice in unexpected ways. I explored research methodology, navigated legal frameworks, and discovered creative applications of information science through geocaching. The highlight was creating a digital art exhibition that examines how AI systems construct identity from personal data – a project that emerged from the Digital Curator course and became one of my most meaningful academic works.",
+  credits: 26,
   subjects: [
     {
       code: "ISKB06",
-      name: "Methodology of Information Studies and Librarianship",
-      description: "...",
+      name: "Research Methodology in Information Science and Library Studies",
+      description:
+        "This course provided comprehensive training in research methodologies with a specific focus on their application in Information Science and Library Studies. The curriculum covered fundamental topics including the philosophy of science, research paradigms, quantitative and qualitative research approaches, research design, validity and reliability, hypothesis testing, sampling methods, and research ethics. Through this course, I developed strong skills in academic communication and learned how to select appropriate methodological approaches for research projects. The course culminated in understanding how to structure research reports using the IMRaD format and navigate the peer-review process. This foundation has been invaluable for my academic work and has shaped my understanding of rigorous research practices in the information science field.",
     },
     {
       code: "ISKB09",
-      name: "Internet Tools",
-      description: "...",
+      name: "Tools and Possibilities of the Internet",
+      description:
+        "This course explored the multifaceted nature of the internet in modern information society, covering both theoretical concepts and practical tools. Key topics included net neutrality, web publishing platforms, information architecture, organizational metaphors of the web, information security and anonymity in cyberspace, IoT and automation, OSINT (Open Source Intelligence), the deep and dark web, and various iterations of the web (Web 2.0, 3.0, etc.). Beyond learning about various internet tools and capabilities, I gained skills in navigating information overload and understanding the evolution of web design aesthetics and their impact on information organization. The course included weekly lectures and discussions, with a final essay component.",
+      externalLink: {
+        url: "https://www.mahdalova-skop.cz/clanek/kontext-2025-12-21-ekonomie-pozornosti",
+        label: "Read my published essay",
+      },
     },
     {
       code: "ISKB11",
-      name: "Survey of Czech Literature. Major Literary Works and Interpretations",
-      description: "...",
+      name: "Overview of Czech Literature",
+      description:
+        "This course provided a chronological survey of Czech literature from its Old Church Slavonic origins through postmodernism, examining significant works within their cultural and historical contexts. While the primary focus was on literary interpretation, I gained valuable insights into how literary works reflect and respond to world events and historical developments. The seminar component involved collaborative work on research papers, which reinforced an important lesson about working in teams: I discovered that I have strong leadership tendencies and find it challenging to remain passive when group members lack clear direction or ideas. While this wasn't always comfortable, particularly when working with less engaged colleagues, it helped me understand my natural inclination toward active participation and initiative-taking in collaborative settings.",
     },
     {
       code: "ISKB13",
-      name: "Legal Basis for Information Services",
-      description: "...",
+      name: "Legal Foundations for Information Services",
+      description:
+        "This course introduced the legal framework governing information services, with particular emphasis on Czech library law and copyright legislation. Rather than providing exhaustive legal coverage, it focused on equipping students with practical knowledge for common situations in information practice. The curriculum covered fundamental legal concepts and principles, methods for researching legal sources, information access laws (freedom of information, press law), data protection and privacy (GDPR), copyright law, and library-specific legislation. A significant achievement was learning to read and interpret legal texts – I read the entire GDPR and developed skills in decoding legal language and navigating legal databases. While challenging, this course gave me confidence in working with legal documents and understanding when professional legal consultation is necessary for information professionals.",
     },
     {
       code: "ISKB36",
-      name: "Creative Laboratory",
-      description: "...",
+      name: "Creative Laboratory – Geocaching and Information Science",
+      description:
+        "This innovative course combined creative problem-solving with geocaching as a medium for exploring connections to information science and library studies, coinciding with geocaching's 25th anniversary. The semester was structured around a comprehensive creative challenge: designing, implementing, and presenting a geocaching project that meaningfully incorporates information science principles. Topics explored included creating educational geocaches, integrating information resources and technologies (databases, digital collections, open data, QR codes, NFC, AR), working with geographic information systems and digital mapping, developing reading and information literacy through geocaching, organizing community events, and effective project communication. My practical experience included creating and finding numerous geocaches throughout Vienna and beyond, with highlights including my own cache \"Aus geologischer Sicht / From a Geological Stand\" (GCBHPAV), which I designed with considerable care – featuring a waterproof logbook, toys (despite not being kid-focused), decoration with stones including lava rocks from Mount Etna, and a Shawshank Redemption-inspired narrative. The course also involved completing several Adventure Lab series exploring Vienna's parks and urban art. The semester culminated in developing and presenting a functional geocaching project prototype or detailed specification.",
     },
     {
       code: "TIM_BM_017",
       name: "Digital Curator",
+      description:
+        "This course examined the intersection of digital technologies with museums, galleries, and archives, structured in three thematic blocks. The first block covered the historical development and current transformation of cultural institutions through digital technologies and new media. The second block focused specifically on archives of New Media art, addressing the complex challenges of preserving and curating digital artworks. The third block featured online sessions with international experts presenting their projects, including scholars from Università degli Studi di Cagliari and artists from Berlin. The course was delivered in English as e-learning with pre-prepared materials, complemented by expert guest lectures and mandatory comprehension questionnaires. The final project involved creating a media work accompanied by a critical text, using the Padlet platform for collaborative idea development.",
+      projectLink: {
+        url: "#/projects/ai-view",
+        label: "View my final project: Reimagined by LLM",
+      },
+    },
+    {
+      code: "p9911",
+      name: "Physical Education – Outdoor Activities (Cycling)",
+      description:
+        "This self-directed outdoor activity course required students to independently plan and execute their chosen activity while tracking progress through the Strava app. I selected cycling with the goal of completing 250km total distance. Due to late registration (my first choice of running was full), I procrastinated and ended up completing the entire 250km requirement in just one week – an intense but ultimately therapeutic experience. Each recorded activity required photographic documentation showing recognizable facial features for verification purposes. This challenge taught me significant lessons about endurance, time management under pressure, and the mental aspects of sustained physical effort. Despite the demanding pace, the experience was memorable and reinforced my capabilities for pushing through challenging physical goals when necessary.",
+    },
+  ],
+};
+
+export const semester4: Semester = {
+  id: "semester4",
+  name: "4th Semester",
+  note: "Coming soon...",
+  credits: 45,
+  subjects: [
+    {
+      code: "ISKB10",
+      name: "Information Retrieval",
+      description: "...",
+    },
+    {
+      code: "ISKB12",
+      name: "Information Systems",
+      description: "...",
+    },
+    {
+      code: "ISKB14",
+      name: "Information Education",
+      description: "...",
+    },
+    {
+      code: "ISKB15",
+      name: "Bachelor Thesis Seminar: Methodology of LIS",
+      description: "...",
+    },
+    {
+      code: "ISKB16",
+      name: "Reference and Information Services 1",
+      description: "...",
+    },
+    {
+      code: "ISKB40",
+      name: "Summer School: Master Course",
+      description: "...",
+    },
+    {
+      code: "ISKB45",
+      name: "Participation at Conferences",
+      description: "...",
+    },
+    {
+      code: "ISKB81",
+      name: "Winter School",
+      description: "...",
+    },
+    {
+      code: "ISKB82",
+      name: "AI in Practice: Skills for the Future and Better Services",
+      description: "...",
+    },
+    {
+      code: "KPI22",
+      name: "Creative Work with Information",
+      description: "...",
+    },
+    {
+      code: "MKM11",
+      name: "Introduction to Critical Thinking",
       description: "...",
     },
     {
       code: "p9911",
-      name: "Physical Education – Outdoor Cycling",
+      name: "Physical Education – Outdoor Activities",
       description: "...",
     },
   ],
