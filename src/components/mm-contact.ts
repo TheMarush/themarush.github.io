@@ -18,7 +18,7 @@ export class MMContact extends LitElement {
     return html`
       <div class="contact-container">
         <h2 class="contact-title">Contact</h2>
-        <p class="contact-intro">If you'd like to say hi, pitch a project, or share a joke — here's where to do it!</p>
+        <p class="contact-intro">If you'd like to say hi, pitch a project, or share a joke: here's where to do it!</p>
 
         <form 
           action="https://formsubmit.co/marush.the.first@gmail.com" 

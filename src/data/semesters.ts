@@ -3,7 +3,7 @@ import type { Semester } from "../types/study.js";
 export const semester1: Semester = {
   id: "semester1",
   name: "1st Semester",
-  note: "I started the semester not really knowing what I signed up for. AI, ethics, librarianship—it all sounded a bit abstract and a lot overwhelming. I was confused, undercaffeinated, and pretty sure I'd made a terrible mistake. But as the weeks went on, things started to connect. I built a chatbot, questioned capitalism, made peace with academic writing, and even developed a strange respect for library systems. Turns out, this place might just be for me after all.",
+  note: "I started the semester not really knowing what I signed up for. AI, ethics, librarianship. It all sounded a bit abstract and a lot overwhelming. I was confused, undercaffeinated, and pretty sure I'd made a terrible mistake. But as the weeks went on, things started to connect. I built a chatbot, questioned capitalism, made peace with academic writing, and even developed a strange respect for library systems. Turns out, this place might just be for me after all.",
   subjects: [
     {
       code: "AI001",
@@ -63,7 +63,7 @@ export const semester1: Semester = {
       code: "ISKB60",
       name: "Prolegomena to Information Studies",
       description:
-        'This was perhaps the most important course of the semester, as it shifted my perception of what studying at KISK actually means. I realized that it\'s not just about librarianship, but about working with information in a much broader and more meaningful sense. Through various experiential and reflective activities, I was introduced to concepts like "digital gardening", which helped me organize my sources and tools in ways that benefit not only my studies but also my personal and professional life. Thanks to this course, my formerly chaotic system of note-taking and knowledge tracking evolved into something more structured and sustainable. It gave me a sense of belonging, direction, and a much better grip on how to grow—both academically and as a person.',
+        'This was perhaps the most important course of the semester, as it shifted my perception of what studying at KISK actually means. I realized that it\'s not just about librarianship, but about working with information in a much broader and more meaningful sense. Through various experiential and reflective activities, I was introduced to concepts like "digital gardening", which helped me organize my sources and tools in ways that benefit not only my studies but also my personal and professional life. Thanks to this course, my formerly chaotic system of note-taking and knowledge tracking evolved into something more structured and sustainable. It gave me a sense of belonging, direction, and a much better grip on how to grow. Both academically and as a person.',
     },
     {
       code: "KPI55",
@@ -107,7 +107,7 @@ export const semester2: Semester = {
       code: "ISKB65",
       name: "Group of Experts",
       description:
-        "An exclusive lecture series that brought in practitioners and scholars from across information studies and related fields. Each week offered a distinct perspective—spanning librarianship, information science, design of services, data management, and culture—followed by space for questions and reflection. Engaging with current trends and concrete case studies helped me connect theory with practice and refine my own interests within the field.",
+        "An exclusive lecture series that brought in practitioners and scholars from across information studies and related fields. Each week offered a distinct perspective: spanning librarianship, information science, design of services, data management, and culture, followed by space for questions and reflection. Engaging with current trends and concrete case studies helped me connect theory with practice and refine my own interests within the field.",
     },
     {
       code: "ISKM38",
@@ -125,13 +125,13 @@ export const semester2: Semester = {
       code: "CORE042",
       name: "Data – the Answer to the Ultimate Question of Life, the Universe, and Everything...",
       description:
-        "A cross-disciplinary exploration of research data—its lifecycle, FAIR principles, methods, and uses across domains from NLP to public policy and microbiology. The lectures highlighted both the promise and pitfalls of data-driven inquiry, from reproducibility and ethics to commercialization and open data in public administration. As someone fascinated by data, I appreciated the breadth of perspectives and came away with clearer standards for trustworthy analysis and collaboration across disciplines.",
+        "A cross-disciplinary exploration of research data, its lifecycle, FAIR principles, methods, and uses across domains from NLP to public policy and microbiology. The lectures highlighted both the promise and pitfalls of data-driven inquiry, from reproducibility and ethics to commercialization and open data in public administration. As someone fascinated by data, I appreciated the breadth of perspectives and came away with clearer standards for trustworthy analysis and collaboration across disciplines.",
     },
     {
       code: "AUT_TM1",
       name: "Introduction to scheduling and time management for students with special needs",
       description:
-        "A practical seminar on planning, prioritization, habits, motivation, productivity, and (digital) hygiene tailored for students with specific needs. Working alongside peers with similar challenges helped me test concrete strategies, compare tools, and build routines that actually fit my life. The experience boosted my confidence that—with the right structures—I can organize anything I set my mind to.",
+        "A practical seminar on planning, prioritization, habits, motivation, productivity, and (digital) hygiene tailored for students with specific needs. Working alongside peers with similar challenges helped me test concrete strategies, compare tools, and build routines that actually fit my life. The experience boosted my confidence that (with the right structures) I can organize anything I set my mind to.",
     },
     {
       code: "ISKB81",
@@ -143,7 +143,7 @@ export const semester2: Semester = {
       code: "ISKB40",
       name: "Summer School: Master Course",
       description:
-        "A four-day cybersecurity intensive delivered by experts from national bodies and industry. After foundational training, we designed and delivered a local community intervention: I led a five-hour workshop for the Czech branch of a well-known NGO on safe online practices—both for individuals and at the organizational level. It was the most demanding subject logistically and administratively (documentation was meticulous as part of Google Security Seminars), but also one of the most impactful.",
+        "A four-day cybersecurity intensive delivered by experts from national bodies and industry. After foundational training, we designed and delivered a local community intervention: I led a five-hour workshop for the Czech branch of a well-known NGO on safe online practices. Both for individuals and at the organizational level. It was the most demanding subject logistically and administratively (documentation was meticulous as part of Google Security Seminars), but also one of the most impactful.",
     },
   ],
 };

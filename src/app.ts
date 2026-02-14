@@ -80,7 +80,7 @@ export class App extends LitElement {
               <h2 class="section-title">KISK MUNI</h2>
             <p>Somewhere along the way, I stopped thinking of information science as a dry field with a misleading name. I began to see how deeply it connects with the world around me, with ethics, with technology, with education, with people. I found a space that doesn't just teach tools but challenges ideas. A space that values reflection as much as innovation.</p>
             <p>And honestly? That's not why I came here.</p>
-            <p>I chose KISK because I was looking for the theoretical side of AI. I wasn't interested in librarianship or particularly drawn to the idea of working with information. But the further I got, the more it all started making sense—how knowledge is structured, how it flows, and how much power there is in understanding it. I didn't know it then, but I had landed in exactly the right place.</p>
+            <p>I chose KISK because I was looking for the theoretical side of AI. I wasn't interested in librarianship or particularly drawn to the idea of working with information. But the further I got, the more it all started making sense: how knowledge is structured, how it flows, and how much power there is in understanding it. I didn't know it then, but I had landed in exactly the right place.</p>
             <p>Explore my academic adventures semester by semester:</p>
             </div>
           </div>

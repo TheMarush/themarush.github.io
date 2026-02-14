@@ -9,13 +9,13 @@ export const galleryImages: GalleryImage[] = [
     src: "https://i.imgur.com/CkikXDV.jpeg",
     alt: "Artwork 1",
     caption:
-      "Four days of Google Cybersecurity Seminars later and suddenly I was running a 5h long intervention at a Czech branch of a major NGO. Cue shaky hands—yes, even after days of preparation, and a brain that short-circuited more than once. But honestly? Nothing was scarier than the bureaucracy and paperwork it took just to make it happen. Terrifying, exhausting, and absolutely worth it.",
+      "Four days of Google Cybersecurity Seminars later and suddenly I was running a 5h long intervention at a Czech branch of a major NGO. Cue shaky hands? yes! Even after days of preparation, and a brain that short-circuited more than once. But honestly? Nothing was scarier than the bureaucracy and paperwork it took just to make it happen. Terrifying, exhausting, and absolutely worth it.",
   },
   {
     src: "https://i.imgur.com/6NEytCJ.jpeg",
     alt: "Artwork 2",
     caption:
-      "Solo trip to Dublin, standing under the glowing Gaia globe in the Long Room at Trinity College. I geeked out over the Book of Kells, wandered Marsh's Library, and side-eyed the hall of fame full of men—until I spotted the newer statues of Rosalind Franklin, Mary Wollstonecraft, Augusta Gregory, and my forever icon Ada Lovelace. Balance, finally. Who run the world? Girls.",
+      "Solo trip to Dublin, standing under the glowing Gaia globe in the Long Room at Trinity College. I geeked out over the Book of Kells, wandered Marsh's Library, and side-eyed the hall of fame full of men,until I spotted the newer statues of Rosalind Franklin, Mary Wollstonecraft, Augusta Gregory, and my forever icon Ada Lovelace. Balance, finally. Who run the world? Girls.",
   },
   {
     src: "https://i.imgur.com/HExMZ7Z.jpeg",
@@ -27,7 +27,7 @@ export const galleryImages: GalleryImage[] = [
     src: "https://i.imgur.com/JRR9kve.jpeg",
     alt: "Artwork 4",
     caption:
-      "Being a feminist means believing in equality, not man-hating—just to clarify for the 478th time. I even wrote 50,000 characters on it for my final paper, so yes, I can back up my sass with citations.",
+      "Being a feminist means believing in equality, not man-hating (just to clarify for the 478th time). I even wrote 50,000 characters on it for my final paper, so yes, I can back up my sass with citations.",
   },
   {
     src: "https://i.imgur.com/QLy4Dnq.jpeg",
@@ -63,7 +63,7 @@ export const galleryImages: GalleryImage[] = [
     src: "https://i.imgur.com/3eH2i6A.jpeg",
     alt: "Artwork 10",
     caption:
-      "Right before running a 5K at the Vienna Marathon—with half-functioning lungs, no bib number, and the stubbornness of a goat. Turns out, putting the number pickup 30 minutes from the start line was a bold logistical choice. But I ran anyway—sick, unmeasurable, and absolutely unstoppable.",
+      "Right before running a 5K at the Vienna Marathon: with half-functioning lungs, no bib number, and the stubbornness of a goat. Turns out, putting the number pickup 30 minutes from the start line was a bold logistical choice. But I ran anyway. Sick, unmeasurable, and absolutely unstoppable.",
   },
   {
     src: "https://i.imgur.com/Jhtx2zy.jpeg",
