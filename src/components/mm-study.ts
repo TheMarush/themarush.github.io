@@ -155,7 +155,8 @@ export class MMStudy extends LitElement {
                     type="button"
                     class="cta-btn"
                     @click=${() => {
-                      window.location.hash = `#/${semester.id}`;
+                      window.location.hash = `#/study/${semester.id}`;
+                      window.scrollTo({ top: 0, behavior: "instant" });
                     }}
                   >
                     <span>View semester</span>
