@@ -378,7 +378,7 @@ export class MMMenu extends LitElement {
     }
 
     .submenu-desktop .submenu-item {
-      --button-bg: #52C8F4;
+      --button-bg: #3a9fc6;
       --button-color: #000;
       font-size: 0.9rem;
       width: auto;
@@ -417,7 +417,7 @@ export class MMMenu extends LitElement {
       }
 
       .submenu-mobile .submenu-item {
-        --button-bg: #52C8F4;
+        --button-bg: #3a9fc6;
         --button-color: #000;
         font-size: 0.9rem;
         width: calc(100% - 1rem);
