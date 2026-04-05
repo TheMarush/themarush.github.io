@@ -10,6 +10,7 @@ import "./components/mm-about.ts";
 import "./components/mm-projects.ts";
 import "./components/mm-study.ts";
 import "./components/mm-ai-view-index.ts";
+import "./components/mm-feminism.ts";
 import "./components/mm-contact.ts";
 import "./components/mm-racoon.ts";
 import { galleryImages } from "./data/gallery.js";
@@ -41,7 +42,7 @@ export class App extends LitElement {
             { id: "gallery", label: "Gallery" },
             { id: "about", label: "About" },
             { id: "testimonials", label: "Testimonials" },
-            { id: "projects", label: "Projects", submenu: [{ id: "ai-view", label: "AI View" }] },
+            { id: "projects", label: "Projects", submenu: [{ id: "ai-view", label: "AI View" }, { id: "feminism", label: "Lifelong Feminist" }] },
             {
               id: "study",
               label: "Study",
@@ -67,6 +68,9 @@ export class App extends LitElement {
           </div>
           <div slot="ai-view">
             <mm-ai-view-index></mm-ai-view-index>
+          </div>
+          <div slot="feminism">
+            <mm-feminism></mm-feminism>
           </div>
           <div slot="testimonials">
             <mm-testimonials .testimonials=${testimonials}></mm-testimonials>
