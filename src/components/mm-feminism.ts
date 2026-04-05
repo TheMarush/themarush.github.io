@@ -79,13 +79,12 @@ export class MMFeminism extends LitElement {
 
     /* ── entries ── */
     .entries {
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
+      display: block;
     }
 
     .entry {
-      overflow: hidden; /* clearfix for floated image */
+      clear: both;
+      margin-bottom: 4rem;
     }
 
     /* image — floated so text wraps around it */

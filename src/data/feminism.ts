@@ -21,7 +21,7 @@ export const feminismEntries: FeminismEntry[] = [
 The stakes of the question are more concrete than they might appear. Psycholinguistic experiments conducted by Valdrová and Kolek demonstrated that when Czech speakers encounter a masculine generic form, the mental image it produces is predominantly male. The data showed that up to a third of speakers interpret a supposedly gender-neutral masculine noun as specifically referring to men, which means women are systematically rendered invisible in the default language of public discourse. Separate research on job advertisements confirmed that gender-fair language appears far more frequently in countries with higher levels of social equality, suggesting the relationship between grammar and culture runs in both directions.
 
 These were not abstractions I was explaining. They were the grammar I had grown up inside.`,
-    image: "/pj-feminism/little-matura.jpg",
+    image: "/pj-feminism/little-matura.webp",
     imageAlt: "Little Matura presentation",
   },
   {
@@ -31,7 +31,7 @@ These were not abstractions I was explaining. They were the grammar I had grown 
     body: `My pre-scientific paper, Pojetí feminismu ve středoevropském kulturním prostoru 21. století (Concepts of Feminism in the Central European Cultural Space of the 21st Century), was a comparative study of how feminist movements are understood, received, and politically instrumentalized across Czech Republic, Slovakia, Germany, Austria, and Poland. It traced the divergence between liberal and radical feminist frameworks and examined why the same word can be celebrated in one country and treated as a slur two borders over. A recurring finding was the post-communist factor: in countries with historical experience of Soviet-era state feminism, the word itself arrived pre-contaminated, associated with enforced ideology rather than emancipation, making grassroots feminist organizing structurally harder to establish and sustain.
 
 The paper included a formal interview with Mgr. Tomáš Pavlas, founder of the Genderman initiative and lecturer in Critical Men's Studies at Charles University in Prague, which shaped my central argument: that without men as committed participants, gender equality remains structurally incomplete. Pavlas framed this not as charity toward feminism but as a matter of democratic obligation. In a patriarchal society, he observed, men carry louder voices for the same demands, and declining to use that advantage is itself a form of complicity.`,
-    image: "/pj-feminism/vwa-pres.jpg",
+    image: "/pj-feminism/vwa-pres.webp",
     imageAlt: "VWA presentation",
     pdf: {
       path: "/pj-feminism/VWA - Feminismus.pdf",
@@ -46,7 +46,7 @@ The paper included a formal interview with Mgr. Tomáš Pavlas, founder of the G
     body: `At winter school, I gave a talk that deliberately refused the conventional frame. Rather than presenting patriarchy as a women's problem requiring women's solutions, I mapped the full system and the costs it imposes on everyone it touches. Yes, the gender pay gap. Yes, the pink tax. But also what the research literature documents with considerable consistency: that men socialized into hegemonic masculine norms are substantially more likely to suppress emotional distress, avoid professional help, and die by suicide at rates more than three times higher than women. A systematic review published in 2024 identified emotional restraint, self-reliance as a survival ideology, and the perceived incompatibility of mental illness with masculine identity as the primary mechanisms linking patriarchal norms to male suicidality.
 
 The same value system that keeps women out of boardrooms keeps men out of therapy. It holds fathers to a provider role while making active caregiving socially legible only as deviation. It constructs vulnerability as feminine and therefore as failure, which means that any man who departs from emotional stoicism faces not only internal conflict but social sanction from other men enforcing the norm. The argument was not that men have it worse, but that a liberation movement which ignores half of its potential constituency is working against itself. Patriarchy is not a conspiracy of men against women. It is a set of rigid scripts that diminishes anyone who deviates from them.`,
-    image: "/pj-feminism/zimni-skola.png",
+    image: "/pj-feminism/zimni-skola.webp",
     imageAlt: "Zimní Škola — winter school",
   },
   {
@@ -58,7 +58,7 @@ The same value system that keeps women out of boardrooms keeps men out of therap
 Over time I began noticing a pattern in conversations with people who rejected or dismissed feminist framing. When the argument was delivered in a register they could not follow, or in a way that positioned them as the problem to be corrected, they received it as an attack rather than an invitation. The implication was not that feminist critique should be softened into incoherence, but that comprehensibility and patience are themselves political tools, and that the goal of changing minds requires meeting people where they actually are.
 
 I also addressed what I see as a significant strategic liability in contemporary feminist organizing: fragmentation that substitutes internal distinction-making for external impact. There are genuine and important differences between feminist groups, including disagreements serious enough to justify separate organizing, such as the exclusion of trans women by some feminist associations. Where such differences cross a threshold of fundamental principle, forming distinct coalitions is not only natural but necessary. The problem arises when the energy of the movement is spent on internal boundary maintenance rather than on the shared goals that motivated it in the first place. Coalition does not require agreement on everything. It requires agreement on enough.`,
-    image: "/pj-feminism/kisk-forum.png",
+    image: "/pj-feminism/kisk-forum.webp",
     imageAlt: "KISK Forum",
     link: {
       href: "https://stisk.online/a/pfp9T/breznove-kiskforum-se-neslo-v-aktivistickem-duchu-prostor-dostala-temata-spojena-s-zenami",
