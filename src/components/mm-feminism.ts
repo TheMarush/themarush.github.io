@@ -81,33 +81,28 @@ export class MMFeminism extends LitElement {
     .entries {
       display: flex;
       flex-direction: column;
-      gap: 5rem;
+      gap: 4rem;
     }
 
     .entry {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
+      overflow: hidden; /* clearfix for floated image */
     }
 
-    .entry.reverse {
-      direction: rtl;
-    }
-
-    .entry.reverse > * {
-      direction: ltr;
-    }
-
-    /* image side */
+    /* image — floated so text wraps around it */
     .entry-image-wrap {
-      position: sticky;
-      top: 1.5rem;
+      float: left;
+      width: 42%;
+      margin: 0.3rem 2.25rem 1.25rem 0;
       border-radius: 0.75rem;
       overflow: hidden;
       border: 1px solid rgba(148, 163, 184, 0.2);
       cursor: zoom-in;
       transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .entry.reverse .entry-image-wrap {
+      float: right;
+      margin: 0.3rem 0 1.25rem 2.25rem;
     }
 
     .entry-image-wrap:hover {
@@ -119,13 +114,6 @@ export class MMFeminism extends LitElement {
       width: 100%;
       height: auto;
       display: block;
-    }
-
-    /* text side */
-    .entry-content {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
     }
 
     .entry-meta {
@@ -237,12 +225,12 @@ export class MMFeminism extends LitElement {
     }
 
     /* responsive */
-    @media (max-width: 900px) {
-      .entry,
-      .entry.reverse {
-        grid-template-columns: 1fr;
-        direction: ltr;
-        gap: 1.75rem;
+    @media (max-width: 700px) {
+      .entry-image-wrap,
+      .entry.reverse .entry-image-wrap {
+        float: none;
+        width: 100%;
+        margin: 0 0 1.5rem 0;
       }
 
       h1 {
@@ -267,40 +255,38 @@ export class MMFeminism extends LitElement {
         >
           <img src="${entry.image}" alt="${entry.imageAlt}" loading="lazy" />
         </div>
-        <div class="entry-content">
-          <div class="entry-meta">${entry.meta}</div>
-          <h2 id="fe-${entry.id}" class="entry-title">${entry.title}</h2>
-          <hr class="entry-divider" />
-          <p class="entry-body">${entry.body}</p>
-          ${entry.pdf || entry.link ? html`
-            <div class="entry-actions">
-              ${entry.pdf ? html`
-                <a
-                  class="action-btn"
-                  href="${entry.pdf.path}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download
-                >
-                  <span aria-hidden="true">↓</span>
-                  <span>${entry.pdf.label}</span>
-                </a>
-                <p class="disclaimer">${entry.pdf.disclaimer}</p>
-              ` : null}
-              ${entry.link ? html`
-                <a
-                  class="action-btn"
-                  href="${entry.link.href}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>${entry.link.label}</span>
-                  <span aria-hidden="true">↗</span>
-                </a>
-              ` : null}
-            </div>
-          ` : null}
-        </div>
+        <div class="entry-meta">${entry.meta}</div>
+        <h2 id="fe-${entry.id}" class="entry-title">${entry.title}</h2>
+        <hr class="entry-divider" />
+        <p class="entry-body">${entry.body}</p>
+        ${entry.pdf || entry.link ? html`
+          <div class="entry-actions">
+            ${entry.pdf ? html`
+              <a
+                class="action-btn"
+                href="${entry.pdf.path}"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                <span aria-hidden="true">↓</span>
+                <span>${entry.pdf.label}</span>
+              </a>
+              <p class="disclaimer">${entry.pdf.disclaimer}</p>
+            ` : null}
+            ${entry.link ? html`
+              <a
+                class="action-btn"
+                href="${entry.link.href}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>${entry.link.label}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            ` : null}
+          </div>
+        ` : null}
       </article>
     `;
   }
