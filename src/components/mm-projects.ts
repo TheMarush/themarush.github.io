@@ -164,7 +164,7 @@ export class MMProjects extends LitElement {
             <div class="card-meta">Personal journey</div>
             <h3 id="feminism-title" class="card-title">Lifelong Feminist</h3>
             <p class="card-body">
-              From a little matura to winter schools and forum stages — a photo diary of the moments that turned feminism from an idea into a way of seeing the world.
+              A photo diary from nearly a decade of feminist work. From a middle school matura to winter schools and public forums, these are the moments that turned feminism from an idea into a way of seeing the world.
             </p>
             <div class="cta-row">
               <button

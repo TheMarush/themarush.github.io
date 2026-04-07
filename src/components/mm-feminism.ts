@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import type { FeminismEntry } from "../data/feminism.js";
 import { feminismEntries, feminismIntro } from "../data/feminism.js";
 import "./mm-back-button.ts";
@@ -147,6 +148,25 @@ export class MMFeminism extends LitElement {
       white-space: pre-line;
     }
 
+    .entry-body strong {
+      color: #f9fafb;
+      font-weight: 600;
+    }
+
+    .key-statement {
+      display: block;
+      font-size: 1.06rem;
+      font-weight: 600;
+      color: #f9fafb;
+      margin-top: 0.75rem;
+      white-space: normal;
+    }
+
+    .intro strong {
+      color: #f9fafb;
+      font-weight: 600;
+    }
+
     .entry-actions {
       display: flex;
       flex-direction: column;
@@ -257,7 +277,7 @@ export class MMFeminism extends LitElement {
         <div class="entry-meta">${entry.meta}</div>
         <h2 id="fe-${entry.id}" class="entry-title">${entry.title}</h2>
         <hr class="entry-divider" />
-        <p class="entry-body">${entry.body}</p>
+        <div class="entry-body">${unsafeHTML(entry.body)}</div>
         ${entry.pdf || entry.link ? html`
           <div class="entry-actions">
             ${entry.pdf ? html`
@@ -298,7 +318,7 @@ export class MMFeminism extends LitElement {
         </div>
         <div class="meta-label">Projects → Lifelong Feminist</div>
         <h1>Lifelong Feminist</h1>
-        <p class="intro">${feminismIntro}</p>
+        <p class="intro">${unsafeHTML(feminismIntro)}</p>
 
         <div class="entries">
           ${feminismEntries.map((entry, i) => this.renderEntry(entry, i))}
