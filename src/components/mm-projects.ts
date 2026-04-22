@@ -179,6 +179,26 @@ export class MMProjects extends LitElement {
               </button>
             </div>
           </article>
+
+          <article class="card" aria-labelledby="ijf26-title">
+            <div class="card-meta">Field coverage</div>
+            <h3 id="ijf26-title" class="card-title">IJF26</h3>
+            <p class="card-body">
+              Three days at the International Journalism Festival in Perugia. Nineteen panels on gender, cybersecurity, conflict reporting, and the future of the craft — notes taken in the rooms, in real time.
+            </p>
+            <div class="cta-row">
+              <button
+                type="button"
+                class="cta-btn"
+                @click=${() => {
+                  window.location.hash = "#/projects/ijf26";
+                }}
+              >
+                <span>Open IJF26 Coverage</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </article>
         </div>
       </section>
     `;
