@@ -24,6 +24,7 @@ export interface IJF26Session {
   speakers: string;
   venue: string;
   url?: string;
+  image?: string;
 }
 
 export interface IJF26Intro {
@@ -71,7 +72,7 @@ export const DAY_LABELS: Record<Day, string> = {
 export const ijf26Intro: IJF26Intro = {
   id: 'intro',
   quoteHeadline: '"Even if we\'re weirdos, we\'re weirdos together."',
-  subtitle: 'The turning point of my career',
+  subtitle: 'Three days, nineteen panels, one very steep hill',
   hook: 'Perugia is a medieval city on top of a hill in Umbria. I was there for three days, attended nineteen panels, and took all of these notes in real time while sitting in the rooms listening. Going to IJF26 was a research trip with very good aperitivos.',
   body: `<p>Perugia is a medieval city on top of a hill in Umbria. The International Journalism Festival takes its buildings spread out across that hill. I was there for three days, I attended nineteen panels across those three days, I was out of the hotel from 8am to 8pm every single day, and I took all of these notes in real time while sitting in the rooms listening.</p>
 
@@ -100,6 +101,7 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'We know what the problems are. We have written the strategies, held the retreats, produced the fifteen-point priority documents. The issue is that none of it seems to translate into actual change at the pace anyone needs.',
     speakers: 'Felicitas Carrique (News Product Alliance, via video), Michael Jarjour (Trustfund), Lucy Kueng (RISJ), moderated by Anita Zielina (Better Leaders Lab)',
     venue: 'Sala delle Colonne, Palazzo Graziani',
+    url: 'https://www.journalismfestival.com/programme/2026/bridging-the-impact-gap-how-to-execute-on-strategic-shifts',
     body: `<p>Okay so. We know what the problems are. We have known for a while. We have written the strategies, held the retreats, produced the fifteen-point priority documents. The issue is that none of it seems to translate into actual change at the pace anyone needs. That is what this session was about, and I appreciated that it did not pretend otherwise.</p>
 
 <p>The framing was blunt and I respected it: we cannot think our way out of the crisis. The problem is not analysis or vision. The problem is execution.</p>
@@ -127,6 +129,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'They opened with actual neuroscience, which immediately earned my trust. Some people have higher baseline cortisol arousal. The problem is not the temperament — it is being forced into environments that were not designed with you in mind and then being told that your discomfort is your personal failing.',
     speakers: 'Steffi Dobmeier (STERN), Ellen Heinrichs (Bonn Institute), Shirish Kulkarni (Media Cymru), Adam Thomas (Evenly Distributed), moderated by Steffi Dobmeier',
     venue: 'Sala delle Colonne, Palazzo Graziani',
+    url: 'https://www.journalismfestival.com/programme/2026/how-to-survive-perugia-and-journalism-in-general-as-an-introvert',
+    image: '/ijf26/introvert.jpeg',
     body: `<p>This was the session I very much knew I needed.</p>
 
 <p>They opened with actual neuroscience, which immediately earned my trust. Some people have higher baseline cortisol arousal. Environments with a lot of social stimulation become overstimulating for them faster, not because they are antisocial or fragile, but because that is literally how their nervous system works. There is a neurotransmitter angle too: acetylcholine and dopamine function differently in introverts and extroverts. Introverts tend to reach flow through depth and focus rather than breadth and stimulation. Evolutionary biology frames both profiles as adaptive depending on the environment. The problem is not the temperament. The problem is being forced into environments that were not designed with you in mind and then being told that your discomfort is your personal failing.</p>
@@ -167,6 +171,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'The session started with a show-of-hands exercise that took ninety seconds and said everything about why this panel existed. Almost everyone stood up. Almost the entire room sat down when asked if the person who assaulted them had been reported. The phrase that stayed with me longest: "Everyone was talking about us, but never with us."',
     speakers: 'Monique El-Faizy, Jess Michaels (3Joannes Inc), Lucia Osborne-Crowley, Elizabeth Stein, moderated by Annette Young (France 24)',
     venue: 'Auditorium San Francesco al Prato',
+    url: 'https://www.journalismfestival.com/programme/2026/the-epstein-files-where-did-the-media-get-it-wrong',
+    image: '/ijf26/EpsteinFiles.jpeg',
     body: `<p>The session started with:</p>
 
 <p>"Stand up if you know someone who has experienced sexual assault, or have yourself." Almost everyone stood up. "Raise your hand if the person who did it was not a stranger in an alley — rather someone they knew." Almost everyone raised their hand. "Sit down if they did not report it." Almost the entire room sat down.</p>
@@ -204,6 +210,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Dave Jorgenson and Aled John spent the time making the case that humor, personality, and internet-native formats are not incompatible with serious journalism. Audience research shows a lack of personality is perceived as a lack of trustworthiness — not neutrality, but distrust.',
     speakers: 'Aled John (Financial Times), Dave Jorgenson (Local News International)',
     venue: 'Auditorium San Francesco al Prato',
+    url: 'https://www.journalismfestival.com/programme/2026/a-101-guide-to-doing-serious-journalism-that-brings-a-smile',
+    image: '/ijf26/101guide.jpeg',
     body: `<p>The provocation in the title is the whole session, really. Dave Jorgenson from Local News International, former journalist of The Guardian, and Aled John from the FT spent the time making the case that humor, personality, and internet-native formats are not incompatible with serious journalism. They are actually tools for comprehension, trust, and reach.</p>
 
 <p>One of the starting points was audience research showing that a lack of personality is perceived as a lack of trustworthiness. Not neutrality. Distrust. A piece assembled by committee with all human voices carefully removed does not feel authoritative. It feels like it is hiding something.</p>
@@ -227,6 +235,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Three women journalists from three different authoritarian contexts — Myanmar, Russia, Nicaragua. Three stories about what exile actually looks like beyond the headlines, and what it costs to carry your country on your chest because there is nowhere else to put it.',
     speakers: 'Abigail Hernandez (La Sala), Hsu Mon Phyo (Delta News Agency), Irina Novik, moderated by Nadine Jurrat (DW Akademie)',
     venue: 'Teatro del Pavone',
+    url: 'https://www.journalismfestival.com/programme/2026/unseen-burdens-the-invisible-backpack-of-women-journalists-in-exile',
+    image: '/ijf26/UnseenBurdens.jpeg',
     body: `<p>Three women journalists from three different authoritarian contexts. Three stories.</p>
 
 <p>Hsu Mon Phyo grew up in Myanmar under military rule and propaganda media, where people are not permitted to speak about peace, democracy, or even Nobel Prize winners. She built Delta News Agency before her country's brief opening toward democracy. When that ended she had to flee, even though she desperately did not want to. She went to Thailand, learned a new language, and kept running the organisation in exile, which she described as almost impossible. There was significant international support for journalists fleeing Myanmar at the beginning, but support and sustainable income are not the same thing. Her co-workers still could not be paid.</p>
@@ -256,6 +266,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Based on a study of more than fifty creator-model journalists in the US and South Africa, this session mapped the structural support needed for independent journalism to survive and scale. The creator path offers real freedom — but also demands you be a reporter, editor, business owner, and marketer simultaneously.',
     speakers: 'Justin Arenstein (Code for Africa), Justin Bank (Independent Journalism Atlas), Dave Jorgenson (Local News International), Amy Mitchell (CNTI), moderated by Liz Kelly Nelson (Project C)',
     venue: 'Sala delle Colonne, Palazzo Graziani',
+    url: 'https://www.journalismfestival.com/programme/2026/creators-and-the-future-of-journalism-insights-on-infrastructure-building-from-the-us-and-south-africa',
+    image: '/ijf26/USandSouthAfrica.jpeg',
     body: `<p>This panel, organised with the Center for News, Technology and Innovation, presented findings from a study of more than fifty creator-model journalists in the US and South Africa. The central tension is one anyone who has tried to run any kind of independent journalistic operation will recognise: the creator-journalist path offers real freedom and the ability to build genuine audience trust, but it also demands you be a reporter, an editor, a business owner, a marketer, and your own legal and insurance department, usually without training for any of those roles except the first one.</p>
 
 <p>The Independent Journalism Atlas is mapping credible creator-model journalists, connecting them to funders, and amplifying developing best practices in the space. The framing was not individual success stories. It was about what structural support needs to exist for this model to produce sustainable, diverse journalism at scale.</p>
@@ -275,6 +287,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'The era of AI-assisted online violence is not looming. It has arrived. Research from 119 countries found that of women journalists who reported online violence, 24% identified abuse generated or amplified by AI tools. In five years, the rate of offline violence linked to online attacks has more than doubled.',
     speakers: 'Kalliopi Mingeirou (UN Women), Maria Ressa (Rappler), Kaylee Williams (Information Integrity Initiative), moderated by Julie Posetti (Information Integrity Initiative)',
     venue: 'Auditorium San Francesco al Prato',
+    url: 'https://www.journalismfestival.com/programme/2026/ai-assisted-gender-based-violence-the-chilling-escalation-of-online-abuse-against-women-in-the-public-sphere',
+    image: '/ijf26/AIassistedGenger.jpeg',
     body: `<p>The era of AI-assisted online violence is not looming. It has arrived. That was the opening frame and the research backed it up completely.</p>
 
 <p>The panel presented findings from a global study of women journalists, human rights defenders, and activists across 119 countries, staged in collaboration with UN Women. Of the 70% of survey respondents who reported experiencing online violence in their work, 24% identified abuse that was generated or amplified by AI tools. For writers and public communicators it goes up to 30%. The boundary between online and offline violence is collapsing: 40.9% of women surveyed reported experiencing offline attacks, including physical assault, stalking, and verbal harassment, that they linked to online violence. In a comparable 2020 survey that figure was 20%. In five years it has more than doubled to 42%.</p>
@@ -302,6 +316,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'A practical, honest, occasionally brutal session on what the current publishing landscape actually demands. You do not submit a finished manuscript — you submit a proposal, and publishers evaluate your platform alongside your writing. This session hit a personal nerve.',
     speakers: 'Dawn Davis (37 Ink), Lynda Hammes (Tertulia), Raju Narisetti (McKinsey Publishing), Madhulika Sikka (Crown Publishing Group), moderated by Mitra Kalita (URL Media)',
     venue: 'Teatro del Pavone',
+    url: 'https://www.journalismfestival.com/programme/2026/from-story-to-spine-how-journalists-turn-reporting-into-books',
+    image: '/ijf26/PublishingBook.jpeg',
     body: `<p>Last year's book session at IJF was standing-room only. This year's panel was practical, honest, and occasionally brutal about what the current publishing landscape actually demands.</p>
 
 <p>The short answer to "what does it take to get published in 2026" is: what it has always taken. A really good story, well told. The longer answer involves a lot more.</p>
@@ -329,6 +345,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Thirty minutes. One of the most urgent sessions of the festival. Cadwalladr coined "broligarchy" in 2024 to describe the convergence of Silicon Valley power and authoritarian politics — and her argument was not that this is a worrying trend. It is already the operating reality.',
     speakers: 'Carole Cadwalladr (The Nerve), interviewed by Lisa Peters (Stichting Democratie en Media)',
     venue: 'Auditorium San Francesco al Prato',
+    url: 'https://www.journalismfestival.com/programme/2026/exposing-the-broligarchy',
+    image: '/ijf26/Broligarchy.jpeg',
     body: `<p>Thirty minutes. One of the most urgent sessions of the festival.</p>
 
 <p>Cadwalladr coined "broligarchy" in 2024 to describe the convergence of Silicon Valley power and authoritarian politics. The argument she made in this session was not that this is a worrying trend. It is that it is already the operating reality, and journalism is running out of time to develop tools capable of responding to it.</p>
@@ -356,6 +374,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Trump called a journalist "quiet, piggy" on Air Force One. These are not tantrums — they are press freedom attacks designed to silence women who hold power to account. When they come from a head of government they license a torrent of abuse from everyone below.',
     speakers: 'Soraya Chemaly, Juliana Dal Piva (Abraji), Karyn Maughan (News24), intro by Kathy Im (MacArthur Foundation), moderated by Elisa Lees Munoz (IWMF)',
     venue: 'Sala dei Notari, Palazzo dei Priori',
+    url: 'https://www.journalismfestival.com/programme/2026/quiet-piggy-misogynistic-attacks-as-a-tool-to-silence-women-journalists-and-how-we-fight-back',
+    image: '/ijf26/QuietPiggy.jpeg',
     body: `<p>Trump called a journalist "quiet, piggy" on Air Force One. That was the opening image and the session spent the next fifty minutes unpacking what that kind of attack actually does, who it is designed to serve, and why silence from colleagues is not neutral.</p>
 
 <p>These are not tantrums. They are press freedom attacks designed to silence women who hold power to account. When they come from a head of government they license a torrent of abuse from everyone below. The session was explicit about not normalising them even when they become routine.</p>
@@ -383,6 +403,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Built around a documentary following AFP journalists in Gaza in the months after October 7, 2023. Adel Zaanoun described covering a war that removed entirely the balance between work and family that all previous conflicts had still allowed.',
     speakers: 'Thibaut Bruttin (Reporters Without Borders), Adel Zaanoun (AFP Gaza), Hélène Lam Trong (documentary director), moderated by Phil Chetwynd (AFP)',
     venue: 'Auditorium San Francesco al Prato',
+    url: 'https://www.journalismfestival.com/programme/2026/journalists-in-gaza',
+    image: '/ijf26/JournalistsInGaza.jpeg',
     body: `<p>I want to be upfront about the limits of my notes from this session. Adel Zaanoun was speaking in English, which is not his first language, and visibly under enormous emotional weight. What I captured is incomplete and I have not filled in what I did not clearly hear.</p>
 
 <p>The session was built around Hélène Lam Trong's documentary "Inside Gaza," which follows the daily lives of AFP journalists in Gaza in the months after October 7, 2023. It has broadcast in Belgium, Switzerland, France, and Germany.</p>
@@ -414,6 +436,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'The honest observation from this panel: success in independent creator journalism is not purely a function of hard work. Timing, luck, and platform conditions at the right moment matter enormously — and those are largely outside anyone\'s control.',
     speakers: 'Dave Jorgenson (Local News International), Tara Palmeri (The Tara Palmeri Show), Sophia Smith Galer, moderated by Francesco Zaffarano (Chora & Will Media)',
     venue: 'Teatro del Pavone',
+    url: 'https://www.journalismfestival.com/programme/2026/choose-your-own-adventure-what-comes-after-vertical-video',
+    image: '/ijf26/YourOwnAdventure.jpeg',
     body: `<p>By the time this session started I had attended six panels and I had genuinely reached my personal limit for creator journalism content. I had also seen Dave Jorgenson speak three times in two days at this point, which I have nobody to blame for but myself and my own scheduling choices.</p>
 
 <p>What came through clearly: Tara Palmeri and Sophia Smith Galer have both built independent platforms that work well beyond the institutional frameworks they came from. The honest observation from the panel was that success in independent creator journalism is not purely a function of hard work. Timing, luck, and the platform conditions at the right moment matter enormously, and those are largely outside anyone's control. That is a more honest framing than most of these conversations offer.</p>
@@ -433,6 +457,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Kevin O\'Gorman and Giovanni Pellerano ran this as a genuinely practical workshop on digital security for journalists. The central lesson: the word "secure" on the packaging means nothing if the architecture is compromised at the root.',
     speakers: 'Kevin O\'Gorman (Freedom of the Press Foundation), Giovanni Pellerano (GlobaLeaks)',
     venue: 'Sala del Dottorato',
+    url: 'https://www.journalismfestival.com/programme/2026/justifiable-trust-how-to-ensure-journalists-have-access-to-the-right-information-when-choosing-security-focused-applications-and-tools',
+    image: '/ijf26/Cybersecurity.jpeg',
     body: `<p>Kevin O'Gorman from the SecureDrop team at the Freedom of the Press Foundation and Giovanni Pellerano from GlobaLeaks ran this as a genuinely practical workshop, which was a welcome change of pace after two days of broader structural discussions. The focus was whistleblowing systems specifically, but the framework they offered applies across digital tools journalists use.</p>
 
 <p>The session opened with a specific case: Teleguard, a messaging app that markets itself as secure, was uploading its own encryption keys to its server. If you control the encryption keys, you can decrypt everything. The word "secure" on the packaging means nothing if the architecture is compromised at the root. This matters not just for journalists but for sources, who are often the most at risk.</p>
@@ -464,6 +490,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Four women who have built independent feminist platforms against the odds. Mona Eltahawy, Francesca Donner, Eliza Anyangwe, Afua Hirsch — on money, patriarchy, and what it means to do journalism that has to exist even when it should not be economically possible.',
     speakers: 'Eliza Anyangwe (Fuller), Francesca Donner (The Persistent), Mona Eltahawy (Feminist Giant), Afua Hirsch, moderated by Nana Darkoa Sekyiamah (Institute of Journalism and Social Change)',
     venue: 'Auditorium San Francesco al Prato',
+    url: 'https://www.journalismfestival.com/programme/2026/the-future-of-gender-just-journalism-from-coverage-to-culture',
+    image: '/ijf26/GenderJustJournalism.jpeg',
     body: `<p>I loved this panel completely. I love them. This is my mission.</p>
 
 <p>Mona Eltahawy opened with a declaration of faith: fuck the patriarchy. She described feminism as the destruction of patriarchy, not its reform. Her image was an octopus: the head is patriarchy, the tentacles are the interlocking systems of oppression that constrain everyone who is not at the centre of power. "It is not enough for me just to be equal. I want to destroy that octopus."</p>
@@ -491,6 +519,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'Sophia Smith Galer has never really thought about personal branding. She thinks about journalism and what her audience actually wants. That distinction turned out to be the whole session.',
     speakers: 'Sophia Smith Galer, Antonio Zappulla (Thomson Reuters Foundation)',
     venue: 'Teatro del Pavone',
+    url: 'https://www.journalismfestival.com/programme/2026/compensating-content-creators-big-tech-and-the-future-of-news',
+    image: '/ijf26/YourOwnBrand.jpeg',
     body: `<p>Short session, short notes.</p>
 
 <p>Sophia Smith Galer has never really thought about personal branding. She thinks about journalism and what her audience actually wants. That distinction turned out to be the whole session.</p>
@@ -512,6 +542,8 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'You cannot just do good journalism and assume it will reach the people who need it. The panel was about polarisation as an editorial problem rather than just a political one — and AI is pushing people into bubbles even more effectively than social media alone.',
     speakers: 'Natalia Antelava (Coda Story), Patricia Campos Mello (Folha de Sao Paulo), Angelina Kariakina (Public Interest Journalism Lab), moderated by Nataliya Gumenyuk (Public Interest Journalism Lab)',
     venue: 'Teatro del Pavone',
+    url: 'https://www.journalismfestival.com/programme/2026/journalism-in-the-polarised-world-reaching-audiences-beyond-the-bubble',
+    image: '/ijf26/PolarisedWorldJournalism.jpeg',
     body: `<p>You cannot just do good journalism and assume it will reach the people who need it. That was the starting premise and it was the honest one.</p>
 
 <p>The panel, built on research from the Public Interest Journalism Lab, was about polarisation as an editorial problem rather than just a political one, and about what journalism can practically do about it.</p>
@@ -535,13 +567,71 @@ export const ijf26Sessions: IJF26Session[] = [
     hook: 'The Washington Post investigated TikTok\'s algorithmic design by asking more than 1,100 volunteer users to donate their own data. Some users were spending four, eight, or ten hours a day on the app. The method is partly adversarial in a productive way: real people making visible what an algorithm would prefer to hide.',
     speakers: 'Caitlin Gilbert (Washington Post, via video), Paul Radu (OCCRP), Paul Myles (On Our Radar), moderated by Neus Vidal (Seek Initiative)',
     venue: 'Sala delle Colonne, Palazzo Graziani',
+    url: 'https://www.journalismfestival.com/programme/2026/expanding-public-interest-journalism-through-citizen-powered-investigations',
+    image: '/ijf26/CitisenJournalism.jpeg',
     body: `<p>The Washington Post investigated TikTok's algorithmic design by asking more than 1,100 volunteer users to donate their own TikTok data. Caitlin Gilbert described the process: users downloaded their data through a secure form and donated it. The resulting dataset included user IDs, videos watched, timestamps, scroll duration, and session length. Some users were spending four, eight, or even ten hours a day on the app. The data made visible what the design was doing to people's time across categories including politics and mental health.</p>
 
-<p>The method is partly adversarial in a productive way: when you have real people giving data and testimonies, the platform cannot simply deny what is happening. TikTok can issue a statement. It cannot disprove a dataset built from its own users' actual behaviour.</p>
+<p>The method is partly adversarial in a productive way: when you have real people providing their own real data and their own testimony, a platform cannot dismiss the findings as speculation. TikTok usually deflects with "that's a speculation." The data donation model removes that deflection. Caitlin also mentioned something I found unexpectedly important: when users' own questions about how the app worked became part of the investigation, they felt more involved in journalism. "When their questions about the world they live in get answered, they feel more involved."</p>
 
-<p>The broader frame from OCCRP and On Our Radar was about what citizen-powered journalism can do that traditional investigative methods cannot: scale, distributed verification, access to communities and data points that a small newsroom team could never reach on its own. The tradeoffs are real — data quality, consent frameworks, the risk of exposing volunteers — but the methodology is maturing.</p>
+<p>Paul Radu from OCCRP put the citizen collaboration argument in stark terms: there are roughly three trillion dollars of corrupt money in the global system and a very small number of investigative journalists. The arithmetic does not work without expanding who does the work. His vision is ambitious: citizens eventually performing investigations by themselves, equipped with the tools professional journalists have developed. The work OCCRP has done sharing data with lawyers, activists, and Transparency International was a concrete example of building infrastructure that allows others to act, not just handing off a story after publication.</p>
 
-<p>The infrastructure question is the same as in every other session about scaling independent journalism: who builds it, who funds it, and who owns it when the investigation is done?</p>`,
+<p>Paul Myles from On Our Radar described working with communities to tell stories in their own words. He described Debbie, a woman in her mid-fifties from Manchester who spent most of her adult life homeless and later received an award for her journalism contribution. The community wanted to tell their own story with a clear instruction: "We don't want pity. We don't want blame for our situation."</p>
+
+<p>What they made was a choose-your-own-adventure format, inspired by the books Debbie loved as a child, that put readers inside the decision-making maze of the housing support system. "It was like a maze to get help. The Manchester maze." After it was published, Debbie's family reached out to her. That is something a conventional housing policy investigation could not have done.</p>`,
+  },
+
+  {
+    id: 'rewriting-her-story',
+    category: 'gender',
+    day: 'saturday',
+    time: '16:00–16:50',
+    quoteHeadline: '"The Epstein Story Is About Epstein, Not About the Women."',
+    subtitle: 'Rewriting Her Story: How News Coverage Can Fight, Not Fuel, Violence Against Women',
+    hook: 'AKAS\'s Global Misogyny News Coverage Tracker measures how the top 50 news providers cover violence against women. The findings: coverage is incident-focused, dominated by male voices, survivor perspectives largely absent. The challenge to newsrooms was direct: look inward.',
+    speakers: 'Francesca Donner (The Persistent), Angelina Kariakina (Public Interest Journalism Lab), Tracy McVeigh (The Guardian), moderated by Luba Kassova (AKAS)',
+    venue: 'Sala dei Notari, Palazzo dei Priori',
+    url: 'https://www.journalismfestival.com/programme/2026/rewriting-her-story-how-news-coverage-can-fight-not-fuel-violence-against-women',
+    image: '/ijf26/RewritingHerStory.jpeg',
+    body: `<p>AKAS has built a Global Misogyny News Coverage Tracker that annually measures trends across 32 terms, narrowed to 12 for analysis, including rape, sexual assault, and domestic violence, across the top 50 news providers. The findings are not surprising but they are useful to have measured and named.</p>
+
+<p>Violence against women coverage remains incident-focused rather than system-focused. It is dominated by male expert voices. Survivor perspectives are largely absent. Coverage often goes into too much detail in a way that is exploitative rather than explanatory. The Epstein case was used as a case study: coverage is descriptive, not explanatory. It tells you what happened. Not how the system enabling it worked. Not who else was implicated in maintaining it. "The Epstein story is about Epstein, not about the women."</p>
+
+<p>Mentions of "gender ideology" are multiplying in news coverage. Men consistently crowd out women's share of voice even in coverage of topics that primarily concern women.</p>
+
+<p>Angelina Kariakina explained why the misogyny numbers in coverage are actually declining, and it is not good news: they are declining because war coverage is crowding everything else out, and most war reporters are men. There is no conflict that helps gender equality. She described a specific story: a girl who had been raped and tortured by her family, whose sister was also likely killed. The story came to light because the girl's brothers appeared in a video being celebrated as heroes for enlisting. The responses to the story were "pure shock, because people didn't even know these stories existed." The whole system around the family reacted. Teachers, neighbours, institutions. One story is not systematic reporting, she said, but one story can change the temperature.</p>
+
+<p>Francesca Donner made the Shakespeare comparison explicit: in the Epstein coverage, the powerful named figures are the main characters. The survivors are the chorus. Her challenge to major news organisations was direct: look inward. "By not representing all the voices, we are doing journalism a disservice." And when people do not see themselves: "There's nothing for me here, why am I showing up to this?"</p>
+
+<p>Tracy McVeigh ended with what felt like a newsroom manifesto: representation is a muscle that has to be exercised repeatedly before it becomes instinctive. It has to be the core of what you do. Platform all voices. All of them. It is not a women's issue. It is everybody's issue.</p>`,
+  },
+
+  {
+    id: 'silent-censorship',
+    category: 'safety-wellbeing',
+    day: 'saturday',
+    time: '17:00–17:50',
+    quoteHeadline: '"A Journalist Silenced by Burnout Is Still a Journalist Silenced."',
+    subtitle: 'Silent Censorship: Trauma, Burnout and Press Freedom',
+    hook: 'Burnout, PTSD, and moral injury in journalists are not private struggles to manage quietly. They are press freedom issues. Journalism has historically treated occupational mental health as a personal responsibility — the panel pushed back hard on that logic.',
+    speakers: 'Jodie Ginsberg (Committee to Protect Journalists), Fergal Keane, Alessandra Galloni (Reuters, via video), moderated by Bruce Shapiro (Global Center for Journalism and Trauma)',
+    venue: 'Teatro del Pavone',
+    url: 'https://www.journalismfestival.com/programme/2026/silent-censorship-trauma-burnout-and-press-freedom',
+    image: '/ijf26/SilentCensorship.jpeg',
+    body: `<p>Burnout, PTSD, and moral injury in journalists are not private struggles to manage quietly. They are press freedom issues. A journalist silenced by burnout is still a journalist silenced. That reframe was the whole session and it mattered.</p>
+
+<p>Journalism has historically treated occupational mental health as a personal responsibility: you knew what you were getting into, you deal with it. The panel pushed back hard on that logic.</p>
+
+<p>Several pressures specific to this moment came up. Social media means anyone can threaten journalists at scale and many do. Journalists in offices moderating, editing, and processing threatening or graphic content are also experiencing trauma and they are largely invisible in conversations about reporter safety. There is increasing government pressure that extends beyond what journalists write to who they are, their lifestyles and identities.</p>
+
+<p>Fergal Keane was honest about what accumulated years of conflict reporting costs. The instruction journalists internalise, often from editors and managers, is effectively: just suck it the fuck up. The symptoms are visible everywhere: elevated sickness, burnout, people leaving the industry, addiction, PTSD. "It is easy to put people into the disciplinary process, and only then does anyone ask: well, maybe there is something else going on underneath."</p>
+
+<p>There is something I call the "good guy wound": the cost of caring about the work deeply enough that you cannot protect yourself from it. You have a reputation, a responsibility, a community depending on your coverage. It is a very difficult decision to say no. Acknowledging that dynamic is not the same as solving it. But it is where you have to start.</p>
+
+<p>The resource problem is acute. There are few people trained to support journalists experiencing trauma who also speak the relevant language, have the cultural context, and are reachable, particularly for journalists in closed environments. Mental health resources are scarce everywhere. The gap between need and provision is significant.</p>
+
+<p>The practical recommendations were consistent: peer support networks, preventative education early in careers before the first crisis rather than only after, and institutional cultures where the first response to a journalist struggling is a human one rather than a disciplinary one.</p>
+
+<p>I left this session with something I felt several times across these three days: journalism is being asked to do an enormous amount of work in a world that is getting harder to report on, with fewer resources, under greater personal threat, and without adequate support. The fact that so many people are still doing it says something. I am still not entirely sure what.</p>`,
   },
 
 ];

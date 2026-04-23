@@ -92,9 +92,23 @@ export class MMIjf26 extends LitElement {
 
         <div class="article-divider"></div>
 
+        ${session?.image
+          ? html`<div class="article-image-wrap">
+              <img class="article-image" src="${session.image}" alt="${session.subtitle}" loading="lazy" />
+            </div>`
+          : null}
+
         <div class="article-body">
           ${unsafeHTML(entry.body)}
         </div>
+
+        ${session?.url
+          ? html`<div class="article-footer">
+              <a class="ijf-link" href="${session.url}" target="_blank" rel="noopener noreferrer">
+                Official programme page <span aria-hidden="true">↗</span>
+              </a>
+            </div>`
+          : null}
       </div>
     `;
   }
@@ -762,6 +776,46 @@ export class MMIjf26 extends LitElement {
       height: 1px;
       background: rgba(248, 250, 252, 0.1);
       margin-bottom: 2rem;
+    }
+
+    /* ── Article image ───────────────────────────────────────────────── */
+
+    .article-image-wrap {
+      margin-bottom: 2rem;
+      border-radius: 0.375rem;
+      overflow: hidden;
+    }
+
+    .article-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: cover;
+    }
+
+    /* ── Article footer ──────────────────────────────────────────────── */
+
+    .article-footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(248, 250, 252, 0.08);
+    }
+
+    .ijf-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+      text-decoration: none;
+      transition: color 150ms;
+    }
+
+    .ijf-link:hover {
+      color: #f9fafb;
     }
 
     /* ── Article body ─────────────────────────────────────────────────── */
