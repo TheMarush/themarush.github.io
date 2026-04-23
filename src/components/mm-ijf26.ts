@@ -18,11 +18,15 @@ type ViewMode = "chronological" | "thematic";
 
 const DAYS: Day[] = ["thursday", "friday", "saturday"];
 
+const REWRITING_HER_STORY_URL =
+  "https://www.journalismfestival.com/programme/2026/rewriting-her-story-how-news-coverage-can-fight-not-fuel-violence-against-women";
+
 @customElement("mm-ijf26")
 export class MMIjf26 extends LitElement {
   @state() private selectedId: string | null = null;
   @state() private viewMode: ViewMode = "chronological";
   @state() private activeFilter: Category | null = null;
+  @state() private introExpanded: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -116,22 +120,48 @@ export class MMIjf26 extends LitElement {
   // ─── INDEX VIEW ───────────────────────────────────────────────────────────
 
   private _renderIntroCard(): TemplateResult {
+    const expanded = this.introExpanded;
     return html`
       <article
-        class="intro-card"
-        @click=${() => this._open("intro")}
-        role="button"
-        tabindex="0"
-        @keydown=${(e: KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") this._open("intro"); }}
-        aria-label="Read introduction: ${ijf26Intro.subtitle}"
+        class="intro-card ${expanded ? "intro-card--expanded" : ""}"
+        aria-label="Introduction: ${ijf26Intro.subtitle}"
       >
-        <div class="intro-card-inner">
+        <div
+          class="intro-card-inner"
+          role="button"
+          tabindex="0"
+          @click=${() => { this.introExpanded = !this.introExpanded; }}
+          @keydown=${(e: KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") this.introExpanded = !this.introExpanded; }}
+        >
           <div class="intro-label">Introduction</div>
           <h2 class="intro-headline">${ijf26Intro.quoteHeadline}</h2>
           <p class="intro-subtitle-text">${ijf26Intro.subtitle}</p>
           <p class="intro-hook">${ijf26Intro.hook}</p>
-          <span class="read-link" aria-hidden="true">Read <span>→</span></span>
+          <span class="read-link" aria-hidden="true">
+            ${expanded ? html`Collapse <span>↑</span>` : html`Read <span>→</span>`}
+          </span>
         </div>
+
+        ${expanded ? html`
+          <div class="intro-expanded-body">
+            ${ijf26Intro.image ? html`
+              <figure class="intro-img-float">
+                <img src="${ijf26Intro.image}" alt="Andrea Marchi photographing the Rewriting Her Story panel at IJF26" loading="lazy" />
+                <figcaption>
+                  Photo: Andrea Marchi ·
+                  <a href="${REWRITING_HER_STORY_URL}" target="_blank" rel="noopener noreferrer">
+                    Rewriting her story: how news coverage can fight, not fuel, violence against women
+                  </a>
+                  · IJF26
+                </figcaption>
+              </figure>
+            ` : null}
+            <div class="intro-body-text">
+              ${unsafeHTML(ijf26Intro.body)}
+            </div>
+            <div style="clear:both"></div>
+          </div>
+        ` : null}
       </article>
     `;
   }
@@ -386,6 +416,67 @@ export class MMIjf26 extends LitElement {
       color: #d1d5db;
       line-height: 1.75;
       max-width: 680px;
+    }
+
+    .intro-card--expanded .intro-card-inner {
+      border-bottom: 1px solid rgba(248, 250, 252, 0.08);
+      padding-bottom: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .intro-expanded-body {
+      padding: 2rem 2.25rem 2.25rem;
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: #d1d5db;
+    }
+
+    .intro-img-float {
+      float: right;
+      margin: 0 0 1.5rem 2rem;
+      width: 270px;
+      flex-shrink: 0;
+    }
+
+    .intro-img-float img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 0.25rem;
+    }
+
+    .intro-img-float figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    .intro-img-float figcaption a {
+      color: #6b7280;
+      text-decoration: underline;
+      text-decoration-color: rgba(107, 114, 128, 0.4);
+      transition: color 150ms;
+    }
+
+    .intro-img-float figcaption a:hover {
+      color: #9ca3af;
+    }
+
+    .intro-body-text p {
+      margin: 0 0 1.5em;
+    }
+
+    .intro-body-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 560px) {
+      .intro-img-float {
+        float: none;
+        width: 100%;
+        margin: 0 0 1.5rem;
+      }
     }
 
     /* ── Controls bar ─────────────────────────────────────────────────── */

@@ -33,6 +33,7 @@ export interface IJF26Intro {
   subtitle: string;
   hook: string;
   body: string;
+  image?: string;
 }
 
 export const CATEGORY_LABELS: Record<Category, string> = {
@@ -73,16 +74,19 @@ export const ijf26Intro: IJF26Intro = {
   id: 'intro',
   quoteHeadline: '"Even if we\'re weirdos, we\'re weirdos together."',
   subtitle: 'Three days, nineteen panels, one very steep hill',
-  hook: 'Perugia is a medieval city on top of a hill in Umbria. I was there for three days, attended nineteen panels, and took all of these notes in real time while sitting in the rooms listening. Going to IJF26 was a research trip with very good aperitivos.',
-  body: `<p>Perugia is a medieval city on top of a hill in Umbria. The International Journalism Festival takes its buildings spread out across that hill. I was there for three days, I attended nineteen panels across those three days, I was out of the hotel from 8am to 8pm every single day, and I took all of these notes in real time while sitting in the rooms listening.</p>
+  hook: 'I went to Perugia knowing exactly what I wanted from it. What I did not fully account for was the hills, the aperitivos, and the specific feeling of sitting in a room full of people who are angry about the same things you are.',
+  image: '/ijf26/intro.jpeg',
+  body: `<p>I want to be honest about why I went to IJF26 and what I was looking for. I study Information Science and Library Studies, I have been doing cybersecurity education and feminist advocacy work for years, and the intersection of those two things, who controls information, who gets protected by it and who gets exposed by it, who gets to speak and who gets silenced, is not an academic interest for me. It is the thread running through basically everything I do. Going to the International Journalism Festival in Perugia was, in that sense, not networking or professional development in the conventional sense. It was more like going somewhere to find out how the people at the front of these fights are actually thinking right now.</p>
 
-<p>By day two I had climbed the equivalent of dozens of floors before most panels even started. By day three I was running on aperitivo networking, strong Italian coffee, and some stubborn sense of mission. For someone who sat through an entire panel on how introverts should take breaks and recharge, I did a spectacular job of ignoring basically everything it recommended.</p>
+<p>My expectations going in were high but also a little wary. Conference programming tends toward the general and the safe. Panels can end up being a long list of problems everyone already knows about, followed by a vague call for collaboration. I was prepared for some of that. What I was hoping for was at least a few sessions where someone said something that shifted how I was thinking about a problem I already cared about. That feels like a reasonable bar.</p>
 
-<p>It was completely worth it.</p>
+<p>Perugia is a medieval city on top of a hill in Umbria. The festival distributes its sessions across several buildings spread around that hill. I was out of the hotel from 8am to 8pm every single day, attended nineteen panels across three days, took all of these notes in real time, climbed the equivalent of dozens of floors daily, and networked at aperitivos with people from Amnesty International, The Nerve, and the AI Whistleblower Initiative among others. For someone who sat through an entire panel on how introverts should take breaks and recharge, I did a spectacular job of ignoring everything it recommended.</p>
 
-<p>If you look at the sessions I chose, the pattern is pretty obvious. Gender. Gender. Conflict. Cybersecurity. Gender. Again and again. That is not an accident and it is not even really a choice at this point, it is just what I care about most and what I think matters most. Feminist journalism, the safety of women in public life, how media covers or fails to cover violence and abuse and power structures, these are not academic interests for me. They are my life's work in progress. Going to IJF26 was a research trip with very good aperitivos.</p>
+<p>If you look at the sessions I chose, the pattern is obvious. Gender. Gender. Conflict. Cybersecurity. Gender. Again and again. That was not a coincidence or even really a deliberate strategy. It was just what I needed to understand better, and the festival had an unusually strong programme on it this year. AI-assisted gender-based violence. Women journalists in exile. How media covers or fails to cover sexual abuse. The misogynistic attacks being used as press freedom tools. These are topics I work on, read about, and think about constantly, and being in rooms where practitioners and researchers were addressing them with serious rigour was, genuinely, one of the better professional experiences I have had.</p>
 
-<p>These articles are based on notes I took in the rooms. Where I have added factual context it is to help the reader understand what was being referenced, not to invent anything. Where I have a strong opinion, it is going to be obvious that it is mine. I was a reporter in those rooms, but I was also a person, and in Perugia those two things kept bumping into each other in ways that were hard to untangle.</p>`,
+<p>What I did not expect was how much the sessions would talk to each other across days and topics. The same structures kept appearing in different contexts: the way silence gets weaponised, the way institutional protection for perpetrators works, the way platforms profit from harm and then decline to fix it, the way women doing important work get pushed out by the same mechanisms whether they are journalists in exile, public figures targeted by deepfakes, or reporters being called "piggy" by a sitting president on Air Force One. By day three it felt less like attending separate panels and more like watching the same argument being made from nineteen different angles.</p>
+
+<p>Did it meet my expectations? More than. The bar I set, at least a few sessions that shifted something, was cleared several times over. What I am carrying out of Perugia is less a set of new facts and more a sharpened sense of what the actual problem is and where the real fights are. These articles are my attempt to put that down on paper while it is still clear. They are based on notes I took in the rooms. Where I have added factual context it is to help the reader, not to invent. Where I have a strong opinion, it will be obvious that it is mine.</p>`,
 };
 
 // ─── SESSIONS ───────────────────────────────────────────────────────────────
@@ -126,7 +130,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '10:30–11:20',
     quoteHeadline: '"People Are Different."',
     subtitle: 'How to Survive Perugia (and Journalism in General) as an Introvert',
-    hook: 'They opened with actual neuroscience, which immediately earned my trust. Some people have higher baseline cortisol arousal. The problem is not the temperament — it is being forced into environments that were not designed with you in mind and then being told that your discomfort is your personal failing.',
+    hook: 'They opened with actual neuroscience, which immediately earned my trust. Some people have higher baseline cortisol arousal. The problem is not the temperament: it is being forced into environments that were not designed with you in mind and then being told that your discomfort is your personal failing.',
     speakers: 'Steffi Dobmeier (STERN), Ellen Heinrichs (Bonn Institute), Shirish Kulkarni (Media Cymru), Adam Thomas (Evenly Distributed), moderated by Steffi Dobmeier',
     venue: 'Sala delle Colonne, Palazzo Graziani',
     url: 'https://www.journalismfestival.com/programme/2026/how-to-survive-perugia-and-journalism-in-general-as-an-introvert',
@@ -207,7 +211,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '14:00–14:50',
     quoteHeadline: '"What If the Assumption That Journalism Has to Be Serious Is Hindering Us?"',
     subtitle: 'A 101 Guide to Doing Serious Journalism That Brings a Smile',
-    hook: 'Dave Jorgenson and Aled John spent the time making the case that humor, personality, and internet-native formats are not incompatible with serious journalism. Audience research shows a lack of personality is perceived as a lack of trustworthiness — not neutrality, but distrust.',
+    hook: 'Dave Jorgenson and Aled John spent the time making the case that humor, personality, and internet-native formats are not incompatible with serious journalism. Audience research shows a lack of personality is perceived as a lack of trustworthiness, not neutrality, but distrust.',
     speakers: 'Aled John (Financial Times), Dave Jorgenson (Local News International)',
     venue: 'Auditorium San Francesco al Prato',
     url: 'https://www.journalismfestival.com/programme/2026/a-101-guide-to-doing-serious-journalism-that-brings-a-smile',
@@ -232,7 +236,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '16:00–16:50',
     quoteHeadline: '"You Enter Exile Because of Your Job, but You Can\'t Do Your Job in Exile Because Nobody Will Pay You."',
     subtitle: 'Unseen Burdens: The Invisible Backpack of Women Journalists in Exile',
-    hook: 'Three women journalists from three different authoritarian contexts — Myanmar, Russia, Nicaragua. Three stories about what exile actually looks like beyond the headlines, and what it costs to carry your country on your chest because there is nowhere else to put it.',
+    hook: 'Three women journalists from three different authoritarian contexts: Myanmar, Russia, Nicaragua. Three stories about what exile actually looks like beyond the headlines, and what it costs to carry your country on your chest because there is nowhere else to put it.',
     speakers: 'Abigail Hernandez (La Sala), Hsu Mon Phyo (Delta News Agency), Irina Novik, moderated by Nadine Jurrat (DW Akademie)',
     venue: 'Teatro del Pavone',
     url: 'https://www.journalismfestival.com/programme/2026/unseen-burdens-the-invisible-backpack-of-women-journalists-in-exile',
@@ -263,7 +267,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '17:00–18:15',
     quoteHeadline: '"How Do We Ensure People Have Access to Many Diverse Sources of Fact-Based Information?"',
     subtitle: 'Creators and the Future of Journalism: Insights on Infrastructure Building from the US and South Africa',
-    hook: 'Based on a study of more than fifty creator-model journalists in the US and South Africa, this session mapped the structural support needed for independent journalism to survive and scale. The creator path offers real freedom — but also demands you be a reporter, editor, business owner, and marketer simultaneously.',
+    hook: 'Based on a study of more than fifty creator-model journalists in the US and South Africa, this session mapped the structural support needed for independent journalism to survive and scale. The creator path offers real freedom, but also demands you be a reporter, editor, business owner, and marketer simultaneously.',
     speakers: 'Justin Arenstein (Code for Africa), Justin Bank (Independent Journalism Atlas), Dave Jorgenson (Local News International), Amy Mitchell (CNTI), moderated by Liz Kelly Nelson (Project C)',
     venue: 'Sala delle Colonne, Palazzo Graziani',
     url: 'https://www.journalismfestival.com/programme/2026/creators-and-the-future-of-journalism-insights-on-infrastructure-building-from-the-us-and-south-africa',
@@ -313,7 +317,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '11:30–12:45',
     quoteHeadline: '"Timing Is a Crapshoot. We Hope We Catch the Wave but the World Is Crazy."',
     subtitle: 'From Story to Spine: How Journalists Turn Reporting into Books',
-    hook: 'A practical, honest, occasionally brutal session on what the current publishing landscape actually demands. You do not submit a finished manuscript — you submit a proposal, and publishers evaluate your platform alongside your writing. This session hit a personal nerve.',
+    hook: 'A practical, honest, occasionally brutal session on what the current publishing landscape actually demands. You do not submit a finished manuscript; you submit a proposal, and publishers evaluate your platform alongside your writing. This session hit a personal nerve.',
     speakers: 'Dawn Davis (37 Ink), Lynda Hammes (Tertulia), Raju Narisetti (McKinsey Publishing), Madhulika Sikka (Crown Publishing Group), moderated by Mitra Kalita (URL Media)',
     venue: 'Teatro del Pavone',
     url: 'https://www.journalismfestival.com/programme/2026/from-story-to-spine-how-journalists-turn-reporting-into-books',
@@ -342,7 +346,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '12:30–13:00',
     quoteHeadline: '"Do Not Obey in Advance."',
     subtitle: 'Exposing the Broligarchy with Carole Cadwalladr',
-    hook: 'Thirty minutes. One of the most urgent sessions of the festival. Cadwalladr coined "broligarchy" in 2024 to describe the convergence of Silicon Valley power and authoritarian politics — and her argument was not that this is a worrying trend. It is already the operating reality.',
+    hook: 'Thirty minutes. One of the most urgent sessions of the festival. Cadwalladr coined "broligarchy" in 2024 to describe the convergence of Silicon Valley power and authoritarian politics. Her argument was not that this is a worrying trend. It is already the operating reality.',
     speakers: 'Carole Cadwalladr (The Nerve), interviewed by Lisa Peters (Stichting Democratie en Media)',
     venue: 'Auditorium San Francesco al Prato',
     url: 'https://www.journalismfestival.com/programme/2026/exposing-the-broligarchy',
@@ -371,7 +375,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '15:00–15:50',
     quoteHeadline: '"It\'s Not What You Say. It\'s the Fact That You\'re Speaking."',
     subtitle: '"Quiet, Piggy": Misogynistic Attacks as a Tool to Silence Women Journalists and How We Fight Back',
-    hook: 'Trump called a journalist "quiet, piggy" on Air Force One. These are not tantrums — they are press freedom attacks designed to silence women who hold power to account. When they come from a head of government they license a torrent of abuse from everyone below.',
+    hook: 'Trump called a journalist "quiet, piggy" on Air Force One. These are not tantrums. They are press freedom attacks designed to silence women who hold power to account. When they come from a head of government they license a torrent of abuse from everyone below.',
     speakers: 'Soraya Chemaly, Juliana Dal Piva (Abraji), Karyn Maughan (News24), intro by Kathy Im (MacArthur Foundation), moderated by Elisa Lees Munoz (IWMF)',
     venue: 'Sala dei Notari, Palazzo dei Priori',
     url: 'https://www.journalismfestival.com/programme/2026/quiet-piggy-misogynistic-attacks-as-a-tool-to-silence-women-journalists-and-how-we-fight-back',
@@ -433,7 +437,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '17:00–17:50',
     quoteHeadline: '"They Aren\'t Successful Necessarily Because of Hard Work but Luck."',
     subtitle: 'Choose Your Own Adventure: What Comes After Vertical Video?',
-    hook: 'The honest observation from this panel: success in independent creator journalism is not purely a function of hard work. Timing, luck, and platform conditions at the right moment matter enormously — and those are largely outside anyone\'s control.',
+    hook: 'The honest observation from this panel: success in independent creator journalism is not purely a function of hard work. Timing, luck, and platform conditions at the right moment matter enormously, and those are largely outside anyone\'s control.',
     speakers: 'Dave Jorgenson (Local News International), Tara Palmeri (The Tara Palmeri Show), Sophia Smith Galer, moderated by Francesco Zaffarano (Chora & Will Media)',
     venue: 'Teatro del Pavone',
     url: 'https://www.journalismfestival.com/programme/2026/choose-your-own-adventure-what-comes-after-vertical-video',
@@ -487,7 +491,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '10:30–11:20',
     quoteHeadline: '"I Don\'t Want to Be a Millionaire. I Want to Make Enough to Be Brave."',
     subtitle: 'The Future of Gender-Just Journalism: From Coverage to Culture',
-    hook: 'Four women who have built independent feminist platforms against the odds. Mona Eltahawy, Francesca Donner, Eliza Anyangwe, Afua Hirsch — on money, patriarchy, and what it means to do journalism that has to exist even when it should not be economically possible.',
+    hook: 'Four women who have built independent feminist platforms against the odds. Mona Eltahawy, Francesca Donner, Eliza Anyangwe, Afua Hirsch, on money, patriarchy, and what it means to do journalism that has to exist even when it should not be economically possible.',
     speakers: 'Eliza Anyangwe (Fuller), Francesca Donner (The Persistent), Mona Eltahawy (Feminist Giant), Afua Hirsch, moderated by Nana Darkoa Sekyiamah (Institute of Journalism and Social Change)',
     venue: 'Auditorium San Francesco al Prato',
     url: 'https://www.journalismfestival.com/programme/2026/the-future-of-gender-just-journalism-from-coverage-to-culture',
@@ -539,7 +543,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '14:00–14:50',
     quoteHeadline: '"The Internet Was Supposed to Connect Us All. But It\'s More Like a Building with Many Rooms."',
     subtitle: 'Journalism in the Polarised World: Reaching Audiences Beyond the Bubble',
-    hook: 'You cannot just do good journalism and assume it will reach the people who need it. The panel was about polarisation as an editorial problem rather than just a political one — and AI is pushing people into bubbles even more effectively than social media alone.',
+    hook: 'You cannot just do good journalism and assume it will reach the people who need it. The panel was about polarisation as an editorial problem rather than just a political one, and AI is pushing people into bubbles even more effectively than social media alone.',
     speakers: 'Natalia Antelava (Coda Story), Patricia Campos Mello (Folha de Sao Paulo), Angelina Kariakina (Public Interest Journalism Lab), moderated by Nataliya Gumenyuk (Public Interest Journalism Lab)',
     venue: 'Teatro del Pavone',
     url: 'https://www.journalismfestival.com/programme/2026/journalism-in-the-polarised-world-reaching-audiences-beyond-the-bubble',
@@ -612,7 +616,7 @@ export const ijf26Sessions: IJF26Session[] = [
     time: '17:00–17:50',
     quoteHeadline: '"A Journalist Silenced by Burnout Is Still a Journalist Silenced."',
     subtitle: 'Silent Censorship: Trauma, Burnout and Press Freedom',
-    hook: 'Burnout, PTSD, and moral injury in journalists are not private struggles to manage quietly. They are press freedom issues. Journalism has historically treated occupational mental health as a personal responsibility — the panel pushed back hard on that logic.',
+    hook: 'Burnout, PTSD, and moral injury in journalists are not private struggles to manage quietly. They are press freedom issues. Journalism has historically treated occupational mental health as a personal responsibility, and the panel pushed back hard on that logic.',
     speakers: 'Jodie Ginsberg (Committee to Protect Journalists), Fergal Keane, Alessandra Galloni (Reuters, via video), moderated by Bruce Shapiro (Global Center for Journalism and Trauma)',
     venue: 'Teatro del Pavone',
     url: 'https://www.journalismfestival.com/programme/2026/silent-censorship-trauma-burnout-and-press-freedom',
