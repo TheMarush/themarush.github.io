@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
+import posthog from "posthog-js";
 import "./components/mm-button.ts";
 import "./components/mm-modal.ts";
 import "./components/mm-menu.ts";
@@ -18,6 +19,10 @@ import { galleryImages } from "./data/gallery.js";
 import { semester1, semester2, semester3, semester4 } from "./data/semesters.js";
 import { testimonials } from "./data/testimonials.js";
 import { ModalController } from "./utils/modal.js";
+
+posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+  api_host: "https://eu.i.posthog.com",
+});
 
 @customElement("mm-app")
 export class App extends LitElement {
