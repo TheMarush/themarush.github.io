@@ -196,7 +196,7 @@ export const semester3: Semester = {
       description:
         "This course examined the intersection of digital technologies with museums, galleries, and archives, structured in three thematic blocks. The first block covered the historical development and current transformation of cultural institutions through digital technologies and new media. The second block focused specifically on archives of New Media art, addressing the complex challenges of preserving and curating digital artworks. The third block featured online sessions with international experts presenting their projects, including scholars from Università degli Studi di Cagliari and artists from Berlin. The course was delivered in English as e-learning with pre-prepared materials, complemented by expert guest lectures and mandatory comprehension questionnaires. The final project involved creating a media work accompanied by a critical text, using the Padlet platform for collaborative idea development.",
       projectLink: {
-        url: "#/projects/ai-view",
+        url: "/projects/ai-view",
         label: "View my final project: Reimagined by LLM",
       },
     },

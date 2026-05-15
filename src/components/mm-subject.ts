@@ -1,6 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type { Subject } from "../types/study.js";
+import { navigate } from "../utils/navigate.js";
 
 @customElement("mm-subject")
 export class MMSubject extends LitElement {
@@ -43,7 +44,7 @@ export class MMSubject extends LitElement {
                           e.preventDefault();
                           const link = this.subject.projectLink;
                           if (link) {
-                            window.location.hash = link.url;
+                            navigate(link.url);
                           }
                         }}
                       >

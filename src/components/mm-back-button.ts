@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { navigate } from "../utils/navigate.js";
 
 @customElement("mm-back-button")
 export class MMBackButton extends LitElement {
@@ -35,7 +36,7 @@ export class MMBackButton extends LitElement {
 
   private handleClick() {
     if (this.href) {
-      window.location.hash = this.href;
+      navigate(this.href);
     } else {
       this.dispatchEvent(new CustomEvent("back", { bubbles: true }));
     }

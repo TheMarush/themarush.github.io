@@ -314,7 +314,7 @@ export class MMFeminism extends LitElement {
     return html`
       <div class="page">
         <div class="back-row">
-          <mm-back-button label="Back to Projects" href="#/projects"></mm-back-button>
+          <mm-back-button label="Back to Projects" href="/projects"></mm-back-button>
         </div>
         <div class="meta-label">Projects → Lifelong Feminist</div>
         <h1>Lifelong Feminist</h1>

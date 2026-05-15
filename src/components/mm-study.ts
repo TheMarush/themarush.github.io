@@ -1,6 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type { Semester } from "../types/study.js";
+import { navigate } from "../utils/navigate.js";
 
 @customElement("mm-study")
 export class MMStudy extends LitElement {
@@ -155,7 +156,7 @@ export class MMStudy extends LitElement {
                     type="button"
                     class="cta-btn"
                     @click=${() => {
-                      window.location.hash = `#/study/${semester.id}`;
+                      navigate(`/study/${semester.id}`);
                       window.scrollTo({ top: 0, behavior: "instant" });
                     }}
                   >

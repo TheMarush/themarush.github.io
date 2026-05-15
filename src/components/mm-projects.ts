@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
+import { navigate } from "../utils/navigate.js";
 
 @customElement("mm-projects")
 export class MMProjects extends LitElement {
@@ -130,9 +131,7 @@ export class MMProjects extends LitElement {
               <button
                 type="button"
                 class="cta-btn"
-                @click=${() => {
-                  window.location.hash = "#/projects/working-on-it";
-                }}
+                @click=${() => navigate("/projects/working-on-it")}
               >
                 <span>Open project</span>
                 <span aria-hidden="true">→</span>
@@ -150,9 +149,7 @@ export class MMProjects extends LitElement {
               <button
                 type="button"
                 class="cta-btn"
-                @click=${() => {
-                  window.location.hash = "#/projects/ai-view";
-                }}
+                @click=${() => navigate("/projects/ai-view")}
               >
                 <span>Open Reimagined by LLM</span>
                 <span aria-hidden="true">→</span>
@@ -170,9 +167,7 @@ export class MMProjects extends LitElement {
               <button
                 type="button"
                 class="cta-btn"
-                @click=${() => {
-                  window.location.hash = "#/projects/feminism";
-                }}
+                @click=${() => navigate("/projects/feminism")}
               >
                 <span>Open Lifelong Feminist</span>
                 <span aria-hidden="true">→</span>
@@ -190,9 +185,7 @@ export class MMProjects extends LitElement {
               <button
                 type="button"
                 class="cta-btn"
-                @click=${() => {
-                  window.location.hash = "#/projects/ijf26";
-                }}
+                @click=${() => navigate("/projects/ijf26")}
               >
                 <span>Open IJF26 Coverage</span>
                 <span aria-hidden="true">→</span>

@@ -2,6 +2,7 @@ import { css, html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import type { AiSystemData, AiSystemId } from "../data/aiView.js";
 import { aiSystems, aiViewConclusion, aiViewIntro, aiViewPrompt, aiViewSources } from "../data/aiView.js";
+import { navigate } from "../utils/navigate.js";
 import "./mm-ai-system-page.ts";
 import "./mm-back-button.ts";
 
@@ -245,15 +246,15 @@ export class MMAiViewIndex extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.syncFromLocation();
-    window.addEventListener("hashchange", this.handleHashChange);
+    window.addEventListener("popstate", this.handlePopState);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener("hashchange", this.handleHashChange);
+    window.removeEventListener("popstate", this.handlePopState);
   }
 
-  private handleHashChange = () => {
+  private handlePopState = () => {
     this.syncFromLocation();
   };
 
@@ -270,18 +271,14 @@ export class MMAiViewIndex extends LitElement {
 
   private syncFromLocation() {
     if (typeof window === "undefined") return;
-    const hash = window.location.hash || "";
-    const cleaned = hash.replace(/^#\/?/, "");
-    const segments = cleaned.split("/").filter(Boolean);
+    const segments = window.location.pathname.split("/").filter(Boolean);
 
-    // Check if we're in the AI view section
-    // URL structure: #/projects/ai-view or #/projects/ai-view/gemini
+    // URL structure: /projects/ai-view or /projects/ai-view/gemini
     if (segments[0] !== "projects" || segments[1] !== "ai-view") {
       this.activeSystem = null;
       return;
     }
 
-    // Check for system selection (segments[2])
     const maybeSystem = segments[2] as AiSystemId | undefined;
     if (maybeSystem && maybeSystem in aiSystems) {
       this.activeSystem = maybeSystem;
@@ -333,7 +330,7 @@ export class MMAiViewIndex extends LitElement {
     return html`
       <div class="page">
         <div class="back-row">
-          <mm-back-button label="Back to Projects" href="#/projects"></mm-back-button>
+          <mm-back-button label="Back to Projects" href="/projects"></mm-back-button>
         </div>
         <div class="meta-label">Projects → Reimagined by LLM</div>
         <h1>Reimagined by LLM</h1>
@@ -363,9 +360,10 @@ export class MMAiViewIndex extends LitElement {
             const system = this.systemFor(id);
             return html`
               <a
-                href="#/projects/ai-view/${id}"
+                href="/projects/ai-view/${id}"
                 class="tile"
                 style=${`color: ${system.accent}; text-decoration: none;`}
+                @click=${(e: Event) => { e.preventDefault(); navigate(`/projects/ai-view/${id}`); }}
               >
                 <div class="tile-label">System environment</div>
                 <div class="tile-title">
@@ -405,9 +403,9 @@ export class MMAiViewIndex extends LitElement {
     return html`
       <div class="page">
         <div class="back-row">
-          <mm-back-button 
-            label="Back to Reimagined by LLM" 
-            href="#/projects/ai-view"
+          <mm-back-button
+            label="Back to Reimagined by LLM"
+            href="/projects/ai-view"
           ></mm-back-button>
         </div>
         <mm-ai-system-page .systemId=${id}></mm-ai-system-page>

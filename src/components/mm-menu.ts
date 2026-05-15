@@ -27,34 +27,28 @@ export class MMMenu extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.syncFromHash();
+    this.syncFromPath();
     document.addEventListener("click", this._handleDocumentClick.bind(this));
-    window.addEventListener("hashchange", this._handleHashChange.bind(this));
+    window.addEventListener("popstate", this._handlePopState.bind(this));
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener("click", this._handleDocumentClick.bind(this));
-    window.removeEventListener("hashchange", this._handleHashChange.bind(this));
+    window.removeEventListener("popstate", this._handlePopState.bind(this));
   }
 
-  private _handleHashChange() {
-    this.syncFromHash();
+  private _handlePopState() {
+    this.syncFromPath();
   }
 
-  private syncFromHash() {
-    const hash = window.location.hash || "";
-    const cleaned = hash.replace(/^#\/?/, "");
-    const segments = cleaned.split("/").filter(Boolean);
-
-    // First segment is the main page (e.g., "gallery", "projects")
+  private syncFromPath() {
+    const segments = window.location.pathname.split("/").filter(Boolean);
     const mainPage = segments[0] || (this.items.length > 0 ? this.items[0].id : "");
 
-    // Check if this is a main menu item
     const mainItem = this.items.find((item) => item.id === mainPage);
     if (mainItem) {
       this.activeItem = mainPage;
-      // If there's a second segment and the main item has a submenu, select that too
       if (segments.length > 1 && mainItem.submenu) {
         const subPage = segments[1];
         const subItem = mainItem.submenu.find((sub) => sub.id === subPage);
@@ -64,7 +58,6 @@ export class MMMenu extends LitElement {
         }
       }
     } else if (this.items.length > 0 && !this.activeItem) {
-      // Default to first item if no valid hash
       this.activeItem = this.items[0].id;
     }
   }
@@ -79,10 +72,10 @@ export class MMMenu extends LitElement {
     this.activeItem = itemId;
     this.isMenuOpen = false;
 
-    // Update URL hash - use hierarchical path for submenu items
-    const hash = parentId ? `#/${parentId}/${itemId}` : `#/${itemId}`;
-    if (window.location.hash !== hash) {
-      window.location.hash = hash;
+    const path = parentId ? `/${parentId}/${itemId}` : `/${itemId}`;
+    if (window.location.pathname !== path) {
+      history.pushState({}, "", path);
+      window.dispatchEvent(new PopStateEvent("popstate"));
     }
 
     this.dispatchEvent(
