@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, query } from "lit/decorators.js";
+import type { Racoon } from "./components/mm-racoon.js";
 import posthog from "posthog-js";
 import "./components/mm-button.ts";
 import "./components/mm-modal.ts";
@@ -27,6 +28,7 @@ posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
 @customElement("mm-app")
 export class App extends LitElement {
   private modal = new ModalController(this);
+  @query("mm-racoon") private racoon!: Racoon;
 
   render() {
     return html`
@@ -37,7 +39,8 @@ export class App extends LitElement {
           message=${this.modal.message}
           image=${this.modal.image}
           .closing=${this.modal.isClosing}
-          @close=${() => this.modal.close()}>
+          @close=${() => this.modal.close()}
+          @modal-image-click=${() => this.modal.updateImage(this.racoon.advance())}>
         </mm-modal>
       `
           : ""

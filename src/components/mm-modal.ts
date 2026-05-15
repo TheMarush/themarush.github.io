@@ -13,11 +13,16 @@ export class Modal extends LitElement {
     }
   }
 
+  private handleImageClick(e: Event) {
+    e.stopPropagation();
+    this.dispatchEvent(new CustomEvent("modal-image-click", { bubbles: true, composed: true }));
+  }
+
   render() {
     return html`
       <div class="overlay" @click=${this.handleOverlayClick}>
         <div class="modal ${this.closing ? "closing" : ""}">
-          ${this.image ? html`<img src=${this.image} alt="Modal image" />` : ""}
+          ${this.image ? html`<img src=${this.image} alt="Modal image" @click=${this.handleImageClick} />` : ""}
           <p>${this.message}</p>
         </div>
       </div>
@@ -81,6 +86,7 @@ export class Modal extends LitElement {
       display: block;
       margin-left: auto;
       margin-right: auto;
+      cursor: pointer;
     }
 
     p {

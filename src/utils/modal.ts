@@ -20,6 +20,11 @@ class ModalController implements ReactiveController {
     this.host.requestUpdate();
   }
 
+  updateImage(image: string) {
+    this.image = image;
+    this.host.requestUpdate();
+  }
+
   close() {
     this.isClosing = true;
     this.host.requestUpdate();
