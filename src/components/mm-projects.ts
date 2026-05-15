@@ -192,6 +192,24 @@ export class MMProjects extends LitElement {
               </button>
             </div>
           </article>
+
+          <article class="card" aria-labelledby="cybersecurity-title">
+            <div class="card-meta">Cybersecurity · Education</div>
+            <h3 id="cybersecurity-title" class="card-title">Google Cybersecurity Seminars</h3>
+            <p class="card-body">
+              A Google.org-funded programme at Masaryk University connecting academic cybersecurity expertise with communities across the Czech Republic — placements at Amnesty International, senior care homes, and a 5-day national roadshow.
+            </p>
+            <div class="cta-row">
+              <button
+                type="button"
+                class="cta-btn"
+                @click=${() => navigate("/projects/cybersecurity")}
+              >
+                <span>Open Google Cybersecurity Seminars</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </article>
         </div>
       </section>
     `;

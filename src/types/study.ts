@@ -7,6 +7,7 @@ export interface Subject {
   code: string;
   name: string;
   description: string;
+  image?: string;
   externalLink?: SubjectLink;
   projectLink?: SubjectLink;
 }

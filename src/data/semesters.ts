@@ -9,6 +9,7 @@ export const semester1: Semester = {
     {
       code: "AI001",
       name: "Elements of AI",
+      image: "https://i.imgur.com/wmKnNvc.jpg",
       description:
         "This course, developed by the University of Helsinki, introduced me to the fundamentals of artificial intelligence, including its definitions, core concepts (like autonomy and adaptability), and real-world applications such as self-driving cars, recommendation systems, and image recognition. I gained a deeper understanding of how AI systems operate, how they differ from human intelligence, and why common terms like learning or understanding can be misleading in this context. The course also encouraged critical reflection on the societal impact of AI and helped me build a clear conceptual foundation for future work in the field.",
     },
@@ -21,6 +22,7 @@ export const semester1: Semester = {
     {
       code: "AI003",
       name: "Ethics of AI",
+      image: "https://i.imgur.com/62dOYR0.jpg",
       description:
         "This course by the University of Helsinki introduced me to the ethical challenges surrounding artificial intelligence, expanding on the foundations laid in Elements of AI and Building AI. I explored philosophical frameworks like utilitarianism and deontology, and how they apply to AI development, especially in relation to transparency, accountability, fairness, and human rights. Through real-life case studies, I critically examined the risks of bias, discrimination, surveillance, and automation, and reflected on the role of regulation and interdisciplinary collaboration. The course helped me see AI not only as a technical innovation, but as a societal force that requires thoughtful and responsible design.",
     },
@@ -140,6 +142,10 @@ export const semester2: Semester = {
       name: "Winter School: Crossing Borders",
       description:
         "A peer-to-peer learning intensive hosted in Bratislava focused on shared knowledge, creativity, and community building. Each participant prepared a session; mine covered feminism and fake news. Beyond the content itself, facilitating activities and co-creating the program strengthened my skills in communication, workshop design, and collaborative organization.",
+      projectLink: {
+        url: "/projects/feminism#zimni-skola",
+        label: "Read more here",
+      },
     },
     {
       code: "ISKB40",

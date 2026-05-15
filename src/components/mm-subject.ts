@@ -1,5 +1,5 @@
 import { css, html, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import type { Subject } from "../types/study.js";
 import { navigate } from "../utils/navigate.js";
 
@@ -7,6 +7,25 @@ import { navigate } from "../utils/navigate.js";
 export class MMSubject extends LitElement {
   @property({ type: Object })
   subject!: Subject;
+
+  @state() private _lightboxOpen = false;
+
+  private _closeLightbox() { this._lightboxOpen = false; }
+  private _openLightbox() { this._lightboxOpen = true; }
+
+  private _onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "Escape") this._closeLightbox();
+  };
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("keydown", this._onKeyDown);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("keydown", this._onKeyDown);
+  }
 
   render() {
     if (!this.subject) {
@@ -17,8 +36,27 @@ export class MMSubject extends LitElement {
 
     return html`
       <section class="subject-section" id="${this.subject.code.toLowerCase()}">
-        <h3 class="subject-title">${this.subject.code} ${this.subject.name}</h3>
-        <p class="subject-description">${this.subject.description}</p>
+        <div class="subject-body">
+          <div class="subject-text">
+            <h3 class="subject-title">${this.subject.code} ${this.subject.name}</h3>
+            <p class="subject-description">${this.subject.description}</p>
+          </div>
+          ${this.subject.image
+            ? html`<img
+                class="subject-image"
+                src="${this.subject.image}"
+                alt="${this.subject.name} certificate"
+                loading="lazy"
+                @click=${this._openLightbox}
+              />`
+            : ""}
+        </div>
+        ${this._lightboxOpen && this.subject.image
+          ? html`<div class="lightbox-overlay" @click=${this._closeLightbox}>
+              <button class="lightbox-close" @click=${this._closeLightbox} aria-label="Close">&#x2715;</button>
+              <img class="lightbox-image" src="${this.subject.image}" alt="${this.subject.name} certificate" @click=${(e: Event) => e.stopPropagation()} />
+            </div>`
+          : ""}
         ${hasLinks
           ? html`
               <div class="subject-links">
@@ -80,6 +118,81 @@ export class MMSubject extends LitElement {
       box-shadow: 0 2px 8px rgba(82, 200, 244, 0.2);
     }
 
+    .subject-body {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .subject-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .subject-image {
+      flex-shrink: 0;
+      width: 240px;
+      height: auto;
+      border-radius: 0.375rem;
+      object-fit: contain;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .subject-image:hover {
+      opacity: 0.85;
+    }
+
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.75rem;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.75;
+      transition: opacity 0.15s ease;
+      z-index: 1001;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+    }
+
+    .lightbox-image {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 0.5rem;
+      object-fit: contain;
+      cursor: default;
+      animation: scaleIn 0.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
     .subject-title {
       margin: 0 0 0.5rem 0;
       font-size: 1.25rem;
@@ -121,6 +234,17 @@ export class MMSubject extends LitElement {
     .subject-link:focus-visible {
       outline: 2px solid var(--button-bg, #52c8f4);
       outline-offset: 2px;
+    }
+
+    @media (max-width: 480px) {
+      .subject-body {
+        flex-direction: column;
+      }
+
+      .subject-image {
+        width: 100%;
+        max-width: 260px;
+      }
     }
 
     @media (prefers-color-scheme: light) {

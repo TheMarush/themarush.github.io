@@ -25,12 +25,28 @@ export class MMFeminism extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener("keydown", this.handleKeyDown);
+    window.addEventListener("popstate", this._handleHashNav);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener("keydown", this.handleKeyDown);
+    window.removeEventListener("popstate", this._handleHashNav);
   }
+
+  firstUpdated() {
+    this._handleHashNav();
+  }
+
+  private _handleHashNav = () => {
+    if (!window.location.pathname.includes("feminism")) return;
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    setTimeout(() => {
+      const target = this.shadowRoot?.getElementById(`fe-${hash}`);
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
 
   private handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Escape" && this.lightboxSrc) {
@@ -130,6 +146,7 @@ export class MMFeminism extends LitElement {
       letter-spacing: 0.02em;
       color: #f9fafb;
       line-height: 1.3;
+      scroll-margin-top: 130px;
     }
 
     .entry-divider {

@@ -1,7 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { customElement, query } from "lit/decorators.js";
-import type { Racoon } from "./components/mm-racoon.js";
 import posthog from "posthog-js";
+import type { Racoon } from "./components/mm-racoon.js";
 import "./components/mm-button.ts";
 import "./components/mm-modal.ts";
 import "./components/mm-menu.ts";
@@ -14,6 +14,7 @@ import "./components/mm-study.ts";
 import "./components/mm-ai-view-index.ts";
 import "./components/mm-feminism.ts";
 import "./components/mm-ijf26.ts";
+import "./components/mm-cybersecurity.ts";
 import "./components/mm-contact.ts";
 import "./components/mm-racoon.ts";
 import { galleryImages } from "./data/gallery.js";
@@ -51,7 +52,16 @@ export class App extends LitElement {
             { id: "gallery", label: "Gallery" },
             { id: "about", label: "About" },
             { id: "testimonials", label: "Testimonials" },
-            { id: "projects", label: "Projects", submenu: [{ id: "ai-view", label: "AI View" }, { id: "feminism", label: "Lifelong Feminist" }, { id: "ijf26", label: "IJF26" }] },
+            {
+              id: "projects",
+              label: "Projects",
+              submenu: [
+                { id: "ai-view", label: "AI View" },
+                { id: "feminism", label: "Lifelong Feminist" },
+                { id: "ijf26", label: "IJF26" },
+                { id: "cybersecurity", label: "Google Cybersecurity Seminars" },
+              ],
+            },
             {
               id: "study",
               label: "Study",
@@ -83,6 +93,9 @@ export class App extends LitElement {
           </div>
           <div slot="ijf26">
             <mm-ijf26></mm-ijf26>
+          </div>
+          <div slot="cybersecurity">
+            <mm-cybersecurity></mm-cybersecurity>
           </div>
           <div slot="testimonials">
             <mm-testimonials .testimonials=${testimonials}></mm-testimonials>
