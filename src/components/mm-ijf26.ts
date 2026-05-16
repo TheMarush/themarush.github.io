@@ -333,7 +333,7 @@ export class MMIjf26 extends LitElement {
     /* ── Page header ──────────────────────────────────────────────────── */
 
     .page-header {
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .header-kicker {
@@ -773,7 +773,7 @@ export class MMIjf26 extends LitElement {
       letter-spacing: 0.08em;
       text-transform: uppercase;
       cursor: pointer;
-      padding: 0 0 2rem;
+      padding: 0 0 1.25rem;
       transition: color 150ms;
     }
 

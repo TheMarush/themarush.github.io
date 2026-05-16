@@ -8,335 +8,149 @@ export class MMCybersecurity extends LitElement {
     :host {
       display: block;
       width: 100%;
+      --surface: #0f1218;
+      --border: #1e2836;
+      --text: #e8edf5;
+      --text-muted: #7a8a9e;
+      --text-dim: #3d4f63;
+      --highlight: #f0f4ff;
     }
 
     .page {
-      max-width: 900px;
+      max-width: 820px;
       margin: 0 auto;
-      padding: 1.5rem 1rem 3rem;
-      color: #f9fafb;
+      padding: 0 1.5rem 3rem;
+      color: var(--text);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 16.5px;
+      line-height: 1.85;
     }
 
     .back-row {
+      padding: 1.5rem 0 0.75rem;
+    }
+
+    .google-pip {
       display: flex;
       align-items: center;
-      margin-bottom: 1.25rem;
+      gap: 5px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
     }
 
-    /* ── HEADER ── */
-    .header {
-      padding: 1rem 0 2rem;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-      margin-bottom: 0;
+    .pip {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .pip-b { background: #4285F4; }
+    .pip-r { background: #EA4335; }
+    .pip-y { background: #FBBC05; }
+    .pip-g { background: #34A853; }
+
+    /* HERO */
+    .hero {
+      padding: 1.75rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .header-tag {
-      font-size: 0.7rem;
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
       letter-spacing: 0.2em;
       color: var(--button-bg, #52c8f4);
       text-transform: uppercase;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .header-tag::before {
-      content: '';
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--button-bg, #52c8f4);
-    }
-
-    .google-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9));
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 4px;
-      padding: 0.3rem 0.75rem;
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      color: #9ca3af;
-      margin-bottom: 1.5rem;
-    }
-
-    .google-dots {
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .google-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      margin: 0 1px;
-    }
-
-    .dot-b { background: #4285F4; }
-    .dot-r { background: #EA4335; }
-    .dot-y { background: #FBBC05; }
-    .dot-g { background: #34A853; }
-
-    .title-link {
-      text-decoration: none;
-      color: inherit;
-      display: inline-block;
+      margin-bottom: 1.8rem;
     }
 
     h1 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700;
-      color: #f0f4ff;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      transition: color 150ms ease;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--highlight);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.8rem;
     }
 
-    .title-link:hover h1 {
-      color: var(--button-bg, #52c8f4);
+    h1 span { color: var(--button-bg, #52c8f4); }
+
+    .hero-body {
+      max-width: 600px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
     }
 
-    h1 em {
-      font-style: normal;
-      color: var(--button-bg, #52c8f4);
-    }
-
-    .subtitle {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      letter-spacing: 0.05em;
-      margin-bottom: 1.5rem;
-    }
-
-    .header-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-
-    .meta-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      color: #6b7280;
-      text-transform: uppercase;
-    }
-
-    .meta-value {
-      font-size: 0.85rem;
+    .hero-body strong {
+      color: var(--highlight);
       font-weight: 600;
-      color: #f9fafb;
     }
 
-    /* ── SECTIONS ── */
+    /* SECTIONS */
     .section {
-      padding: 2.5rem 0;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      padding: 2.5rem 0 2rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .section:last-child {
-      border-bottom: none;
-    }
+    .section:last-of-type { border-bottom: none; padding-bottom: 0; }
 
-    .section-label {
-      font-size: 0.65rem;
+    .section-marker {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
       letter-spacing: 0.2em;
-      color: var(--button-bg, #52c8f4);
+      color: var(--text-dim);
       text-transform: uppercase;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(148, 163, 184, 0.2), transparent);
+      margin-bottom: 2rem;
     }
 
     h2 {
-      margin: 0 0 1rem;
+      font-family: 'Syne', sans-serif;
       font-size: 1.5rem;
       font-weight: 700;
-      color: #f0f4ff;
+      color: var(--highlight);
       letter-spacing: -0.01em;
-    }
-
-    h3 {
-      margin: 0 0 0.4rem;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #f0f4ff;
+      margin-bottom: 1.2rem;
     }
 
     p {
-      color: #9ca3af;
-      margin: 0 0 0.85rem;
-      font-size: 0.97rem;
-      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
     }
 
-    strong {
-      color: #f0f4ff;
-      font-weight: 600;
-    }
+    p:last-child { margin-bottom: 0; }
 
-    /* ── CALLOUT ── */
+    strong { color: var(--highlight); font-weight: 600; }
+
+    em { font-style: italic; }
+
+    /* CALLOUT */
     .callout {
-      background: rgba(82, 200, 244, 0.07);
-      border-left: 3px solid var(--button-bg, #52c8f4);
-      border-radius: 0 6px 6px 0;
-      padding: 1rem 1.25rem;
-      margin: 1.25rem 0;
+      border-left: 2px solid var(--button-bg, #52c8f4);
+      padding: 1rem 1.4rem;
+      background: rgba(82, 200, 244, 0.08);
+      border-radius: 0 4px 4px 0;
+      margin: 1.5rem 0;
     }
 
     .callout p {
-      color: #e5e7eb;
+      color: var(--text);
       margin: 0;
+      font-size: 0.95rem;
     }
 
-    .callout strong {
-      color: var(--button-bg, #52c8f4);
-    }
-
-    /* ── STATS ── */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 0.75rem;
-      margin: 1.25rem 0;
-    }
-
-    .stat {
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9)), #020617;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 8px;
-      padding: 1.1rem 0.9rem;
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 1.7rem;
-      font-weight: 800;
-      color: var(--button-bg, #52c8f4);
-      line-height: 1;
-      margin-bottom: 0.25rem;
-    }
-
-    .stat-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      color: #9ca3af;
-      text-transform: uppercase;
-    }
-
-    /* ── TIMELINE ── */
-    .timeline {
-      position: relative;
-      padding-left: 1.5rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.5rem;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, var(--button-bg, #52c8f4) 0%, rgba(148, 163, 184, 0.1) 100%);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-bottom: 2.25rem;
-      padding-left: 1.5rem;
-    }
-
-    .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -1.5rem;
-      top: 0.5rem;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--button-bg, #52c8f4);
-      border: 2px solid #020617;
-      box-shadow: 0 0 0 1px var(--button-bg, #52c8f4);
-    }
-
-    .timeline-date {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      color: var(--button-bg, #52c8f4);
-      text-transform: uppercase;
-      margin-bottom: 0.35rem;
-    }
-
-    /* ── CARDS ── */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 0.9rem;
-      margin-top: 1.25rem;
-    }
-
-    .card {
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9)), #020617;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      transition: border-color 200ms ease, transform 200ms ease;
-    }
-
-    .card:hover {
-      border-color: rgba(82, 200, 244, 0.35);
-      transform: translateY(-2px);
-    }
-
-    .card-icon {
-      font-size: 1.4rem;
-    }
-
-    .card h3 {
-      font-size: 0.9rem;
-    }
-
-    .card p {
-      font-size: 0.82rem;
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* ── PLACEMENT BLOCKS ── */
+    /* PLACEMENTS */
     .placement {
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9)), #020617;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 8px;
-      padding: 1.6rem;
-      margin-bottom: 1.1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+      margin-bottom: 1.2rem;
       position: relative;
-      overflow: hidden;
     }
 
     .placement::before {
@@ -344,174 +158,156 @@ export class MMCybersecurity extends LitElement {
       position: absolute;
       top: 0;
       left: 0;
-      width: 3px;
+      width: 2px;
       height: 100%;
       background: var(--button-bg, #52c8f4);
+      border-radius: 6px 0 0 6px;
     }
 
-    .placement-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 0.9rem;
+    .placement-top {
+      margin-bottom: 1rem;
     }
 
-    .placement-org {
-      font-size: 1rem;
+    .placement-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
       font-weight: 700;
-      color: #f0f4ff;
+      color: var(--highlight);
     }
 
-    .tag-row {
+    .placement-body {
       display: flex;
-      gap: 0.4rem;
-      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: flex-start;
     }
 
-    .tag {
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      color: var(--button-bg, #52c8f4);
-      background: rgba(82, 200, 244, 0.08);
-      border: 1px solid rgba(82, 200, 244, 0.2);
-      border-radius: 3px;
-      padding: 0.2rem 0.5rem;
-      text-transform: uppercase;
+    .placement-text {
+      flex: 1 1 60%;
+      min-width: 0;
     }
 
-    .tag.signed {
-      color: #6ee7b7;
-      background: rgba(110, 231, 183, 0.08);
-      border-color: rgba(110, 231, 183, 0.2);
-    }
-
-    .contract-note {
-      font-size: 0.68rem;
-      color: #6b7280;
-      letter-spacing: 0.04em;
-      margin: 0.5rem 0 0;
-    }
-
-    /* ── LETTER BOX ── */
-    .letter-box {
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9)), #020617;
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 8px;
-      padding: 1.75rem;
-      margin-top: 1.25rem;
-    }
-
-    .letter-meta {
-      font-size: 0.65rem;
-      color: #6b7280;
-      margin-bottom: 0.85rem;
-      letter-spacing: 0.06em;
-    }
-
-    .letter-text {
-      color: #e5e7eb;
-      font-style: italic;
-      margin: 0;
-    }
-
-    /* ── EXPERT GRID ── */
-    .expert-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
-      gap: 0.65rem;
-      margin-top: 0.85rem;
-    }
-
-    .expert {
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9)), #020617;
-      border: 1px solid rgba(148, 163, 184, 0.15);
+    .placement-photo-link {
+      flex: 0 0 38%;
+      min-width: 0;
+      display: block;
       border-radius: 6px;
-      padding: 0.85rem 1rem;
+      overflow: hidden;
+      align-self: stretch;
     }
 
-    .expert-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #f0f4ff;
-      margin-bottom: 0.12rem;
+    .placement-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+      transition: opacity 200ms ease;
     }
 
-    .expert-org {
+    .placement-photo-link:hover .placement-photo {
+      opacity: 0.82;
+    }
+
+    .contract-line {
+      font-family: 'IBM Plex Mono', monospace;
       font-size: 0.62rem;
-      color: #6b7280;
+      color: var(--text-dim);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
     }
 
-    /* ── CHIPS ── */
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.85rem;
-    }
-
-    .chip {
-      font-size: 0.7rem;
-      color: #9ca3af;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      border-radius: 20px;
-      padding: 0.28rem 0.75rem;
-    }
-
-    .city-chip {
-      font-size: 0.72rem;
-      color: var(--button-bg, #52c8f4);
-      background: rgba(82, 200, 244, 0.07);
-      border: 1px solid rgba(82, 200, 244, 0.2);
-      border-radius: 4px;
-      padding: 0.28rem 0.65rem;
-    }
-
-    .skill-chip {
-      font-size: 0.68rem;
-      color: #f0f4ff;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      border-radius: 4px;
-      padding: 0.28rem 0.65rem;
-    }
-
-    /* ── SUB-HEADING ── */
-    .sub-heading {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #f0f4ff;
-      margin: 1.5rem 0 0.75rem;
-    }
-
-    /* ── PHOTO PLACEHOLDER ── */
-    .photo-placeholder {
-      border: 1px dashed rgba(148, 163, 184, 0.2);
-      border-radius: 8px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      background: rgba(15, 23, 42, 0.5);
+    /* DETAIL GRID */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
       margin: 1.5rem 0;
     }
 
-    .ph-icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.65rem;
+    .detail-cell {
+      background: var(--surface);
+      padding: 1.2rem 1.4rem;
     }
 
-    .photo-placeholder p {
-      font-size: 0.7rem;
-      color: #6b7280;
+    .detail-cell .label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .detail-cell .val {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--highlight);
+    }
+
+    /* CITY CHIPS */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1rem;
+    }
+
+    .chip {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--button-bg, #52c8f4);
+      background: rgba(82, 200, 244, 0.08);
+      border: 1px solid rgba(82, 200, 244, 0.18);
+      border-radius: 3px;
+      padding: 0.25rem 0.65rem;
+      letter-spacing: 0.04em;
+    }
+
+    .chip-highlight {
+      background: rgba(82, 200, 244, 0.2);
+      border-color: var(--button-bg, #52c8f4);
+      font-weight: 600;
+    }
+
+    /* PHOTO SLOT */
+    .photo-slot {
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .photo-slot p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
       margin: 0;
     }
 
-    /* ── RESPONSIVE ── */
+    /* INTRO SPACING */
+    .placements-intro {
+      margin-bottom: 1.8rem;
+    }
+
     @media (max-width: 600px) {
-      h1 { font-size: 1.55rem; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-      .header-meta { gap: 1rem; }
+      .page { padding: 0 1.2rem 4rem; }
+      h1 { font-size: 1.75rem; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .placement-body { flex-direction: column; }
+      .placement-photo-link {
+        flex: none;
+        width: 100%;
+        order: 2;
+      }
     }
   `;
 
@@ -522,379 +318,213 @@ export class MMCybersecurity extends LitElement {
           <mm-back-button label="Back to Projects" href="/projects"></mm-back-button>
         </div>
 
-        <!-- HEADER -->
-        <div class="header">
-          <div class="header-tag">Portfolio · Cybersecurity Engagement</div>
-
-          <div class="google-badge">
-            <span class="google-dots">
-              <span class="google-dot dot-b"></span>
-              <span class="google-dot dot-r"></span>
-              <span class="google-dot dot-y"></span>
-              <span class="google-dot dot-g"></span>
-            </span>
-            Google Cybersecurity Seminars &nbsp;·&nbsp; with support from Google.org &nbsp;·&nbsp; Masaryk University ARTS
-          </div>
-
-          <a
-            class="title-link"
-            href="https://cyberseminars.withgoogle.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open Google Cybersecurity Seminars website"
-          >
-            <h1>From Classroom to Community:<br><em>Cybersecurity as Public Service</em></h1>
-          </a>
-
-          <div class="subtitle">Marie Anna Mahdalová · Informační studia, Masarykova univerzita · 2025–2026</div>
-
-          <div class="header-meta">
-            <div class="meta-item">
-              <span class="meta-label">Programme</span>
-              <span class="meta-value">Czech Cybersecurity Seminars (CSS)</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Funder</span>
-              <span class="meta-value">Google.org / Silicon Valley Community Foundation</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">University</span>
-              <span class="meta-value">Masarykova univerzita · Filozofická fakulta</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Duration</span>
-              <span class="meta-value">May 2025 – May 2026</span>
-            </div>
-          </div>
+        <div class="google-pip">
+          <span class="pip pip-b"></span>
+          <span class="pip pip-r"></span>
+          <span class="pip pip-y"></span>
+          <span class="pip pip-g"></span>
+          Google.org Cybersecurity Seminars
         </div>
 
-        <!-- 01 ABOUT -->
+        <!-- HERO -->
+        <div class="hero">
+          <div class="eyebrow">Portfolio · Cybersecurity</div>
+          <h1>Teaching security<br>to people who need it <span>most.</span></h1>
+          <p class="hero-body">
+            I participated in <strong>Google.org's Cybersecurity Seminars programme</strong>, a global initiative
+            supporting hands-on cybersecurity training at universities across Europe, the Middle East, and Africa.
+            Masaryk University is one of roughly 20 institutions worldwide selected for this funding. The work is not
+            about earning a certificate. It is about taking what you learn and actually doing something with it, in
+            communities that do not have a dedicated IT team, or a security budget, or anyone to ask.
+          </p>
+        </div>
+
+        <!-- THE PROGRAMME -->
         <div class="section">
-          <div class="section-label">01 · About the Programme</div>
-          <h2>What is Czech Cybersecurity Seminars?</h2>
+          <div class="section-marker">The Programme</div>
+          <h2>What Google.org is funding, and why</h2>
           <p>
-            <strong>Czech Cybersecurity Seminars (CSS)</strong> is a Masaryk University initiative funded by a grant
-            from Google.org through the Silicon Valley Community Foundation. Its mission is to connect academic
-            cybersecurity expertise with local communities across the Czech Republic, strengthening digital resilience
-            outside the university walls.
+            The Cybersecurity Seminars initiative is run by <strong>Virtual Routes</strong> (formerly the European
+            Cyber Conflict Research Incubator), which selects and supports universities across EMEA to expand access
+            to cybersecurity education. The goal is not just to train more security professionals. It is to get those
+            students working with local organisations that are genuinely underserved: small NGOs, care facilities,
+            public libraries. Places that face the same threats as large institutions but with a fraction of the
+            resources to deal with them.
           </p>
           <p>
-            Students participate in hands-on internships (<em>stáže</em>), designing and delivering educational
-            interventions for organisations that lack the cybersecurity resources of larger institutions — think care
-            homes, civil society organisations, and libraries.
+            At Masaryk University, the programme runs as <strong>Czech Cybersecurity Seminars (CSS)</strong>.
+            Students go through intensive expert-led training, then design and deliver real workshops for real
+            community partners. The placement has to be useful, and it has to be documented.
           </p>
           <div class="callout">
-            <p>
-              <strong>Core principle:</strong> Academic knowledge only creates value when it leaves the university.
-              CSS operationalises the "third role" of the university — direct engagement with and service to society —
-              through student-led cybersecurity placements.
-            </p>
-          </div>
-          <div class="stats-row">
-            <div class="stat">
-              <div class="stat-number">2</div>
-              <div class="stat-label">Signed placements</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">1</div>
-              <div class="stat-label">Roadshow expedition</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">10+</div>
-              <div class="stat-label">Expert lectures attended</div>
-            </div>
-            <div class="stat">
-              <div class="stat-number">200+</div>
-              <div class="stat-label">People reached (Roadshow)</div>
-            </div>
+            <p>Students gain hands-on experience by supporting local community organisations through internship placements and applied training, not classroom simulations.</p>
           </div>
         </div>
 
-        <!-- 02 JOURNEY -->
+        <!-- EXPERT TRAINING -->
         <div class="section">
-          <div class="section-label">02 · Journey</div>
-          <h2>How It Unfolded</h2>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-date">Summer / Autumn 2024</div>
-              <h3>Joining the Summer School</h3>
-              <p>
-                My involvement began at the <strong>CSS Summer School</strong>, an intensive programme featuring
-                presentations and hands-on workshops led by cybersecurity experts from across the Czech Republic —
-                including professionals from NÚKIB, Masaryk University, and the private sector.
-              </p>
-              <p>
-                The school covered a broad curriculum: from understanding threat landscapes to practical skills in
-                phishing recognition, OSINT, incident response simulation, and the psychological dimensions of social
-                engineering.
-              </p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">January 2025 — October 2025</div>
-              <h3>First Placements: Amnesty International & Senior Care</h3>
-              <p>
-                Following the summer school, I completed <strong>two independent cybersecurity placements</strong> —
-                the foundational requirement of the CSS programme. Each placement involved designing a bespoke
-                educational intervention for a real community partner.
-              </p>
-              <p>
-                Both placements were formalised through official <em>Smlouvy o realizaci studentských stáží</em>
-                (Contracts for student cybersecurity placements) signed between Masaryk University and the respective
-                organisations.
-              </p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">Spring 2026 · ISKM111</div>
-              <h3>Accepted to the CyberImpact Roadshow</h3>
-              <p>
-                Having successfully completed prior placements, I was accepted into
-                <strong>ISKM111 CyberImpact Roadshow</strong> — an intensive, accredited 5-day field expedition across
-                Czech Republic, available to at most 20 students. The course carries <strong>4 ECTS credits</strong>
-                and includes a stipend of <strong>12,000 CZK</strong> upon completion.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 03 TRAINING -->
-        <div class="section">
-          <div class="section-label">03 · Training</div>
-          <h2>Expert-Led Education</h2>
+          <div class="section-marker">Expert Training</div>
+          <h2>What I learned before I taught anyone anything</h2>
           <p>
-            Before designing any workshop, I underwent substantial expert instruction from field professionals. The
-            training ensured that every community session I facilitated was grounded in current, real-world knowledge
-            rather than generic textbook content.
+            Before designing a single session, <strong>I went through substantial expert-led instruction: lectures
+            and workshops from professionals</strong> at NÚKIB (Czech National Cyber and Information Security
+            Agency), Masaryk University, and the private sector, including Martin Ukrop, Ivo Nutár, and Irena Adler
+            Pavelková. Everything from threat modelling and phishing simulation to the psychology of social
+            engineering and how to run incident response with a non-technical team.
           </p>
-          <div class="callout">
-            <p>
-              Instruction came from experts at <strong>NÚKIB</strong> (Czech National Cyber and Information Security
-              Agency), <strong>Masaryk University</strong>, and the private sector. Named instructors include Martin
-              Ukrop, Ivo Nutár, and Irena Adler Pavelková — alongside the CSS academic faculty.
-            </p>
-          </div>
-          <div class="sub-heading">CSS Faculty & Mentors</div>
-          <div class="expert-grid">
-            <div class="expert">
-              <div class="expert-name">PhDr. Pavla Vizváry, Ph.D. LL.M.</div>
-              <div class="expert-org">Masarykova univerzita</div>
-            </div>
-            <div class="expert">
-              <div class="expert-name">PhDr. Petr Škyřík, Ph.D.</div>
-              <div class="expert-org">KISK, Filozofická fakulta</div>
-            </div>
-            <div class="expert">
-              <div class="expert-name">RNDr. Valdemar Švábenský, Ph.D.</div>
-              <div class="expert-org">Masarykova univerzita</div>
-            </div>
-            <div class="expert">
-              <div class="expert-name">RNDr. Michal Černý, Ph.D.</div>
-              <div class="expert-org">Masarykova univerzita</div>
-            </div>
-            <div class="expert">
-              <div class="expert-name">Mgr. Tomáš Marek, Ph.D.</div>
-              <div class="expert-org">Masarykova univerzita</div>
-            </div>
-            <div class="expert">
-              <div class="expert-name">Mgr. Magdaléna Bohuslavová</div>
-              <div class="expert-org">CSS Coordinator</div>
-            </div>
-          </div>
-          <div class="sub-heading">Topics Covered</div>
-          <div class="chips">
-            <span class="chip">Phishing & Social Engineering</span>
-            <span class="chip">Password Managers & MFA</span>
-            <span class="chip">OSINT & Data Exposure</span>
-            <span class="chip">Incident Response</span>
-            <span class="chip">Device & Account Security</span>
-            <span class="chip">AI-Powered Threats</span>
-            <span class="chip">Secure Communication</span>
-            <span class="chip">Digital Identity Protection</span>
-            <span class="chip">Media Manipulation</span>
-            <span class="chip">Privacy & Data Rights</span>
-          </div>
+          <p>
+            If I was going to walk into a care home or an NGO and talk to people about their digital safety, I
+            needed to know what I was talking about. And I needed to be able to explain it without requiring a
+            computer science degree to follow.
+          </p>
         </div>
 
-        <!-- 04 PLACEMENTS -->
+        <!-- COMMUNITY PLACEMENTS -->
         <div class="section">
-          <div class="section-label">04 · Community Placements</div>
-          <h2>Where the Learning Became Real</h2>
+          <div class="section-marker">Community Placements</div>
+          <h2>Where the work actually happened</h2>
+          <p class="placements-intro">
+            The programme required one placement. I completed two. The first was through the programme. The second
+            I chose and set up myself.
+          </p>
 
           <div class="placement">
-            <div class="placement-header">
-              <div class="placement-org">Domov pro seniory Holásecká</div>
-              <div class="tag-row">
-                <span class="tag signed">Contract Signed</span>
-                <span class="tag">Brno · Mar–May 2026</span>
+            <div class="placement-top">
+              <div class="placement-name">Domov pro seniory Holásecká</div>
+            </div>
+            <div class="placement-body">
+              <div class="placement-text">
+                <p>
+                  I chose this placement myself. Working with seniors was not the obvious pick, but it made sense to me:
+                  <strong>they are among the most consistently targeted groups</strong> when it comes to digital fraud,
+                  and often the least reached by any kind of awareness effort. The home gave me access to the residents
+                  directly, and that is who I worked with.
+                </p>
+                <p>
+                  The session focused on passwords and account security, built around real examples of the calls,
+                  messages, and visits that actually happen to people in this situation. We also covered what residents
+                  are legally entitled to say to turn away unsolicited offers and aggressive callers, so they leave the
+                  session with something concrete to use, not just awareness but an actual script. The facility responded
+                  well enough to share it on their social media.
+                </p>
+                <p>
+                  Afterwards, residents came up to ask about situations they were already dealing with. Whether I had a
+                  direct answer or not, I was prepared enough to either address it properly or point them to the right
+                  resource. That felt like the real measure of whether the session worked.
+                </p>
+                <div class="callout">
+                  <p>Seniors are specifically and repeatedly targeted by digital and phone-based fraud. The gap between how often they are targeted and how rarely they receive any kind of preparation for it is significant.</p>
+                </div>
               </div>
+              <a
+                href="https://www.facebook.com/dsholasecka/posts/pfbid09CivaAmA7svMviDkbtszjjUbdaoRAgccXkfFKDHQnuGucxtthkJhkWrE1KgdWJpBl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="placement-photo-link"
+                aria-label="View on Facebook"
+              >
+                <img
+                  src="https://i.imgur.com/vi56Vyo.jpg"
+                  alt="Workshop session at Domov pro seniory Holásecká"
+                  class="placement-photo"
+                />
+              </a>
             </div>
-            <p>
-              A residential care facility for seniors and people with reduced self-sufficiency in Brno, representing
-              exactly the type of organisation the CSS programme targets: <strong>small, locally focused, without
-              dedicated cybersecurity resources</strong>, yet facing the same digital threats as large institutions.
-            </p>
-            <p>
-              I designed and facilitated an interactive cybersecurity workshop tailored specifically to the staff's
-              context — daily care work, limited IT background, and the particular risks faced when handling sensitive
-              personal and health data of vulnerable individuals.
-            </p>
-            <div class="callout">
-              <p>
-                <strong>Why it mattered:</strong> Care staff regularly receive communications about residents from
-                families, medical providers, and authorities. They are high-value phishing targets, often without
-                knowing it. A single compromised account could expose data for an entire home.
-              </p>
+            <div class="contract-line">
+              Formal contract: MU x Domov pro seniory Holásecká, p.o. · ICO 75145189 · Signed 26.3.2026
             </div>
-            <p class="contract-note">
-              Contract: MU × Domov pro seniory Holásecká, příspěvková organizace · IČO 75145189 · Signed 26.3.2026 · Valid to 31.5.2026
-            </p>
           </div>
 
           <div class="placement">
-            <div class="placement-header">
-              <div class="placement-org">Amnesty International Česká republika</div>
-              <div class="tag-row">
-                <span class="tag signed">Contract Signed</span>
-                <span class="tag">Prague · Jan–Oct 2025</span>
-              </div>
+            <div class="placement-top">
+              <div class="placement-name">Amnesty International Česká republika</div>
             </div>
             <p>
-              I initiated this placement independently. Recognising that human rights organisations are
-              <strong>high-profile targets for state-sponsored cyber threats</strong>, I reached out directly to
-              Amnesty International CZ to offer a free, tailored workshop — and they accepted.
+              This one was my choice. I had worked with Amnesty International before on signature collection in
+              Prague, and when I thought about where a second workshop could actually matter, this felt obvious.
+              Human rights organisations are <strong>high-profile targets for state-sponsored cyber threats</strong>,
+              and they rarely have the resources to address it properly.
             </p>
             <p>
-              The workshop (approximately 5 hours, for up to 25 staff members) was designed around the specific threat
-              landscape of a human rights NGO: activist-focused spear phishing, OSINT exposure of staff identities, and
-              the particular risks of working with whistleblowers and at-risk individuals.
+              I wrote the pitch cold, offered a free session tailored to their specific risk landscape, and they said
+              yes. <strong>The workshop ran for approximately five hours with up to 25 staff members.</strong> Amnesty
+              collects significant amounts of personal data through petitions, and that trust is something they have
+              to actively protect. Prevention matters more here than response: once that data is compromised, the
+              damage to trust is hard to undo.
+            </p>
+            <p>
+              Because five hours is a long time to hold attention, the session was designed to be genuinely
+              interactive. We used Mentimeter for live participation and self-assessment throughout, with breaks and
+              space for discussion built in. On the practical side, we covered setting up 2FA, using Bitwarden for
+              password management, creating a separate email account for sensitive work, and storing important data
+              securely using Keybase. Things people could walk away and actually implement the same day.
             </p>
             <div class="callout">
-              <p>
-                <strong>Why it mattered:</strong> For organisations like Amnesty, a digital security breach isn't just
-                an inconvenience — it can compromise the safety of activists, informants, and vulnerable people who
-                depend on the organisation's confidentiality.
-              </p>
+              <p>For an organisation like Amnesty, a security breach is not an IT inconvenience. It can put activists, informants, and vulnerable people in real danger.</p>
             </div>
-            <p class="contract-note">
-              Contract: MU × Amnesty International Česká republika, z.s. · IČO 44793430 · Signed 29.1.2025 · Valid to 31.10.2025
-            </p>
-          </div>
-
-          <div class="letter-box">
-            <div class="letter-meta">Outreach email · Marie Anna Mahdalová → amnesty@amnesty.cz · July 17, 2025</div>
-            <p class="letter-text">
-              "Prevence v oblasti digitální bezpečnosti je dnes zásadní, i s ohledem na rostoucí využívání umělé
-              inteligence a phishingových útoků." — <em>Workshop offer sent to Amnesty International, independently
-              initiated</em>
-            </p>
+            <div class="contract-line">
+              Formal contract: MU x Amnesty International Česká republika, z.s. · ICO 44793430 · Signed 29.1.2025
+            </div>
           </div>
         </div>
 
-        <!-- 05 ROADSHOW -->
+        <!-- CYBERIMPACT ROADSHOW -->
         <div class="section">
-          <div class="section-label">05 · CyberImpact Roadshow</div>
-          <h2>ISKM111 · 5-Day National Expedition</h2>
+          <div class="section-marker">CyberImpact Roadshow · ISKM111</div>
+          <h2>Forty-five people on a bus, ten cities, five days</h2>
           <p>
-            The CyberImpact Roadshow is the programme's flagship activity. A <strong>45-person team</strong> — 20 MUNI
-            students, 10 academic staff, and 15 community representatives — boards a single bus and travels
-            <strong>~1,400 km across the Czech Republic in five days</strong>, delivering workshops in 10 regional
-            cities.
+            After completing my placements, I was accepted into the <strong>CyberImpact Roadshow</strong>, an
+            accredited field expedition run by the CSS programme. Twenty students, ten academic staff, fifteen
+            community representatives. One bus, roughly 1,400 km across the Czech Republic, delivering cybersecurity
+            workshops in regional cities that rarely see this kind of education. The course is capped at 20 students.
           </p>
-          <div class="callout">
-            <p>
-              <strong>Dates:</strong> May 18–22, 2026 &nbsp;·&nbsp;
-              <strong>Impact:</strong> Direct reach to 200+ people across 10 cities &nbsp;·&nbsp;
-              <strong>Stipend:</strong> 12,000 CZK upon completion &nbsp;·&nbsp;
-              <strong>Credits:</strong> 4 ECTS
-            </p>
-          </div>
-          <div class="sub-heading">Cities Visited</div>
-          <div class="chips">
-            <span class="city-chip">Zlín</span>
-            <span class="city-chip">Ostrava</span>
-            <span class="city-chip">Olomouc</span>
-            <span class="city-chip">Pardubice</span>
-            <span class="city-chip">Liberec</span>
-            <span class="city-chip">Ústí nad Labem</span>
-            <span class="city-chip">Karlovy Vary</span>
-            <span class="city-chip">Plzeň</span>
-            <span class="city-chip">České Budějovice</span>
-            <span class="city-chip">Jihlava</span>
-          </div>
-          <div class="card-grid">
-            <div class="card">
-              <div class="card-icon">🎯</div>
-              <h3>Workshop Design</h3>
-              <p>Students design ~90-min interactive workshops from scratch, with clear learning objectives, activities,
-              and evaluation tools — tailored to each community's specific needs.</p>
+          <p>
+            <strong>Every participant was required to attend all ten workshops,</strong> not just their own, in the
+            spirit of peer and professional review. You watch how others facilitate, give and receive feedback, and
+            build a shared picture of what actually works with different audiences. Each workshop runs for about two
+            hours, co-facilitated with an academic expert.
+          </p>
+          <p>
+            I facilitated the workshop in <strong>Ústí nad Labem</strong>, with a focus on device security. Topics
+            included PIN and screen lock setup, automatic updates, the 3-2-1 backup rule for photos, password
+            phrases, Bitwarden, and two-factor authentication, built for people with no assumed technical background
+            and grounded in the kinds of fraud that actually target them. The full presentation is below.
+          </p>
+          <p>
+            Afterwards, everyone contributes to a shared output, the <em>Kyberbezpečnostní atlas Česka 2026</em>,
+            a practical guide for future educators working in the same space.
+          </p>
+
+          <div class="detail-grid">
+            <div class="detail-cell">
+              <div class="label">Dates</div>
+              <div class="val">May 18 to 22, 2026</div>
             </div>
-            <div class="card">
-              <div class="card-icon">🤝</div>
-              <h3>Tandem Facilitation</h3>
-              <p>Each student works in tandem with an academic expert, facilitating for real audiences including social
-              workers, librarians, and care professionals.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">📊</div>
-              <h3>Impact Measurement</h3>
-              <p>Pre/post questionnaires, rapid debriefs, and qualitative reflection — creating evidence of change, not
-              just delivery.</p>
-            </div>
-            <div class="card">
-              <div class="card-icon">📚</div>
-              <h3>Atlas Output</h3>
-              <p>All participants co-create the <em>Kyberbezpečnostní atlas Česka 2026</em> — a methodological resource
-              available for future educators and practitioners.</p>
+
+            <div class="detail-cell">
+              <div class="label">People reached</div>
+              <div class="val">200+ across 10 cities</div>
             </div>
           </div>
-          <div class="photo-placeholder">
-            <div class="ph-icon">📸</div>
-            <p>[ CyberImpact Roadshow photos · May 2026 · Coming soon ]</p>
+
+          <div class="chip-row">
+            <span class="chip">Zlín</span>
+            <span class="chip">Ostrava</span>
+            <span class="chip">Olomouc</span>
+            <span class="chip">Pardubice</span>
+            <span class="chip">Liberec</span>
+            <span class="chip chip-highlight">Ústí nad Labem</span>
+            <span class="chip">Karlovy Vary</span>
+            <span class="chip">Plzeň</span>
+            <span class="chip">České Budějovice</span>
+            <span class="chip">Jihlava</span>
+          </div>
+
+          <div class="photo-slot">
+            <p>Photos from the expedition · May 2026 · Coming soon</p>
           </div>
         </div>
 
-        <!-- 06 SKILLS -->
-        <div class="section">
-          <div class="section-label">06 · Skills & Competencies</div>
-          <h2>What This Work Built</h2>
-          <p>
-            Across summer school, two placements, and the Roadshow, this engagement developed a rare combination:
-            <strong>technical cybersecurity literacy applied in human-centred, community contexts</strong>.
-          </p>
-          <div class="card-grid">
-            <div class="card">
-              <h3>Technical Knowledge</h3>
-              <p>Grounded understanding of current threat landscape, attack vectors, and defensive practices — taught by
-              active practitioners, not just academics.</p>
-            </div>
-            <div class="card">
-              <h3>Workshop Design</h3>
-              <p>Ability to translate complex technical topics into accessible, engaging 90-min sessions for
-              non-technical audiences using design thinking methodology.</p>
-            </div>
-            <div class="card">
-              <h3>Community Facilitation</h3>
-              <p>Experience facilitating groups of diverse backgrounds — seniors, civil society workers, NGO staff —
-              with empathy and cultural sensitivity.</p>
-            </div>
-            <div class="card">
-              <h3>Independent Initiative</h3>
-              <p>Independently identified and secured a placement with Amnesty International — demonstrating proactive
-              outreach, not just programme compliance.</p>
-            </div>
-          </div>
-          <div class="chips" style="margin-top: 1.25rem;">
-            <span class="skill-chip">Cybersecurity Awareness Training</span>
-            <span class="skill-chip">Service Learning</span>
-            <span class="skill-chip">Workshop Facilitation</span>
-            <span class="skill-chip">Needs Assessment</span>
-            <span class="skill-chip">Impact Evaluation</span>
-            <span class="skill-chip">NGO Communication</span>
-            <span class="skill-chip">OSINT</span>
-            <span class="skill-chip">Phishing Simulation</span>
-            <span class="skill-chip">Digital Literacy Education</span>
-            <span class="skill-chip">Vulnerable Community Work</span>
-          </div>
-        </div>
       </div>
     `;
   }

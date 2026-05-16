@@ -205,7 +205,7 @@ export class MMProjects extends LitElement {
                 class="cta-btn"
                 @click=${() => navigate("/projects/cybersecurity")}
               >
-                <span>Open Google Cybersecurity Seminars</span>
+                <span>Google CS</span>
                 <span aria-hidden="true">→</span>
               </button>
             </div>
