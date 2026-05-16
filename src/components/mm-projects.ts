@@ -159,13 +159,20 @@ export class MMProjects extends LitElement {
           </article>
 
           <article class="card" aria-labelledby="good-enough-title">
-            <div class="card-meta">Planning companion</div>
+            <div class="card-meta">AI in Practice · KISK · 2026</div>
             <h3 id="good-enough-title" class="card-title">Good Enough</h3>
             <p class="card-body">
-              A planning companion designed for neurodivergent people and people with similar experiences. Built around the idea that done is better than perfect — and that "good enough" is not failure, it's a strategy.
+              A planning companion for people with AuDHD, built over one semester using the Double Diamond framework. From a stuck opening message to a deployed prototype — and an honest account of what AI could and couldn't do along the way.
             </p>
             <div class="cta-row">
-              <span class="coming-soon-label">In development</span>
+              <button
+                type="button"
+                class="cta-btn"
+                @click=${() => navigate("/projects/good-enough")}
+              >
+                <span>Open Good Enough</span>
+                <span aria-hidden="true">→</span>
+              </button>
             </div>
           </article>
 
