@@ -17,7 +17,7 @@ export class MMCybersecurity extends LitElement {
     }
 
     .page {
-      max-width: 820px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 0 1.5rem 3rem;
       color: var(--text);

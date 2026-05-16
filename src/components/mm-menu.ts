@@ -49,12 +49,16 @@ export class MMMenu extends LitElement {
     const mainItem = this.items.find((item) => item.id === mainPage);
     if (mainItem) {
       this.activeItem = mainPage;
-      if (segments.length > 1 && mainItem.submenu) {
+      if (segments.length > 1) {
         const subPage = segments[1];
-        const subItem = mainItem.submenu.find((sub) => sub.id === subPage);
-        if (subItem) {
+        if (mainItem.submenu) {
+          const subItem = mainItem.submenu.find((sub) => sub.id === subPage);
+          if (subItem) {
+            this.activeItem = subPage;
+            this.expandedItems = new Set([mainPage]);
+          }
+        } else {
           this.activeItem = subPage;
-          this.expandedItems = new Set([mainPage]);
         }
       }
     } else if (this.items.length > 0 && !this.activeItem) {

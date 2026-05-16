@@ -52,27 +52,8 @@ export class App extends LitElement {
             { id: "gallery", label: "Gallery" },
             { id: "about", label: "About" },
             { id: "testimonials", label: "Testimonials" },
-            {
-              id: "projects",
-              label: "Projects",
-              submenu: [
-                { id: "ai-view", label: "AI View" },
-                { id: "feminism", label: "Lifelong Feminist" },
-                { id: "ijf26", label: "IJF26" },
-                { id: "cybersecurity", label: "Google Cybersecurity Seminars" },
-              ],
-            },
-            {
-              id: "study",
-              label: "Study",
-              submenu: [
-                { id: "semester1", label: "Semester 1" },
-                { id: "semester2", label: "Semester 2" },
-                { id: "semester3", label: "Semester 3" },
-                { id: "semester4", label: "Semester 4" },
-                { id: "semester5", label: "Semester 5" },
-              ],
-            },
+            { id: "projects", label: "Projects" },
+            { id: "study", label: "Study" },
             { id: "contact", label: "Contact" },
           ]}
           position="left">
@@ -153,7 +134,7 @@ export class App extends LitElement {
 
     .section-container {
       padding: 1.5rem 1rem;
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
     }
 

@@ -268,6 +268,9 @@ export class MMIjf26 extends LitElement {
   private _renderIndex(): TemplateResult {
     return html`
       <div class="index-page">
+        <div class="back-row">
+          <mm-back-button label="Back to Projects" href="/projects"></mm-back-button>
+        </div>
         <header class="page-header">
           <div class="header-kicker">International Journalism Festival · Perugia · April 16–18, 2026</div>
           <h1 class="page-title">IJF26 Coverage</h1>
@@ -325,9 +328,15 @@ export class MMIjf26 extends LitElement {
     }
 
     .page {
-      max-width: 1120px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 1.5rem 1rem 4rem;
+    }
+
+    /* ── Back row ────────────────────────────────────────────────────── */
+
+    .back-row {
+      padding-bottom: 1rem;
     }
 
     /* ── Page header ──────────────────────────────────────────────────── */

@@ -28,7 +28,7 @@ export class MMAiViewIndex extends LitElement {
     }
 
     .page {
-      max-width: 1120px;
+      max-width: 980px;
       margin: 0 auto;
       padding: 1.5rem 1rem 2rem;
       color: #f9fafb;

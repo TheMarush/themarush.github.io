@@ -43,7 +43,7 @@ export class MMAiSystemPage extends LitElement {
       flex-direction: column;
       gap: 2rem;
       padding: 1.5rem 1rem 2rem;
-      max-width: 1120px;
+      max-width: 980px;
       margin: 0 auto;
       color: #f9fafb;
     }

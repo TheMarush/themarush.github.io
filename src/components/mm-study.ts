@@ -16,7 +16,7 @@ export class MMStudy extends LitElement {
 
     .container {
       padding: 1.5rem 1rem;
-      max-width: 1120px;
+      max-width: 980px;
       margin: 0 auto;
       color: inherit;
     }

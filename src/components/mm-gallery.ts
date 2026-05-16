@@ -1,6 +1,13 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import type { GalleryImage } from "../data/gallery.js";
+import { navigate, navigateWithAnchor } from "../utils/navigate.js";
+
+const PROJECT_ROUTES: Record<string, { path: string; anchor?: string }> = {
+  "google-cs": { path: "/projects/cybersecurity" },
+  "feminist": { path: "/projects/feminism" },
+  "eu careers": { path: "/projects", anchor: "eu-ambassador-title" },
+};
 
 @customElement("mm-gallery")
 export class MMGallery extends LitElement {
@@ -13,9 +20,10 @@ export class MMGallery extends LitElement {
         <h2 class="gallery-title">My Art</h2>
         <p class="gallery-intro">This is the Art Gallery of meee!</p>
         <div class="gallery">
-          ${this.images.map(
-            (img) => html`
-              <div class="art-item">
+          ${this.images.map((img) => {
+            const route = img.project ? PROJECT_ROUTES[img.project] : undefined;
+            return html`
+              <div class="art-item" id=${img.id}>
                 <img
                   src=${img.src}
                   alt=${img.alt}
@@ -23,9 +31,18 @@ export class MMGallery extends LitElement {
                   loading="lazy"
                 />
                 <p class="art-item-caption">${img.caption}</p>
+                ${route
+                  ? html`<button
+                      type="button"
+                      class="read-more-link"
+                      @click=${() => route.anchor
+                        ? navigateWithAnchor(route.path, route.anchor)
+                        : navigate(route.path)}
+                    >read more here →</button>`
+                  : ""}
               </div>
-            `,
-          )}
+            `;
+          })}
         </div>
       </div>
     `;
@@ -39,7 +56,7 @@ export class MMGallery extends LitElement {
 
     .gallery-container {
       padding: 1.5rem 1rem;
-      max-width: 1200px;
+      max-width: 980px;
       margin: 0 auto;
       overflow: visible;
     }
@@ -109,6 +126,31 @@ export class MMGallery extends LitElement {
       overflow-wrap: break-word;
       hyphens: auto;
       overflow: visible;
+    }
+
+    .read-more-link {
+      margin-top: 0.5rem;
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.78rem;
+      color: var(--button-bg, #52C8F4);
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: rgba(82, 200, 244, 0.4);
+      font-style: italic;
+      transition: text-decoration-color 150ms, opacity 150ms;
+    }
+
+    .read-more-link:hover {
+      text-decoration-color: var(--button-bg, #52C8F4);
+      opacity: 0.85;
+    }
+
+    .read-more-link:focus-visible {
+      outline: 2px solid var(--button-bg, #52C8F4);
+      outline-offset: 2px;
+      border-radius: 2px;
     }
 
     @media (max-width: 768px) {
