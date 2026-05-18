@@ -1,5 +1,20 @@
 import { css, html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import {
+  goodEnoughFeatures,
+  goodEnoughKnobs,
+  goodEnoughSurveyStats,
+  goodEnoughInterestStats,
+  goodEnoughSurveyDetails,
+  goodEnoughPOVs,
+  goodEnoughPullQuotes,
+  goodEnoughOpenResponsesCompanion,
+  goodEnoughOpenResponsesClose,
+  goodEnoughEthicalPrinciples,
+  goodEnoughDesignPrinciples,
+  goodEnoughChartNotes,
+} from "../data/good-enough.js";
 import "./mm-back-button.ts";
 
 @customElement("mm-good-enough")
@@ -290,29 +305,60 @@ export class MMGoodEnough extends LitElement {
       line-height: 1.4;
     }
 
-    /* CHART PLACEHOLDER */
-    .chart-placeholder {
-      border: 1px dashed var(--border);
+    /* CHART IMAGE */
+    .chart-img-wrap {
+      margin: 0.75rem 0 1.25rem;
+      border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      margin: 1.5rem 0;
+      overflow: hidden;
     }
 
-    .chart-placeholder-label {
+    .chart-img-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .chart-img-caption {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
       color: var(--text-dim);
-      letter-spacing: 0.08em;
-      margin: 0 0 0.3rem;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
     }
 
-    .chart-placeholder-q {
+    /* CHART NOTE — fallback badge when no image is available */
+    .chart-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.65rem;
+      border: 1px dashed rgba(61, 79, 99, 0.7);
+      border-radius: 4px;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .chart-note-label {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .chart-note-sep {
+      color: var(--text-dim);
+      font-size: 0.56rem;
+    }
+
+    .chart-note-q {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.56rem;
       color: #4b5563;
-      letter-spacing: 0.04em;
-      margin: 0;
+      letter-spacing: 0.03em;
     }
 
     /* FEATURE CARDS */
@@ -622,6 +668,35 @@ export class MMGoodEnough extends LitElement {
     }
   `;
 
+  private static readonly _chartImages: Partial<Record<keyof typeof goodEnoughChartNotes, string>> = {
+    diagnosis: "/good-enough/Q5.png",
+    laziness: "/good-enough/Q8.png",
+    shame: "/good-enough/Q12.png",
+    abandonment: "/good-enough/Q22.png",
+    hardDay: "/good-enough/Q27.png",
+    tone: "/good-enough/Q28.png",
+  };
+
+  private _chartNote(key: keyof typeof goodEnoughChartNotes) {
+    const q = goodEnoughChartNotes[key];
+    const src = MMGoodEnough._chartImages[key];
+    if (src) {
+      return html`
+        <div class="chart-img-wrap">
+          <img src="${src}" alt="${q}" loading="lazy" />
+          <div class="chart-img-caption">${q}</div>
+        </div>
+      `;
+    }
+    return html`
+      <div class="chart-note">
+        <span class="chart-note-label">Viz · coming soon</span>
+        <span class="chart-note-sep">·</span>
+        <span class="chart-note-q">${q}</span>
+      </div>
+    `;
+  }
+
   render() {
     return html`
       <div class="page">
@@ -707,22 +782,14 @@ export class MMGoodEnough extends LitElement {
           <h3>Initial ethical questions</h3>
           <p>Four questions that stayed throughout the entire project:</p>
           <div class="principles">
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>External-pressure dependence.</strong> A tool that replicates this dynamic, even gently, risks deepening it.</p>
-            </div>
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>Breaking systems that already work.</strong> Some users have built their own strategies, and imposing a new system can dismantle them.</p>
-            </div>
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>Being too gentle.</strong> A tool designed never to push may paradoxically fail users who need a degree of external accountability.</p>
-            </div>
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>Language.</strong> For many users, English is the language in which they first found words for their own experience. Language is not a neutral design decision.</p>
-            </div>
+            ${goodEnoughEthicalPrinciples.map(
+              (text) => html`
+                <div class="principle">
+                  <div class="principle-dot"></div>
+                  <p class="principle-text">${unsafeHTML(text)}</p>
+                </div>
+              `
+            )}
           </div>
         </div>
 
@@ -783,8 +850,8 @@ export class MMGoodEnough extends LitElement {
           </p>
 
           <div class="pull-quote">
-            <p class="pull-quote-text">"When you haven't done something you planned to do for yourself, what do you say to yourself? Is it words, or more of a feeling?"</p>
-            <div class="pull-quote-source">Interview protocol · Revised from AI draft</div>
+            <p class="pull-quote-text">${goodEnoughPullQuotes[0].text}</p>
+            <div class="pull-quote-source">${goodEnoughPullQuotes[0].source}</div>
           </div>
 
           <h3>Interview 1: Self-inquiry</h3>
@@ -797,8 +864,8 @@ export class MMGoodEnough extends LitElement {
           </p>
 
           <div class="pull-quote">
-            <p class="pull-quote-text">"I felt like garbage. Completely."</p>
-            <div class="pull-quote-source">Interview 1 · Two words. No mechanism. Just the weight of it.</div>
+            <p class="pull-quote-text">${goodEnoughPullQuotes[1].text}</p>
+            <div class="pull-quote-source">${goodEnoughPullQuotes[1].source}</div>
           </div>
 
           <h3>Interview 2: AI simulation</h3>
@@ -829,8 +896,8 @@ export class MMGoodEnough extends LitElement {
           </p>
 
           <div class="pull-quote">
-            <p class="pull-quote-text">"There's a moment where I'd like to do something but it doesn't work, or doesn't go according to plan, and then it breaks."</p>
-            <div class="pull-quote-source">Interview 3</div>
+            <p class="pull-quote-text">${goodEnoughPullQuotes[2].text}</p>
+            <div class="pull-quote-source">${goodEnoughPullQuotes[2].source}</div>
           </div>
 
           <p>
@@ -846,8 +913,8 @@ export class MMGoodEnough extends LitElement {
           </p>
 
           <div class="pull-quote">
-            <p class="pull-quote-text">"You are not your produce. You are not your code."</p>
-            <div class="pull-quote-source">Interview 4</div>
+            <p class="pull-quote-text">${goodEnoughPullQuotes[3].text}</p>
+            <div class="pull-quote-source">${goodEnoughPullQuotes[3].source}</div>
           </div>
 
           <div class="callout define">
@@ -878,63 +945,29 @@ export class MMGoodEnough extends LitElement {
 
           <h3>POV statements</h3>
           <div class="pov-list">
-            <div class="pov-card">
-              <div class="pov-name">Marie</div>
-              <p class="pov-text">
-                Needs to find a <strong>single safe entry point</strong> into a self-directed task, because her
-                brain treats tasks without external stakes as non-urgent, and every visible reminder of what's
-                unfinished deepens the shame that makes starting harder.
-              </p>
-            </div>
-            <div class="pov-card">
-              <div class="pov-name">A.</div>
-              <p class="pov-text">
-                Needs a companion that <strong>holds her context and reorients her after disruption</strong>:
-                not emotional support, but a concrete map of what remains.
-              </p>
-            </div>
-            <div class="pov-card">
-              <div class="pov-name">P.</div>
-              <p class="pov-text">
-                Needs <strong>behaviour change to happen gradually and without direct instruction</strong>,
-                because telling neurodivergent people what to do triggers reactance, and the companion
-                must know when to step back and refer to a professional.
-              </p>
-            </div>
-            <div class="pov-card">
-              <div class="pov-name">Late-diagnosed adult</div>
-              <p class="pov-text">
-                Needs a tool that <strong>doesn't speak the language of the systems that failed them</strong>,
-                because every streak counter, missed-day notification, or visible failure list reactivates
-                decades of internalized shame.
-              </p>
-            </div>
+            ${goodEnoughPOVs.map(
+              (pov) => html`
+                <div class="pov-card">
+                  <div class="pov-name">${pov.name}</div>
+                  <p class="pov-text">${unsafeHTML(pov.text)}</p>
+                </div>
+              `
+            )}
           </div>
 
           <h3>The survey</h3>
           <div class="detail-grid">
-            <div class="detail-cell">
-              <div class="label">Questions</div>
-              <div class="val">36</div>
-            </div>
-            <div class="detail-cell">
-              <div class="label">Respondents</div>
-              <div class="val">24</div>
-            </div>
-            <div class="detail-cell">
-              <div class="label">Age range</div>
-              <div class="val">15–52</div>
-            </div>
-            <div class="detail-cell">
-              <div class="label">Neurodivergent-identifying</div>
-              <div class="val">75%</div>
-            </div>
+            ${goodEnoughSurveyDetails.map(
+              (cell) => html`
+                <div class="detail-cell">
+                  <div class="label">${cell.label}</div>
+                  <div class="val">${cell.val}</div>
+                </div>
+              `
+            )}
           </div>
 
-          <div class="chart-placeholder">
-            <p class="chart-placeholder-label">Visualization · coming soon</p>
-            <p class="chart-placeholder-q">Q5 — Diagnosis status breakdown</p>
-          </div>
+          ${this._chartNote("diagnosis")}
 
           <p>
             Only 16.7% hold a formal AuDHD or combined diagnosis. Only 17.6% first understood their
@@ -950,10 +983,7 @@ export class MMGoodEnough extends LitElement {
             It is ongoing. The companion must actively counter a narrative the user is still living inside.
           </p>
 
-          <div class="chart-placeholder">
-            <p class="chart-placeholder-label">Visualization · coming soon</p>
-            <p class="chart-placeholder-q">Q8 — How long respondents believed the problem was laziness</p>
-          </div>
+          ${this._chartNote("laziness")}
 
           <h3>Ten knob ratings</h3>
           <p>
@@ -962,32 +992,18 @@ export class MMGoodEnough extends LitElement {
           </p>
 
           <div class="stat-grid">
-            <div class="stat-cell">
-              <div class="stat-label">Shame accumulation</div>
-              <div class="stat-value">4.0</div>
-              <div class="stat-desc">62.5% rated a perfect 5. Strongest single result in the survey.</div>
-            </div>
-            <div class="stat-cell">
-              <div class="stat-label">External pressure dependency</div>
-              <div class="stat-value">3.71</div>
-              <div class="stat-desc">71% rated 4 or 5. Validates the "only for me" devaluation loop.</div>
-            </div>
-            <div class="stat-cell">
-              <div class="stat-label">Inconsistent weekly capacity</div>
-              <div class="stat-value">2.88</div>
-              <div class="stat-desc">71% report their capacity is not consistent week to week.</div>
-            </div>
-            <div class="stat-cell">
-              <div class="stat-label">Pattern tracking</div>
-              <div class="stat-value">4.25</div>
-              <div class="stat-desc">83.4% rated 4 or 5. Most consistently desired feature.</div>
-            </div>
+            ${goodEnoughSurveyStats.map(
+              (stat) => html`
+                <div class="stat-cell">
+                  <div class="stat-label">${stat.label}</div>
+                  <div class="stat-value">${stat.value}</div>
+                  <div class="stat-desc">${stat.desc}</div>
+                </div>
+              `
+            )}
           </div>
 
-          <div class="chart-placeholder">
-            <p class="chart-placeholder-label">Visualization · coming soon</p>
-            <p class="chart-placeholder-q">Q12 — Shame-driven avoidance ratings</p>
-          </div>
+          ${this._chartNote("shame")}
 
           <h3>Tool abandonment</h3>
           <p>
@@ -997,10 +1013,7 @@ export class MMGoodEnough extends LitElement {
             abandonment driver — not difficulty of use, cost, or feature gaps.
           </p>
 
-          <div class="chart-placeholder">
-            <p class="chart-placeholder-label">Visualization · coming soon</p>
-            <p class="chart-placeholder-q">Q22 — Reasons for abandoning planning tools</p>
-          </div>
+          ${this._chartNote("abandonment")}
 
           <h3>What would make someone open it on a hard day</h3>
           <p>
@@ -1008,10 +1021,7 @@ export class MMGoodEnough extends LitElement {
             <em>"I don't know."</em> The entry point cannot require the user to already know what they want.
           </p>
 
-          <div class="chart-placeholder">
-            <p class="chart-placeholder-label">Visualization · coming soon</p>
-            <p class="chart-placeholder-q">Q27 — What would make you open it on a hard day</p>
-          </div>
+          ${this._chartNote("hardDay")}
 
           <h3>Tone preference</h3>
           <p>
@@ -1019,45 +1029,35 @@ export class MMGoodEnough extends LitElement {
             <strong>Raccoon Mode is not a stylistic preference. It is a functional design requirement.</strong>
           </p>
 
-          <div class="chart-placeholder">
-            <p class="chart-placeholder-label">Visualization · coming soon</p>
-            <p class="chart-placeholder-q">Q28 — Tone preference</p>
-          </div>
+          ${this._chartNote("tone")}
 
           <h3>Interest in Good Enough</h3>
           <div class="stat-grid">
-            <div class="stat-cell">
-              <div class="stat-label">Mean interest score</div>
-              <div class="stat-value">4.0 / 5</div>
-              <div class="stat-desc">No respondents rated 1.</div>
-            </div>
-            <div class="stat-cell">
-              <div class="stat-label">Rated 4 or 5</div>
-              <div class="stat-value">66.7%</div>
-              <div class="stat-desc">Strong cross-sample validation.</div>
-            </div>
+            ${goodEnoughInterestStats.map(
+              (stat) => html`
+                <div class="stat-cell">
+                  <div class="stat-label">${stat.label}</div>
+                  <div class="stat-value">${stat.value}</div>
+                  <div class="stat-desc">${stat.desc}</div>
+                </div>
+              `
+            )}
           </div>
 
-          <div class="chart-placeholder">
-            <p class="chart-placeholder-label">Visualization · coming soon</p>
-            <p class="chart-placeholder-q">Q26 — Interest in Good Enough</p>
-          </div>
+          ${this._chartNote("interest")}
 
           <h3>Selected open responses</h3>
           <p>On what the companion must understand that most tools miss:</p>
           <div class="open-responses">
-            <p class="open-response">"Not every day can be treated the same. Some days I need a complete opposite of what I need other times."</p>
-            <p class="open-response">"Task paralysis. The inability to choose where to start and to start."</p>
-            <p class="open-response">"I rely on outer motivation. I cannot motivate myself."</p>
-            <p class="open-response">"Don't make me feel guilty. I am trying."</p>
+            ${goodEnoughOpenResponsesCompanion.map(
+              (r) => html`<p class="open-response">${r}</p>`
+            )}
           </div>
           <p>On what would make someone close it and never return:</p>
           <div class="open-responses">
-            <p class="open-response">"Shame me into performing."</p>
-            <p class="open-response">"If it showed me a monthly or weekly review highlighting plans I didn't finish."</p>
-            <p class="open-response">"Analysing my behaviour without my consent. I would not use it out of fear."</p>
-            <p class="open-response">"Seeing all the tasks I didn't do."</p>
-            <p class="open-response">"Complicated setup."</p>
+            ${goodEnoughOpenResponsesClose.map(
+              (r) => html`<p class="open-response">${r}</p>`
+            )}
           </div>
         </div>
 
@@ -1077,38 +1077,14 @@ export class MMGoodEnough extends LitElement {
           </p>
 
           <div class="feature-grid">
-            <div class="feature-card">
-              <div class="feature-name">Mood-first interface</div>
-              <p class="feature-desc">Every session opens with one question. The entire UI adapts based on the answer.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-name">The One Thread</div>
-              <p class="feature-desc">Instead of a list, shows exactly one task, chosen based on current state. User can accept, swap, or say "not today."</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-name">Reorientation mode</div>
-              <p class="feature-desc">When a session breaks mid-task, reopening the companion restores full context. <em>Memory is the feature.</em></p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-name">Progress in reverse</div>
-              <p class="feature-desc">Instead of showing how much is left, shows only what has already been done. "You've already written 300 words."</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-name">No-list mode</div>
-              <p class="feature-desc">For users in shame-spiral states, all historical tasks are hidden. Only the present moment is visible.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-name">Raccoon Mode</div>
-              <p class="feature-desc">A toggleable lightly humorous personality layer, including occasional raccoon facts and small-win celebrations.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-name">Pattern recognition</div>
-              <p class="feature-desc">When a task recurs without moving, the companion names it once, neutrally: "This one has come up three times." It does not ask why.</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-name">Proof-of-concept export</div>
-              <p class="feature-desc">A "here's what I actually did this week" summary, generated for the user and for no one else, to counter the "I did nothing" cognitive distortion.</p>
-            </div>
+            ${goodEnoughFeatures.map(
+              (f) => html`
+                <div class="feature-card">
+                  <div class="feature-name">${f.name}</div>
+                  <p class="feature-desc">${unsafeHTML(f.desc)}</p>
+                </div>
+              `
+            )}
           </div>
 
           <div class="callout">
@@ -1149,46 +1125,14 @@ export class MMGoodEnough extends LitElement {
           <p>Each dimension was traced directly to a specific research source:</p>
 
           <div class="knob-list">
-            <div class="knob-row">
-              <div class="knob-name">Initiation resistance</div>
-              <div class="knob-desc">How hard it is to start a task — the gap between intending and beginning.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">Momentum fragility</div>
-              <div class="knob-desc">How easily flow breaks when something unexpected happens mid-task.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">Perfectionism grip</div>
-              <div class="knob-desc">How much "good enough" feels like failure rather than strategy.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">External pressure dependency</div>
-              <div class="knob-desc">Whether action is primarily triggered by deadlines and others' expectations.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">Shame accumulation</div>
-              <div class="knob-desc">How strongly visible incomplete tasks compound into avoidance.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">Time blindness</div>
-              <div class="knob-desc">How poorly time passing is perceived — affecting planning and transitions.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">Hyperfocus availability</div>
-              <div class="knob-desc">Whether deep-focus states are accessible and how long they last.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">Disruption tolerance</div>
-              <div class="knob-desc">How quickly and fully function returns after an unexpected break.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">Self-insight level</div>
-              <div class="knob-desc">Accuracy of self-reporting — determines how much the companion recalibrates silently.</div>
-            </div>
-            <div class="knob-row">
-              <div class="knob-name">External accountability reliance</div>
-              <div class="knob-desc">Whether the user functions better with a witness — human or system.</div>
-            </div>
+            ${goodEnoughKnobs.map(
+              (k) => html`
+                <div class="knob-row">
+                  <div class="knob-name">${k.name}</div>
+                  <div class="knob-desc">${k.desc}</div>
+                </div>
+              `
+            )}
           </div>
 
           <h3>The system prompt is a design document</h3>
@@ -1279,26 +1223,14 @@ export class MMGoodEnough extends LitElement {
           <p>Across every iteration, from the first brief to the final Replit deployment:</p>
 
           <div class="principles">
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>No visible failure lists.</strong> Ever.</p>
-            </div>
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>Mood-first entry.</strong> Every session begins with how the user is, not what they need to do.</p>
-            </div>
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>One thread at a time.</strong> Not a list. One thing.</p>
-            </div>
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>Shame-free return after absence.</strong> No streaks, no guilt, no catch-up guilt.</p>
-            </div>
-            <div class="principle">
-              <div class="principle-dot"></div>
-              <p class="principle-text"><strong>The raccoon test.</strong> Every proposed feature was checked against whether it could have been generated by AI without knowing a real user. If yes, it went back to the research.</p>
-            </div>
+            ${goodEnoughDesignPrinciples.map(
+              (text) => html`
+                <div class="principle">
+                  <div class="principle-dot"></div>
+                  <p class="principle-text">${unsafeHTML(text)}</p>
+                </div>
+              `
+            )}
           </div>
 
           <h3>What is not yet built</h3>

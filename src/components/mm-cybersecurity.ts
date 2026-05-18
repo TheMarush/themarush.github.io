@@ -1,5 +1,11 @@
 import { css, html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import {
+  cybersecurityPlacements,
+  cybersecurityRoadshowCities,
+  cybersecurityRoadshowDetails,
+} from "../data/cybersecurity.js";
 import "./mm-back-button.ts";
 
 @customElement("mm-cybersecurity")
@@ -388,84 +394,37 @@ export class MMCybersecurity extends LitElement {
             I chose and set up myself.
           </p>
 
-          <div class="placement">
-            <div class="placement-top">
-              <div class="placement-name">Domov pro seniory Holásecká</div>
-            </div>
-            <div class="placement-body">
-              <div class="placement-text">
-                <p>
-                  I chose this placement myself. Working with seniors was not the obvious pick, but it made sense to me:
-                  <strong>they are among the most consistently targeted groups</strong> when it comes to digital fraud,
-                  and often the least reached by any kind of awareness effort. The home gave me access to the residents
-                  directly, and that is who I worked with.
-                </p>
-                <p>
-                  The session focused on passwords and account security, built around real examples of the calls,
-                  messages, and visits that actually happen to people in this situation. We also covered what residents
-                  are legally entitled to say to turn away unsolicited offers and aggressive callers, so they leave the
-                  session with something concrete to use, not just awareness but an actual script. The facility responded
-                  well enough to share it on their social media.
-                </p>
-                <p>
-                  Afterwards, residents came up to ask about situations they were already dealing with. Whether I had a
-                  direct answer or not, I was prepared enough to either address it properly or point them to the right
-                  resource. That felt like the real measure of whether the session worked.
-                </p>
-                <div class="callout">
-                  <p>Seniors are specifically and repeatedly targeted by digital and phone-based fraud. The gap between how often they are targeted and how rarely they receive any kind of preparation for it is significant.</p>
-                </div>
+          ${cybersecurityPlacements.map((placement) => html`
+            <div class="placement">
+              <div class="placement-top">
+                <div class="placement-name">${placement.name}</div>
               </div>
-              <a
-                href="https://www.facebook.com/dsholasecka/posts/pfbid09CivaAmA7svMviDkbtszjjUbdaoRAgccXkfFKDHQnuGucxtthkJhkWrE1KgdWJpBl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="placement-photo-link"
-                aria-label="View on Facebook"
-              >
-                <img
-                  src="https://i.imgur.com/vi56Vyo.jpg"
-                  alt="Workshop session at Domov pro seniory Holásecká"
-                  class="placement-photo"
-                />
-              </a>
+              <div class="placement-body">
+                <div class="placement-text">
+                  ${placement.paragraphs.map((para) => html`<p>${unsafeHTML(para)}</p>`)}
+                  <div class="callout">
+                    <p>${placement.callout}</p>
+                  </div>
+                </div>
+                ${placement.photo ? html`
+                  <a
+                    href=${placement.photo.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="placement-photo-link"
+                    aria-label=${placement.photo.ariaLabel}
+                  >
+                    <img
+                      src=${placement.photo.src}
+                      alt=${placement.photo.alt}
+                      class="placement-photo"
+                    />
+                  </a>
+                ` : ""}
+              </div>
+              <div class="contract-line">${placement.contractLine}</div>
             </div>
-            <div class="contract-line">
-              Formal contract: MU x Domov pro seniory Holásecká, p.o. · ICO 75145189 · Signed 26.3.2026
-            </div>
-          </div>
-
-          <div class="placement">
-            <div class="placement-top">
-              <div class="placement-name">Amnesty International Česká republika</div>
-            </div>
-            <p>
-              This one was my choice. I had worked with Amnesty International before on signature collection in
-              Prague, and when I thought about where a second workshop could actually matter, this felt obvious.
-              Human rights organisations are <strong>high-profile targets for state-sponsored cyber threats</strong>,
-              and they rarely have the resources to address it properly.
-            </p>
-            <p>
-              I wrote the pitch cold, offered a free session tailored to their specific risk landscape, and they said
-              yes. <strong>The workshop ran for approximately five hours with up to 25 staff members.</strong> Amnesty
-              collects significant amounts of personal data through petitions, and that trust is something they have
-              to actively protect. Prevention matters more here than response: once that data is compromised, the
-              damage to trust is hard to undo.
-            </p>
-            <p>
-              Because five hours is a long time to hold attention, the session was designed to be genuinely
-              interactive. We used Mentimeter for live participation and self-assessment throughout, with breaks and
-              space for discussion built in. On the practical side, we covered setting up 2FA, using Bitwarden for
-              password management, creating a separate email account for sensitive work, and storing important data
-              securely using Keybase. Things people could walk away and actually implement the same day.
-            </p>
-            <div class="callout">
-              <p>For an organisation like Amnesty, a security breach is not an IT inconvenience. It can put activists, informants, and vulnerable people in real danger.</p>
-            </div>
-            <div class="contract-line">
-              Formal contract: MU x Amnesty International Česká republika, z.s. · ICO 44793430 · Signed 29.1.2025
-            </div>
-          </div>
+          `)}
         </div>
 
         <!-- CYBERIMPACT ROADSHOW -->
@@ -496,28 +455,18 @@ export class MMCybersecurity extends LitElement {
           </p>
 
           <div class="detail-grid">
-            <div class="detail-cell">
-              <div class="label">Dates</div>
-              <div class="val">May 18 to 22, 2026</div>
-            </div>
-
-            <div class="detail-cell">
-              <div class="label">People reached</div>
-              <div class="val">200+ across 10 cities</div>
-            </div>
+            ${cybersecurityRoadshowDetails.map((cell) => html`
+              <div class="detail-cell">
+                <div class="label">${cell.label}</div>
+                <div class="val">${cell.value}</div>
+              </div>
+            `)}
           </div>
 
           <div class="chip-row">
-            <span class="chip">Zlín</span>
-            <span class="chip">Ostrava</span>
-            <span class="chip">Olomouc</span>
-            <span class="chip">Pardubice</span>
-            <span class="chip">Liberec</span>
-            <span class="chip chip-highlight">Ústí nad Labem</span>
-            <span class="chip">Karlovy Vary</span>
-            <span class="chip">Plzeň</span>
-            <span class="chip">České Budějovice</span>
-            <span class="chip">Jihlava</span>
+            ${cybersecurityRoadshowCities.map((city) => html`
+              <span class="chip ${city.highlight ? "chip-highlight" : ""}">${city.name}</span>
+            `)}
           </div>
 
           <div class="photo-slot">
