@@ -18,7 +18,7 @@ export class MMCybersecurity extends LitElement {
       --border: #1e2836;
       --text: #e8edf5;
       --text-muted: #7a8a9e;
-      --text-dim: #3d4f63;
+      --text-dim: #6b8099;
       --highlight: #f0f4ff;
     }
 

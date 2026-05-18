@@ -27,7 +27,7 @@ export class MMGoodEnough extends LitElement {
       --border: #1e2836;
       --text: #e8edf5;
       --text-muted: #7a8a9e;
-      --text-dim: #3d4f63;
+      --text-dim: #6b8099;
       --highlight: #f0f4ff;
       --accent: var(--button-bg, #52c8f4);
       --raccoon: #a78bfa;
@@ -315,8 +315,13 @@ export class MMGoodEnough extends LitElement {
 
     .chart-img-wrap img {
       display: block;
-      width: 100%;
+      max-width: 62%;
       height: auto;
+      margin: 0;
+    }
+
+    .chart-img-wrap--full img {
+      max-width: 100%;
     }
 
     .chart-img-caption {
@@ -328,6 +333,89 @@ export class MMGoodEnough extends LitElement {
       padding: 0.4rem 0.8rem;
       border-top: 1px solid var(--border);
       background: rgba(255,255,255,0.01);
+    }
+
+    /* METHODOLOGY ROLLOUT */
+    .methodology-rollout {
+      margin: 2rem 0 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .methodology-rollout summary {
+      padding: 0.85rem 1.1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      background: rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .methodology-rollout summary:hover {
+      background: rgba(0, 0, 0, 0.45);
+      color: var(--text-muted);
+    }
+
+    .methodology-rollout summary::-webkit-details-marker { display: none; }
+
+    .methodology-rollout summary::before {
+      content: '▶';
+      font-size: 0.5rem;
+      transition: transform 0.15s;
+    }
+
+    .methodology-rollout[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .methodology-rollout-body {
+      padding: 1.25rem 1.4rem 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .methodology-rollout-body h4 {
+      font-size: 0.75rem;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin: 1.5rem 0 0.4rem;
+    }
+
+    .methodology-rollout-body h4:first-child {
+      margin-top: 0;
+    }
+
+    .methodology-note {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      border-left: 2px solid var(--border);
+      padding: 0.5rem 0.85rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .methodology-finding {
+      margin: 0.75rem 0;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .methodology-finding-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.35rem;
     }
 
     /* CHART NOTE — fallback badge when no image is available */
@@ -681,8 +769,9 @@ export class MMGoodEnough extends LitElement {
     const q = goodEnoughChartNotes[key];
     const src = MMGoodEnough._chartImages[key];
     if (src) {
+      const wrapClass = key === 'hardDay' ? 'chart-img-wrap chart-img-wrap--full' : 'chart-img-wrap';
       return html`
-        <div class="chart-img-wrap">
+        <div class="${wrapClass}">
           <img src="${src}" alt="${q}" loading="lazy" />
           <div class="chart-img-caption">${q}</div>
         </div>
@@ -710,8 +799,8 @@ export class MMGoodEnough extends LitElement {
           <h1>Good Enough</h1>
           <p class="hero-tagline">A planning tool that doesn't punish you for being human.</p>
           <p class="hero-body">
-            This is a project about a planning companion for people with AuDHD —
-            co-occurring autism and ADHD — built over one semester as part of the course
+            This is a project about a planning companion for people with AuDHD,
+            co-occurring autism and ADHD, built over one semester as part of the course
             <strong>AI in Practice</strong> at KISK, MUNI Arts, following the Double Diamond
             design framework from the first vague idea to a deployed prototype. It started
             because I needed it to exist.
@@ -728,7 +817,7 @@ export class MMGoodEnough extends LitElement {
 
         <!-- CHALLENGE 1: DEFINING THE PROJECT -->
         <div class="section">
-          <div class="section-marker">Challenge 1 — Defining the project</div>
+          <div class="section-marker">Challenge 1: Defining the project</div>
           <span class="phase-marker discover">Double Diamond: Discover</span>
           <h2>It started from being stuck</h2>
           <p>
@@ -746,7 +835,7 @@ export class MMGoodEnough extends LitElement {
           <h3>The problem</h3>
           <p>
             Some people spend most of their lives thinking something is fundamentally wrong
-            with them. They are simultaneously organised and chaotic — a kind of organised
+            with them. They are simultaneously organised and chaotic, a kind of organised
             chaos that is hard to explain to others. They didn't know the rules of the game.
             They didn't know they were playing a different one.
           </p>
@@ -755,7 +844,7 @@ export class MMGoodEnough extends LitElement {
             specific trap: they are capable of building plans. <strong>The problem is
             everything after that.</strong> The paralysis is not laziness. It is a combination
             of completion paralysis, internal motivation instability, shame-spiral mechanics,
-            and concentration block irregularity — focus and capacity that don't follow a
+            and concentration block irregularity, focus and capacity that don't follow a
             daily rhythm, arriving in waves.
           </p>
 
@@ -774,7 +863,7 @@ export class MMGoodEnough extends LitElement {
           <p>
             The companion has a personality. Kind, lightly humorous, occasionally firm but
             never punitive. If the user disappears for three days and comes back, it opens
-            with a joke — maybe a raccoon fact — because AuDHD people and raccoons have a
+            with a joke, maybe a raccoon fact, because AuDHD people and raccoons have a
             lot in common: both are chaotic, curious, resourceful, and excellent at making
             something out of nothing.
           </p>
@@ -795,12 +884,12 @@ export class MMGoodEnough extends LitElement {
 
         <!-- CHALLENGE 2: RESEARCH -->
         <div class="section">
-          <div class="section-marker">Challenge 2 — Research and stakeholder mapping</div>
+          <div class="section-marker">Challenge 2: Research and stakeholder mapping</div>
           <span class="phase-marker discover">Double Diamond: Discover</span>
           <h2>The competitive landscape</h2>
           <p>
-            The landscape was mapped with AI support — Claude for synthesis, Perplexity for
-            source mapping — then critically verified. The finding: a range of tools partially
+            The landscape was mapped with AI support (Claude for synthesis, Perplexity for
+            source mapping), then critically verified. The finding: a range of tools partially
             overlap with this project's scope. None addresses the full picture.
             <strong>Several actively make things worse.</strong>
           </p>
@@ -818,16 +907,16 @@ export class MMGoodEnough extends LitElement {
             Other tools reviewed: <strong>Tiimo</strong> (strong on visual routines, missing emotional
             adaptation), <strong>Goblin Tools</strong> (excellent for task decomposition, no persistent
             companion), <strong>Motion</strong> (too rigid, assumes consistent daily capacity),
-            <strong>Focusmate</strong> (body doubling — a proven ADHD technique — but requiring social
+            <strong>Focusmate</strong> (body doubling, a proven ADHD technique, but requiring social
             energy that may be limited for autistic users), and <strong>Notion / Obsidian</strong>
-            (unlimited customisation, which is both the appeal and the trap — setting up the perfect
+            (unlimited customisation, which is both the appeal and the trap: setting up the perfect
             system becomes its own form of procrastination).
           </p>
 
           <h3>What AI consistently missed</h3>
           <p>
             Two recurring errors required correction: AI conflated ADHD and AuDHD, omitting the autistic
-            dimension, and it was overly optimistic about the quality of existing tools — several of which
+            dimension, and it was overly optimistic about the quality of existing tools, several of which
             were abandoned projects presented as active. Source verification was essential throughout.
           </p>
           <p>
@@ -840,7 +929,7 @@ export class MMGoodEnough extends LitElement {
 
         <!-- CHALLENGE 3: USER RESEARCH -->
         <div class="section">
-          <div class="section-marker">Challenge 3 — User research and empathy mapping</div>
+          <div class="section-marker">Challenge 3: User research and empathy mapping</div>
           <span class="phase-marker discover">Double Diamond: Discover</span>
           <h2>Three interviews, one methodological confrontation</h2>
           <p>
@@ -859,7 +948,7 @@ export class MMGoodEnough extends LitElement {
             Key themes: completion paralysis driven by perceived insignificance
             (<em>"if it only matters to me, my brain doesn't treat it as urgent"</em>),
             shame-spiral mechanics from visible failure lists, external pressure as the primary trigger
-            for action, and concentration arriving in blocks — not days. Two weeks of high capacity,
+            for action, and concentration arriving in blocks, not days. Two weeks of high capacity,
             two weeks of near-zero. Not something discipline fixes.
           </p>
 
@@ -908,7 +997,7 @@ export class MMGoodEnough extends LitElement {
 
           <h3>Interview 4: A third failure mode</h3>
           <p>
-            Fear of success as a blocker — activating specifically at the moment of releasing finished work.
+            Fear of success as a blocker, activating specifically at the moment of releasing finished work.
             And the reframe that became the project's name:
           </p>
 
@@ -928,7 +1017,7 @@ export class MMGoodEnough extends LitElement {
 
         <!-- CHALLENGE 4: SURVEY -->
         <div class="section">
-          <div class="section-marker">Challenge 4 — Data synthesis and the survey</div>
+          <div class="section-marker">Challenge 4: Data synthesis and the survey</div>
           <span class="phase-marker define">Double Diamond: Define</span>
           <h2>Where research and design converged</h2>
           <p>
@@ -956,6 +1045,103 @@ export class MMGoodEnough extends LitElement {
           </div>
 
           <h3>The survey</h3>
+
+          <details class="methodology-rollout">
+            <summary>Research Methodology: extended summary</summary>
+            <div class="methodology-rollout-body">
+              <div class="methodology-note">
+                This summary is based on a study submitted for the course Research Methodology 2 at the
+                Faculty of Arts, Masaryk University. The paper is currently awaiting formal review and
+                feedback from the course instructor. The findings presented here are the author's own
+                analysis and have not yet been validated or corrected by a university methodology
+                supervisor. This page will be updated once that review is complete.
+              </div>
+
+              <h4>What the study was</h4>
+              <p>
+                The survey underlying the Good Enough project was not only a design research tool; it was
+                also analysed as a formal quantitative study for a parallel methodology course. A 36-item
+                questionnaire was distributed via social media and personal networks in May 2026. 24
+                respondents completed it. The sample skewed young (median age 21), predominantly female
+                (75%), and Czech-based (71%). 75% identified with neurodivergence in some form; only
+                20.8% held a formal diagnosis.
+              </p>
+              <p>
+                Statistical analysis was conducted in JASP (Version 0.97) and included descriptive
+                statistics, one-sample t-tests, Spearman rank correlations, and Mann-Whitney U group
+                comparisons.
+              </p>
+
+              <h4>What the numbers showed</h4>
+              <p>Three findings were statistically significant above the scale midpoint (tested against a neutral score of 3 out of 5):</p>
+
+              <div class="methodology-finding">
+                <div class="methodology-finding-label">Shame-driven avoidance</div>
+                <p style="margin:0">
+                  Mean 4.00, p = .004, Cohen's d = 0.65. Seeing a growing list of unfinished tasks
+                  makes respondents want to avoid the tool entirely. Medium-to-large effect. This is the
+                  strongest single design constraint in the entire project: no visible failure lists, ever.
+                </p>
+              </div>
+
+              <div class="methodology-finding">
+                <div class="methodology-finding-label">External pressure dependency</div>
+                <p style="margin:0">
+                  Mean 3.71, p = .012, Cohen's d = 0.56. Getting things done for others but not for
+                  oneself. Medium effect. Validates the "only for me" devaluation loop identified in
+                  Interview 1 and built into the 10-knob personalisation model.
+                </p>
+              </div>
+
+              <div class="methodology-finding">
+                <div class="methodology-finding-label">Desire for pattern tracking</div>
+                <p style="margin:0">
+                  Mean 4.25, p &lt; .001, Cohen's d = 1.17. The strongest result in the dataset, a large
+                  effect. Respondents strongly want the companion to notice and reflect their own patterns
+                  back to them. This directly grounds the pattern tracking feature built into the Replit
+                  deployment.
+                </p>
+              </div>
+
+              <h4>One correlation worth naming</h4>
+              <p>
+                Shame-driven avoidance and external pressure dependency were significantly and moderately
+                correlated (Spearman's r&#x209B; = .539, p = .007). This means they are not just two
+                separate problems; they cluster. People who avoid tasks because of accumulated shame are
+                also the people who can only act when someone else is depending on them. The companion
+                has to address both simultaneously, not separately.
+              </p>
+
+              <h4>One finding that matters for access</h4>
+              <p>
+                No statistically significant differences emerged between formally diagnosed respondents
+                and those without a diagnosis on any measured item. The planning-related experiences this
+                tool is designed for are not contingent on holding a clinical label. This is the
+                statistical backing for the design decision that Good Enough does not require diagnosis
+                as a threshold for relevance.
+              </p>
+
+              <h4>What the study cannot claim</h4>
+              <p>
+                The sample is small (n = 24) and was recruited through the author's personal network,
+                which skews toward university-age adults in the Czech Republic and DACH region. The
+                questionnaire was designed specifically for this project and has not been validated
+                against established psychometric tools. The author occupies an insider position, someone
+                with AuDHD-related experience designing a tool for people with AuDHD-related experience,
+                which is both a methodological strength (depth of construct understanding) and a
+                potential source of confirmation bias.
+              </p>
+              <p>
+                These findings support the design decisions of Good Enough. They do not constitute
+                clinical evidence, and the study does not claim to generalise beyond this convenience
+                sample.
+              </p>
+              <p class="methodology-note" style="margin:1rem 0 0">
+                Full paper available on request. This summary will be updated following instructor review.
+              </p>
+            </div>
+          </details>
+
           <div class="detail-grid">
             ${goodEnoughSurveyDetails.map(
               (cell) => html`
@@ -971,7 +1157,7 @@ export class MMGoodEnough extends LitElement {
 
           <p>
             Only 16.7% hold a formal AuDHD or combined diagnosis. Only 17.6% first understood their
-            neurodivergence through clinical diagnosis — the dominant routes were self-recognition through
+            neurodivergence through clinical diagnosis; the dominant routes were self-recognition through
             reading (58.8%) and online communities (58.8%).
             <strong>The tool must not require clinical validation to be accessible.</strong>
           </p>
@@ -1010,7 +1196,7 @@ export class MMGoodEnough extends LitElement {
             The two most common reasons for abandoning planning tools, both at 54.2%:
             <strong>"I fall behind and feel too ashamed to come back"</strong> and
             <strong>"it works for a few weeks and then stops."</strong> Shame is the primary
-            abandonment driver — not difficulty of use, cost, or feature gaps.
+            abandonment driver, not difficulty of use, cost, or feature gaps.
           </p>
 
           ${this._chartNote("abandonment")}
@@ -1063,7 +1249,7 @@ export class MMGoodEnough extends LitElement {
 
         <!-- CHALLENGE 5: IDEATION -->
         <div class="section">
-          <div class="section-marker">Challenge 5 — Ideation and customer journey</div>
+          <div class="section-marker">Challenge 5: Ideation and customer journey</div>
           <span class="phase-marker develop">Double Diamond: Develop</span>
           <h2>Fourteen ideas, eight survivors</h2>
           <p>
@@ -1112,7 +1298,7 @@ export class MMGoodEnough extends LitElement {
 
         <!-- CHALLENGE 6: PROTOTYPE -->
         <div class="section">
-          <div class="section-marker">Challenge 6 — Prototype and personalisation</div>
+          <div class="section-marker">Challenge 6: Prototype and personalisation</div>
           <span class="phase-marker develop">Double Diamond: Develop</span>
           <h2>The 10-knob spectrum model</h2>
           <p>
@@ -1157,7 +1343,7 @@ export class MMGoodEnough extends LitElement {
             stark white backgrounds have a documented negative impact on autism; dark mode reduces visual
             stimulation for ADHD; muted blues and greens promote calm and focus; warm neutrals offer
             predictable comfort for sensory sensitivity. The final colour palette was selected against
-            all four criteria — not from aesthetic preference.
+            all four criteria, not from aesthetic preference.
           </p>
           <p>
             The prototype went through five visual iterations. A mood picker was tried and removed (it
@@ -1169,9 +1355,9 @@ export class MMGoodEnough extends LitElement {
           <h3>Deployment</h3>
           <p>
             Built on Replit with a secure API proxy, anonymous session management,
-            <strong>PostgreSQL-based persistent memory</strong> — the companion stores a 2–3 sentence
+            <strong>PostgreSQL-based persistent memory</strong>: the companion stores a 2–3 sentence
             session summary and injects it into the next session's system prompt, directly addressing
-            the research requirement that the companion must not forget — the 10-knob onboarding,
+            the research requirement that the companion must not forget, the 10-knob onboarding,
             pattern tracking across sessions, and a session export button.
           </p>
           <p>
@@ -1183,10 +1369,10 @@ export class MMGoodEnough extends LitElement {
 
         <!-- BUILD PROCESS -->
         <div class="section">
-          <div class="section-marker">Build process — What actually happened</div>
+          <div class="section-marker">Build process: What actually happened</div>
           <h2>Five conversations, one connective tissue</h2>
           <p>
-            The project lived across five simultaneous Claude conversations — not by design, but because
+            The project lived across five simultaneous Claude conversations, not by design, but because
             different conversations served different functions. One served as the informed side (project
             memory, design partner, critical checker), one as the building side (drafting under deadline
             pressure), one for the survey design, one for the prototype build, and one for writing the
@@ -1203,7 +1389,7 @@ export class MMGoodEnough extends LitElement {
             <div class="lesson-label">The fabricated statistic</div>
             <p>
               During one session, Claude generated a data visualisation that included:
-              <strong>"Tool abandonment (shame mechanic): 67% leave within 3 months — Goblin Tools
+              <strong>"Tool abandonment (shame mechanic): 67% leave within 3 months. Goblin Tools
               documentation."</strong> This statistic does not exist. Goblin Tools publishes no such
               documentation. The number was invented, the source was invented, and it was formatted to
               look like a legitimate citation.
@@ -1237,7 +1423,7 @@ export class MMGoodEnough extends LitElement {
           <p>
             Unpredictable check-ins require a background process the free Replit tier can't run.
             Silent recalibration of knob scores requires longitudinal data. Offline mode and hormonal
-            cycle awareness — flagged in the literature as relevant for female AuDHD users in their 30s —
+            cycle awareness (flagged in the literature as relevant for female AuDHD users in their 30s)
             were both specified and grounded, but the 80% Replit capacity limit was reached before they
             could be implemented. <strong>They are ready to build.</strong>
           </p>
@@ -1256,15 +1442,15 @@ export class MMGoodEnough extends LitElement {
             The AI tools were useful for holding detail and generating fast under pressure. They were not
             useful as a substitute for judgment. Early drafts were robotic. First prototypes violated
             design principles. The building chat drifted from the research. In every case, the correction
-            required someone who knew what the project was actually trying to do — and who was willing
+            required someone who knew what the project was actually trying to do, and who was willing
             to say "this isn't right" rather than accept the plausible output.
           </p>
 
           <div class="callout">
             <p>
               The most useful single habit developed during this project: treating AI output as a first
-              draft that requires verification, not a final answer that requires formatting. That shift —
-              from user to editor — changed how every subsequent conversation worked.
+              draft that requires verification, not a final answer that requires formatting. That shift,
+              from user to editor, changed how every subsequent conversation worked.
             </p>
           </div>
         </div>

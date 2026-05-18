@@ -67,7 +67,7 @@ export const goodEnoughFeatures: GoodEnoughFeature[] = [
 export const goodEnoughKnobs: GoodEnoughKnob[] = [
   {
     name: "Initiation resistance",
-    desc: "How hard it is to start a task — the gap between intending and beginning.",
+    desc: "How hard it is to start a task: the gap between intending and beginning.",
   },
   {
     name: "Momentum fragility",
@@ -87,7 +87,7 @@ export const goodEnoughKnobs: GoodEnoughKnob[] = [
   },
   {
     name: "Time blindness",
-    desc: "How poorly time passing is perceived — affecting planning and transitions.",
+    desc: "How poorly time passing is perceived, affecting planning and transitions.",
   },
   {
     name: "Hyperfocus availability",
@@ -99,11 +99,11 @@ export const goodEnoughKnobs: GoodEnoughKnob[] = [
   },
   {
     name: "Self-insight level",
-    desc: "Accuracy of self-reporting — determines how much the companion recalibrates silently.",
+    desc: "Accuracy of self-reporting: determines how much the companion recalibrates silently.",
   },
   {
     name: "External accountability reliance",
-    desc: "Whether the user functions better with a witness — human or system.",
+    desc: "Whether the user functions better with a witness, human or system.",
   },
 ];
 
@@ -219,11 +219,11 @@ export const goodEnoughDesignPrinciples: string[] = [
 ];
 
 export const goodEnoughChartNotes: Record<string, string> = {
-  diagnosis: "Q5 — Diagnosis status breakdown",
-  laziness: "Q8 — How long respondents believed the problem was laziness",
-  shame: "Q12 — Shame-driven avoidance ratings",
-  abandonment: "Q22 — Reasons for abandoning planning tools",
-  hardDay: "Q27 — What would make you open it on a hard day",
-  tone: "Q28 — Tone preference",
-  interest: "Q26 — Interest in Good Enough",
+  diagnosis: "Q5: Diagnosis status breakdown",
+  laziness: "Q8: How long respondents believed the problem was laziness",
+  shame: "Q12: Shame-driven avoidance ratings",
+  abandonment: "Q22: Reasons for abandoning planning tools",
+  hardDay: "Q27: What would make you open it on a hard day",
+  tone: "Q28: Tone preference",
+  interest: "Q26: Interest in Good Enough",
 };
