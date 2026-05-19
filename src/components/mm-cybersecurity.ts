@@ -97,6 +97,43 @@ export class MMCybersecurity extends LitElement {
       font-weight: 600;
     }
 
+    .hero-layout {
+      display: flex;
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .hero-content {
+      flex: 1 1 55%;
+      min-width: 0;
+    }
+
+    .hero-side-img {
+      flex: 0 0 38%;
+      min-width: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      align-self: flex-start;
+    }
+
+    .hero-side-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-below-img {
+      margin-top: 1.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .hero-below-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* SECTIONS */
     .section {
       padding: 2.5rem 0 2rem;
@@ -314,6 +351,9 @@ export class MMCybersecurity extends LitElement {
         width: 100%;
         order: 2;
       }
+      .hero-layout { flex-direction: column; }
+      .hero-side-img { flex: none; width: 100%; }
+      .hero-side-img img { height: auto; max-height: 280px; }
     }
   `;
 
@@ -324,25 +364,31 @@ export class MMCybersecurity extends LitElement {
           <mm-back-button label="Back to Projects" href="/projects"></mm-back-button>
         </div>
 
-        <div class="google-pip">
-          <span class="pip pip-b"></span>
-          <span class="pip pip-r"></span>
-          <span class="pip pip-y"></span>
-          <span class="pip pip-g"></span>
-          Google.org Cybersecurity Seminars
-        </div>
-
         <!-- HERO -->
         <div class="hero">
-          <div class="eyebrow">Portfolio · Cybersecurity</div>
-          <h1>Teaching security<br>to people who need it <span>most.</span></h1>
-          <p class="hero-body">
-            I participated in <strong>Google.org's Cybersecurity Seminars programme</strong>, a global initiative
-            supporting hands-on cybersecurity training at universities across Europe, the Middle East, and Africa.
-            Masaryk University is one of roughly 20 institutions worldwide selected for this funding. The work is not
-            about earning a certificate. It is about taking what you learn and actually doing something with it, in
-            communities that do not have a dedicated IT team, or a security budget, or anyone to ask.
-          </p>
+          <div class="hero-layout">
+            <div class="hero-content">
+              <div class="google-pip">
+                <span class="pip pip-b"></span>
+                <span class="pip pip-r"></span>
+                <span class="pip pip-y"></span>
+                <span class="pip pip-g"></span>
+                Google.org Cybersecurity Seminars
+              </div>
+              <div class="eyebrow">Portfolio · Cybersecurity</div>
+              <h1>Teaching security<br>to people who need it <span>most.</span></h1>
+              <p class="hero-body">
+                I participated in <strong>Google.org's Cybersecurity Seminars programme</strong>, a global initiative
+                supporting hands-on cybersecurity training at universities across Europe, the Middle East, and Africa.
+                Masaryk University is one of roughly 20 institutions worldwide selected for this funding. The work is not
+                about earning a certificate. It is about taking what you learn and actually doing something with it, in
+                communities that do not have a dedicated IT team, or a security budget, or anyone to ask.
+              </p>
+            </div>
+            <div class="hero-side-img">
+              <img src="https://i.imgur.com/ObESF8o.jpg" alt="Google.org Cybersecurity Seminars" loading="lazy" />
+            </div>
+          </div>
         </div>
 
         <!-- THE PROGRAMME -->
@@ -431,6 +477,9 @@ export class MMCybersecurity extends LitElement {
         <div class="section">
           <div class="section-marker">CyberImpact Roadshow · ISKM111</div>
           <h2>Forty-five people on a bus, ten cities, five days</h2>
+          <div class="hero-below-img">
+            <img src="https://i.imgur.com/CqGRYkq.jpg" alt="CyberImpact Roadshow" loading="lazy" />
+          </div>
           <p>
             After completing my placements, I was accepted into the <strong>CyberImpact Roadshow</strong>, an
             accredited field expedition run by the CSS programme. Twenty students, ten academic staff, fifteen
