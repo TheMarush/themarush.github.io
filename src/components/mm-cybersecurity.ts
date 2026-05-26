@@ -304,7 +304,7 @@ export class MMCybersecurity extends LitElement {
 
     .chip {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.58rem;
       color: var(--button-bg, #52c8f4);
       background: rgba(82, 200, 244, 0.08);
       border: 1px solid rgba(82, 200, 244, 0.18);
@@ -317,6 +317,28 @@ export class MMCybersecurity extends LitElement {
       background: rgba(82, 200, 244, 0.2);
       border-color: var(--button-bg, #52c8f4);
       font-weight: 600;
+    }
+
+    .chip-arrow {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      align-self: center;
+      line-height: 1;
+    }
+
+    /* FLOAT IMAGE */
+    .float-img-right {
+      float: right;
+      width: 52%;
+      margin: 0.25rem 0 1rem 1.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .float-img-right img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     /* PHOTO SLOT */
@@ -354,6 +376,8 @@ export class MMCybersecurity extends LitElement {
       .hero-layout { flex-direction: column; }
       .hero-side-img { flex: none; width: 100%; }
       .hero-side-img img { height: auto; max-height: 280px; }
+      .float-img-right { float: none; width: 100%; margin: 0 0 1rem; }
+      .expedition-img { width: 100%; }
     }
   `;
 
@@ -375,7 +399,6 @@ export class MMCybersecurity extends LitElement {
                 <span class="pip pip-g"></span>
                 Google.org Cybersecurity Seminars
               </div>
-              <div class="eyebrow">Portfolio · Cybersecurity</div>
               <h1>Teaching security<br>to people who need it <span>most.</span></h1>
               <p class="hero-body">
                 I participated in <strong>Google.org's Cybersecurity Seminars programme</strong>, a global initiative
@@ -475,8 +498,14 @@ export class MMCybersecurity extends LitElement {
 
         <!-- CYBERIMPACT ROADSHOW -->
         <div class="section">
-          <div class="section-marker">CyberImpact Roadshow · ISKM111</div>
+          <div class="section-marker">CyberImpact Roadshow</div>
           <h2>Forty-five people on a bus, ten cities, five days</h2>
+          <div class="chip-row">
+            ${cybersecurityRoadshowCities.map((city, i) => html`
+              <span class="chip ${city.highlight ? "chip-highlight" : ""}">${city.name}</span>
+              ${i < cybersecurityRoadshowCities.length - 1 ? html`<span class="chip-arrow">→</span>` : ""}
+            `)}
+          </div>
           <div class="hero-below-img">
             <img src="https://i.imgur.com/CqGRYkq.jpg" alt="CyberImpact Roadshow" loading="lazy" />
           </div>
@@ -493,7 +522,7 @@ export class MMCybersecurity extends LitElement {
             hours, co-facilitated with an academic expert.
           </p>
           <p>
-            I facilitated the workshop in <strong>Ústí nad Labem</strong>, with a focus on device security. Topics
+            I facilitated the workshop in Ústí nad Labem, with a focus on device security. Topics
             included PIN and screen lock setup, automatic updates, the 3-2-1 backup rule for photos, password
             phrases, Bitwarden, and two-factor authentication, built for people with no assumed technical background
             and grounded in the kinds of fraud that actually target them. The full presentation is below.
@@ -502,6 +531,46 @@ export class MMCybersecurity extends LitElement {
             Afterwards, everyone contributes to a shared output, the <em>Kyberbezpečnostní atlas Česka 2026</em>,
             a practical guide for future educators working in the same space.
           </p>
+
+          <div class="placement">
+            <div class="placement-top">
+              <div class="placement-name">Ústí nad Labem — Device Security</div>
+            </div>
+            <div class="placement-text" style="overflow:hidden;">
+              <div class="float-img-right">
+                <img src="https://i.imgur.com/zQiOn4G.jpg" alt="Workshop in Ústí nad Labem" loading="lazy" />
+              </div>
+              <p>
+                The workshop ran on 20 May at the Knihovna Ústeckého kraje, co-facilitated with CSIRT-MU. The audience
+                was general public with no assumed technical background. The session was designed for exactly the group
+                that takes the most financial damage from digital fraud, not because they are the most frequently
+                targeted, but because their average losses are higher. In 2023, the average damage from a single vishing
+                attack in the Czech Republic was 300,000 CZK (roughly €12,000).
+              </p>
+              <p>
+                The session covered eight topics in roughly 90 minutes: physical device protection, software updates,
+                photo backup using the 3-2-1 rule (three copies of your data, on two different types of storage, with
+                one kept offsite), notification privacy, app permissions, password phrases, Bitwarden, and two-factor
+                authentication, with step-by-step instructions for both Android and iPhone throughout. The throughline
+                was simple: every security measure you put in place buys you time. Time to hang up, call back on a
+                number you found yourself, and ask someone you trust. The whole session was built around that idea, not
+                around memorising rules.
+              </p>
+              <p>
+                The hands-on activity asked participants to sort real messages, SMS, emails, described phone calls, into
+                genuine or fraudulent, and mark the warning signals. Getting it wrong was part of the point. The three
+                signals that run through every real attack, urgency, fear, and secrecy, are easy to spot in retrospect
+                and much harder under pressure. Practising the recognition before it happens is the whole purpose.
+              </p>
+              <p>
+                Participants left with the 4P rule (Přemýšlej, Prověř, Poraď se, Plať, meaning Think, Verify, Ask
+                someone, then Pay), at least one setting changed on their own phone, and a printed checklist of ten
+                things to have in place. The full methodical guide was produced as an open educational resource for
+                future educators working in the same space.
+                <em>[EDITOR: link/embed the guide here once uploaded]</em>
+              </p>
+            </div>
+          </div>
 
           <div class="detail-grid">
             ${cybersecurityRoadshowDetails.map((cell) => html`
@@ -512,14 +581,8 @@ export class MMCybersecurity extends LitElement {
             `)}
           </div>
 
-          <div class="chip-row">
-            ${cybersecurityRoadshowCities.map((city) => html`
-              <span class="chip ${city.highlight ? "chip-highlight" : ""}">${city.name}</span>
-            `)}
-          </div>
-
-          <div class="photo-slot">
-            <p>Photos from the expedition · May 2026 · Coming soon</p>
+          <div class="hero-below-img">
+            <img src="https://i.imgur.com/gvAtj7L.jpg" alt="CyberImpact Roadshow expedition" class="expedition-img" loading="lazy" />
           </div>
         </div>
 

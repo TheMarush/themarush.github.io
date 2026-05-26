@@ -60,7 +60,7 @@ export const cybersecurityRoadshowCities: RoadshowCity[] = [
   { name: "Olomouc" },
   { name: "Pardubice" },
   { name: "Liberec" },
-  { name: "Ústí nad Labem", highlight: true },
+  { name: "Ústí nad Labem" },
   { name: "Karlovy Vary" },
   { name: "Plzeň" },
   { name: "České Budějovice" },
@@ -68,6 +68,6 @@ export const cybersecurityRoadshowCities: RoadshowCity[] = [
 ];
 
 export const cybersecurityRoadshowDetails: DetailCell[] = [
-  { label: "Dates", value: "May 18 to 22, 2026" },
-  { label: "People reached", value: "200+ across 10 cities" },
+  { label: "Dates", value: "18–22 May 2026" },
+  { label: "People reached", value: "200+ across 10 regional cities in 5 days" },
 ];
