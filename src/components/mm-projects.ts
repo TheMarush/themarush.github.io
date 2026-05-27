@@ -210,6 +210,28 @@ export class MMProjects extends LitElement {
       font-style: italic;
     }
 
+    /* ── ROW 3 – PODCAST (full width, horizontal) ── */
+    .story-podcast {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      border-top: 2px solid rgba(148, 163, 184, 0.5);
+      border-right: none;
+      margin-top: 0.5rem;
+      flex-direction: row;
+    }
+
+    .story-podcast .story-img {
+      width: 360px;
+      aspect-ratio: 16 / 9;
+      margin: 0.75rem 0 0.75rem 0;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+
+    .story-podcast .story-text {
+      padding-left: 1.5rem;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 760px) {
       .paper {
@@ -222,6 +244,9 @@ export class MMProjects extends LitElement {
       .story-b1        { grid-column: 1 / 3;  grid-row: 3; }
       .story-b2        { grid-column: 3 / 5;  grid-row: 3; border-right: none; }
       .story-b3        { grid-column: 1 / -1; grid-row: 4; border-right: none; }
+      .story-podcast   { grid-column: 1 / -1; grid-row: 5; flex-direction: column; }
+      .story-podcast .story-img { width: calc(100% - 1.5rem); margin: 0.75rem 0.75rem 0; }
+      .story-podcast .story-text { padding-left: 0; }
 
       .story-feature .story-text { padding-left: 0; }
       .story-brief   .story-text { padding-right: 0; }
@@ -242,18 +267,23 @@ export class MMProjects extends LitElement {
       .story-brief,
       .story-b1,
       .story-b2,
-      .story-b3 {
+      .story-b3,
+      .story-podcast {
         grid-column: 1 / -1 !important;
         grid-row: auto !important;
         border-right: none !important;
+        flex-direction: column !important;
       }
+
+      .story-podcast .story-img { width: calc(100% - 1.5rem) !important; margin: 0.75rem 0.75rem 0 !important; }
 
       .story-feature   .story-text,
       .story-secondary .story-text,
       .story-brief     .story-text,
       .story-b1        .story-text,
       .story-b2        .story-text,
-      .story-b3        .story-text {
+      .story-b3        .story-text,
+      .story-podcast   .story-text {
         padding-left: 0 !important;
         padding-right: 0 !important;
       }
@@ -391,6 +421,28 @@ export class MMProjects extends LitElement {
               <div class="cta-row">
                 <button type="button" class="read-btn" @click=${() => navigate("/projects/feminism")}>
                   Read more →
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="story story-podcast" aria-labelledby="podcast-title">
+            <img
+              class="story-img"
+              src="https://img.youtube.com/vi/Qn3vAJkE4ms/hqdefault.jpg"
+              alt="Mahdalky podcast — mother and daughter conversations"
+              loading="lazy"
+            />
+            <div class="story-text">
+              <div class="kicker">Podcast · Czech · 2024–present</div>
+              <h3 id="podcast-title" class="headline">Podcast: Mahdalky</h3>
+              <div class="hrule"></div>
+              <p class="deck">
+                Mother and daughter, two generations, one podcast. Honest conversations about mental health, money, attention, parenting, and technology. Breaking taboos so you don't have to do it alone.
+              </p>
+              <div class="cta-row">
+                <button type="button" class="read-btn" @click=${() => navigate("/projects/podcast")}>
+                  All episodes →
                 </button>
               </div>
             </div>
