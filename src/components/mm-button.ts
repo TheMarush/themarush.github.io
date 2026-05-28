@@ -53,11 +53,6 @@ export class MMButon extends LitElement {
       outline: 4px auto -webkit-focus-ring-color;
     }
 
-    @media (prefers-color-scheme: light) {
-    button.mm-button {
-        background-color: #f9f9f9;
-      }
-    }
   `;
 }
 

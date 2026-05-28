@@ -66,13 +66,6 @@ export class Modal extends LitElement {
       animation: modalIn 0.3s ease-out forwards;
     }
 
-    @media (prefers-color-scheme: light) {
-      .modal {
-        background: #ffffff;
-        color: #213547;
-      }
-    }
-
     .modal.closing {
       animation: modalOut 0.2s ease-in forwards;
     }

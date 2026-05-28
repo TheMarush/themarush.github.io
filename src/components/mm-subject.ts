@@ -247,11 +247,6 @@ export class MMSubject extends LitElement {
       }
     }
 
-    @media (prefers-color-scheme: light) {
-      .subject-section {
-        background-color: rgba(82, 200, 244, 0.08);
-      }
-    }
   `;
 }
 

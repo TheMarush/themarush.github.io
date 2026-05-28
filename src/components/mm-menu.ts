@@ -421,28 +421,23 @@ export class MMMenu extends LitElement {
       }
     }
 
-    @media (prefers-color-scheme: dark) {
-      @media (max-width: 767px) {
-        .burger-container {
-        }
+    @media (max-width: 767px) {
+      .burger-btn {
+        background: rgba(248, 250, 252, 0.05);
+      }
 
-        .burger-btn {
-          background: rgba(248, 250, 252, 0.05);
-        }
+      .burger-btn span {
+        background: #f1f5f9;
+      }
 
-        .burger-btn span {
-          background: #f1f5f9;
-        }
+      .menu-nav.right {
+        background: rgba(248, 250, 252, 0.03);
+        border-left-color: rgba(248, 250, 252, 0.08);
+      }
 
-        .menu-nav.right {
-          background: rgba(248, 250, 252, 0.03);
-          border-left-color: rgba(248, 250, 252, 0.08);
-        }
-
-        .menu-nav.left {
-          background: rgba(248, 250, 252, 0.03);
-          border-right-color: rgba(248, 250, 252, 0.08);
-        }
+      .menu-nav.left {
+        background: rgba(248, 250, 252, 0.03);
+        border-right-color: rgba(248, 250, 252, 0.08);
       }
     }
 

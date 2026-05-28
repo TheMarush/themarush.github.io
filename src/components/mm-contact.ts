@@ -209,13 +209,6 @@ export class MMContact extends LitElement {
       }
     }
 
-    @media (prefers-color-scheme: light) {
-      .contact-form input,
-      .contact-form textarea {
-        background-color: #f9f9f9;
-        color: #213547;
-      }
-    }
   `;
 }
 
