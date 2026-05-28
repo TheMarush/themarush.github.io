@@ -38,10 +38,19 @@ export class MMPodcast extends LitElement {
   @state()
   private _active = new Set<string>();
 
+  @state()
+  private _expanded = new Set<string>();
+
   private _play(id: string) {
     const next = new Set(this._active);
     next.add(id);
     this._active = next;
+  }
+
+  private _toggleExpanded(id: string) {
+    const next = new Set(this._expanded);
+    next.has(id) ? next.delete(id) : next.add(id);
+    this._expanded = next;
   }
 
   static styles = css`
@@ -143,6 +152,12 @@ export class MMPodcast extends LitElement {
       border-color: #1db954;
       color: #1db954;
       background: rgba(29, 185, 84, 0.06);
+    }
+
+    .platform-link.youtube:hover {
+      border-color: #ff0000;
+      color: #ff0000;
+      background: rgba(255, 0, 0, 0.06);
     }
 
     .platform-link svg {
@@ -275,12 +290,24 @@ export class MMPodcast extends LitElement {
       flex-shrink: 0;
     }
 
+    .ep-body-wrap {
+      position: relative;
+      max-height: 5.5rem;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
+    }
+
+    .ep-body-wrap.expanded {
+      max-height: none;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
     .ep-body {
       font-size: 0.88rem;
       color: #d1d5db;
       line-height: 1.8;
-      max-height: 11rem;
-      overflow-y: auto;
     }
 
     .ep-body p {
@@ -289,6 +316,21 @@ export class MMPodcast extends LitElement {
 
     .ep-body p:last-child {
       margin-bottom: 0;
+    }
+
+    .ep-readmore {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #9ca3af;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: color 150ms ease;
+      text-align: left;
+    }
+
+    .ep-readmore:hover {
+      color: #f9fafb;
     }
 
     /* ── responsive ── */
@@ -317,6 +359,7 @@ export class MMPodcast extends LitElement {
 
   private renderEpisode(ep: PodcastEpisode) {
     const isActive = this._active.has(ep.youtubeId);
+    const isExpanded = this._expanded.has(ep.id);
     return html`
       <article class="episode" id="ep-${ep.number}" aria-labelledby="ep-title-${ep.number}">
         <div class="ep-media">
@@ -360,7 +403,12 @@ export class MMPodcast extends LitElement {
           <div class="ep-meta">Ep. ${ep.number} · ${ep.date}</div>
           <h2 id="ep-title-${ep.number}" class="ep-title">${ep.title}</h2>
           <hr class="ep-divider" />
-          <div class="ep-body">${unsafeHTML(ep.description)}</div>
+          <div class="ep-body-wrap ${isExpanded ? 'expanded' : ''}">
+            <div class="ep-body">${unsafeHTML(ep.description)}</div>
+          </div>
+          <button class="ep-readmore" @click=${() => this._toggleExpanded(ep.id)}>
+            ${isExpanded ? 'Read less ↑' : 'Read more ↓'}
+          </button>
         </div>
       </article>
     `;
@@ -391,7 +439,19 @@ export class MMPodcast extends LitElement {
               </svg>
               Spotify
             </a>
-            ${PLATFORMS.filter(p => p.id !== "spotify").map(p => html`
+            ${PLATFORMS.filter(p => p.id !== "spotify").map(p => p.id === "youtube" ? html`
+              <a
+                class="platform-link youtube"
+                href="${p.href}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
+              </a>
+            ` : html`
               <a
                 class="platform-link"
                 href="${p.href}"
