@@ -46,8 +46,7 @@ export class MMContact extends LitElement {
         <div class="contact-links">
           <p>Find me elsewhere:</p>
           <a href="https://github.com/TheMarush" target="_blank" class="contact-link">GitHub</a> |
-          <a href="https://www.strava.com/athletes/130258990" target="_blank" class="contact-link">Strava</a> |
-          <a href="https://youtube.com/@marieannam.7648?si=VtgVY0MjdPS7CrD0" target="_blank" class="contact-link">YouTube</a> |
+          <a href="https://www.instagram.com/the.marush.eu/" target="_blank" class="contact-link">Instagram</a> |
           <a href="https://www.linkedin.com/in/marie-anna-mahdlová-a81299305" target="_blank" class="contact-link">LinkedIn</a>
 
           <p class="dont-click-wrapper">
