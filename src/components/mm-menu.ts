@@ -1,6 +1,5 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import "./mm-button.ts";
 
 export interface MenuItem {
   id: string;
@@ -110,8 +109,13 @@ export class MMMenu extends LitElement {
     this.isMenuOpen = false;
   }
 
+  private _isActiveParent(item: MenuItem): boolean {
+    if (this.activeItem === item.id) return true;
+    if (item.submenu) return item.submenu.some((sub) => sub.id === this.activeItem);
+    return false;
+  }
+
   private _renderDesktopSubmenu() {
-    // Find the parent menu item that has a submenu and contains the active submenu item
     let parentItem: MenuItem | undefined;
     for (const item of this.items) {
       if (item.submenu) {
@@ -126,14 +130,14 @@ export class MMMenu extends LitElement {
     if (!parentItem?.submenu) return "";
 
     return html`
-      <div class="submenu-desktop">
+      <div class="submenu-bar">
         ${parentItem.submenu.map(
           (subitem) => html`
-          <mm-button 
-            cta="${subitem.label}"
-            class="submenu-item ${this.activeItem === subitem.id ? "active" : ""}"
-            .onClick=${() => this._selectItem(subitem.id, parentItem?.id)}>
-          </mm-button>
+          <button
+            class="submenu-link ${this.activeItem === subitem.id ? "active" : ""}"
+            @click=${() => this._selectItem(subitem.id, parentItem?.id)}>
+            ${subitem.label}
+          </button>
         `,
         )}
       </div>
@@ -143,28 +147,54 @@ export class MMMenu extends LitElement {
   render() {
     return html`
       <div class="menu-container">
-        <div class="burger-container ${this.position}">
-          <button class="burger-btn" @click=${this._toggleMenu}>
+        <header class="navbar">
+          <button class="nav-brand" @click=${() => this._selectItem(this.items[0]?.id)}>
+            The Marush
+          </button>
+
+          <nav class="nav-links" role="navigation" aria-label="Main navigation">
+            ${this.items.map(
+              (item) => html`
+              <button
+                class="nav-link ${this._isActiveParent(item) ? "active" : ""}"
+                @click=${() => this._selectItem(item.id)}>
+                ${item.label}
+              </button>
+            `,
+            )}
+          </nav>
+
+          <div class="nav-social">
+            <slot name="header-end"></slot>
+          </div>
+
+          <button
+            class="nav-burger ${this.isMenuOpen ? "open" : ""}"
+            @click=${this._toggleMenu}
+            aria-label="Toggle navigation">
             <span></span>
             <span></span>
             <span></span>
           </button>
-        </div>
-        <nav class="menu-nav ${this.position} ${this.isMenuOpen ? "open" : ""}" @click=${this._closeMenu}>
+        </header>
+
+        <div class="mobile-drawer ${this.position} ${this.isMenuOpen ? "open" : ""}">
           ${this.items.map(
             (item) => html`
-            <div class="menu-item-container">
-              <div class="menu-item-wrapper">
-                <mm-button 
-                  cta="${item.label}"
-                  class="${this.activeItem === item.id && !item.submenu?.some((sub) => sub.id === this.activeItem) ? "active" : ""}"
-                  .onClick=${() => this._selectItem(item.id)}>
-                </mm-button>
+            <div class="drawer-item">
+              <div class="drawer-row">
+                <button
+                  class="drawer-link ${this._isActiveParent(item) ? "active" : ""}"
+                  @click=${() => this._selectItem(item.id)}>
+                  ${item.label}
+                </button>
                 ${
                   item.submenu
                     ? html`
-                  <button class="submenu-toggle" @click=${(e: Event) => this._toggleSubmenu(item.id, e)}>
-                    <span class="caret ${this.expandedItems.has(item.id) ? "expanded" : ""}">▶</span>
+                  <button
+                    class="drawer-caret ${this.expandedItems.has(item.id) ? "expanded" : ""}"
+                    @click=${(e: Event) => this._toggleSubmenu(item.id, e)}>
+                    ▶
                   </button>
                 `
                     : ""
@@ -173,14 +203,14 @@ export class MMMenu extends LitElement {
               ${
                 item.submenu && this.expandedItems.has(item.id)
                   ? html`
-                <div class="submenu-mobile">
+                <div class="drawer-sub">
                   ${item.submenu.map(
-                    (subitem) => html`
-                    <mm-button 
-                      cta="${subitem.label}"
-                      class="submenu-item ${this.activeItem === subitem.id ? "active" : ""}"
-                      .onClick=${() => this._selectItem(subitem.id, item.id)}>
-                    </mm-button>
+                    (sub) => html`
+                    <button
+                      class="drawer-link sub ${this.activeItem === sub.id ? "active" : ""}"
+                      @click=${() => this._selectItem(sub.id, item.id)}>
+                      ${sub.label}
+                    </button>
                   `,
                   )}
                 </div>
@@ -190,8 +220,10 @@ export class MMMenu extends LitElement {
             </div>
           `,
           )}
-        </nav>
+        </div>
+
         ${this._renderDesktopSubmenu()}
+
         <div class="menu-content" @click=${this._closeMenu}>
           <slot name="${this.activeItem}"></slot>
         </div>
@@ -201,250 +233,321 @@ export class MMMenu extends LitElement {
 
   static styles = css`
     :host {
+      display: block;
       width: 100%;
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
     .menu-container {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
       width: 100%;
+      min-height: 100%;
     }
 
-    .menu-nav {
+    /* ── Navbar ── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      align-items: center;
+      padding: 0 1.5rem;
+      height: 3.5rem;
+      background: rgba(12, 12, 12, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(82, 200, 244, 0.2);
+      box-sizing: border-box;
     }
 
-    .menu-nav mm-button.active {
-      --button-bg: #0a71ac;
-      --button-color: #fff;
-      transform: scale(1.05);
-    }
-
-    .menu-content {
-      min-height: 200px;
-      padding: 1rem;
-      margin: 0 1rem;
-      border: 2px solid #52C8F4;
-      border-radius: 0.5rem;
-      background-color: rgba(82, 200, 244, 0.1);
-    }
-
-    @media (min-width: 768px) {
-      .menu-content {
-        margin: 0 5rem;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .menu-content {
-        margin: 0 10rem;
-      }
-    }
-
-    .burger-container {
-      display: none;
-    }
-
-    .burger-btn {
+    .nav-brand {
       background: none;
       border: none;
       cursor: pointer;
-      padding: 0.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #52C8F4;
+      padding: 0;
+      margin-right: 2rem;
+      flex-shrink: 0;
+      font-family: inherit;
+      white-space: nowrap;
     }
 
-    .burger-btn span {
-      width: 25px;
-      height: 3px;
-      background: #333;
-      transition: 0.3s;
+    .nav-brand:hover {
+      opacity: 0.75;
     }
 
-    @media (max-width: 767px) {
-      .menu-container {
-        position: relative;
-      }
-
-      .burger-container {
-        display: flex;
-        justify-content: flex-end;
-        padding: 0.25rem;
-      }
-
-      .burger-container.left {
-        justify-content: flex-start;
-      }
-
-      .burger-btn {
-        background: rgba(15, 23, 42, 0.05);
-        border-radius: 8px;
-        padding: 0.75rem;
-      }
-
-      .menu-nav {
-        position: fixed;
-        top: 0;
-        width: max-content;
-        height: 100vh;
-        background: rgba(15, 23, 42, 0.03);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        padding: 0.75rem;
-        z-index: 1000;
-        justify-content: start;
-        transition: 0.3s ease;
-      }
-
-      .menu-nav.right {
-        right: -100%;
-        border-left: 1px solid rgba(15, 23, 42, 0.08);
-      }
-
-      .menu-nav.left {
-        left: -100%;
-        border-right: 1px solid rgba(15, 23, 42, 0.08);
-      }
-
-      .menu-nav.right.open {
-        right: 0;
-      }
-
-      .menu-nav.left.open {
-        left: 0;
-      }
-
-      .menu-content {
-        margin: 0;
-      }
-    }
-
-    .menu-item-container {
-      display: contents;
-    }
-
-    .menu-item-wrapper {
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 0.25rem;
+      flex: 1;
+      overflow: hidden;
     }
 
-    .submenu-toggle {
-      background: none !important;
+    .nav-link {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      padding: 0 0.875rem;
+      height: 3.5rem;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      font-family: inherit;
+      flex-shrink: 0;
+    }
+
+    .nav-link:hover {
+      color: #f1f5f9;
+    }
+
+    .nav-link.active {
+      color: #52C8F4;
+      border-bottom-color: #52C8F4;
+    }
+
+    /* Social icons area — visually separated from nav links */
+    .nav-social {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: 1rem;
+      margin-left: auto;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
+      gap: 0.125rem;
+    }
+
+    /* Mobile burger */
+    .nav-burger {
+      display: none;
+      background: none;
       border: none;
       cursor: pointer;
-      padding: 0.25rem;
-      display: none;
-      outline: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .submenu-toggle:hover,
-    .submenu-toggle:focus,
-    .submenu-toggle:active {
-      background: none !important;
-      outline: none;
-    }
-
-    .caret {
-      font-size: 0.75rem;
-      transition: transform 0.2s ease;
-      display: inline-block;
-    }
-
-    .caret.expanded {
-      transform: rotate(90deg);
-    }
-
-    .submenu-desktop {
-      display: flex;
-      gap: 0.5rem;
+      padding: 0.4rem;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid rgba(82, 200, 244, 0.3);
-      animation: slideInFromTop 0.3s ease-out;
+      margin-left: 0.625rem;
+      flex-shrink: 0;
+      border-radius: 4px;
     }
 
-    .submenu-desktop .submenu-item {
-      --button-bg: #3a9fc6;
-      --button-color: #000;
-      font-size: 0.9rem;
-      width: auto;
-      min-width: 8rem;
+    .nav-burger:hover {
+      background: rgba(255, 255, 255, 0.07);
     }
 
-    .submenu-mobile {
-      display: none;
+    .nav-burger span {
+      width: 20px;
+      height: 2px;
+      background: #d1d5db;
+      border-radius: 2px;
+      transition: 0.25s ease;
+      display: block;
     }
 
+    .nav-burger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-burger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .nav-burger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── Mobile overrides ── */
     @media (max-width: 767px) {
-      .menu-item-container {
-        display: block;
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
         width: 100%;
       }
 
-      .menu-item-wrapper {
-        width: 100%;
+      .menu-container {
+        padding-top: 3.5rem;
       }
 
-      .submenu-toggle {
-        display: block;
-      }
-
-      .submenu-desktop {
+      .nav-links {
         display: none;
       }
 
-      .submenu-mobile {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-        padding-left: 1rem;
-        margin-top: 0.5rem;
-        animation: slideInFromTop 0.3s ease-out;
+      .nav-social {
+        border-left: none;
+        padding-left: 0;
       }
 
-      .submenu-mobile .submenu-item {
-        --button-bg: #3a9fc6;
-        --button-color: #000;
-        font-size: 0.9rem;
-        width: calc(100% - 1rem);
+      .nav-burger {
+        display: flex;
       }
+    }
+
+    /* ── Mobile drawer ── */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 3.5rem;
+      width: 240px;
+      height: calc(100vh - 3.5rem);
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      flex-direction: column;
+      padding: 1rem 0.75rem;
+      gap: 0.125rem;
+      z-index: 99;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-drawer.left {
+      left: 0;
+      border-right: 1px solid rgba(82, 200, 244, 0.15);
+      transform: translateX(-100%);
+    }
+
+    .mobile-drawer.right {
+      right: 0;
+      border-left: 1px solid rgba(82, 200, 244, 0.15);
+      transform: translateX(100%);
+    }
+
+    .mobile-drawer.open {
+      transform: translateX(0);
     }
 
     @media (max-width: 767px) {
-      .burger-btn {
-        background: rgba(248, 250, 252, 0.05);
-      }
-
-      .burger-btn span {
-        background: #f1f5f9;
-      }
-
-      .menu-nav.right {
-        background: rgba(248, 250, 252, 0.03);
-        border-left-color: rgba(248, 250, 252, 0.08);
-      }
-
-      .menu-nav.left {
-        background: rgba(248, 250, 252, 0.03);
-        border-right-color: rgba(248, 250, 252, 0.08);
+      .mobile-drawer {
+        display: flex;
       }
     }
 
-    @keyframes slideInFromTop {
+    .drawer-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .drawer-link {
+      flex: 1;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.83rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      padding: 0.75rem 0.75rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+      font-family: inherit;
+    }
+
+    .drawer-link:hover {
+      color: #f1f5f9;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .drawer-link.active {
+      color: #52C8F4;
+      background: rgba(82, 200, 244, 0.08);
+    }
+
+    .drawer-link.sub {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding-left: 1.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .drawer-caret {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6b7280;
+      font-size: 0.65rem;
+      padding: 0.5rem 0.625rem;
+      transition: transform 0.2s;
+      font-family: inherit;
+    }
+
+    .drawer-caret.expanded {
+      transform: rotate(90deg);
+    }
+
+    .drawer-sub {
+      display: flex;
+      flex-direction: column;
+      animation: slideIn 0.2s ease;
+    }
+
+    /* ── Desktop submenu bar ── */
+    .submenu-bar {
+      display: flex;
+      gap: 0.375rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0.625rem 1.5rem;
+      background: rgba(82, 200, 244, 0.04);
+      border-bottom: 1px solid rgba(82, 200, 244, 0.12);
+      animation: slideIn 0.25s ease;
+    }
+
+    .submenu-link {
+      background: transparent;
+      border: 1px solid rgba(82, 200, 244, 0.2);
+      cursor: pointer;
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      padding: 0.375rem 0.875rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .submenu-link:hover {
+      color: #f1f5f9;
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(82, 200, 244, 0.4);
+    }
+
+    .submenu-link.active {
+      color: #52C8F4;
+      background: rgba(82, 200, 244, 0.1);
+      border-color: #52C8F4;
+    }
+
+    /* ── Content ── */
+    .menu-content {
+      flex: 1;
+      min-height: 200px;
+    }
+
+    @keyframes slideIn {
       from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-6px);
       }
       to {
         opacity: 1;
