@@ -52,10 +52,10 @@ export class App extends LitElement {
       <div class="main">
         <mm-menu
           .items=${[
-            { id: "gallery", label: "Gallery" },
+            { id: "projects", label: "Projects" },
             { id: "about", label: "About" },
             { id: "testimonials", label: "Testimonials" },
-            { id: "projects", label: "Projects" },
+            { id: "gallery", label: "Gallery" },
             { id: "study", label: "Study" },
             { id: "contact", label: "Contact" },
             { id: "donate", label: "Support" },
