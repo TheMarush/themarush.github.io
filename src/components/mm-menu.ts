@@ -24,6 +24,16 @@ export class MMMenu extends LitElement {
   @state()
   private expandedItems: Set<string> = new Set();
 
+  // Index from which nav items overflow into the "···" dropdown (-1 = all fit)
+  @state()
+  private _overflowIndex = -1;
+
+  @state()
+  private _overflowOpen = false;
+
+  private _itemWidths: number[] = [];
+  private _resizeObserver: ResizeObserver | null = null;
+
   connectedCallback() {
     super.connectedCallback();
     this.syncFromPath();
@@ -31,10 +41,82 @@ export class MMMenu extends LitElement {
     window.addEventListener("popstate", this._handlePopState.bind(this));
   }
 
+  firstUpdated() {
+    this._measureItems();
+
+    const navbar = this.shadowRoot?.querySelector(".navbar") as HTMLElement | null;
+    if (!navbar) return;
+    this._resizeObserver = new ResizeObserver(() => this._checkNavFit());
+    this._resizeObserver.observe(navbar);
+
+    // Immediate synchronous check — runs before the browser paints, no flash
+    this._checkNavFit();
+
+    // Re-measure after webfonts finish loading in case glyph widths changed
+    document.fonts?.ready.then(() => {
+      this._measureItems();
+      this._checkNavFit();
+    });
+  }
+
+  private _measureItems() {
+    // Only re-measure when all items are currently rendered in the nav
+    if (this._overflowIndex !== -1) return;
+    const buttons = Array.from(
+      this.shadowRoot?.querySelectorAll(".nav-link") ?? [],
+    ) as HTMLElement[];
+    if (buttons.length > 0) {
+      this._itemWidths = buttons.map((btn) => btn.offsetWidth);
+    }
+  }
+
+  private _checkNavFit() {
+    const navLinks = this.shadowRoot?.querySelector(".nav-links") as HTMLElement | null;
+    if (!navLinks || this._itemWidths.length === 0) return;
+
+    // navLinks.clientWidth is the true available space for nav items:
+    // flexbox has already subtracted brand, social, overflow-btn, and padding.
+    const available = navLinks.clientWidth;
+    const totalNeeded = this._itemWidths.reduce((a, b) => a + b, 0);
+
+    if (totalNeeded <= available) {
+      if (this._overflowIndex !== -1) this._overflowIndex = -1;
+      return;
+    }
+
+    // Items don't fit. When the overflow button isn't yet in the DOM (no _overflowIndex),
+    // pre-subtract its width so we don't overshoot on the first render.
+    const OVERFLOW_BTN_W = 56;
+    const cap = this._overflowIndex === -1 ? available - OVERFLOW_BTN_W : available;
+
+    let sum = 0;
+    for (let i = 0; i < this._itemWidths.length; i++) {
+      if (sum + this._itemWidths[i] > cap) {
+        if (this._overflowIndex !== i) this._overflowIndex = i;
+        return;
+      }
+      sum += this._itemWidths[i];
+    }
+    if (this._overflowIndex !== -1) this._overflowIndex = -1;
+  }
+
+  updated(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has("items")) {
+      this._overflowIndex = -1;
+      this._itemWidths = [];
+      // Let the re-render with all items complete, then measure
+      requestAnimationFrame(() => {
+        this._measureItems();
+        this._checkNavFit();
+      });
+    }
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener("click", this._handleDocumentClick.bind(this));
     window.removeEventListener("popstate", this._handlePopState.bind(this));
+    this._resizeObserver?.disconnect();
   }
 
   private _handlePopState() {
@@ -68,12 +150,14 @@ export class MMMenu extends LitElement {
   private _handleDocumentClick(e: Event) {
     if (!this.contains(e.target as Node)) {
       this.isMenuOpen = false;
+      this._overflowOpen = false;
     }
   }
 
   private _selectItem(itemId: string, parentId?: string) {
     this.activeItem = itemId;
     this.isMenuOpen = false;
+    this._overflowOpen = false;
 
     const path = parentId ? `/${parentId}/${itemId}` : `/${itemId}`;
     if (window.location.pathname !== path) {
@@ -103,6 +187,11 @@ export class MMMenu extends LitElement {
   private _toggleMenu(e: Event) {
     e.stopPropagation();
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  private _toggleOverflow(e: Event) {
+    e.stopPropagation();
+    this._overflowOpen = !this._overflowOpen;
   }
 
   private _closeMenu() {
@@ -145,6 +234,12 @@ export class MMMenu extends LitElement {
   }
 
   render() {
+    const visibleItems =
+      this._overflowIndex === -1 ? this.items : this.items.slice(0, this._overflowIndex);
+    const hiddenItems =
+      this._overflowIndex === -1 ? [] : this.items.slice(this._overflowIndex);
+    const overflowHasActive = hiddenItems.some((i) => this._isActiveParent(i));
+
     return html`
       <div class="menu-container">
         <header class="navbar">
@@ -153,7 +248,7 @@ export class MMMenu extends LitElement {
           </button>
 
           <nav class="nav-links" role="navigation" aria-label="Main navigation">
-            ${this.items.map(
+            ${visibleItems.map(
               (item) => html`
               <button
                 class="nav-link ${this._isActiveParent(item) ? "active" : ""}"
@@ -163,6 +258,31 @@ export class MMMenu extends LitElement {
             `,
             )}
           </nav>
+
+          ${hiddenItems.length > 0
+            ? html`
+            <div class="overflow-menu">
+              <button
+                class="overflow-btn ${overflowHasActive ? "active" : ""}"
+                @click=${this._toggleOverflow}
+                aria-label="More navigation items"
+                aria-expanded=${this._overflowOpen}>
+                ···
+              </button>
+              <div class="overflow-dropdown ${this._overflowOpen ? "open" : ""}">
+                ${hiddenItems.map(
+                  (item) => html`
+                  <button
+                    class="overflow-item ${this._isActiveParent(item) ? "active" : ""}"
+                    @click=${() => this._selectItem(item.id)}>
+                    ${item.label}
+                  </button>
+                `,
+                )}
+              </div>
+            </div>
+          `
+            : ""}
 
           <div class="nav-social">
             <slot name="header-end"></slot>
@@ -312,6 +432,89 @@ export class MMMenu extends LitElement {
     .nav-link.active {
       color: #52C8F4;
       border-bottom-color: #52C8F4;
+    }
+
+    /* ── Overflow "···" dropdown ── */
+    .overflow-menu {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .overflow-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: #9ca3af;
+      padding: 0 0.75rem;
+      height: 3.5rem;
+      transition: color 0.2s, border-color 0.2s;
+      font-family: inherit;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .overflow-btn:hover {
+      color: #f1f5f9;
+    }
+
+    .overflow-btn.active {
+      color: #52C8F4;
+      border-bottom-color: #52C8F4;
+    }
+
+    .overflow-dropdown {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      min-width: 160px;
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(82, 200, 244, 0.15);
+      border-radius: 6px;
+      padding: 0.375rem;
+      z-index: 200;
+      animation: slideIn 0.2s ease;
+      gap: 2px;
+    }
+
+    .overflow-dropdown.open {
+      display: flex;
+    }
+
+    .overflow-item {
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      padding: 0.625rem 0.75rem;
+      border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+      font-family: inherit;
+      width: 100%;
+    }
+
+    .overflow-item:hover {
+      color: #f1f5f9;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .overflow-item.active {
+      color: #52C8F4;
+      background: rgba(82, 200, 244, 0.08);
     }
 
     /* Social icons area — visually separated from nav links */
