@@ -300,11 +300,33 @@ export class MMProjects extends LitElement {
       <section class="container" aria-labelledby="projects-title">
         <h2 id="projects-title" class="title">Projects</h2>
         <p class="subtitle">Selected Work &amp; Ongoing Experiments</p>
-        <p class="intro">Some projects are polished, others are messy — each one taught me something worth keeping.</p>
+        <p class="intro">Some projects are polished, others are messy. Each one taught me something worth keeping.</p>
 
         <div class="paper">
 
-          <article class="story story-feature" aria-labelledby="good-enough-title">
+          <article class="story story-feature" aria-labelledby="eu-ambassador-title">
+            <img
+              class="story-img"
+              src="/eu-careers/prague-training.jpg"
+              alt="EU Careers Student Ambassadors at Czernin Palace, Prague"
+              loading="lazy"
+            />
+            <div class="story-text">
+              <div class="kicker">Education · Advocacy · 2026–2027</div>
+              <h3 id="eu-ambassador-title" class="headline">EU Careers Ambassador</h3>
+              <div class="hrule"></div>
+              <p class="deck">
+                One of the students explaining to other students that working for the EU is a real job you can actually apply for. Training done in Prague. Now the actual work starts, at MUNI.
+              </p>
+              <div class="cta-row">
+                <button type="button" class="read-btn" @click=${() => navigate("/projects/eu-careers")}>
+                  Read more →
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="story story-secondary" aria-labelledby="good-enough-title">
             <img
               class="story-img"
               src="/good-enough/Q5.png"
@@ -316,7 +338,7 @@ export class MMProjects extends LitElement {
               <h3 id="good-enough-title" class="headline">Good Enough</h3>
               <div class="hrule"></div>
               <p class="deck">
-                A planning companion for people with AuDHD, built over one semester using the Double Diamond framework. From a stuck opening message to a deployed prototype — and an honest account of what AI could and couldn't do along the way.
+                A planning companion for people with AuDHD, built over one semester using the Double Diamond framework. From a stuck opening message to a deployed prototype, and an honest account of what AI could and couldn't do along the way.
               </p>
               <div class="cta-row">
                 <button type="button" class="read-btn" @click=${() => navigate("/projects/good-enough")}>
@@ -326,36 +348,18 @@ export class MMProjects extends LitElement {
             </div>
           </article>
 
-          <article class="story story-secondary" aria-labelledby="cybersecurity-title">
-            <img
-              class="story-img"
-              src="https://i.imgur.com/ObESF8o.jpg"
-              alt="Google.org Cybersecurity Seminars"
-              loading="lazy"
-            />
+          <article class="story story-brief" aria-labelledby="cybersecurity-title">
             <div class="story-text">
               <div class="kicker">Cybersecurity · Education · 2025–2026</div>
               <h3 id="cybersecurity-title" class="headline">Google Cybersecurity Seminars</h3>
               <div class="hrule"></div>
               <p class="deck">
-                A Google.org-funded programme at Masaryk University connecting academic cybersecurity expertise with communities across the Czech Republic — placements at Amnesty International, senior care homes, and a 5-day national roadshow.
+                A Google.org-funded programme at Masaryk University: placements at Amnesty International, senior care homes, and a 5-day national roadshow.
               </p>
               <div class="cta-row">
                 <button type="button" class="read-btn" @click=${() => navigate("/projects/cybersecurity")}>
                   Read more →
                 </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="story story-brief" aria-labelledby="eu-ambassador-title">
-            <div class="story-text">
-              <div class="kicker">Education · Advocacy · 2026–2027</div>
-              <h3 id="eu-ambassador-title" class="headline">EU Careers Ambassador</h3>
-              <div class="hrule"></div>
-              <p class="deck">Just accepted. Starting soon. More details to follow as the work begins.</p>
-              <div class="cta-row">
-                <span class="coming-soon">Coming soon</span>
               </div>
             </div>
           </article>
@@ -372,7 +376,7 @@ export class MMProjects extends LitElement {
               <h3 id="ijf26-title" class="headline">IJF26</h3>
               <div class="hrule"></div>
               <p class="deck">
-                Three days at the International Journalism Festival in Perugia. Nineteen panels on gender, cybersecurity, conflict reporting, and the future of the craft — notes taken in the rooms, in real time.
+                Three days at the International Journalism Festival in Perugia. Nineteen panels on gender, cybersecurity, conflict reporting, and the future of the craft. Notes taken in the rooms, in real time.
               </p>
               <div class="cta-row">
                 <button type="button" class="read-btn" @click=${() => navigate("/projects/ijf26")}>
@@ -408,7 +412,7 @@ export class MMProjects extends LitElement {
             <img
               class="story-img"
               src="/pj-feminism/kisk-forum.webp"
-              alt="KISK Forum — feminist advocacy"
+              alt="KISK Forum, feminist advocacy"
               loading="lazy"
             />
             <div class="story-text">
@@ -416,7 +420,7 @@ export class MMProjects extends LitElement {
               <h3 id="feminism-title" class="headline">Lifelong Feminist</h3>
               <div class="hrule"></div>
               <p class="deck">
-                A photo diary from nearly a decade of feminist work. From a middle school matura to winter schools and public forums — the moments that turned feminism from an idea into a way of seeing the world.
+                A photo diary from nearly a decade of feminist work. From a middle school matura to winter schools and public forums: the moments that turned feminism from an idea into a way of seeing the world.
               </p>
               <div class="cta-row">
                 <button type="button" class="read-btn" @click=${() => navigate("/projects/feminism")}>
@@ -430,7 +434,7 @@ export class MMProjects extends LitElement {
             <img
               class="story-img"
               src="https://img.youtube.com/vi/Qn3vAJkE4ms/hqdefault.jpg"
-              alt="Mahdalky podcast — mother and daughter conversations"
+              alt="Mahdalky podcast: mother and daughter conversations"
               loading="lazy"
             />
             <div class="story-text">

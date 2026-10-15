@@ -47,7 +47,7 @@ The paper included a formal interview with <strong>Mgr. Tomáš Pavlas</strong>,
 
 <strong>The same value system that keeps women out of boardrooms keeps men out of therapy.</strong> It holds fathers to a provider role while making active caregiving socially legible only as deviation. It constructs vulnerability as feminine and therefore as failure, which means that any man who departs from emotional stoicism faces not only internal conflict but social sanction from other men enforcing the norm. The argument was not that men have it worse, but that a liberation movement which ignores half of its potential constituency is working against itself. <strong>Patriarchy is not a conspiracy of men against women. It is a set of rigid scripts that diminishes anyone who deviates from them.</strong>`,
     image: "/pj-feminism/zimni-skola.webp",
-    imageAlt: "Zimní Škola — winter school",
+    imageAlt: "Zimní Škola, winter school",
   },
   {
     id: "kisk-forum",

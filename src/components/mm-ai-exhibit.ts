@@ -1149,7 +1149,7 @@ export class MMAiExhibit extends LitElement {
       >
         <!-- Exhibit Meta -->
         <div class="exhibit-meta">
-          Exhibit ${indexLabel} — ${exhibit.inputType}
+          Exhibit ${indexLabel} · ${exhibit.inputType}
         </div>
 
         <!-- Alternating Layout: Image Left/Right -->

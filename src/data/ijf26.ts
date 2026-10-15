@@ -139,7 +139,7 @@ export const ijf26Sessions: IJF26Session[] = [
 
 <p>They opened with actual neuroscience, which immediately earned my trust. Some people have higher baseline cortisol arousal. Environments with a lot of social stimulation become overstimulating for them faster, not because they are antisocial or fragile, but because that is literally how their nervous system works. There is a neurotransmitter angle too: acetylcholine and dopamine function differently in introverts and extroverts. Introverts tend to reach flow through depth and focus rather than breadth and stimulation. Evolutionary biology frames both profiles as adaptive depending on the environment. The problem is not the temperament. The problem is being forced into environments that were not designed with you in mind and then being told that your discomfort is your personal failing.</p>
 
-<p>Shirish Kulkarni added a neurodivergent lens that I think was genuinely the most valuable contribution of the whole session. The overlap between introversion and neurodivergence is significant. Designing spaces that work for introverts almost always means designing spaces that work for a much bigger group of people than the word "introvert" usually suggests. He also called out the journalism culture assumption that loud argumentation equals intelligence — "the more you argue the better journalist you are" — and I laughed because yes, that particular piece of nonsense has done a lot of damage to a lot of people who had perfectly good ideas and just did not want to shout them.</p>
+<p>Shirish Kulkarni added a neurodivergent lens that I think was genuinely the most valuable contribution of the whole session. The overlap between introversion and neurodivergence is significant. Designing spaces that work for introverts almost always means designing spaces that work for a much bigger group of people than the word "introvert" usually suggests. He also called out the journalism culture assumption that loud argumentation equals intelligence ("the more you argue the better journalist you are"), and I laughed because yes, that particular piece of nonsense has done a lot of damage to a lot of people who had perfectly good ideas and just did not want to shout them.</p>
 
 <p>The panel worked through twelve specific and practical suggestions.</p>
 
@@ -179,7 +179,7 @@ export const ijf26Sessions: IJF26Session[] = [
     image: '/ijf26/EpsteinFiles.jpeg',
     body: `<p>The session started with:</p>
 
-<p>"Stand up if you know someone who has experienced sexual assault, or have yourself." Almost everyone stood up. "Raise your hand if the person who did it was not a stranger in an alley — rather someone they knew." Almost everyone raised their hand. "Sit down if they did not report it." Almost the entire room sat down.</p>
+<p>"Stand up if you know someone who has experienced sexual assault, or have yourself." Almost everyone stood up. "Raise your hand if the person who did it was not a stranger in an alley, but someone they knew." Almost everyone raised their hand. "Sit down if they did not report it." Almost the entire room sat down.</p>
 
 <p>That took maybe ninety seconds. It said everything about why this panel existed.</p>
 
@@ -193,7 +193,7 @@ export const ijf26Sessions: IJF26Session[] = [
 
 <p>The Jerry Sandusky comparison came up. In that case, institutions acted and people were fired. The panel's read: partly because the victims were boys. When girls are victims they get framed as underage women. When young men are victims they get framed as children. The language encodes who gets protection.</p>
 
-<p>There was a detailed discussion of the "perfect victim" problem. A case was described where video evidence showed a woman in a state of complete incapacitation. Even then, major outlets struggled to simply believe her — they had to see the video. She was a perfect victim in every conventional sense of what society expects women to be. "That is not the case with every victim." If even the most textbook case gets treated this way, what happens to everyone else?</p>
+<p>There was a detailed discussion of the "perfect victim" problem. A case was described where video evidence showed a woman in a state of complete incapacitation. Even then, major outlets struggled to simply believe her. They had to see the video. She was a perfect victim in every conventional sense of what society expects women to be. "That is not the case with every victim." If even the most textbook case gets treated this way, what happens to everyone else?</p>
 
 <p>The panel also pushed back on language. "Powerful men" was challenged as a frame. The preferred version: "horrific men with power." They're not powerful, they yield power.</p>
 
@@ -255,7 +255,7 @@ export const ijf26Sessions: IJF26Session[] = [
 
 <p>The gendered dimension ran through everything. You enter exile because of your job, but you cannot do your job in exile because no one will pay you. For women, that compounds with the constant expectation to prove yourself in environments that did not expect you to be there. "You have the right to do and be anyone and anything." Yeah. But we have to work three times harder than men for it.</p>
 
-<p>Women journalists tend to cover the topics that power finds dangerous: human rights, minorities, equality, climate, democracy — all those dangerous system-breaking topics. That is not accidental. And it is directly connected to why they end up in exile.</p>
+<p>Women journalists tend to cover the topics that power finds dangerous: human rights, minorities, equality, climate, democracy. All those dangerous system-breaking topics. That is not accidental. And it is directly connected to why they end up in exile.</p>
 
 <p>At the end of the session each panelist was asked what object best summed up their invisible backpack. Irina was wearing a necklace she had bought in St. Petersburg. Hsu was wearing one her mother had given her in Myanmar. Abigail was wearing one in the shape of a map of Nicaragua. Each of them carrying their home on their chest because there is nowhere else to put it.</p>`,
   },
@@ -355,7 +355,7 @@ export const ijf26Sessions: IJF26Session[] = [
 
 <p>Cadwalladr coined "broligarchy" in 2024 to describe the convergence of Silicon Valley power and authoritarian politics. The argument she made in this session was not that this is a worrying trend. It is that it is already the operating reality, and journalism is running out of time to develop tools capable of responding to it.</p>
 
-<p>Her frame: the tech giants are not just media companies. They are surveillance infrastructure. Their agenda across platforms is the collection and control of personal data. They are in active alliance with authoritarian state power — what she called "tech capture": capturing states, news organisations, and the journalism institutions that are supposed to hold them accountable.</p>
+<p>Her frame: the tech giants are not just media companies. They are surveillance infrastructure. Their agenda across platforms is the collection and control of personal data. They are in active alliance with authoritarian state power, which she called "tech capture": capturing states, news organisations, and the journalism institutions that are supposed to hold them accountable.</p>
 
 <p>She called it techno-fascism and she was not being rhetorical. Authoritarian states are learning from each other. Tech platforms provide the tools of surveillance and control. The men running those platforms have a worldview that is simultaneously libertarian and authoritarian: freedom for themselves, control for everyone else.</p>
 
@@ -388,7 +388,7 @@ export const ijf26Sessions: IJF26Session[] = [
 
 <p>Juliana Dal Piva described being threatened and then having her own institution not believe her, not want to make it a conversation. It took her almost a week to get anyone to stand up with her. Her company eventually backed her from the beginning, she said, but the starting assumption was that she should be strong, not cry, and keep working. "I was pretending to be okay and being productive, which was expected of me."</p>
 
-<p>The structural argument: these attacks are framed as gender issues but they are structural issues. Feminism becoming stigmatised is not accidental. When a feminist enters an institution the whole institution is in danger of being changed, and that is exactly the point. The methods used against women journalists — isolation, silencing, character destruction — are the same methods used in intimate partner violence. They just get scaled up through platforms and political rhetoric.</p>
+<p>The structural argument: these attacks are framed as gender issues but they are structural issues. Feminism becoming stigmatised is not accidental. When a feminist enters an institution the whole institution is in danger of being changed, and that is exactly the point. The methods used against women journalists (isolation, silencing, character destruction) are the same methods used in intimate partner violence. They just get scaled up through platforms and political rhetoric.</p>
 
 <p>On solidarity: why do colleagues go quiet when a peer is attacked by an authority figure? The panel had no patience for it. There is no excuse for standing by.</p>
 

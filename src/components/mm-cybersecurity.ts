@@ -534,7 +534,7 @@ export class MMCybersecurity extends LitElement {
 
           <div class="placement">
             <div class="placement-top">
-              <div class="placement-name">Ústí nad Labem — Device Security</div>
+              <div class="placement-name">Ústí nad Labem: Device Security</div>
             </div>
             <div class="placement-text" style="overflow:hidden;">
               <div class="float-img-right">

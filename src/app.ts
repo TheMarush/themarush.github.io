@@ -16,6 +16,7 @@ import "./components/mm-feminism.ts";
 import "./components/mm-ijf26.ts";
 import "./components/mm-cybersecurity.ts";
 import "./components/mm-good-enough.ts";
+import "./components/mm-eu-careers.ts";
 import "./components/mm-podcast.ts";
 import "./components/mm-contact.ts";
 import "./components/mm-donate.ts";
@@ -101,6 +102,9 @@ export class App extends LitElement {
           </div>
           <div slot="good-enough">
             <mm-good-enough></mm-good-enough>
+          </div>
+          <div slot="eu-careers">
+            <mm-eu-careers></mm-eu-careers>
           </div>
           <div slot="podcast">
             <mm-podcast></mm-podcast>
