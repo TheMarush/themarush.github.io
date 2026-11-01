@@ -17,6 +17,7 @@ import "./components/mm-ijf26.ts";
 import "./components/mm-cybersecurity.ts";
 import "./components/mm-good-enough.ts";
 import "./components/mm-eu-careers.ts";
+import "./components/mm-head-in-the-clouds.ts";
 import "./components/mm-podcast.ts";
 import "./components/mm-contact.ts";
 import "./components/mm-donate.ts";
@@ -105,6 +106,9 @@ export class App extends LitElement {
           </div>
           <div slot="eu-careers">
             <mm-eu-careers></mm-eu-careers>
+          </div>
+          <div slot="head-in-the-clouds">
+            <mm-head-in-the-clouds></mm-head-in-the-clouds>
           </div>
           <div slot="podcast">
             <mm-podcast></mm-podcast>

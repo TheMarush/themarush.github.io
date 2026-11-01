@@ -1,5 +1,6 @@
 import { css, html, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { navigate } from "../utils/navigate.js";
 
 export interface MenuItem {
   id: string;
@@ -161,8 +162,7 @@ export class MMMenu extends LitElement {
 
     const path = parentId ? `/${parentId}/${itemId}` : `/${itemId}`;
     if (window.location.pathname !== path) {
-      history.pushState({}, "", path);
-      window.dispatchEvent(new PopStateEvent("popstate"));
+      navigate(path);
     }
 
     this.dispatchEvent(

@@ -19,8 +19,6 @@ export class MMAiViewIndex extends LitElement {
   @state()
   private conclusionOpen: boolean = false;
 
-  private previousSystem: AiSystemId | null = null;
-
   static styles = css`
     :host {
       display: block;
@@ -258,17 +256,6 @@ export class MMAiViewIndex extends LitElement {
     this.syncFromLocation();
   };
 
-  updated(changedProperties: Map<string | number | symbol, unknown>) {
-    super.updated(changedProperties);
-    // Scroll to first hr when entering a system page
-    if (this.activeSystem && this.activeSystem !== this.previousSystem) {
-      this.scrollToFirstHr();
-      this.previousSystem = this.activeSystem;
-    } else if (!this.activeSystem) {
-      this.previousSystem = null;
-    }
-  }
-
   private syncFromLocation() {
     if (typeof window === "undefined") return;
     const segments = window.location.pathname.split("/").filter(Boolean);
@@ -285,26 +272,6 @@ export class MMAiViewIndex extends LitElement {
     } else {
       this.activeSystem = null;
     }
-  }
-
-  private scrollToFirstHr() {
-    // Wait for the DOM to update, then scroll to the hero section's border-bottom
-    // Use multiple requestAnimationFrame calls to ensure shadow DOM is rendered
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const systemPage = this.shadowRoot?.querySelector("mm-ai-system-page");
-        const hero = systemPage?.shadowRoot?.querySelector(".hero") as HTMLElement;
-        if (hero) {
-          // Get the position of the hero's bottom (where the border-bottom/hr is)
-          const rect = hero.getBoundingClientRect();
-          const heroBottom = window.scrollY + rect.bottom;
-          window.scrollTo({
-            top: heroBottom,
-            behavior: "smooth",
-          });
-        }
-      });
-    });
   }
 
   private systemFor(id: AiSystemId): AiSystemData {

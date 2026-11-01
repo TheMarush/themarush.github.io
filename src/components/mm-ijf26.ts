@@ -45,8 +45,8 @@ export class MMIjf26 extends LitElement {
   private _open(id: string) {
     this.selectedId = id;
     this.shadowRoot?.querySelector(".page")?.scrollTo({ top: 0 });
-    // Scroll the host into view as well
-    this.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Open the article at the top of the page; scrollIntoView would tuck it under the sticky navbar
+    window.scrollTo({ top: 0, behavior: "instant" });
   }
 
   private _close() {

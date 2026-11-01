@@ -2,6 +2,100 @@ import { css, html, LitElement } from "lit";
 import { customElement } from "lit/decorators.js";
 import { navigate } from "../utils/navigate.js";
 
+type Story = {
+  id: string;
+  href: string;
+  img: string;
+  alt: string;
+  kicker: string;
+  title: string;
+  deck: string;
+  cta?: string;
+  /* Lead = wide headline story at the top of the grid */
+  lead?: boolean;
+};
+
+/* Stories after this many are rendered as a full-width list instead of the grid */
+const GRID_COUNT = 5;
+
+const STORIES: Story[] = [
+  {
+    id: "eu-ambassador-title",
+    href: "/projects/eu-careers",
+    img: "/eu-careers/prague-training.jpg",
+    alt: "EU Careers Student Ambassadors at Czernin Palace, Prague",
+    kicker: "Education · Advocacy · 2026–2027",
+    title: "EU Careers Ambassador",
+    deck: "One of the students explaining to other students that working for the EU is a real job you can actually apply for. Training done in Prague. Now the actual work starts, at MUNI.",
+    lead: true,
+  },
+  {
+    id: "head-in-the-clouds-title",
+    href: "/projects/head-in-the-clouds",
+    img: "/head-in-the-clouds/stay-bubbly-card.jpg",
+    alt: "Hand-drawn blue fish with yellow fins and bubbles, by Marush",
+    kicker: "Self-discovery · 2026",
+    title: "Head in the clouds, plan in hand",
+    deck: "Three personality tests tried to tell me who I am. One of them got it very wrong.",
+    cta: "Read the story",
+  },
+  {
+    id: "good-enough-title",
+    href: "/projects/good-enough",
+    img: "/good-enough/Q5.png",
+    alt: "Good Enough app conversation screenshot",
+    kicker: "AI in Practice · KISK · 2026",
+    title: "Good Enough",
+    deck: "A planning companion for people with AuDHD, built over one semester using the Double Diamond framework. From a stuck opening message to a deployed prototype, and an honest account of what AI could and couldn't do along the way.",
+  },
+  {
+    id: "cybersecurity-title",
+    href: "/projects/cybersecurity",
+    img: "https://i.imgur.com/ObESF8o.jpg",
+    alt: "Google.org Cybersecurity Seminars",
+    kicker: "Cybersecurity · Education · 2025–2026",
+    title: "Google Cybersecurity Seminars",
+    deck: "A Google.org-funded programme at Masaryk University: placements at Amnesty International, senior care homes, and a 5-day national roadshow.",
+  },
+  {
+    id: "ijf26-title",
+    href: "/projects/ijf26",
+    img: "/ijf26/intro.jpeg",
+    alt: "International Journalism Festival 2026, Perugia",
+    kicker: "Field Coverage · 2026",
+    title: "IJF26",
+    deck: "Three days at the International Journalism Festival in Perugia. Nineteen panels on gender, cybersecurity, conflict reporting, and the future of the craft. Notes taken in the rooms, in real time.",
+  },
+  {
+    id: "ai-view-title",
+    href: "/projects/ai-view",
+    img: "/ai-gallery/grok-image.jpg",
+    alt: "Grok's interpretation of identity from personal data",
+    kicker: "Virtual Exhibition · 2025",
+    title: "Reimagined by LLM",
+    deck: "Three AI systems. The same archive. Three completely different interpretations of who I am. A small lab for exploring how algorithmic systems read, misread, and construct identity from personal data.",
+  },
+  {
+    id: "feminism-title",
+    href: "/projects/feminism",
+    img: "/pj-feminism/kisk-forum.webp",
+    alt: "KISK Forum, feminist advocacy",
+    kicker: "Personal Journey · 2018–present",
+    title: "Lifelong Feminist",
+    deck: "A photo diary from nearly a decade of feminist work. From a middle school matura to winter schools and public forums: the moments that turned feminism from an idea into a way of seeing the world.",
+  },
+  {
+    id: "podcast-title",
+    href: "/projects/podcast",
+    img: "https://img.youtube.com/vi/Qn3vAJkE4ms/hqdefault.jpg",
+    alt: "Mahdalky podcast: mother and daughter conversations",
+    kicker: "Podcast · Czech · 2024–present",
+    title: "Podcast: Mahdalky",
+    deck: "Mother and daughter, two generations, one podcast. Honest conversations about mental health, money, attention, parenting, and technology. Breaking taboos so you don't have to do it alone.",
+    cta: "All episodes",
+  },
+];
+
 @customElement("mm-projects")
 export class MMProjects extends LitElement {
   private _onAnchor = (e: Event) => {
@@ -10,6 +104,13 @@ export class MMProjects extends LitElement {
       this.shadowRoot?.querySelector(`[aria-labelledby="${anchor}"]`) ??
       this.shadowRoot?.querySelector(`#${anchor}`);
     el?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  /* Keep ctrl/cmd/shift/middle-click working as normal links (new tab etc.) */
+  private _onLinkClick = (e: MouseEvent, href: string) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    navigate(href);
   };
 
   connectedCallback() {
@@ -26,6 +127,10 @@ export class MMProjects extends LitElement {
     :host {
       display: block;
       width: 100%;
+      --gutter: 1.25rem;
+      --rule: rgba(148, 163, 184, 0.22);
+      --rule-strong: rgba(148, 163, 184, 0.45);
+      --accent: var(--button-bg, #52c8f4);
     }
 
     .container {
@@ -40,418 +145,243 @@ export class MMProjects extends LitElement {
       margin: 0 0 0.4rem;
       font-size: 2rem;
       font-weight: 700;
-      color: var(--button-bg, #52c8f4);
-      border-bottom: 2px solid var(--button-bg, #52c8f4);
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
       padding-bottom: 0.5rem;
     }
 
     .subtitle {
-      margin: 0 0 0.4rem;
+      margin: 0 0 1.5rem;
       font-size: 0.9rem;
       color: #9ca3af;
     }
 
-    .intro {
-      font-size: 0.96rem;
-      line-height: 1.7;
-      margin: 0 0 1.5rem;
-      color: inherit;
-    }
-
-    /* ── NEWSPAPER GRID ── */
-    .paper {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 0;
-    }
-
-    /* Row 1 placement */
-    .story-feature   { grid-column: 1 / 4; grid-row: 1; }
-    .story-secondary { grid-column: 4 / 6; grid-row: 1; }
-    .story-brief     { grid-column: 6 / 7; grid-row: 1; }
-
-    /* Row 2 placement */
-    .story-b1 { grid-column: 1 / 3; grid-row: 2; }
-    .story-b2 { grid-column: 3 / 5; grid-row: 2; }
-    .story-b3 { grid-column: 5 / 7; grid-row: 2; }
-
-    /* ── SHARED STORY SHELL ── */
-    .story {
-      border-top: 2px solid rgba(148, 163, 184, 0.45);
-      display: flex;
-      flex-direction: column;
+    /* ── NEWSPAPER GRID ──
+       Every story draws its own left column rule. The grid is pulled out by one
+       gutter on each side and the wrapper clips it, so the outermost rules and
+       padding disappear and content stays flush with the page edges. */
+    .paper-clip {
       overflow: hidden;
     }
 
-    /* Column rules */
-    .story-feature,
-    .story-secondary,
-    .story-b1,
-    .story-b2 {
-      border-right: 1px solid rgba(148, 163, 184, 0.22);
+    .paper {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      row-gap: 0.75rem;
+      margin: 0 calc(-1 * var(--gutter)) 0 calc(-1 * var(--gutter) - 1px);
     }
 
-    /* Row 2 stronger top rule + spacing */
-    .story-b1,
-    .story-b2,
-    .story-b3 {
-      border-top: 2px solid rgba(148, 163, 184, 0.5);
-      margin-top: 0.5rem;
+    /* Row 1: lead (4) + 2 · Row 2: 2 + 2 + 2 · then full-width list rows */
+    .story       { grid-column: span 2; }
+    .story-lead  { grid-column: span 4; }
+    .story-wide  { grid-column: 1 / -1; }
+
+    /* ── STORY (whole card is the link) ── */
+    .story {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      padding: 0.85rem var(--gutter) 1.1rem;
+      border-top: 2px solid var(--rule-strong);
+      border-left: 1px solid var(--rule);
+      cursor: pointer;
+    }
+
+    .story-wide {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1.5rem;
     }
 
     /* ── PHOTO ── */
-    .story-img {
-      width: calc(100% - 1.5rem);
-      margin: 0.75rem 0.75rem 0;
-      display: block;
-      object-fit: cover;
+    .img-frame {
+      overflow: hidden;
       flex-shrink: 0;
+      aspect-ratio: 16 / 9;
+      background: rgba(148, 163, 184, 0.08);
     }
 
-    .story-feature   .story-img { aspect-ratio: 3 / 2; }
-    .story-secondary .story-img { aspect-ratio: 3 / 2; }
-    .story-b1        .story-img,
-    .story-b2        .story-img,
-    .story-b3        .story-img { aspect-ratio: 16 / 9; }
+    .story-lead .img-frame { aspect-ratio: 2 / 1; }
+    .story-wide .img-frame { width: 320px; }
+
+    .img-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: saturate(0.9);
+    }
+
+    .story:hover .img-frame img {
+      transform: scale(1.04);
+      filter: saturate(1.05);
+    }
 
     /* ── TEXT CONTENT ── */
     .story-text {
-      padding: 0.85rem 1.25rem 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
       flex: 1;
     }
 
-    /* Outer-edge flush */
-    .story-feature .story-text,
-    .story-b1      .story-text { padding-left: 0; }
-
-    .story-brief   .story-text,
-    .story-b3      .story-text { padding-right: 0; }
-
-    /* ── KICKER ── */
     .kicker {
       font-size: 0.66rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--button-bg, #52c8f4);
+      color: var(--accent);
       font-weight: 600;
       margin: 0;
     }
 
-    /* ── HEADLINE ── */
     .headline {
       font-family: Georgia, "Times New Roman", serif;
       font-weight: 700;
       line-height: 1.12;
       margin: 0;
+      font-size: 1.15rem;
       color: #f9fafb;
     }
 
-    .story-feature   .headline { font-size: 2rem; }
-    .story-secondary .headline { font-size: 1.3rem; }
-    .story-brief     .headline { font-size: 1rem; }
-    .story-b1        .headline,
-    .story-b2        .headline,
-    .story-b3        .headline { font-size: 1.05rem; }
+    .story-lead .headline { font-size: 2rem; }
+    .story-wide .headline { font-size: 1.3rem; }
 
-    /* ── HEADLINE RULE ── */
+    .headline a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    /* Stretch the headline link over the whole card */
+    .headline a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .headline a:focus-visible {
+      outline: none;
+    }
+
+    .headline a:focus-visible::after {
+      outline: 2px solid var(--accent);
+      outline-offset: -4px;
+    }
+
+    .story:hover .headline a,
+    .headline a:focus-visible {
+      color: var(--accent);
+    }
+
     .hrule {
       width: 2rem;
       height: 2px;
       background: rgba(148, 163, 184, 0.35);
       flex-shrink: 0;
+      transition: width 0.3s ease, background 0.3s ease;
     }
 
-    /* ── DECK ── */
+    .story:hover .hrule {
+      width: 3.5rem;
+      background: var(--accent);
+    }
+
     .deck {
-      font-size: 0.87rem;
+      font-size: 0.84rem;
       color: #d1d5db;
       line-height: 1.65;
       margin: 0;
     }
 
-    .story-brief .deck,
-    .story-b1    .deck,
-    .story-b2    .deck,
-    .story-b3    .deck { font-size: 0.82rem; }
+    .story-lead .deck { font-size: 0.92rem; }
 
-    .story-brief .deck { color: #9ca3af; }
-
-    /* ── CTA ── */
-    .cta-row {
+    /* ── CTA (visual only; the card itself is the link) ── */
+    .cta {
       margin-top: auto;
       padding-top: 0.5rem;
-    }
-
-    .read-btn {
-      background: none;
-      border: none;
-      padding: 0;
-      color: var(--button-bg, #52c8f4);
-      cursor: pointer;
+      color: var(--accent);
       font-size: 0.76rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
     }
 
-    .read-btn:focus-visible {
-      outline: 2px solid var(--button-bg, #52c8f4);
-      outline-offset: 2px;
+    .cta .arrow {
+      display: inline-block;
+      transition: transform 0.2s ease;
     }
 
-    .coming-soon {
-      font-size: 0.76rem;
-      color: #6b7280;
-      font-style: italic;
+    .story:hover .cta .arrow {
+      transform: translateX(4px);
     }
 
-    /* ── ROW 3 – PODCAST (full width, horizontal) ── */
-    .story-podcast {
-      grid-column: 1 / -1;
-      grid-row: 3;
-      border-top: 2px solid rgba(148, 163, 184, 0.5);
-      border-right: none;
-      margin-top: 0.5rem;
-      flex-direction: row;
-    }
-
-    .story-podcast .story-img {
-      width: 360px;
-      aspect-ratio: 16 / 9;
-      margin: 0.75rem 0 0.75rem 0;
-      flex-shrink: 0;
-      align-self: flex-start;
-    }
-
-    .story-podcast .story-text {
-      padding-left: 1.5rem;
+    @media (prefers-reduced-motion: reduce) {
+      .img-frame img,
+      .hrule,
+      .cta .arrow {
+        transition: none;
+      }
     }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 760px) {
-      .paper {
-        grid-template-columns: repeat(4, 1fr);
-      }
+      .paper { grid-template-columns: repeat(2, 1fr); }
 
-      .story-feature   { grid-column: 1 / -1; grid-row: 1; border-right: none; }
-      .story-secondary { grid-column: 1 / 3;  grid-row: 2; }
-      .story-brief     { grid-column: 3 / 5;  grid-row: 2; border-right: none; }
-      .story-b1        { grid-column: 1 / 3;  grid-row: 3; }
-      .story-b2        { grid-column: 3 / 5;  grid-row: 3; border-right: none; }
-      .story-b3        { grid-column: 1 / -1; grid-row: 4; border-right: none; }
-      .story-podcast   { grid-column: 1 / -1; grid-row: 5; flex-direction: column; }
-      .story-podcast .story-img { width: calc(100% - 1.5rem); margin: 0.75rem 0.75rem 0; }
-      .story-podcast .story-text { padding-left: 0; }
+      .story       { grid-column: span 1; }
+      .story-lead,
+      .story-wide  { grid-column: 1 / -1; }
 
-      .story-feature .story-text { padding-left: 0; }
-      .story-brief   .story-text { padding-right: 0; }
-      .story-b3      .story-text { padding-right: 0; }
-
-      .story-secondary .story-text { padding-left: 0; }
-      .story-b1        .story-text { padding-left: 0; }
-      .story-b2        .story-text { padding-left: 1.25rem; }
+      .story-lead .headline { font-size: 1.6rem; }
+      .story-wide .img-frame { width: 40%; }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       .title { font-size: 1.5rem; }
 
       .paper { grid-template-columns: 1fr; }
 
-      .story-feature,
-      .story-secondary,
-      .story-brief,
-      .story-b1,
-      .story-b2,
-      .story-b3,
-      .story-podcast {
-        grid-column: 1 / -1 !important;
-        grid-row: auto !important;
-        border-right: none !important;
-        flex-direction: column !important;
-      }
-
-      .story-podcast .story-img { width: calc(100% - 1.5rem) !important; margin: 0.75rem 0.75rem 0 !important; }
-
-      .story-feature   .story-text,
-      .story-secondary .story-text,
-      .story-brief     .story-text,
-      .story-b1        .story-text,
-      .story-b2        .story-text,
-      .story-b3        .story-text,
-      .story-podcast   .story-text {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-      }
-
-      .story-feature .headline { font-size: 1.5rem; }
-
-      .story-feature   .story-img { aspect-ratio: 16 / 9; }
-      .story-secondary .story-img { aspect-ratio: 16 / 9; }
+      .story-wide { flex-direction: column; }
+      .story-wide .img-frame { width: 100%; }
+      .story-lead .img-frame { aspect-ratio: 16 / 9; }
+      .story-lead .headline { font-size: 1.5rem; }
     }
   `;
+
+  private _renderStory(s: Story, i: number) {
+    const variant = i >= GRID_COUNT ? "story-wide" : s.lead ? "story-lead" : "";
+    return html`
+      <article class="story ${variant}" aria-labelledby=${s.id}>
+        <div class="img-frame">
+          <img src=${s.img} alt=${s.alt} loading="lazy" />
+        </div>
+        <div class="story-text">
+          <div class="kicker">${s.kicker}</div>
+          <h3 id=${s.id} class="headline">
+            <a href=${s.href} @click=${(e: MouseEvent) => this._onLinkClick(e, s.href)}>${s.title}</a>
+          </h3>
+          <div class="hrule"></div>
+          <p class="deck">${s.deck}</p>
+          <div class="cta" aria-hidden="true">
+            ${s.cta ?? "Read more"} <span class="arrow">→</span>
+          </div>
+        </div>
+      </article>
+    `;
+  }
 
   render() {
     return html`
       <section class="container" aria-labelledby="projects-title">
         <h2 id="projects-title" class="title">Projects</h2>
         <p class="subtitle">Selected Work &amp; Ongoing Experiments</p>
-        <p class="intro">Some projects are polished, others are messy. Each one taught me something worth keeping.</p>
 
-        <div class="paper">
-
-          <article class="story story-feature" aria-labelledby="eu-ambassador-title">
-            <img
-              class="story-img"
-              src="/eu-careers/prague-training.jpg"
-              alt="EU Careers Student Ambassadors at Czernin Palace, Prague"
-              loading="lazy"
-            />
-            <div class="story-text">
-              <div class="kicker">Education · Advocacy · 2026–2027</div>
-              <h3 id="eu-ambassador-title" class="headline">EU Careers Ambassador</h3>
-              <div class="hrule"></div>
-              <p class="deck">
-                One of the students explaining to other students that working for the EU is a real job you can actually apply for. Training done in Prague. Now the actual work starts, at MUNI.
-              </p>
-              <div class="cta-row">
-                <button type="button" class="read-btn" @click=${() => navigate("/projects/eu-careers")}>
-                  Read more →
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="story story-secondary" aria-labelledby="good-enough-title">
-            <img
-              class="story-img"
-              src="/good-enough/Q5.png"
-              alt="Good Enough app conversation screenshot"
-              loading="lazy"
-            />
-            <div class="story-text">
-              <div class="kicker">AI in Practice · KISK · 2026</div>
-              <h3 id="good-enough-title" class="headline">Good Enough</h3>
-              <div class="hrule"></div>
-              <p class="deck">
-                A planning companion for people with AuDHD, built over one semester using the Double Diamond framework. From a stuck opening message to a deployed prototype, and an honest account of what AI could and couldn't do along the way.
-              </p>
-              <div class="cta-row">
-                <button type="button" class="read-btn" @click=${() => navigate("/projects/good-enough")}>
-                  Read more →
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="story story-brief" aria-labelledby="cybersecurity-title">
-            <div class="story-text">
-              <div class="kicker">Cybersecurity · Education · 2025–2026</div>
-              <h3 id="cybersecurity-title" class="headline">Google Cybersecurity Seminars</h3>
-              <div class="hrule"></div>
-              <p class="deck">
-                A Google.org-funded programme at Masaryk University: placements at Amnesty International, senior care homes, and a 5-day national roadshow.
-              </p>
-              <div class="cta-row">
-                <button type="button" class="read-btn" @click=${() => navigate("/projects/cybersecurity")}>
-                  Read more →
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="story story-b1" aria-labelledby="ijf26-title">
-            <img
-              class="story-img"
-              src="/ijf26/intro.jpeg"
-              alt="International Journalism Festival 2026, Perugia"
-              loading="lazy"
-            />
-            <div class="story-text">
-              <div class="kicker">Field Coverage · 2026</div>
-              <h3 id="ijf26-title" class="headline">IJF26</h3>
-              <div class="hrule"></div>
-              <p class="deck">
-                Three days at the International Journalism Festival in Perugia. Nineteen panels on gender, cybersecurity, conflict reporting, and the future of the craft. Notes taken in the rooms, in real time.
-              </p>
-              <div class="cta-row">
-                <button type="button" class="read-btn" @click=${() => navigate("/projects/ijf26")}>
-                  Read more →
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="story story-b2" aria-labelledby="ai-view-title">
-            <img
-              class="story-img"
-              src="/ai-gallery/claude-image.png"
-              alt="Claude's interpretation of identity from personal data"
-              loading="lazy"
-            />
-            <div class="story-text">
-              <div class="kicker">Virtual Exhibition · 2025</div>
-              <h3 id="ai-view-title" class="headline">Reimagined by LLM</h3>
-              <div class="hrule"></div>
-              <p class="deck">
-                Three AI systems. The same archive. Three completely different interpretations of who I am. A small lab for exploring how algorithmic systems read, misread, and construct identity from personal data.
-              </p>
-              <div class="cta-row">
-                <button type="button" class="read-btn" @click=${() => navigate("/projects/ai-view")}>
-                  Read more →
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="story story-b3" aria-labelledby="feminism-title">
-            <img
-              class="story-img"
-              src="/pj-feminism/kisk-forum.webp"
-              alt="KISK Forum, feminist advocacy"
-              loading="lazy"
-            />
-            <div class="story-text">
-              <div class="kicker">Personal Journey · 2018–present</div>
-              <h3 id="feminism-title" class="headline">Lifelong Feminist</h3>
-              <div class="hrule"></div>
-              <p class="deck">
-                A photo diary from nearly a decade of feminist work. From a middle school matura to winter schools and public forums: the moments that turned feminism from an idea into a way of seeing the world.
-              </p>
-              <div class="cta-row">
-                <button type="button" class="read-btn" @click=${() => navigate("/projects/feminism")}>
-                  Read more →
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="story story-podcast" aria-labelledby="podcast-title">
-            <img
-              class="story-img"
-              src="https://img.youtube.com/vi/Qn3vAJkE4ms/hqdefault.jpg"
-              alt="Mahdalky podcast: mother and daughter conversations"
-              loading="lazy"
-            />
-            <div class="story-text">
-              <div class="kicker">Podcast · Czech · 2024–present</div>
-              <h3 id="podcast-title" class="headline">Podcast: Mahdalky</h3>
-              <div class="hrule"></div>
-              <p class="deck">
-                Mother and daughter, two generations, one podcast. Honest conversations about mental health, money, attention, parenting, and technology. Breaking taboos so you don't have to do it alone.
-              </p>
-              <div class="cta-row">
-                <button type="button" class="read-btn" @click=${() => navigate("/projects/podcast")}>
-                  All episodes →
-                </button>
-              </div>
-            </div>
-          </article>
-
+        <div class="paper-clip">
+          <div class="paper">
+            ${STORIES.map((s, i) => this._renderStory(s, i))}
+          </div>
         </div>
       </section>
     `;
