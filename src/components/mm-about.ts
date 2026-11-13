@@ -1,5 +1,6 @@
 import { css, html, LitElement, type SVGTemplateResult, svg } from "lit";
 import { customElement } from "lit/decorators.js";
+import { type CvDate, type CvLink, type CvSection, cv } from "../data/cv.js";
 import { navigate } from "../utils/navigate.js";
 
 const STRENGTHS_PATH = "/projects/head-in-the-clouds";
@@ -12,32 +13,6 @@ const SOCIALS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/marie-anna-mahdlová-a81299305" },
   { label: "Instagram", href: "https://www.instagram.com/the.marush.eu/" },
   { label: "GitHub", href: "https://github.com/TheMarush" },
-];
-
-const GLANCE = [
-  {
-    label: "Studies",
-    stacked: true,
-    items: [
-      "BSc Information Science, Masaryk University (expected 2027)",
-      "Austrian Matura, bilingual, Realgymnasium Komensky Vienna",
-    ],
-  },
-  {
-    label: "Skills",
-    items: [
-      "Python",
-      "JavaScript",
-      "Data analysis",
-      "Machine learning",
-      "Web development",
-      "Elements of AI & Ethics of AI (University of Helsinki)",
-    ],
-  },
-  {
-    label: "Languages",
-    items: ["Czech (native)", "English (C1)", "Slovak (C1)", "German (B2)", "Welsh (basic)"],
-  },
 ];
 
 const ICONS: Record<string, SVGTemplateResult> = {
@@ -105,6 +80,54 @@ export class MMAbout extends LitElement {
           ${ICONS[name]}
         </svg>
       </span>
+    `;
+  }
+
+  private _date(d: CvDate) {
+    return d.datetime ? html`<time datetime=${d.datetime}>${d.text}</time>` : d.text;
+  }
+
+  /* Wrap each linked name in the text; everything else stays plain */
+  private _linked(text: string, links: CvLink[] = []) {
+    if (!links.length) return text;
+    const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const pattern = new RegExp(`(${links.map((l) => escapeRe(l.text)).join("|")})`);
+    return text.split(pattern).map((part) => {
+      const link = links.find((l) => l.text === part);
+      if (!link) return part;
+      return link.url.startsWith("/")
+        ? html`<a href=${link.url} @click=${(e: MouseEvent) => this._onLinkClick(e, link.url)}>${part}</a>`
+        : html`<a href=${link.url} target="_blank" rel="noopener noreferrer">${part}</a>`;
+    });
+  }
+
+  private _cvSection(s: CvSection) {
+    const body =
+      s.kind === "timeline"
+        ? s.entries.map(
+            (e) => html`
+              <li class="cv-row">
+                <p class="cv-date">${e.dates.map((d, i) => html`${i ? " – " : ""}${this._date(d)}`)}</p>
+                <div>
+                  <h4>${this._linked(e.title, e.links)}</h4>
+                  ${e.detail ? html`<p>${this._linked(e.detail, e.links)}</p>` : ""}
+                </div>
+              </li>
+            `,
+          )
+        : s.items.map(
+            (item) => html`
+              <li class="cv-row">
+                ${item.label ? html`<p class="cv-date">${item.label}<span class="cv-sep">:</span></p>` : ""}
+                <p class="cv-text">${item.text}</p>
+              </li>
+            `,
+          );
+    return html`
+      <section class="cv-group">
+        <h3 class="label">${s.title}</h3>
+        <ul>${body}</ul>
+      </section>
     `;
   }
 
@@ -199,18 +222,9 @@ export class MMAbout extends LitElement {
       </section>
 
       <div class="page">
-        <section class="glance reveal" aria-labelledby="glance-title">
-          <h2 id="glance-title">At a glance</h2>
-          <dl>
-            ${GLANCE.map(
-              (g) => html`
-                <div class="glance-col">
-                  <dt class="label">${g.label}</dt>
-                  ${g.stacked ? g.items.map((item) => html`<dd>${item}</dd>`) : html`<dd>${g.items.join(" · ")}</dd>`}
-                </div>
-              `,
-            )}
-          </dl>
+        <section class="cv reveal" aria-labelledby="cv-title">
+          <h2 id="cv-title">CV</h2>
+          ${cv.map((s) => this._cvSection(s))}
         </section>
       </div>
     `;
@@ -486,37 +500,57 @@ export class MMAbout extends LitElement {
 
     a.btn:focus-visible { outline-color: #fff; }
 
-    /* ── AT A GLANCE ── */
-    .glance {
+    /* ── CV ── */
+    .cv {
       padding: 2rem 0 3rem;
     }
 
-    .glance h2 {
+    .cv h2 {
       font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-muted);
       margin-bottom: 1rem;
     }
 
-    .glance dl {
+    .cv-group + .cv-group { margin-top: 1.5rem; }
+
+    .cv h3 { margin-bottom: 0.5rem; }
+
+    .cv ul {
       display: grid;
-      gap: 1.25rem;
+      gap: 0.75rem;
     }
 
-    .glance dt { margin-bottom: 0.35rem; }
-
-    .glance dd {
+    .cv-row {
+      display: grid;
+      gap: 0.1rem;
       font-size: 0.88rem;
       line-height: 1.6;
-      color: var(--text-muted);
     }
 
-    .glance dd + dd { margin-top: 0.3rem; }
+    .cv-date {
+      color: var(--text-dim);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cv-sep { display: none; }
+
+    .cv p + p { margin-top: 0; }
+
+    .cv h4 {
+      margin: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 600;
+      color: var(--text);
+    }
 
     /* ── WIDER SCREENS ── */
     @media (min-width: 640px) {
       .page { padding: 0 1.5rem; }
       .tiles { grid-template-columns: repeat(2, 1fr); }
+      .cv-row { grid-template-columns: 10.5rem 1fr; column-gap: 1.25rem; }
+      .cv-row > .cv-text:only-child { grid-column: 2; }
     }
 
     @media (min-width: 760px) {
@@ -525,7 +559,6 @@ export class MMAbout extends LitElement {
       .cards { grid-template-columns: repeat(2, 1fr); padding: 3rem 0; }
       .card { grid-template-columns: 3rem 1fr; gap: 1.25rem; padding: 1.5rem; }
       .card--wide { grid-column: 1 / -1; }
-      .glance dl { grid-template-columns: 1fr 1.3fr 1fr; gap: 2rem; }
     }
 
     @media (min-width: 900px) {
