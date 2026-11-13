@@ -241,6 +241,10 @@ export class MMHeadInTheClouds extends LitElement {
   }
 
   static styles = css`
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
     :host {
       display: block;
       width: 100%;
@@ -272,8 +276,16 @@ export class MMHeadInTheClouds extends LitElement {
       margin: 0;
     }
 
-    h1, h2, h3, .eyebrow, .meta, .section-marker, .row-label, .strength-name, .test-name, .btn {
-      font-family: 'Syne', system-ui, sans-serif;
+    h1, h2, h3, .strength-name, .test-name {
+      font-family: var(--font-heading);
+    }
+
+    .eyebrow, .meta, .section-marker, .row-label {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .btn {
+      font-family: var(--font-ui);
     }
 
     p { color: var(--text-muted); }
@@ -568,13 +580,13 @@ export class MMHeadInTheClouds extends LitElement {
 
     .diagram .core-label {
       fill: var(--highlight);
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: var(--font-heading);
       font-weight: 700;
       font-size: 17px;
     }
 
     .diagram .node-label {
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: var(--font-heading);
       font-size: 15px;
       font-weight: 600;
     }
@@ -593,7 +605,7 @@ export class MMHeadInTheClouds extends LitElement {
 
     .link-names {
       display: block;
-      font-family: 'Syne', system-ui, sans-serif;
+      font-family: var(--font-heading);
       font-size: 0.85rem;
       font-weight: 700;
       margin-bottom: 0.2rem;

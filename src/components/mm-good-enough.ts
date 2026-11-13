@@ -20,6 +20,10 @@ import "./mm-back-button.ts";
 @customElement("mm-good-enough")
 export class MMGoodEnough extends LitElement {
   static styles = css`
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
     :host {
       display: block;
       width: 100%;
@@ -63,12 +67,12 @@ export class MMGoodEnough extends LitElement {
     }
 
     h1 {
-      font-family: 'Syne', sans-serif;
+      font-family: var(--font-heading);
       font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
+      font-weight: 600;
       line-height: 1.1;
       color: var(--highlight);
-      letter-spacing: -0.02em;
+      letter-spacing: normal;
       margin-bottom: 0.5rem;
     }
 
@@ -176,16 +180,16 @@ export class MMGoodEnough extends LitElement {
     }
 
     h2 {
-      font-family: 'Syne', sans-serif;
+      font-family: var(--font-heading);
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--highlight);
-      letter-spacing: -0.01em;
+      letter-spacing: normal;
       margin-bottom: 1.2rem;
     }
 
     h3 {
-      font-family: 'Syne', sans-serif;
+      font-family: var(--font-heading);
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--highlight);
@@ -291,9 +295,9 @@ export class MMGoodEnough extends LitElement {
     }
 
     .stat-cell .stat-value {
-      font-family: 'Syne', sans-serif;
+      font-family: var(--font-heading);
       font-size: 1.6rem;
-      font-weight: 800;
+      font-weight: 600;
       color: var(--accent);
       line-height: 1.1;
     }
@@ -478,7 +482,7 @@ export class MMGoodEnough extends LitElement {
     }
 
     .feature-name {
-      font-family: 'Syne', sans-serif;
+      font-family: var(--font-heading);
       font-size: 0.92rem;
       font-weight: 700;
       color: var(--highlight);
@@ -670,7 +674,7 @@ export class MMGoodEnough extends LitElement {
     }
 
     .detail-cell .val {
-      font-family: 'Syne', sans-serif;
+      font-family: var(--font-ui);
       font-size: 0.9rem;
       font-weight: 700;
       color: var(--highlight);

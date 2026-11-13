@@ -2,12 +2,17 @@ import { css, html, LitElement, type SVGTemplateResult, svg } from "lit";
 import { customElement } from "lit/decorators.js";
 import { navigate } from "../utils/navigate.js";
 
-const CONTACT_PATH = "/contact";
 const STRENGTHS_PATH = "/projects/head-in-the-clouds";
 const SHOP_URL = "https://the-marush.tpopsite.com/";
 const ESSAY_URL = "https://www.mahdalova-skop.cz/clanek/kontext-2025-12-21-ekonomie-pozornosti";
 
 const GOOD_ENOUGH_PATH = "/projects/good-enough";
+
+const SOCIALS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/marie-anna-mahdlová-a81299305" },
+  { label: "Instagram", href: "https://www.instagram.com/the.marush.eu/" },
+  { label: "GitHub", href: "https://github.com/TheMarush" },
+];
 
 const GLANCE = [
   {
@@ -108,9 +113,9 @@ export class MMAbout extends LitElement {
       <div class="page">
         <header class="hero">
           <h1 class="headline reveal">
-            <span><em>Curious</em> by default.</span>
-            <span><em>Calm</em> under pressure.</span>
-            <span>A little <em>better</em> every day.</span>
+            <span>Curious by default.</span>
+            <span>Calm under pressure.</span>
+            <span>A little better every day.</span>
           </h1>
 
           <div class="intro reveal">
@@ -118,13 +123,7 @@ export class MMAbout extends LitElement {
             <p>I'm an Information Science student at Masaryk University, based in Vienna. My focus is AI, data and cybersecurity. Everything I learn goes into the next thing I build, and that's my whole method.</p>
           </div>
 
-          <div class="currently reveal">
-            <span class="label">Currently</span>
-            <ul class="pills">
-              <li class="pill pill--live">EU Careers Student Ambassador</li>
-              <li class="pill pill--live">Open to part-time roles in Vienna</li>
-            </ul>
-          </div>
+          <p class="currently reveal">Open to part-time roles in Vienna</p>
         </header>
 
         <div class="cards">
@@ -192,11 +191,11 @@ export class MMAbout extends LitElement {
         </section>
       </div>
 
-      <section class="band" aria-labelledby="band-title">
-        <div class="band-inner reveal">
-          <h2 id="band-title">Head in the clouds, plan in hand.</h2>
-          <a class="btn" href=${CONTACT_PATH} @click=${(e: MouseEvent) => this._onLinkClick(e, CONTACT_PATH)}>Let's talk</a>
-        </div>
+      <section class="band reveal" aria-labelledby="band-title">
+        <h2 id="band-title">Head in the clouds, plan in hand.</h2>
+        <ul class="socials">
+          ${SOCIALS.map((s) => html`<li><a class="btn" href=${s.href} target="_blank" rel="noopener">${s.label}</a></li>`)}
+        </ul>
       </section>
 
       <div class="page">
@@ -218,6 +217,10 @@ export class MMAbout extends LitElement {
   }
 
   static styles = css`
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
     :host {
       display: block;
       width: 100%;
@@ -273,22 +276,6 @@ export class MMAbout extends LitElement {
       color: var(--text-dim);
     }
 
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .pill {
-      padding: 0.3rem 0.75rem;
-      font-size: 0.85rem;
-      line-height: 1.4;
-      color: var(--text);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-    }
-
     /* ── REVEAL ON SCROLL ── */
     .reveal {
       opacity: 0;
@@ -311,37 +298,20 @@ export class MMAbout extends LitElement {
 
     /* ── HERO ── */
     .hero {
-      position: relative;
-      isolation: isolate;
-      padding: 4rem 0 2.5rem;
+      padding: 3.5rem 0 2.5rem;
       border-bottom: 1px solid var(--border);
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(45% 55% at 40% 35%, rgba(82, 200, 244, 0.09), transparent);
-      pointer-events: none;
-      z-index: -1;
-    }
-
     .headline {
-      font-size: clamp(2.1rem, 6.5vw + 0.6rem, 3.75rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.025em;
-      color: var(--highlight);
-      margin-bottom: 1.75rem;
+      font-family: var(--font-heading);
+      font-size: clamp(1.7rem, 3.5vw + 0.8rem, 2.5rem);
+      font-weight: 500;
+      line-height: 1.25;
+      color: #fff;
+      margin-bottom: 1.5rem;
     }
 
     .headline span { display: block; }
-    .headline span + span { margin-top: 0.15em; }
-
-    .headline em {
-      font-style: normal;
-      color: var(--accent);
-    }
 
     .intro {
       max-width: 42rem;
@@ -349,28 +319,9 @@ export class MMAbout extends LitElement {
     }
 
     .currently {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.6rem 0.9rem;
-      margin-top: 1.75rem;
-    }
-
-    .pill--live {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-color: rgba(82, 200, 244, 0.4);
-      background: rgba(82, 200, 244, 0.08);
-    }
-
-    .pill--live::before {
-      content: "";
-      flex: none;
-      width: 0.45rem;
-      height: 0.45rem;
-      border-radius: 50%;
-      background: var(--accent);
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-dim);
     }
 
     /* ── CARDS ── */
@@ -496,60 +447,44 @@ export class MMAbout extends LitElement {
 
     /* ── CLOSING BAND ── */
     .band {
-      padding: 2.25rem 1rem 2.5rem;
+      padding: 1.5rem 1rem 2rem;
       text-align: center;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(82, 200, 244, 0.14), transparent 70%),
-        rgba(82, 200, 244, 0.04);
-      border-top: 1px solid rgba(82, 200, 244, 0.25);
-      border-bottom: 1px solid rgba(82, 200, 244, 0.25);
     }
 
     .band h2 {
-      max-width: 40rem;
-      margin: 0 auto 1.25rem;
-      font-size: clamp(1.6rem, 4.5vw + 0.4rem, 2.6rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--highlight);
-      text-wrap: balance;
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: clamp(1.5rem, 2.5vw + 0.8rem, 2rem);
+      font-weight: 400;
+      line-height: 1.3;
+      color: #fff;
+      margin-bottom: 1.25rem;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
     }
 
     a.btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      min-height: 2.75rem;
-      padding: 0.7rem 1.75rem;
-      box-sizing: border-box;
-      border: none;
-      border-radius: 0.3rem;
-      box-shadow: 0 6px 18px rgba(82, 200, 244, 0.25);
-      line-height: 1.2;
-      background: var(--button-bg, #52c8f4);
-      color: var(--button-color, #000);
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-    }
-
-    a.btn:hover,
-    a.btn:focus-visible {
-      transform: scale(1.05);
-      background: #0b76b4;
+      display: inline-block;
+      padding: 0.55rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 500;
       color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 6px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
 
-    a.btn:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
+    a.btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: #fff;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      a.btn { transition: none; }
-      a.btn:hover, a.btn:focus-visible { transform: none; }
-    }
+    a.btn:focus-visible { outline-color: #fff; }
 
     /* ── AT A GLANCE ── */
     .glance {

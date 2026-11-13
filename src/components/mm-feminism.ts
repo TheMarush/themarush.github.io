@@ -55,6 +55,10 @@ export class MMFeminism extends LitElement {
   };
 
   static styles = css`
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
     :host {
       display: block;
       width: 100%;

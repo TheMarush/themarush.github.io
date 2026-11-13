@@ -321,6 +321,10 @@ export class MMIjf26 extends LitElement {
   // ─── STYLES ───────────────────────────────────────────────────────────────
 
   static styles = css`
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
     :host {
       display: block;
       width: 100%;
@@ -406,7 +410,7 @@ export class MMIjf26 extends LitElement {
     .intro-headline {
       margin: 0 0 0.5rem;
       font-size: clamp(1.4rem, 3vw, 2rem);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: var(--font-heading);
       font-weight: 700;
       line-height: 1.25;
       color: #f9fafb;
@@ -725,7 +729,7 @@ export class MMIjf26 extends LitElement {
     .card-headline {
       margin: 0;
       font-size: 1.05rem;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: var(--font-heading);
       font-weight: 700;
       line-height: 1.3;
       color: #f9fafb;
@@ -839,11 +843,11 @@ export class MMIjf26 extends LitElement {
     .article-headline {
       margin: 0 0 0.75rem;
       font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: var(--font-heading);
       font-weight: 700;
       line-height: 1.2;
       color: #f9fafb;
-      letter-spacing: -0.01em;
+      letter-spacing: normal;
     }
 
     .article-subtitle {

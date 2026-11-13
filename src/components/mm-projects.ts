@@ -124,6 +124,10 @@ export class MMProjects extends LitElement {
   }
 
   static styles = css`
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
     :host {
       display: block;
       width: 100%;
@@ -238,7 +242,7 @@ export class MMProjects extends LitElement {
     }
 
     .headline {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: var(--font-heading);
       font-weight: 700;
       line-height: 1.12;
       margin: 0;

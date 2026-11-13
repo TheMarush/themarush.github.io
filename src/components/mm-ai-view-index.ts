@@ -20,6 +20,10 @@ export class MMAiViewIndex extends LitElement {
   private conclusionOpen: boolean = false;
 
   static styles = css`
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+    }
+
     :host {
       display: block;
       width: 100%;
