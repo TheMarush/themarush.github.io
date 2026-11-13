@@ -51,6 +51,8 @@ export class App extends LitElement {
       `
           : ""
       }
+      <div class="side-art left" aria-hidden="true"></div>
+      <div class="side-art right" aria-hidden="true"></div>
       <div class="main">
         <mm-menu
           .items=${[
@@ -192,6 +194,39 @@ export class App extends LitElement {
       .social-icon {
         width: 1.75rem;
         height: 1.75rem;
+      }
+    }
+
+    /* Decorative drawings in the empty desktop gutters beside the 980px content column */
+    .side-art {
+      display: none;
+    }
+
+    @media (min-width: 1400px) {
+      .side-art {
+        --gutter: calc((100vw - 1040px) / 2);
+        --art-width: clamp(120px, calc(var(--gutter) - 80px), 180px);
+        display: block;
+        position: fixed;
+        top: 4rem;
+        bottom: 0;
+        width: var(--art-width);
+        background: url("/side-art/ladder-clouds.webp") center top / 100% auto repeat-y;
+        mix-blend-mode: screen;
+        opacity: 0.28;
+        pointer-events: none;
+        user-select: none;
+        -webkit-mask-image: linear-gradient(to bottom, transparent, #000 3rem, #000 calc(100% - 8rem), transparent);
+        mask-image: linear-gradient(to bottom, transparent, #000 3rem, #000 calc(100% - 8rem), transparent);
+      }
+
+      .side-art.left {
+        left: calc((var(--gutter) - var(--art-width)) / 2);
+      }
+
+      .side-art.right {
+        right: calc((var(--gutter) - var(--art-width)) / 2);
+        transform: scaleX(-1);
       }
     }
 
