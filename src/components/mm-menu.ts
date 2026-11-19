@@ -6,6 +6,8 @@ export interface MenuItem {
   id: string;
   label: string;
   submenu?: MenuItem[];
+  /* Reachable via the brand logo and the mobile drawer, but not shown in the desktop bar */
+  hideInNav?: boolean;
 }
 
 @customElement("mm-menu")
@@ -160,7 +162,8 @@ export class MMMenu extends LitElement {
     this.isMenuOpen = false;
     this._overflowOpen = false;
 
-    const path = parentId ? `/${parentId}/${itemId}` : `/${itemId}`;
+    const isHome = !parentId && itemId === this.items[0]?.id && this.items[0]?.hideInNav;
+    const path = isHome ? "/" : parentId ? `/${parentId}/${itemId}` : `/${itemId}`;
     if (window.location.pathname !== path) {
       navigate(path);
     }
@@ -234,10 +237,11 @@ export class MMMenu extends LitElement {
   }
 
   render() {
+    const navItems = this.items.filter((item) => !item.hideInNav);
     const visibleItems =
-      this._overflowIndex === -1 ? this.items : this.items.slice(0, this._overflowIndex);
+      this._overflowIndex === -1 ? navItems : navItems.slice(0, this._overflowIndex);
     const hiddenItems =
-      this._overflowIndex === -1 ? [] : this.items.slice(this._overflowIndex);
+      this._overflowIndex === -1 ? [] : navItems.slice(this._overflowIndex);
     const overflowHasActive = hiddenItems.some((i) => this._isActiveParent(i));
 
     return html`

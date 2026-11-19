@@ -10,7 +10,7 @@ const ESSAY_URL = "https://www.mahdalova-skop.cz/clanek/kontext-2025-12-21-ekono
 const GOOD_ENOUGH_PATH = "/projects/good-enough";
 
 const SOCIALS = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/marie-anna-mahdlová-a81299305" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/marie-anna-mahdalov%C3%A1/" },
   { label: "Instagram", href: "https://www.instagram.com/the.marush.eu/" },
   { label: "GitHub", href: "https://github.com/TheMarush" },
 ];
