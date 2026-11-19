@@ -17,6 +17,16 @@ const pages = {
     imageAlt:
       "Digital drawing by Marush: patterned curtains drawn back to reveal hand-drawn flowers growing on a rainbow.",
   },
+  "/gallery": {
+    title: "Gallery | The Marush",
+    description:
+      "A walk through my history in art, from childhood drawings to fineliner, sketchbooks, paint and whiteboards. Plus a few photos of the Marush, unframed.",
+    image: "/art/history/the-colour-coming-in/roots-out.jpg",
+    imageWidth: 1374,
+    imageHeight: 1600,
+    imageAlt:
+      "Roots Out by Marush, a sketchbook spread: a rainbow zigzag grid beside 'Stop shrinking to fit in places you have outgrown', with a plant breaking out of its pot.",
+  },
   "/projects/head-in-the-clouds": {
     title: "Head in the clouds, plan in hand | Marush",
     description: "Three personality tests, one honest reflection: how I think, create and work with people.",

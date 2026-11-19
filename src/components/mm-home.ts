@@ -1,6 +1,8 @@
 import { css, html, LitElement, nothing } from "lit";
 import { customElement, query, state } from "lit/decorators.js";
 import { type Artwork, artSrcset, artWebp, artworks } from "../data/art.js";
+import type { MMArtLightbox } from "./mm-art-lightbox.js";
+import "./mm-art-lightbox.ts";
 import { navigate } from "../utils/navigate.js";
 
 const INSTAGRAM = "https://www.instagram.com/the.marush.eu/";
@@ -56,9 +58,8 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
 
 @customElement("mm-home")
 export class MMHome extends LitElement {
-  @state() private opened: Artwork | null = null;
   @state() private openingLoaded = false;
-  @query("dialog") private dialog!: HTMLDialogElement;
+  @query("mm-art-lightbox") private lightbox!: MMArtLightbox;
   @query(".opening img") private openingImg!: HTMLImageElement;
 
   firstUpdated() {
@@ -85,27 +86,8 @@ export class MMHome extends LitElement {
       : html`<a class=${className} href=${href} @click=${(e: MouseEvent) => this.go(e, href)}>${content}</a>`;
   }
 
-  private async openArt(art: Artwork) {
-    this.opened = art;
-    await this.updateComplete;
-    document.documentElement.style.overflow = "hidden";
-    this.dialog.showModal();
-  }
-
-  private closeArt() {
-    if (this.dialog?.open) this.dialog.close();
-  }
-
-  /* Fires for Esc, the close button and taps outside alike */
-  private onDialogClose() {
-    document.documentElement.style.overflow = "";
-    this.opened = null;
-  }
-
-  /* A tap anywhere that isn't the artwork or its caption counts as "outside" */
-  private onDialogClick(e: MouseEvent) {
-    const target = e.target as HTMLElement;
-    if (!target.closest("img, figcaption, button")) this.closeArt();
+  private openArt(art: Artwork) {
+    this.lightbox.show([art]);
   }
 
   render() {
@@ -127,7 +109,7 @@ export class MMHome extends LitElement {
         ${this.renderManifesto()} ${this.renderWays()} ${this.renderTalk()}
       </div>
 
-      ${this.renderLightbox()}
+      <mm-art-lightbox></mm-art-lightbox>
     `;
   }
 
@@ -236,42 +218,6 @@ export class MMHome extends LitElement {
         </div>
         <p class="more quiet">${this.link("/contact", "Other ways to reach me →")}</p>
       </section>
-    `;
-  }
-
-  private renderLightbox() {
-    const art = this.opened;
-    const details = art ? [art.year, art.medium].filter(Boolean).join(" · ") : "";
-    return html`
-      <dialog
-        aria-label=${art?.title ?? art?.alt ?? "Artwork"}
-        @close=${this.onDialogClose}
-        @click=${this.onDialogClick}>
-        ${
-          art
-            ? html`
-              <button type="button" class="close" aria-label="Close" @click=${this.closeArt}>×</button>
-              <figure>
-                <img
-                  src=${artWebp(art, 1400)}
-                  srcset=${artSrcset(art)}
-                  sizes="92vw"
-                  width=${art.width}
-                  height=${art.height}
-                  alt=${art.alt} />
-                ${
-                  art.title || details
-                    ? html`<figcaption>
-                      ${art.title ? html`<span class="art-title">${art.title}</span>` : nothing}
-                      ${details ? html`<span class="art-details">${details}</span>` : nothing}
-                    </figcaption>`
-                    : nothing
-                }
-              </figure>
-            `
-            : nothing
-        }
-      </dialog>
     `;
   }
 
@@ -613,89 +559,6 @@ export class MMHome extends LitElement {
 
     .talk .quiet a:hover {
       color: var(--paper);
-    }
-
-    /* ── Lightbox ── */
-    dialog {
-      width: 100%;
-      height: 100%;
-      max-width: 100vw;
-      max-height: 100dvh;
-      margin: 0;
-      padding: 3.5rem 1rem 1rem;
-      box-sizing: border-box;
-      border: 0;
-      /* The dialog fills the screen, so its own background does the dimming */
-      background: rgba(10, 10, 10, 0.94);
-      color: var(--text);
-      overscroll-behavior: contain;
-    }
-
-    dialog[open] {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    dialog::backdrop {
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    dialog figure {
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 100%;
-      max-height: 100%;
-    }
-
-    dialog img {
-      display: block;
-      max-width: 100%;
-      max-height: calc(100dvh - 9rem);
-      width: auto;
-      height: auto;
-      object-fit: contain;
-    }
-
-    dialog figcaption {
-      margin-top: 1rem;
-      text-align: center;
-    }
-
-    .art-title {
-      display: block;
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      color: var(--paper);
-    }
-
-    .art-details {
-      display: block;
-      margin-top: 0.25rem;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .close {
-      position: fixed;
-      top: 0.75rem;
-      right: 0.75rem;
-      width: 2.75rem;
-      height: 2.75rem;
-      border: 1px solid rgba(244, 239, 230, 0.3);
-      border-radius: 50%;
-      background: rgba(20, 20, 20, 0.8);
-      color: var(--paper);
-      font-size: 1.6rem;
-      line-height: 1;
-      cursor: pointer;
-    }
-
-    .close:hover {
-      border-color: var(--paper);
     }
 
     @media (prefers-reduced-motion: reduce) {
